@@ -3,51 +3,55 @@ title = 'Linux'
 date = 2024-03-17T13:38:01+08:00
 draft = false
 +++
-#Windo和Linux双系统方法
-##磁盘分区
+# Windo和Linux双系统方法
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182044795.jpg)
+## 磁盘分区
 1.打开计算机管理
 2.找到磁盘管理
-![](2024-03-10-14-12-40.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182046535.png)
 3.选择你要压缩的盘，**你压缩掉的空间将作为新系统的空间**
 4.右键打开你要压缩的盘符，点击压缩卷
-![](2024-03-10-14-15-07.png)
-![](2024-03-10-14-15-41.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182047380.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182047783.png)
 5.压缩后的效果
-![](2024-03-10-14-16-06.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182047587.png)
 
 
-##下载Linux镜像
+## 下载Linux镜像
 1.下载 Ubuntu 镜像，这里可以去官方下载，但是官方在国外，默认外网链接可能网速有点小慢。（科技玩家例外）
 更好的选择是国内的资源镜像网站，比如说清华大学开源软件镜像站
 
 清华大学开源软件镜像站 https://mirrors.tuna.tsinghua.edu.cn/
-![alt text](image-1.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182048313.png)
 
-##准备u盘刻盘工具
+## 准备u盘刻盘工具
 我用的是UltralSO
 
 https://cn.ultraiso.net/xiazai.html
 
 下载后打开，找到你下载的镜像文件，找到后，点击右上角的启动->写入硬盘映像
-![](2024-03-10-23-40-16.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182048612.png)
 
 *写入时记得插入u盘，这个u盘将作为启动盘*
 *写入时，这个u盘的数据全会被格式化，谨慎操作*
 
 然后点击写入就可以了
 
-##开机引导界面
+## 开机引导界面
 将写好的映像文件的U盘插入你需要的电脑，在开始时按f12，本人用的是联想，不同电脑可能不同，正常都是f12
 
 在引导界面可以看到几个选项，选择你的u盘作为启动项，反正不是window和network就是了
 
 接下来你会进入这个界面
-![](2024-03-10-23-46-43.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182049797.png)
 
 点击这个install软件进入配置
 选语言->安装类型我选最小安装->进行磁盘分区，我分了四个盘，具体操作，选择你事先被压缩的空间，点击右下角的加号
 
-![](2024-03-10-23-49-34.png)
+![](https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182049778.png)
+
+*很抱歉当时没有拍下分盘的具体过程，如有需要可以自己去搜索，我给个链接*
+https://blog.csdn.net/u012514113/article/details/131269056
 
 安装后->选择地区->设置账户密码->重启->输入密码，ok
 
