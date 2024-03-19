@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="git 啊能镇楼 git配置 $ git config --global user.name &quot;runoob&quot; $ git config --global user.email test@runoob.com 查看配置信息 $ git config --list git工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他">
+<title>git</title>
+
+<link rel='canonical' href='http://localhost:1313/p/git/'>
+
+<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="git">
+<meta property='og:description' content="git 啊能镇楼 git配置 $ git config --global user.name &quot;runoob&quot; $ git config --global user.email test@runoob.com 查看配置信息 $ git config --list git工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他">
+<meta property='og:url' content='http://localhost:1313/p/git/'>
+<meta property='og:site_name' content='西伯利亚土豆商'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-19T13:35:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-19T13:35:01&#43;08:00'/>
+<meta name="twitter:title" content="git">
+<meta name="twitter:description" content="git 啊能镇楼 git配置 $ git config --global user.name &quot;runoob&quot; $ git config --global user.email test@runoob.com 查看配置信息 $ git config --list git工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu30e88383a721a2a54354209b7d01645c_12673_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">西伯利亚土豆商</a></h1>
+            <h2 class="site-description">我打开圣经，上面第一句话就是&#34;Hello World!&#34;</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#git">git</a>
+      <ol>
+        <li><a href="#git配置">git配置</a></li>
+        <li><a href="#查看配置信息">查看配置信息</a></li>
+        <li><a href="#git工作流程">git工作流程</a></li>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#git-创建仓库">git 创建仓库</a>
+          <ol>
+            <li><a href="#git-clone">git clone</a></li>
+            <li><a href="#创建仓库命令">创建仓库命令</a></li>
+            <li><a href="#提交与修改">提交与修改</a></li>
+            <li><a href="#提交日志">提交日志</a></li>
+            <li><a href="#远程操作">远程操作</a></li>
+          </ol>
+        </li>
+        <li><a href="#git分支管理">git分支管理</a></li>
+        <li><a href="#git-分支管理">git 分支管理</a>
+          <ol>
+            <li><a href="#列出分支">列出分支</a></li>
+            <li><a href="#删除分支">删除分支</a></li>
+            <li><a href="#分支合并">分支合并</a></li>
+            <li><a href="#合并冲突">合并冲突</a></li>
+            <li><a href="#git查看提交历史">git查看提交历史</a></li>
+          </ol>
+        </li>
+        <li><a href="#git标签">git标签</a></li>
+        <li><a href="#git远程仓库github">git远程仓库（github）</a>
+          <ol>
+            <li><a href="#添加远程库">添加远程库</a>
+              <ol>
+                <li><a href="#查看当前的远程库">查看当前的远程库</a></li>
+                <li><a href="#提取远程仓库">提取远程仓库</a></li>
+                <li><a href="#推送到远程仓库">推送到远程仓库</a></li>
+                <li><a href="#删除远程仓库">删除远程仓库</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#git服务其搭建暂时不搞">git服务其搭建（暂时不搞）</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git/">git</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 19, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 11 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="git">git</h1>
+<p><strong>啊能镇楼</strong></p>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181915672.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="git配置">git配置</h2>
+<pre><code>    $ git config --global user.name &quot;runoob&quot;
+     $ git config --global user.email test@runoob.com
+</code></pre>
+<h2 id="查看配置信息">查看配置信息</h2>
+<pre><code>    $ git config --list
+</code></pre>
+<h2 id="git工作流程">git工作流程</h2>
+<ul>
+<li>克隆git资源作为工作目录</li>
+<li>在克隆的资源上添加或修改文件</li>
+<li>如果其他人修改，你可以更新资源</li>
+<li>在提交前查看修改</li>
+<li>提交修改</li>
+<li>在修改完成后，如果发现有错误，可以撤回提交并再次修改并提交</li>
+</ul>
+<h2 id="基本概念">基本概念</h2>
+<ul>
+<li><strong>工作区</strong>：就是你在电脑里能看到的目录</li>
+<li><strong>暂存区</strong>：英文叫stage或index，一般存放在 <em>.git</em> 目录下的index文件，所以我们把暂存区有时也叫作索引（index）</li>
+<li><strong>版本库</strong>：工作区有一个隐藏目录 <em>.git</em>，这个不算工作区，而是Git的版本库</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181722043.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>图中左侧为工作区，右侧为版本库。在版本库中标记为“index”的区域是暂存区（stage/index）,标记为“master”的是master分支所代表的目录树</li>
+<li>图中我们可以看出此时“HEAD”实际是指向master分支的一个“游标”。所以图示的命令中出现HEAD的地方是可以用master来替换的</li>
+<li>图中的object标识的区域为git的对象库，实际位于“.git/objects”目录下，里面包含了创建的各种对象及内容</li>
+<li>当对工作区修改（或新增）的文件执行git add命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中</li>
+<li>当执行提交（git commit）时，暂存区的目录树写到版本库（对象库）中，master分支会相应的更新。即master指向的目录树就是提交时暂存区的目录树</li>
+<li>当执行 <em>git reset HEAD</em> 操作时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响</li>
+<li>当执行 <em>git rm &ndash;cached<file></em> 命令时，会直接从暂存区删除文件，工作区则不做出改变。</li>
+<li>当执行 <em>git checkout .</em> 或者 <em>git checkout &ndash; <file></em> 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区中的改动。</li>
+<li>当执行 <em>git checkout HEAD .</em> 或者 <em>git checkout HEAD <file></em> 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动</li>
+</ul>
+<h2 id="git-创建仓库">git 创建仓库</h2>
+<p><em>git init初始化一个仓库</em>
+Git 的很多命令都需要在 Git 的仓库中运行，所以 git init 是使用 Git 的第一个命令。
+在执行完成 git init 命令后，Git 仓库会生成一个 .git 目录，该目录包含了资源的所有元数据，其他的项目目录保持不变。</p>
+<p><em>git init newrepo</em>使用我们指定目录作为Git仓库</p>
+<p>初始化后，会在 newrepo 目录下会出现一个名为 .git 的目录，所有 Git 需要的数据和资源都存放在这个目录中。</p>
+<p>如果当前目录下有几个文件想要纳入版本控制，需要先用 git add 命令告诉 Git 开始对这些文件进行跟踪，然后提交</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git add *.c
+</span></span><span class="line"><span class="cl">$ git add README
+</span></span><span class="line"><span class="cl">$ git commit -m &#39;初始化项目版本&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上命令将目录下以 .c 结尾及 README 文件提交到仓库中。</p>
+<p><strong>注： 在 Linux 系统中，commit 信息使用单引号 &lsquo;，Windows 系统，commit 信息使用双引号 &ldquo;。所以在 git bash 中 git commit -m &lsquo;提交说明&rsquo; 这样是可以的，在 Windows 命令行中就要使用双引号 git commit -m &ldquo;提交说明&rdquo;</strong></p>
+<h3 id="git-clone">git clone</h3>
+<p>我们使用 git clone 从现有 Git 仓库中拷贝项目</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone &lt;repo&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们需要克隆到指定的目录，可以使用以下命令格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone &lt;repo&gt; &lt;directory&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数说明</p>
+<ul>
+<li>repo：git仓库</li>
+<li>directory：本地目录</li>
+</ul>
+<p>比如，要克隆 Ruby 语言的 Git 代码仓库 Grit，可以用下面的命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git clone git://github.com/schacon/grit.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行该命令后，会在当前目录下创建一个名为grit的目录，其中包含一个 .git 的目录，用于保存下载下来的所有版本记录。</p>
+<p>如果要自己定义要新建的项目目录名称，可以在上面的命令末尾指定新的名字：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git clone git://github.com/schacon/grit.git mygrit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181910344.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>git init 初始化仓库</li>
+<li>git add . 添加文件到暂存区</li>
+<li>git commit 将暂存区内容添加到仓库中</li>
+</ul>
+<h3 id="创建仓库命令">创建仓库命令</h3>
+<ul>
+<li>git 初始化仓库</li>
+<li>git clone 拷贝一份远程仓库，也就是下载一个项目</li>
+</ul>
+<h3 id="提交与修改">提交与修改</h3>
+<ul>
+<li>git add 添加文件到暂存区</li>
+<li>git status 查看仓库当前的状态，显示有变更的文件</li>
+<li>git diff 比较文件的不同，即暂存区和工作区的差异</li>
+<li>git commit 提交暂存区到本地仓库</li>
+<li>git reset 回退版本</li>
+<li>git rm 将文件从暂存区和工作区删除</li>
+<li>git mv 移动或重命名工作区文件</li>
+<li>git checkout 分支切换</li>
+<li>git switch 更清晰地切换分支（2.3版本引入）</li>
+<li>git restore 恢复或撤销文件的更改</li>
+</ul>
+<h3 id="提交日志">提交日志</h3>
+<ul>
+<li>git log 查看历史提交记录</li>
+<li>git blame <file> 以列表形式查看指定文件的历史修改记录</li>
+</ul>
+<h3 id="远程操作">远程操作</h3>
+<ul>
+<li>git remote 远程仓库操作</li>
+<li>git fetch 从远程获取代码库</li>
+<li>git pull 下载远程代码并合并</li>
+<li>git push 上传远程代码并合并</li>
+</ul>
+<h2 id="git分支管理">git分支管理</h2>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181930456.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>创建分支命令：
+git branch (branchname)</p>
+<p>切换分支命令
+git checkout (branchname)</p>
+<p>当你切换分支的时候，git会用该分支的最后提交的快照替换你的工作目录的内容，以多个分支不需要多个目录。</p>
+<p>合并分支命令
+git merge</p>
+<p>你可以多次合并到统一分支， 也可以选择在合并之后直接删除被并入的分支。</p>
+<h2 id="git-分支管理">git 分支管理</h2>
+<h3 id="列出分支">列出分支</h3>
+<p>git branch
+没有参数时，git branch 会列出你在本地的分支</p>
+<pre><code>    $ git branch
+    * master
+</code></pre>
+<p>此例的意思就是，我们有一个叫做 master 的分支，并且该分支是当前分支。</p>
+<p>当你执行 git init 的时候，默认情况下 Git 就会为你创建 master 分支。</p>
+<p>如果我们要手动创建一个分支。执行 git branch (branchname) 即可</p>
+<pre><code>    $ git branch testing
+    $ git branch
+    * master
+    testing
+</code></pre>
+<p>现在我们可以看到，有了一个新分支 testing。</p>
+<p>当你以此方式在上次提交更新之后创建了新分支，如果后来又有更新提交， 然后又切换到了 testing 分支，Git 将还原你的工作目录到你创建分支时候的样子。</p>
+<p>接下来我们将演示如何切换分支，我们用 git checkout (branch) 切换到我们要修改的分支</p>
+<pre><code>    $ ls
+    README
+    $ echo 'runoob.com' &gt; test.txt
+    $ git add .
+    $ git commit -m 'add test.txt'
+    [master 3e92c19] add test.txt
+    1 file changed, 1 insertion(+)
+    create mode 100644 test.txt
+    $ ls
+    README        test.txt
+    $ git checkout testing
+    Switched to branch 'testing'
+    $ ls
+    README
+</code></pre>
+<p>当我们切换到 testing 分支的时候，我们添加的新文件 test.txt 被移除了。切换回 master 分支的时候，它们又重新出现了。</p>
+<pre><code>    $ git checkout master
+    Switched to branch 'master'
+    $ ls
+    README        test.txt
+</code></pre>
+<p>我们也可以使用 git checkout -b (branchname) 命令来创建新分支并立即切换到该分支下，从而在该分支中操作。</p>
+<pre><code>    $ git checkout -b newtest
+    Switched to a new branch 'newtest'
+    $ git rm test.txt 
+    rm 'test.txt'
+    $ ls
+    README
+    $ touch runoob.php
+    $ git add .
+    $ git commit -am 'removed test.txt、add runoob.php'
+    [newtest c1501a2] removed test.txt、add runoob.php
+    2 files changed, 1 deletion(-)
+    create mode 100644 runoob.php
+    delete mode 100644 test.txt
+    $ ls
+    README        runoob.php
+    $ git checkout master
+    Switched to branch 'master'
+    $ ls
+    README        test.txt
+</code></pre>
+<p>如你所见，我们创建了一个分支，在该分支上移除了一些文件 test.txt，并添加了 runoob.php 文件，然后切换回我们的主分支，删除的 test.txt 文件又回来了，且新增加的 runoob.php 不存在主分支中。</p>
+<p>使用分支将工作切分开来，从而让我们能够在不同开发环境中做事，并来回切换</p>
+<h3 id="删除分支">删除分支</h3>
+<p>git branch -d (branchname)</p>
+<p>例如我们要删除 testing 分支：
+$ git branch
+* master
+testing
+$ git branch -d testing
+Deleted branch testing (was 85fc7e7).
+$ git branch
+* master</p>
+<h3 id="分支合并">分支合并</h3>
+<p>一旦某分支有了独立内容，你终究会希望将它合并回到你的主分支。 你可以使用以下命令将任何分支合并到当前分支中去</p>
+<p>git merge</p>
+<pre><code>    $ git branch
+    * master
+    newtest
+    $ ls
+    README        test.txt
+    $ git merge newtest
+    Updating 3e92c19..c1501a2
+    Fast-forward
+    runoob.php | 0
+    test.txt   | 1 -
+    2 files changed, 1 deletion(-)
+    create mode 100644 runoob.php
+    delete mode 100644 test.txt
+    $ ls
+    README        runoob.php
+</code></pre>
+<p>以上实例中我们将 newtest 分支合并到主分支去，test.txt 文件被删除。</p>
+<p>合并完后就可以删除分支</p>
+<pre><code>    $ git branch -d newtest
+    Deleted branch newtest (was c1501a2).
+</code></pre>
+<p>删除后， 就只剩下 master 分支了：</p>
+<pre><code>    $ git branch
+    * master
+</code></pre>
+<h3 id="合并冲突">合并冲突</h3>
+<p>合并并不仅仅是简单的文件添加、移除的操作，Git 也会合并修改</p>
+<pre><code>    $ git branch
+    * master
+    $ cat runoob.php
+</code></pre>
+<p>首先，我们创建一个叫做 change_site 的分支，切换过去，我们将 runoob.php 内容改为</p>
+<pre><code>    &lt;?php
+    echo 'runoob';
+    ?&gt;
+</code></pre>
+<p>创建 change_site 分支：</p>
+<pre><code>    $ git checkout -b change_site
+    Switched to a new branch 'change_site'
+    $ vim runoob.php
+    $ head -3 runoob.php
+    &lt;?php
+    echo 'runoob';
+    ?&gt;
+    $ git commit -am 'changed the runoob.php'
+    [change_site 7774248] changed the runoob.php
+    1 file changed, 3 insertions(+)
+</code></pre>
+<p>将修改的内容提交到 change_site 分支中。 现在，假如切换回 master 分支我们可以看内容恢复到我们修改前的(空文件，没有代码)，我们再次修改 runoob.php 文件。</p>
+<pre><code>    $ git checkout master
+    Switched to branch 'master'
+    $ cat runoob.php
+    $ vim runoob.php    # 修改内容如下
+    $ cat runoob.php
+    &lt;?php
+    echo 1;
+    ?&gt;
+    $ git diff
+    diff --git a/runoob.php b/runoob.php
+    index e69de29..ac60739 100644
+    --- a/runoob.php
+    +++ b/runoob.php
+    @@ -0,0 +1,3 @@
+    +&lt;?php
+    +echo 1;
+    +?&gt;
+    $ git commit -am '修改代码'
+    [master c68142b] 修改代码
+    1 file changed, 3 insertions(+)
+</code></pre>
+<p>现在这些改变已经记录到我的 &ldquo;master&rdquo; 分支了。接下来我们将 &ldquo;change_site&rdquo; 分支合并过来</p>
+<pre><code>    $ git merge change_site
+    Auto-merging runoob.php
+    CONFLICT (content): Merge conflict in runoob.php
+    Automatic merge failed; fix conflicts and then commit the result.
+
+    $ cat runoob.php     # 打开文件，看到冲突内容
+    &lt;?php
+    &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    echo 1;
+    =======
+    echo 'runoob';
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; change_site
+    ?&gt;
+</code></pre>
+<p>我们将前一个分支合并到 master 分支，一个合并冲突就出现了，接下来我们需要手动去修改它</p>
+<pre><code>    $ vim runoob.php 
+    $ cat runoob.php
+    &lt;?php
+    echo 1;
+    echo 'runoob';
+    ?&gt;
+    $ git diff
+    diff --cc runoob.php
+    index ac60739,b63d7d7..0000000
+    --- a/runoob.php
+    +++ b/runoob.php
+    @@@ -1,3 -1,3 +1,4 @@@
+    &lt;?php
+    +echo 1;
+    + echo 'runoob';
+    ?&gt;
+</code></pre>
+<p>在 Git 中，我们可以用 git add 要告诉 Git 文件冲突已经解决
+$ git status -s
+UU runoob.php
+$ git add runoob.php
+$ git status -s
+M  runoob.php
+$ git commit
+[master 88afe0e] Merge branch &lsquo;change_site&rsquo;</p>
+<h3 id="git查看提交历史">git查看提交历史</h3>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182000182.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>我们还可以用 &ndash;graph 选项，查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项</p>
+<ul>
+<li>d5e9fc2 (HEAD -&gt; master) Merge branch &lsquo;change_site&rsquo;
+|\<br>
+| * 7774248 (change_site) changed the runoob.php</li>
+<li>| c68142b 修改代码
+|/</li>
+<li>c1501a2 removed test.txt、add runoob.php</li>
+<li>3e92c19 add test.txt</li>
+<li>3b58100 第一次版本提交</li>
+</ul>
+<p>现在我们可以更清楚明了地看到何时工作分叉、又何时归并。</p>
+<p>你也可以用 &ndash;reverse 参数来逆向显示所有日志。</p>
+<pre><code>    $ git log --reverse --oneline
+    3b58100 第一次版本提交
+    3e92c19 add test.txt
+    c1501a2 removed test.txt、add runoob.php
+    7774248 (change_site) changed the runoob.php
+    c68142b 修改代码
+    d5e9fc2 (HEAD -&gt; master) Merge branch 'change_site'
+</code></pre>
+<p>如果只想查找指定用户的提交日志可以使用命令：git log &ndash;author , 例如，比方说我们要找 Git 源码中 Linus 提交的部分</p>
+<pre><code>    $ git log --author=Linus --oneline -5
+    81b50f3 Move 'builtin-*' into a 'builtin/' subdirectory
+    3bb7256 make &quot;index-pack&quot; a built-in
+    377d027 make &quot;git pack-redundant&quot; a built-in
+    b532581 make &quot;git unpack-file&quot; a built-in
+    112dd51 make &quot;mktag&quot; a built-in
+</code></pre>
+<p>如果你要指定日期，可以执行几个选项：&ndash;since 和 &ndash;before，但是你也可以用 &ndash;until 和 &ndash;after。</p>
+<p>例如，如果我要看 Git 项目中三周前且在四月十八日之后的所有提交，我可以执行这个（我还用了 &ndash;no-merges 选项以隐藏合并提交）</p>
+<pre><code>    $ git log --oneline --before={3.weeks.ago} --after={2010-04-18} --no-merges
+    5469e2d Git 1.7.1-rc2
+    d43427d Documentation/remote-helpers: Fix typos and improve language
+    272a36b Fixup: Second argument may be any arbitrary string
+    b6c8d2d Documentation/remote-helpers: Add invocation section
+    5ce4f4e Documentation/urls: Rewrite to accomodate transport::address
+    00b84e9 Documentation/remote-helpers: Rewrite description
+    03aa87e Documentation: Describe other situations where -z affects git diff
+    77bc694 rebase-interactive: silence warning when no commits rewritten
+    636db2c t3301: add tests to use --format=&quot;%N&quot;
+</code></pre>
+<p>更多 git log 命令可查看 <a class="link" href="http://git-scm.com/docs/git-log"  target="_blank" rel="noopener"
+    >http://git-scm.com/docs/git-log</a> 或使用 git log &ndash;help 命令查看帮助信息。</p>
+<p>git blame
+git blame 命令用于逐行显示指定文件的每一行代码是由谁在什么时候引入或修改的。</p>
+<p>strong&gt;git blame 可以追踪文件中每一行的变更历史，包括作者、提交哈希、提交日期和提交消息等信息。</p>
+<p>如果要查看指定文件的修改记录可以使用 git blame 命令，格式如下</p>
+<p>git blame [选项] &lt;文件路径&gt;</p>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182013279.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="git标签">git标签</h2>
+<p>如果你达到一个重要的阶段，并希望永远记住那个特别的提交快照，你可以使用 git tag 给它打上标签。</p>
+<p>比如说，我们想为我们的 runoob 项目发布一个&quot;1.0&quot;版本。 我们可以用 git tag -a v1.0 命令给最新一次提交打上（HEAD）&ldquo;v1.0&quot;的标签。</p>
+<p>-a 选项意为&quot;创建一个带注解的标签&rdquo;。 不用 -a 选项也可以执行的，但它不会记录这标签是啥时候打的，谁打的，也不会让你添加个标签的注解。 我推荐一直创建带注解的标签。</p>
+<p>$ git tag -a v1.0</p>
+<p>当你执行 git tag -a 命令时，Git 会打开你的编辑器，让你写一句标签注解，就像你给提交写注解一样。</p>
+<p>现在，注意当我们执行 git log &ndash;decorate 时，我们可以看到我们的标签了</p>
+<ul>
+<li>d5e9fc2 (HEAD -&gt; master) Merge branch &lsquo;change_site&rsquo;
+|\<br>
+| * 7774248 (change_site) changed the runoob.php</li>
+<li>| c68142b 修改代码
+|/</li>
+<li>c1501a2 removed test.txt、add runoob.php</li>
+<li>3e92c19 add test.txt</li>
+<li>3b58100 第一次版本提交</li>
+</ul>
+<p>如果我们忘了给某个提交打标签，又将它发布了，我们可以给它追加标签。</p>
+<p>例如，假设我们发布了提交 85fc7e7(上面实例最后一行)，但是那时候忘了给它打标签。 我们现在也可以</p>
+<pre><code>    $ git tag -a v0.9 85fc7e7
+    $ git log --oneline --decorate --graph
+    *   d5e9fc2 (HEAD -&gt; master) Merge branch 'change_site'
+    |\  
+    | * 7774248 (change_site) changed the runoob.php
+    * | c68142b 修改代码
+    |/  
+    * c1501a2 removed test.txt、add runoob.php
+    * 3e92c19 add test.txt
+    * 3b58100 (tag: v0.9) 第一次版本提交
+</code></pre>
+<p>如果我们要查看所有标签可以使用以下命令</p>
+<pre><code>    $ git tag
+    v0.9
+    v1.0
+</code></pre>
+<p>指定标签信息命令：
+git tag -a <tagname> -m &ldquo;runoob.com标签&rdquo;</p>
+<p>PGP签名标签命令
+git tag -s <tagname> -m &ldquo;runoob.com标签&rdquo;</p>
+<h2 id="git远程仓库github">git远程仓库（github）</h2>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182017215.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="添加远程库">添加远程库</h3>
+<p>要添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用,命令格式如下</p>
+<p>git remote add [shortname] [url]</p>
+<p>本例以 Github 为例作为远程仓库，如果你没有 Github 可以在官网 <a class="link" href="https://github.com/"  target="_blank" rel="noopener"
+    >https://github.com/</a>注册。</p>
+<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过SSH加密的，所以我们需要配置验证信息：</p>
+<p>使用以下命令生成 SSH Key：</p>
+<p>后面的 <a class="link" href="mailto:your_email@youremail.com" >your_email@youremail.com</a> 改为你在 Github 上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。</p>
+<p>成功的话会在 ~/ 下生成 .ssh 文件夹，进去，打开 id_rsa.pub，复制里面的 key。</p>
+<pre><code>    $ ssh-keygen -t rsa -C &quot;429240967@qq.com&quot;
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/Users/tianqixin/.ssh/id_rsa): 
+    Enter passphrase (empty for no passphrase):    # 直接回车
+    Enter same passphrase again:                   # 直接回车
+    Your identification has been saved in /Users/tianqixin/.ssh/id_rsa.
+    Your public key has been saved in /Users/tianqixin/.ssh/id_rsa.pub.
+    The key fingerprint is:
+    SHA256:MDKVidPTDXIQoJwoqUmI4LBAsg5XByBlrOEzkxrwARI 429240967@qq.com
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |E*+.+=**oo       |
+    |%Oo+oo=o. .      |
+    |%**.o.o.         |
+    |OO.  o o         |
+    |+o+     S        |
+    |.                |
+    |                 |
+    |                 |
+    |                 |
+    +----[SHA256]-----+
+</code></pre>
+<p>回到 github 上，进入 Account =&gt; Settings（账户配置）</p>
+<p>左边选择 SSH and GPG keys，然后点击 New SSH key 按钮,title 设置标题，可以随便填，粘贴在你电脑上生成的 key。</p>
+<p>为了验证是否成功，输入以下命令：</p>
+<pre><code>    $ ssh -T git@github.com
+    The authenticity of host 'github.com (52.74.223.119)' can't be established.
+    RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+    Are you sure you want to continue connecting (yes/no/[fingerprint])? yes                   # 输入 yes
+    Warning: Permanently added 'github.com,52.74.223.119' (RSA) to the list of known hosts.
+    Hi tianqixin! You've successfully authenticated, but GitHub does not provide shell access. # 成功信息
+</code></pre>
+<p>以下命令说明我们已成功连上 Github。</p>
+<p>之后登录后点击&rdquo; New repository &quot;</p>
+<p>之后在在Repository name 填入 runoob-git-test(远程仓库名) ，其他保持默认设置，点击&quot;Create repository&quot;按钮，就成功地创建了一个新的Git仓库</p>
+<h4 id="查看当前的远程库">查看当前的远程库</h4>
+<p>git remote</p>
+<pre><code>    $ git remote
+    origin
+    $ git remote -v
+    origin    git@github.com:tianqixin/runoob-git-test.git (fetch)
+    origin    git@github.com:tianqixin/runoob-git-test.git (push)
+</code></pre>
+<h4 id="提取远程仓库">提取远程仓库</h4>
+<p>Git 有两个命令用来提取远程仓库的更新。</p>
+<p>1、从远程仓库下载新分支与数据</p>
+<p>git fetch</p>
+<p>该命令执行完后需要执行 git merge 远程分支到你所在的分支。</p>
+<p>2、从远端仓库提取数据并尝试合并到当前分支：</p>
+<p>git merge</p>
+<p>该命令就是在执行 git fetch 之后紧接着执行 git merge 远程分支到你所在的任意分支</p>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182024856.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h4 id="推送到远程仓库">推送到远程仓库</h4>
+<p>推送你的新分支与数据到某个远端仓库命令:</p>
+<p>git push [alias] [branch]</p>
+<p>以上命令将你的 [branch] 分支推送成为 [alias] 远程仓库上的 [branch] 分支，实例如下。</p>
+<p>$ touch runoob-test.txt      # 添加文件
+$ git add runoob-test.txt
+$ git commit -m &ldquo;添加到远程&rdquo;
+master 69e702d] 添加到远程
+1 file changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 runoob-test.txt</p>
+<p>$ git push origin master    # 推送到 Github</p>
+<h4 id="删除远程仓库">删除远程仓库</h4>
+<p>git remote rm [别名]</p>
+<h2 id="git服务其搭建暂时不搞">git服务其搭建（暂时不搞）</h2>
+<p><em>以上文档资料来自菜鸟教程，本人只是学习并总结借鉴</em></p>
+<p><em>最后,德狗镇楼</em>
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182029744.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 西伯利亚土豆商
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
