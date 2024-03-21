@@ -6,7 +6,155 @@
         <description>Recent content on 西伯利亚土豆商</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Thu, 21 Mar 2024 12:35:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 21 Mar 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>爬虫</title>
+        <link>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</link>
+        <pubDate>Thu, 21 Mar 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</guid>
+        <description>&lt;h1 id=&#34;爬虫基础&#34;&gt;爬虫基础&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403211058784.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“可见即可爬~”&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;爬虫概念&#34;&gt;爬虫概念&lt;/h2&gt;
+&lt;p&gt;如果互联网是一张大的蜘蛛网，那一台计算机上的数据便是蜘蛛网上的一个猎物，而爬虫程序就是一只小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;网络爬虫也叫网络蜘蛛，特指一类自动批量下载网络资源的程序&lt;/em&gt;
+&lt;strong&gt;网络爬虫是伪装成客户端与服务端进行数据交互的程序&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;爬虫的应用&#34;&gt;爬虫的应用&lt;/h2&gt;
+&lt;p&gt;1.数据采集
+2.搜索引擎
+3.模拟操作
+4.软件测试
+5.网络安全&lt;/p&gt;
+&lt;h2 id=&#34;爬虫的分类略&#34;&gt;爬虫的分类（略）&lt;/h2&gt;
+&lt;h3 id=&#34;爬虫的一般开发流程&#34;&gt;爬虫的一般开发流程：&lt;/h3&gt;
+&lt;p&gt;1.最简单的单一页面数据的爬取：&lt;/p&gt;
+&lt;p&gt;url-&amp;gt;发送请求，获取响应-&amp;gt;提取数据-&amp;gt;保存数据&lt;/p&gt;
+&lt;p&gt;2.多页面数据的爬取&lt;/p&gt;
+&lt;p&gt;发送请求，获取响应——&amp;gt;提取url地址，继续请求&lt;/p&gt;
+&lt;h3 id=&#34;爬虫开发的重难点&#34;&gt;爬虫开发的重难点&lt;/h3&gt;
+&lt;p&gt;1.数据的获取（反爬）
+2.采集的速度&lt;/p&gt;
+&lt;h2 id=&#34;http和https&#34;&gt;HTTP和HTTPS&lt;/h2&gt;
+&lt;p&gt;大多数商业应用采用的架构：
+1.c/s client server
+2.b/s broser(浏览器) server
+3.m/s mobile server&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;以上统称为客户端与服务端&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;http协议超文本传输协议&#34;&gt;HTTP协议（超文本传输协议）&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;爬取想要的数据前，一定要明确其使用的是什么协议&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;HTTP是基于TCP/IP通信协议来传输数据的&lt;/p&gt;
+&lt;h4 id=&#34;tcpip通信的三次握手与四次挥手&#34;&gt;TCP/IP通信的三次握手与四次挥手&lt;/h4&gt;
+&lt;h5 id=&#34;三次握手建立连接&#34;&gt;三次握手建立连接&lt;/h5&gt;
+&lt;p&gt;client:嘿，服务端girl！我想和你建立连接
+server：好呀，嘻嘻
+client：真好，那我们开始（数据）交互吧！&lt;/p&gt;
+&lt;p&gt;（进行数据交互ing）&lt;/p&gt;
+&lt;h5 id=&#34;四次挥手断开连接&#34;&gt;四次挥手断开连接&lt;/h5&gt;
+&lt;p&gt;client：我已经和你交互（数据）完了，我们断开连接吧!
+server：你确定要断开连接吗？
+server：那你断开连接吧
+client：欧克，那我断开连接了&lt;/p&gt;
+&lt;h4 id=&#34;http请求流程&#34;&gt;HTTP请求流程：&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;我们日常用浏览器搜索东西，输入的是URL,浏览器会将其自动转换为HTTP协议&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;一次http请求的基本流程，有客户端向服务端发起一次请求（request），而服务器在接收到以后返回给客户端一个响应（response）.所以一次完成的http请求包含请求和响应两部分&lt;/p&gt;
+&lt;p&gt;浏览器发送http请求的过程：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.域名解析
+2.发起TCP的3次握手
+3.建立TCP连接后发起HTTP请求
+4.服务器响应http请求，浏览器得到html代码
+5.浏览器解析html代码，并请求html代码中的资源（js，css，图片等）
+6.浏览器对页面进行渲染呈现给用户
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;tip：
+在网页的右键检查network-&amp;gt;name-&amp;gt;request headers view parsed下的connection:keep-alive保持常连接，就不用频繁三次握手和四次挥手了&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;浏览器获取的内容（elements的内容）包含：url地址对应的响应+js+css+picture
+爬虫会获取：url地址对应的响应&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;url浏览器搜索框里的内容&#34;&gt;url（浏览器搜索框里的内容）&lt;/h4&gt;
+&lt;p&gt;发送http请求时，通过url对网络资源进行定位&lt;/p&gt;
+&lt;p&gt;url：统一资源定位符。用来标识某一处资源的地址，也叫网址&lt;/p&gt;
+&lt;h5 id=&#34;组成协议域名端口默认80路径参数&#34;&gt;组成：协议+域名（端口默认80）+路径+参数&lt;/h5&gt;
+&lt;p&gt;&lt;em&gt;http协议的端口号默认为80可以不写，http协议的端口号默认为443可以不行，（域名可以确定时哪一台电脑，而端口号是为了确定是哪台电脑的哪一个应用）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;域名通常是IP地址的映射&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;http请求格式&#34;&gt;http请求格式&lt;/h4&gt;
+&lt;p&gt;客户端发送一个HTTP请求到服务器的请求消息包括一下部分：请求行,请求头，空行和请求数据
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403201542835.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;请求方法&#34;&gt;请求方法&lt;/h5&gt;
+&lt;p&gt;分类：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;OPTIONS
+PUT
+DELETE
+TRACE
+CONNECT
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常用方法是GET 和 POST&lt;/p&gt;
+&lt;p&gt;GET:负责从服务器获取数据
+POST:负责向服务器提交数据&lt;/p&gt;
+&lt;h5 id=&#34;请求头&#34;&gt;请求头&lt;/h5&gt;
+&lt;h5 id=&#34;http请求正文&#34;&gt;http请求正文&lt;/h5&gt;
+&lt;p&gt;请求正文通常是使用POST请求中表单数据，而对于GET请求，请求体则为空&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;在爬虫中，如果构造POST，需要正确的content-type，并了解各种请求库的各个参数设置时使用的是哪种content-type，不然可能会导致post提交后无法正常响应&lt;/em&gt;&lt;/p&gt;
+&lt;h5 id=&#34;http响应格式&#34;&gt;HTTP响应格式&lt;/h5&gt;
+&lt;p&gt;由四个部分组成，分别是：
+状态行（响应行）
+消息报头
+空行
+响应正文&lt;/p&gt;
+&lt;h5 id=&#34;http协议的特点&#34;&gt;http协议的特点&lt;/h5&gt;
+&lt;p&gt;HTTP是无连接的
+HTTP是媒体独立的
+HTTP是无状态的&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;保持http连接状态的技术是会话和Cookies&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;https协议安全版的http&#34;&gt;https协议，安全版的HTTP&lt;/h4&gt;
+&lt;p&gt;http是基于tcp/ip协议的，而https是在http协议的基础之上，再加一层SSL/TLS协议，数据在传输过程中是加密的&lt;/p&gt;
+&lt;p&gt;http是明文传输的而https是密文传输，所以较安全但性能低&lt;/p&gt;
+&lt;h3 id=&#34;会话技术&#34;&gt;会话技术&lt;/h3&gt;
+&lt;p&gt;会话在服务端，就是网站的服务器，用来保存用户的会话信息；cookies在客户端，也可以理解为浏览器端&lt;/p&gt;
+&lt;h5 id=&#34;cookie&#34;&gt;Cookie&lt;/h5&gt;
+&lt;p&gt;指某些网站为了辨别用户身份，进行session跟踪而存储在用户本地终端上的数据（通常经过加密）&lt;/p&gt;
+&lt;h5 id=&#34;cookie可以理解为一个凭证&#34;&gt;Cookie可以理解为一个凭证&lt;/h5&gt;
+&lt;p&gt;1.实际是由服务器发给客户端的特殊信息
+2.这些信息以文本文件的方式存放在客户端
+3.客户端每次向服务器发送请求的时候都会带上这些特殊信息
+4.服务器在接收到Cookie以后，会验证cookie的信息，以此来辨别用户的身份&lt;/p&gt;
+&lt;h5 id=&#34;爬虫为什么要使用cookie&#34;&gt;爬虫为什么要使用cookie&lt;/h5&gt;
+&lt;h6 id=&#34;好处&#34;&gt;好处：&lt;/h6&gt;
+&lt;pre&gt;&lt;code&gt;能够访问登陆页面
+有一定的反爬作用
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h6 id=&#34;坏处&#34;&gt;坏处：&lt;/h6&gt;
+&lt;pre&gt;&lt;code&gt;请求太频繁有可能被识别为爬虫
+一般使用多账号解决
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;session&#34;&gt;Session&lt;/h4&gt;
+&lt;p&gt;一个浏览器窗口从打开到关闭这个期间&lt;/p&gt;
+&lt;p&gt;在一个客户从打开浏览器到关闭浏览器这个期间，发起的所以请求都可以被识别为同一个用户，session是基于cookie的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403211042048.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;以上资料来自https://blog.csdn.net/qq_44907926/article/details/118585030&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;作者大大真的牛逼，写的真好&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>git</title>
         <link>http://localhost:1313/p/git/</link>
         <pubDate>Tue, 19 Mar 2024 13:35:01 +0800</pubDate>
