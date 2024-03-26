@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
+<title>爬虫学习plus</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
+
+<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="爬虫学习plus">
+<meta property='og:description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
+<meta property='og:url' content='http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
+<meta property='og:site_name' content='西伯利亚土豆商'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T13:28:01&#43;08:00'/>
+<meta name="twitter:title" content="爬虫学习plus">
+<meta name="twitter:description" content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu30e88383a721a2a54354209b7d01645c_12673_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">西伯利亚土豆商</a></h1>
+            <h2 class="site-description">我打开圣经，上面第一句话就是&#34;Hello World!&#34;</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#rootstxt协议">roots.txt协议：</a></li>
+    <li><a href="#http协议">http协议：</a>
+      <ol>
+        <li><a href="#常用请求头信息">常用请求头信息</a></li>
+        <li><a href="#常用响应头信息">常用响应头信息：</a></li>
+      </ol>
+    </li>
+    <li><a href="#https协议">https协议：</a>
+      <ol>
+        <li><a href="#加密方式">加密方式：</a></li>
+      </ol>
+    </li>
+    <li><a href="#reques模块">reques模块</a>
+      <ol>
+        <li><a href="#如何使用">如何使用：</a></li>
+      </ol>
+    </li>
+    <li><a href="#数据解析-">数据解析 ：</a>
+      <ol>
+        <li><a href="#聚焦爬虫爬取页面中指定的页面内容">聚焦爬虫：爬取页面中指定的页面内容</a>
+          <ol>
+            <li><a href="#bs4进行数据解析">bs4进行数据解析</a></li>
+            <li><a href="#xpath解析最常用且便携高效的一种解析方式通用性">xpath解析:最常用且便携高效的一种解析方式，通用性</a></li>
+            <li><a href="#验证码识别">验证码识别</a></li>
+            <li><a href="#cookie用来让服务器端记录客户端的相关状态">cookie:用来让服务器端记录客户端的相关状态</a></li>
+            <li><a href="#代理破解封ip这种反爬机制">代理：破解封ip这种反爬机制</a></li>
+          </ol>
+        </li>
+        <li><a href="#高性能异步爬虫">高性能异步爬虫</a>
+          <ol>
+            <li><a href="#目的在爬虫中使用异步实现高性能的数据爬取操作">目的：在爬虫中使用异步实现高性能的数据爬取操作</a></li>
+            <li><a href="#异步爬虫的方式">异步爬虫的方式：</a></li>
+          </ol>
+        </li>
+        <li><a href="#selenium模块的基本使用">selenium模块的基本使用</a></li>
+        <li><a href="#无头浏览器">无头浏览器</a></li>
+        <li><a href="#12306模拟登录">12306模拟登录</a></li>
+        <li><a href="#scrapy框架">scrapy框架</a>
+          <ol>
+            <li><a href="#基本使用">基本使用</a></li>
+            <li><a href="#scrapy数据解析">scrapy数据解析</a></li>
+            <li><a href="#process_item方法">process_item方法</a></li>
+            <li><a href="#parse方法">parse方法</a></li>
+            <li><a href="#基于spider的全站数据爬取">基于Spider的全站数据爬取</a></li>
+            <li><a href="#五大核心组件">五大核心组件</a></li>
+            <li><a href="#请求传参">请求传参</a></li>
+            <li><a href="#图片数据爬取之imagespipeline">图片数据爬取之ImagesPipeline</a></li>
+            <li><a href="#中间件">中间件</a></li>
+            <li><a href="#process_response">process_response</a></li>
+            <li><a href="#链接提取器根据制定规则allow正则进行指定链接的提取">链接提取器：根据制定规则（allow=&ldquo;正则&rdquo;）进行指定链接的提取</a></li>
+            <li><a href="#规则解析器将链接提取器提取到的链接进行指定规则callback的解析的操作">规则解析器：将链接提取器提取到的链接进行指定规则（callback）的解析的操作</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#分布式爬虫">分布式爬虫</a></li>
+    <li><a href="#增量式爬虫">增量式爬虫</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/">爬虫学习plus</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 26, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 13 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403262100222.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h1 id="rootstxt协议">roots.txt协议：</h1>
+<p>君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰</p>
+<h1 id="http协议">http协议：</h1>
+<pre><code>概念：就是服务器和客户端进行数据交互的一种形式
+</code></pre>
+<h2 id="常用请求头信息">常用请求头信息</h2>
+<pre><code>user-agent:请求载体的身份标识
+connection：请求完毕后，是断开连接还是保持连接
+</code></pre>
+<h2 id="常用响应头信息">常用响应头信息：</h2>
+<pre><code>content-type：服务器响应回客户端的数据类型
+</code></pre>
+<h1 id="https协议">https协议：</h1>
+<pre><code>安全的超文本传输协议
+</code></pre>
+<h2 id="加密方式">加密方式：</h2>
+<pre><code>对称密钥加密
+非对称密钥加密
+证书密钥加密
+</code></pre>
+<h1 id="reques模块">reques模块</h1>
+<pre><code>python中原生的一款基于网络请求的模块，功能强大，简单便携，效率极高
+作用：模拟浏览器发请求
+</code></pre>
+<h2 id="如何使用">如何使用：</h2>
+<pre><code>指定URL
+发起请求
+获取响应数据
+数据解析
+持久化存储
+</code></pre>
+<p><em>有些数据可能是动态请求加载出来的，不能通过url直接请求出来</em></p>
+<h1 id="数据解析-">数据解析 ：</h1>
+<pre><code>解析的局部的文本内容都会在标签之间或标签对应的属性中进行存储 
+1.进行指定标签的定位
+2.标签或者标签对应的属性中存储的数据值进行提取（解析）
+</code></pre>
+<h2 id="聚焦爬虫爬取页面中指定的页面内容">聚焦爬虫：爬取页面中指定的页面内容</h2>
+<p>正则
+bs4
+xpath</p>
+<p>text(字符串)    content(二进制)   json()(对象)</p>
+<h3 id="bs4进行数据解析">bs4进行数据解析</h3>
+<pre><code>1.实例化一个BeautifulSoup对象，并将页面源码数据加载到该对象中
+2.通过调用BeautifulSoup对象中相关的属性或方法进行标签定位和数据提取
+</code></pre>
+<h3 id="xpath解析最常用且便携高效的一种解析方式通用性">xpath解析:最常用且便携高效的一种解析方式，通用性</h3>
+<pre><code>-xpath解析原理：
+    1.实例化一个etree的对象，且需要将被解析的页面源码数据加载到该对象中
+    2.调用etree对象中的xpath方法结合着xpath表达式实现标签的定位和内容的捕获
+-环境安装
+-如何实例化一个etree对象：from lxml import etree
+    1.将本地的html文档的源码数据加载到etree对象中：
+    etree.parse(filePath)
+    2.可以将从互联网上获取的源码数据加载到该对象中：
+    etree.HTML('page_text')
+- xpath('xpath表达式')
+    1./表示的是从根节点开始定位。表示的是一个层级
+    2.//表示的是多个层级。可以表示从任意位置开始定位
+    3.属性定位：//div[@class='song'] tag[@attrName=&quot;attrValue&quot;]
+    4.索引定位：//div[@class='song']/p[3] 索引是从1开始的
+    5.取文本：
+        /text()获取的是标签中直系的文本内容
+        //text()标签中非直系的文本内容
+    6.取属性：
+        /@attrName  ==&gt;img/src
+</code></pre>
+<h3 id="验证码识别">验证码识别</h3>
+<p>反爬机制：验证码。识别验证码图片中的数据，用于模拟登录操作</p>
+<p>识别验证码的操作：
+人工肉眼识别
+第三方自动识别</p>
+<h3 id="cookie用来让服务器端记录客户端的相关状态">cookie:用来让服务器端记录客户端的相关状态</h3>
+<pre><code>1.手动处理：通过抓包工具获取cookie值，将值封装到headers中
+2.自动处理：
+    cookie值来自登录post请求后，由服务器端创建
+    session会话对象：
+        作用：
+            1.可以进行请求的发送
+            2.如果请求过程中产生了cookie，则该cookie会被自动存储/携带在该session对象中
+        创建一个session对象：session=requests.Session()
+        使用session对象进行模拟登录post请求的发送（cookie就会被存储在session中）
+        session对象对个人主页对应的get请求进行发送（携带了cookie）
+</code></pre>
+<h3 id="代理破解封ip这种反爬机制">代理：破解封ip这种反爬机制</h3>
+<pre><code>什么是代理：代理服务器
+代理的作用：
+    突破自身ip访问的限制
+    隐藏自身真实ip
+代理相关的网站：
+    快代理
+    西si代理
+    www.goubanjia.com
+代理ip的类型：
+    http:应用到http协议对应的url中
+    https：应用到https协议对应的url中
+代理ip的匿名度：
+    透明：服务器知道该次请求使用了代理，也知道请求对应的真实ip
+    匿名：服务器知道该次请求使用了代理，不知道请求对应的真实ip
+    高匿：服务器不知道该次请求使用了代理，不知道请求对应的真实ip
+</code></pre>
+<h2 id="高性能异步爬虫">高性能异步爬虫</h2>
+<h3 id="目的在爬虫中使用异步实现高性能的数据爬取操作">目的：在爬虫中使用异步实现高性能的数据爬取操作</h3>
+<h3 id="异步爬虫的方式">异步爬虫的方式：</h3>
+<pre><code>1.多线程，多进程（不推荐）
+    好处：可以认为相关阻塞的操作单独开启线程或者进程，阻塞操作就可以异步执行
+    弊端：无法无限制的开启多线程或者多进程
+2.线程池，进程池（适当的使用）
+    好处：我们可以降低系统对进程或者线程创建和销毁的一个频率，从而很好的降低系统的开销
+    弊端：池中线程或者进程的数量是有上限的
+3.单线程+异步协程（推荐）
+    event_loop：事件循环：相当于一个无限循环，我们可以把一个函数注册到这个事件循环上，当满足某些条件时，函数就会被循环执行
+    coroutine:协程对象，我们可以将协程对象注册到事件循环中，它会被事件循环调用。我们可以使用async关键字来定义一个方法。这个方法在调用时不会被立即执行，而是返回一个协程对象。
+    task：任务，它是对协程对象的进一步封装，包含了任务的各个状态
+    future：代表将来执行或还没被执行的任务，实际上和task没有本质区别
+    async:定义一个协程
+    await：用来挂起阻塞方法的执行
+</code></pre>
+<p><em>在异步协程中如果出现了同步模块相关的代码，就无法实现异步</em>
+<em>当在asyncio中遇到阻塞操作时必须进行手动挂起</em>
+<em>异步模块中 text()文本 read()二进制 json()json对象</em>
+<em>获取响应数据操作之前一定要使用await进行手动挂起</em></p>
+<h2 id="selenium模块的基本使用">selenium模块的基本使用</h2>
+<p>问题：selenium模块和爬虫之间具有怎样的关联
+便携的获取网站中动态加载的数据
+便携实现模拟登录</p>
+<p>什么是selenium模块
+基于浏览器自动化的一个模块</p>
+<p>selenium使用流程：
+环境安装
+下载一个浏览器的驱动程序
+实例化一个浏览器的映射关系
+便携基于浏览器自动化的操作代码
+发起请求:get(url)
+标签定位:find系列方法
+标签交互:send_keys(&lsquo;xxx&rsquo;)
+执行js程序:excute_script(&lsquo;jsCode&rsquo;)
+前进，后退:back(),forward()
+关闭浏览器:quit()</p>
+<pre><code>selenium处理iframe
+    如果定位的标签存在于iframe标签之中的则必须进行标签定位，使用switch_to.frame(id)
+    动作链(拖动)：from selenium.webdriver import ActionChains
+        实例化一个动作链对象：action = ActionChains(bro)
+        click_and_hold(div):长按且点击操作
+        move_by_offset(x,y)
+        perform()让动作链立即执行
+        action.release()释放动作链对象
+</code></pre>
+<h2 id="无头浏览器">无头浏览器</h2>
+<h2 id="12306模拟登录">12306模拟登录</h2>
+<pre><code>超级鹰：http://www..chaojiying.com/about.html
+    注册：普通用户
+    登录：普通用户
+        提分查询：充值
+        创建一个软件（id）
+        下载示例代码
+
+12306模拟登录编码流程：
+    使用selenium打开登录页面
+    对当前selenium打开的这张页面进行截图
+    对当前图片局部区域（验证码图片）进行裁剪
+        好处：将验证吗图片和模拟登录进行一一对应
+    使用超级鹰识别验证码图片（坐标）
+</code></pre>
+<h2 id="scrapy框架">scrapy框架</h2>
+<p>什么是框架
+就是一个集成了很多功能并且具有很强通用性的一个项目模板</p>
+<p>如何学习框架
+专门学习框架封装的各种功能的详细用法</p>
+<p>什么是scrapy
+爬虫中封装好的一个明星框架。功能：高性能的持久化存储，异步的数据下载，高性能的数据解析，分布式</p>
+<h3 id="基本使用">基本使用</h3>
+<pre><code>环境的安装
+测试：在终端里录入scrapy指令，没有报错就是成功
+创建一个工程：scrapy startproject xxPro
+cd xxxPro
+在spiders子目录中创建一个爬虫文件
+    scrapy genspider spiderName www.xxx.com
+执行工程
+    scrapy crawl spiderName
+</code></pre>
+<h3 id="scrapy数据解析">scrapy数据解析</h3>
+<pre><code>基于终端指令：
+    要求：只可以将prase方法的返回值存储到本地的文本文件中
+    注意：持久化存储对应的文本文件的类型只可以是：&quot;json,jsonlines,jl,csv,xml
+    指令：scrapy crawl xxx -o filePath
+    好处：简介高效便携
+    缺点：局限性比较强（数据只可以存储到指定后缀的文本文件中）
+基于管道：
+    编码流程：
+        数据解析
+        在item类中定义相关的属性
+        将解析的数据封装存储到item类型的对象
+        将item类型的对象提交给管道进行持久化存的操作
+        在管道类的process_item中要将其接受到的item对象中存储的数据进行持久化存储操作
+        在配置文件中开启管道
+    好处：
+        通用性强
+</code></pre>
+<p><em>xpath返回的是列表，但是列表元素一定是Selector类型的对象</em>
+<em>extract可以将Selector对象中data参数存储的字符串提取出来</em>
+<em>列表调用了extract之后，则表示将列表中的每一个Selector对象中data对应的字符串提取出来</em></p>
+<h3 id="process_item方法">process_item方法</h3>
+<p>专门用来出来item类型对象
+该方法可以接收爬虫文件提交过来的item对象
+该方法每接收到一个item就会被调用一次</p>
+<h3 id="parse方法">parse方法</h3>
+<p>用作于数据解析:response参数表示的就是请求成功后对应的响应对象</p>
+<p><em>yield item 将item提交给了管道</em></p>
+<p><em>管道文件中一个管道类对应将一组数据存储到一个平台或者载体中</em></p>
+<p><em>显示指定类型的日志信息</em>
+LOG_LEVEL = &ldquo;ERROR&rdquo;</p>
+<p>面试题：将爬取的数据一份存储到本地，一份存储到数据库，如何实现？
+管道文件中一个管道类对应的是将数据存储到一种平台
+爬虫文件提交的item之后给管道文件中第一个别执行的管道类接收
+process_item中的return item 表示将item传递给下一个即将被执行的管道类</p>
+<p><em>手动请求发送:callback回调函数是专门用作于数据解析</em></p>
+<h3 id="基于spider的全站数据爬取">基于Spider的全站数据爬取</h3>
+<pre><code>就是将网站中某板块下的全部页码对应的页面数据进行爬取
+需求
+实现方式：
+    将所有页面的url添加到start_urls列表（不建议）
+    自动手动进行请求发送（推荐）
+        手动请求发送:
+            yield scrapy.Request(url,callback):callback专门用做于数据解析
+</code></pre>
+<h3 id="五大核心组件">五大核心组件</h3>
+<pre><code>引擎（Scrapy）
+    用来处理整个系统的数据流处理，触发事务（框架核心）
+
+调度器（Scheduler）
+    用来接受引擎发过来的请求，压入队列中，并在引擎再次请求的时候返回，可以想象为一个URL（抓取网页的网址或者说是链接）的优先队列，由他来决定下一个要抓取的网址是什么，同时去除重复的网址
+
+下载器（Downloader） 
+    用于下载网页的内容，并将网页内容返回给蜘蛛(Scrapy下载器是建立在twisted这个高效的异步模型上的)
+
+爬虫（Spiders）
+    爬虫是主要干活的，用于从特定的网页中提取自己需要的信息，即所谓的实体（Item）。用户也可以从中提取出链接，让Scrapy继续爬取下一个页面
+
+项目管道（Pipeline）
+    负责处理爬虫从网页中抽取的实体，主要的功能是持久化实体，验证实体的有效性，清除不需要的信息，当页面被爬虫解析后，将被发送到项目管道，并经过几个特定的次序处理数据
+</code></pre>
+<h3 id="请求传参">请求传参</h3>
+<pre><code>使用场景：如果爬取解析的数据不在同一张页面上（深度爬取）
+需求
+</code></pre>
+<h3 id="图片数据爬取之imagespipeline">图片数据爬取之ImagesPipeline</h3>
+<pre><code>基于scrapy爬取字符串类型的数据和爬取图片类型的区别？
+    字符串：只需要基于xpath进行解析且提交管道进行持久化存储
+    图片：xpath解析出图片src的属性值，单独的对图片地址发起请求获取图片二进制类型的数据
+
+    ImagesPipeline:
+        只需将img的src属性值进行解析，提交到管道，管道就会对图片的src进行请求发送获取图片的二进制
+    需求
+    使用流程:
+        数据解析(图片的地址)
+        将存储图片地址的item提交到制定的管道类
+        在管道文件中自定制一个基于ImagePipeLine的一个管道类
+            get_media_request
+            file_path
+            item_completed
+        在配置文件中：
+            指定图片存储的目录：IMAGES_STORE = './imgs_bobo'
+            指定开启的管道：自定制的管道类
+</code></pre>
+<h3 id="中间件">中间件</h3>
+<pre><code>下载中间件
+    位置：引擎和下载器之间
+    作用：批量拦截到整个工程中所有的请求和响应
+    拦截请求：
+        UA伪装:process_request
+        代理IP:process_exception:return request
+    拦截响应：
+        篡改响应数据，响应对象
+        需求：爬取网易新闻中的新闻数据（标题和内容）
+            1.通过网页新闻的首页解析出五大板块对应的详情页的url（没有动态加载）
+            2.每一个板块对应的新闻标题都是动态加载出来的（动态加载）
+            3.通过解析出每一条新闻详情页的url获取详情页的页面源码，解析出新闻内容
+</code></pre>
+<h3 id="process_response">process_response</h3>
+<p>该方法拦截五大板块对应的响应对象，进行篡改</p>
+<h3 id="链接提取器根据制定规则allow正则进行指定链接的提取">链接提取器：根据制定规则（allow=&ldquo;正则&rdquo;）进行指定链接的提取</h3>
+<h3 id="规则解析器将链接提取器提取到的链接进行指定规则callback的解析的操作">规则解析器：将链接提取器提取到的链接进行指定规则（callback）的解析的操作</h3>
+<p><em>follow=True :可以将链接提取器继续作用到连接提取器提取到的链接所对应的页面中</em></p>
+<p>CrawlSpider类：Spider的一个子类
+全站数据爬取的方式
+基于Spider：手动请求
+基于CrawlSpider
+CrawlSpider的使用：
+创建一个工程
+cd xxx
+创建爬虫文件（CrawlSpider）：
+scrapy genspider -t crawl xxx <a class="link" href="https://www.xxxx.com"  target="_blank" rel="noopener"
+    >www.xxxx.com</a>
+链接提取器：
+作用：根据指定的规则（allow）进行指定连接的提取
+规则解析器
+作用：将连接提取器提取到的连接进行指定规则（callback）的解析
+需求：爬取sun网址中的编号，新闻标题，新闻内容，标号
+分析:爬取的数据没有在同一张页面中
+1.可以使用链接提取器提取所有的页码链接
+2.让链接提取器提取所有的新闻详情页的链接</p>
+<h1 id="分布式爬虫">分布式爬虫</h1>
+<p>概念：我们需要搭建一个分布式的机群，让其对一组资源进行分布联合爬取。</p>
+<p>作用：提升爬取数据的效率</p>
+<p>如何实现分布式?
+安装一个scrapy-redis的组件
+原生的scarapy是不可以实现分布式爬虫，必须要让scrapy结合着scrapy-redis组件一起实现分布式</p>
+<p>为什么原生的scrapy不可以实现分布式？
+调度器不可以被分布式机群共享
+管道不可以被分布式机群共享</p>
+<p>scrapy-redis组件作用：
+可以给原生的scrapy框架提供可以被共享的管道和调度器</p>
+<p>实现流程</p>
+<pre><code>创建一个工程
+创建一个基于CrawlSpider的爬虫文件
+修改当前的爬虫文件：
+
+    导包：from scrapy_redis.spiders importRedisCrawlSpiden
+    将start_urls和allowed domains进行注释
+    添加一个新属性：redis_key ='sun’可以被共享的调度器队列的名称
+    编写数据解析相关的操作
+    类的父类修改成RedjsCrawISpider
+
+修改配置文件settings
+    指定使用可以被共享的管道：
+        ITEM_PIPELINES = {
+            'scrapy_redis.pipelines.RedisPipeline'：400
+        }
+    指定调度器：
+        增加了一个去重容器类的配置，作用使用Redis的set集合来存储请求的指纹数据。
+        DUPEFILTER_CLASS=&quot;scrapy_redis.dupefilter.RFPDupeFilter&quot;
+
+        使用scrapy-redis组件自己的调度器
+        SCHEDULER =&quot;scrapy redis.scheduler.Scheduler&quot;
+
+        配置调度器是否要持久化，也就是当爬虫结束了，要不要清空Redis中请求队列和去
+        SCHEDULER_PERSIST =True
+redis相关操作配置：
+    配置redis的配置文件：
+        linux或者mac:redis.conf
+        windows:redis.windows.conf
+        代开配置文件修改：
+            将bind 127.0.0.1进行删除
+            关闭保护模式：protected-mode yes改为no
+        结合着配置文件开启redis服务
+            redis-server 配置文件
+        启动客户端：
+            redis-cli
+    执行工程：
+        scrapy runspiderXxx.py
+    向调度器的队列中放入一个起始的url：
+        调度器的队列在redis的客户端中
+            lpushxxx www.xxx.com
+    爬取到的数据存储在了redis的proName：item这个数据结构中
+</code></pre>
+<h1 id="增量式爬虫">增量式爬虫</h1>
+<pre><code>概念：监测网站数据更新的情况，只会爬取网站最新更新出来的数据。
+分析：
+    指定一个起始url
+    基于CrawlSpider获取其他页码链接
+    基于Rule将其他页码链接进行请求
+    从每一个页码对应的页面源码中解析出每一个电影详情页的URL
+
+核心：检测电影详情页的url之前有没有请求过
+    将爬取过的电影详情页的url存储
+    存储到redis的set数据结构
+    
+    对详情页的url发起请求，然后解析出电影的名称和简介
+    进行持久化存储
+</code></pre>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 西伯利亚土豆商
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

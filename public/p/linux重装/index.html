@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="我打开圣经，上面第一句话就是就是&quot;Hello World&quot; 其实，好多东西你自己用心去学，去看官方文档，效果比看网上那些猫猫狗狗的博客效果更好，">
-<title>My First Post</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
+<title>Linux重装</title>
 
-<link rel='canonical' href='http://localhost:1313/p/my-first-post/'>
+<link rel='canonical' href='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
 
-<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="My First Post">
-<meta property='og:description' content="我打开圣经，上面第一句话就是就是&quot;Hello World&quot; 其实，好多东西你自己用心去学，去看官方文档，效果比看网上那些猫猫狗狗的博客效果更好，">
-<meta property='og:url' content='http://localhost:1313/p/my-first-post/'>
+<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="Linux重装">
+<meta property='og:description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
+<meta property='og:url' content='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
 <meta property='og:site_name' content='西伯利亚土豆商'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-17T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-17T13:28:01&#43;08:00'/>
-<meta name="twitter:title" content="My First Post">
-<meta name="twitter:description" content="我打开圣经，上面第一句话就是就是&quot;Hello World&quot; 其实，好多东西你自己用心去学，去看官方文档，效果比看网上那些猫猫狗狗的博客效果更好，">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T18:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T18:28:01&#43;08:00'/>
+<meta name="twitter:title" content="Linux重装">
+<meta name="twitter:description" content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
     </head>
     <body class="
     article-page
@@ -203,7 +203,60 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#window与linux双系统安装与卸载linux">Window与Linux双系统安装与卸载Linux</a>
+      <ol>
+        <li><a href="#ubuntu卸载">Ubuntu卸载</a>
+          <ol>
+            <li><a href="#删除ubuntu所在卷">删除ubuntu所在卷</a></li>
+            <li><a href="#删除unbuntu-efi分区">删除unbuntu EFI分区</a></li>
+            <li><a href="#删除ubuntu系统启动项">删除Ubuntu系统启动项</a></li>
+          </ol>
+        </li>
+        <li><a href="#磁盘分区如果你是第一次装ubuntu">磁盘分区（如果你是第一次装Ubuntu）</a></li>
+        <li><a href="#安装ubuntu系统">安装ubuntu系统</a>
+          <ol>
+            <li><a href="#下载linux镜像">下载Linux镜像</a></li>
+            <li><a href="#准备u盘刻盘工具">准备u盘刻盘工具</a></li>
+            <li><a href="#开机引导界面">开机引导界面</a>
+              <ol>
+                <li><a href="#分区方案">分区方案</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -214,7 +267,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/my-first-post/">My First Post</a>
+            <a href="/p/linux%E9%87%8D%E8%A3%85/">Linux重装</a>
         </h2>
     
         
@@ -236,7 +289,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 17, 2024</time>
+                <time class="article-time--published">Mar 26, 2024</time>
             </div>
         
 
@@ -251,7 +304,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -266,7 +319,7 @@
     <section class="article-content">
     
     
-    <p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182029744.jpg"
+    <p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403191526421.jpg"
 	
 	
 	
@@ -274,8 +327,72 @@
 	
 	
 ></p>
-<p>我打开圣经，上面第一句话就是就是&quot;Hello World&quot;</p>
-<p><em>其实，好多东西你自己用心去学，去看官方文档，效果比看网上那些猫猫狗狗的博客效果更好，我能做的就是抛块砖引个玉</em></p>
+<h1 id="window与linux双系统安装与卸载linux">Window与Linux双系统安装与卸载Linux</h1>
+<p><em>如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu</em></p>
+<p><em>重装unbuntu记得先保存好ubuntu想保存的文件</em></p>
+<h2 id="ubuntu卸载">Ubuntu卸载</h2>
+<h3 id="删除ubuntu所在卷">删除ubuntu所在卷</h3>
+<p>进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”</p>
+<h3 id="删除unbuntu-efi分区">删除unbuntu EFI分区</h3>
+<p>Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具</p>
+<p>输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）</p>
+<p>输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）</p>
+<h3 id="删除ubuntu系统启动项">删除Ubuntu系统启动项</h3>
+<p>Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具</p>
+<p>输入 list disk 查看磁盘，输入 select disk 1</p>
+<p>输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）</p>
+<p>输入 assign letter=J（分配盘符）</p>
+<p>管理员模式打开记事本，记事本选择文件-打开-选中磁盘J</p>
+<p>打开 EFI 文件夹，删除Ubuntu文件夹</p>
+<p>返回 Distpart 界面，输入 remove letter=J</p>
+<h2 id="磁盘分区如果你是第一次装ubuntu">磁盘分区（如果你是第一次装Ubuntu）</h2>
+<p>1.打开计算机管理
+2.找到磁盘管理
+3.选择你要压缩的盘，<strong>你压缩掉的空间将作为新系统的空间</strong>
+4.右键打开你要压缩的盘符，点击压缩卷
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182047551.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182047587.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="安装ubuntu系统">安装ubuntu系统</h2>
+<p><strong>强烈建议安装最新lts版本，我写这篇博客时是22.04版</strong>
+<em>我就是因为第一次装的是18.04版所以才重装的，QAQ</em></p>
+<h3 id="下载linux镜像">下载Linux镜像</h3>
+<p>1.下载 Ubuntu 镜像，这里可以去官方下载，但是官方在国外，默认外网链接可能网速有点小慢。（科技玩家例外）
+更好的选择是国内的资源镜像网站，比如说清华大学开源软件镜像站</p>
+<p>清华大学开源软件镜像站 <a class="link" href="https://mirrors.tuna.tsinghua.edu.cn/"  target="_blank" rel="noopener"
+    >https://mirrors.tuna.tsinghua.edu.cn/</a></p>
+<h3 id="准备u盘刻盘工具">准备u盘刻盘工具</h3>
+<p>我用的是UltralSO</p>
+<p>下载后打开，找到你下载的镜像文件，找到后，点击右上角的启动-&gt;写入硬盘映像</p>
+<p><em>写入时记得插入u盘，这个u盘将作为启动盘</em>
+<em>写入时，这个u盘的数据全会被格式化，谨慎操作</em></p>
+<p>然后点击写入就可以了</p>
+<h3 id="开机引导界面">开机引导界面</h3>
+<p>将写好的映像文件的U盘插入你需要的电脑，在开始时按f12，本人用的是联想，不同电脑可能不同，正常都是f12</p>
+<p>在引导界面可以看到几个选项，选择你的u盘作为启动项，反正不是window和network就是了</p>
+<p>启动后你会进入系统选择界面，使用方向键选择 ubuntu 后回车就进入了 Ubuntu 的安装引导界面。在侧边栏中选择系统语言，English、Chinese都可，看自己喜好，然后点击 Install Ubuntu 进入安装，选择安装方式，选择正常安装就行，会默认安装火狐浏览器等软件。或者选择最小安装的话可以在安装完成后自行安装需要的软件，两种方式影响不大。下面的安装第三方软件选项也可以选上，也可以不选，后面再根据需要手动安装。我这里就只选择了正常安装，然后点击继续，在安装类型选择时，建议自己手动分区，说一下分区情况吧，我找了大部分教程都是分为四个区：</p>
+<h4 id="分区方案">分区方案</h4>
+<p>/boot : 1G（最好）  主分区。系统的boot启动引导项安装位置</p>
+<p>/  : 随意（尽量大）    主分区。根目录，所有目录的根节点，其下包含很多子目录，如/usr  /tmp等</p>
+<p>/home :  自定义（尽量大，一般最后分）   逻辑分区。一般放置自己的数据</p>
+<p>swap : 16G   逻辑分区。交换空间，一般是物理内存的1~2倍就行了</p>
+<p>具体操作，首先找到 free space 空间，如下，选中该空间，点击左下角的加号+，进行内存分配</p>
+<p>安装后-&gt;选择地区（上海或香港都可以，我选的是上海）-&gt;设置账户密码-&gt;重启-&gt;输入密码，ok</p>
+<p><em>我和同学在重启时都出现，黑屏跳一堆数据的情况，我们当时都很慌，但是我们最后强制关机重启后，发现没有大问题，起码我们没发现问题</em></p>
+<p>以后你每次开机时都可以选择windo和Linux之一的系统进行启动</p>
 
 </section>
 
