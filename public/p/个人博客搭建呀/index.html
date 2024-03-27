@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
+<title>个人博客搭建呀</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="个人博客搭建呀">
+<meta property='og:description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
+<meta property='og:url' content='http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
+<meta property='og:site_name' content='西伯利亚土豆商'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-27T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-27T13:28:01&#43;08:00'/>
+<meta name="twitter:title" content="个人博客搭建呀">
+<meta name="twitter:description" content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu30e88383a721a2a54354209b7d01645c_12673_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">西伯利亚土豆商</a></h1>
+            <h2 class="site-description">我打开圣经，上面第一句话就是&#34;Hello World!&#34;</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#hugo静态网站生成器">hugo（静态网站生成器）</a>
+      <ol>
+        <li><a href="#生成站点">生成站点</a></li>
+        <li><a href="#创建文章">创建文章</a></li>
+        <li><a href="#安装皮肤">安装皮肤</a></li>
+        <li><a href="#配置hugotoml">配置hugo.toml</a></li>
+        <li><a href="#生成网站">生成网站</a></li>
+        <li><a href="#推送到github">推送到GitHub</a>
+          <ol>
+            <li><a href="#在pubilc文件夹中创建仓库">在pubilc文件夹中创建仓库</a></li>
+          </ol>
+        </li>
+        <li><a href="#将两个仓库链接起来">将两个仓库链接起来</a>
+          <ol>
+            <li><a href="#打开git-bash命令窗口">打开git bash命令窗口</a></li>
+            <li><a href="#生成ssh-key">生成ssh key</a></li>
+            <li><a href="#把ssh-key添加到github">把ssh key添加到github</a></li>
+            <li><a href="#测试ssh连接">测试SSH连接</a></li>
+          </ol>
+        </li>
+        <li><a href="#后续提交">后续提交</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/">个人博客搭建呀</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 27, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403271606982.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<em>在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接</em></p>
+<h1 id="hugo静态网站生成器">hugo（静态网站生成器）</h1>
+<p><em>其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了</em></p>
+<p>总之，先给官方文档
+<a class="link" href="https://www.gohugo.org/"  target="_blank" rel="noopener"
+    >https://www.gohugo.org/</a></p>
+<p><em>看的懂最好，看不懂，那就看看我的或别人的</em></p>
+<p>这一步可以参照网上很多人的文档，最推荐官方，下载链接如下：
+<a class="link" href="https://github.com/gohugoio/hugo/releases"  target="_blank" rel="noopener"
+    >https://github.com/gohugoio/hugo/releases</a></p>
+<p>选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的</p>
+<p>下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin</p>
+<p>解释一下，为什么要改文件夹名字？
+为了添加环境变量</p>
+<p>为什么文件夹的名字是bin？
+“约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行</p>
+<p>什么是环境变量？
+emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。</p>
+<p>如何添加环境变量？
+请善用搜索引擎，有很多写得超级详细</p>
+<p><em>以上信息是别人博主发的，我懒得写，哈哈</em></p>
+<h2 id="生成站点">生成站点</h2>
+<p>使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：</p>
+<p><em>在cmd输入哦</em></p>
+<p>$ hugo new site /path/to/site</p>
+<p>这样就在 /path/to/site 目录里生成了初始站点，进去目录：</p>
+<p>$ cd /path/to/site</p>
+<p>站点目录结构：</p>
+<p>▸ archetypes/
+▸ content/
+▸ layouts/
+▸ static/
+config.toml</p>
+<p>在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面</p>
+<h2 id="创建文章">创建文章</h2>
+<p>创建一个 about 页面</p>
+<p>$ hugo new about.md</p>
+<p>about.md 自动生成到了 content/about.md ，打开 about.md 看下</p>
+<pre><code>  +++
+  date = &quot;2015-10-25T08:36:54-07:00&quot;
+  draft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章
+  title = &quot;about&quot;
+
+  +++
+</code></pre>
+<p>正文内容</p>
+<p>创建第一篇文章，放到 post 目录，方便之后生成聚合页面</p>
+<p>$ hugo new post/first.md</p>
+<h2 id="安装皮肤">安装皮肤</h2>
+<p>一个好看的主题是必要的，但是完全自己去写就太麻烦了，hugo中有很多精美的主题，比较方便的操作是在Hugo项目目录里面使用Git命令来克隆themes：你需要提供主题的 Git 仓库 URL。通常，主题的仓库 URL 可以在 Hugo Themes 官方网站或主题的文档中找到。</p>
+<p>git clone <a class="link" href="https://github.com/author/theme-name.git"  target="_blank" rel="noopener"
+    >https://github.com/author/theme-name.git</a> themes/theme-name</p>
+<p>或者直接下载主题的压缩包，将其解压到themes/文件夹下，这样的话，就需要你对hugo.toml文件进行一点过的修改。</p>
+<p><em>git的介绍可以看看官方文档或者我的博客也有，基本都是我从官方文档中学习的</em></p>
+<h2 id="配置hugotoml">配置hugo.toml</h2>
+<p>好多教程里面直接就说会生成config.yml文件，但事实上新版的都是生成的hugo.toml，这不免让第一次配置的人感到迷惑，这两种的使用都是可以的，只是在语法结构上会有区别(类似于c++和python)，如果你想要完全自己手搓，按照你喜欢的语言就好，如果像我一样，只想点点鼠标，那就主要观察你下载的themes里面它使用的是什么，跟着用就行。</p>
+<p>例如，我下载的主题是PaperMod，其提供的范例里面用config.yml替代了hugo.toml，所以在使用时，可以直接将范例中的文件替代掉你创建的站点下的hugo.toml文件，并在里面进行一定的修改</p>
+<p>使用主题前最好看一下主题相应的配置教程，不同的主题是不一样，主题就是别人写好的网站的模板，而你就是去套用别人的模板。</p>
+<p>theme = &ldquo;my-theme&rdquo;
+// my-theme是你下载的theme的主题名，要和你解压的文件名一致</p>
+<h2 id="生成网站">生成网站</h2>
+<p>需要注意的是，虽然我们做了这么多，但是在这个结构下(在 my-site这个结构下)，我们网站的页面实际上是还没有生成的，要想生成静态网站页面，必须运行如下命令</p>
+<p>hugo</p>
+<p>命令运行后，在上文提到my-site这个结构下会产生一个public/文件夹，里面保存生成的静态页面，后面将其在GitHub上面布置，实际上就是将public/中的内容远程推送到Github仓库中后进行展示。</p>
+<p>hugo server</p>
+<p>可以在本地预览你生成的网站，点击链接就可以在你本地的电脑看到自己搭建的网页的，但是这只是完成了一半，你需要将其托管到github page上，别人才能通过网址找到你的网站，github page是最简单且免费的方法，当然便宜的东西是有缺陷的，如果以后自己想深入，就需要买个域名和服务器了</p>
+<h2 id="推送到github">推送到GitHub</h2>
+<p>首先在GitHub上创建一个仓库，名字最好和你自己的名字一样，其实也无所谓，但是好多人都这么做，但是我不是</p>
+<h3 id="在pubilc文件夹中创建仓库">在pubilc文件夹中创建仓库</h3>
+<p>记得cd 进入对应的文件夹</p>
+<p>其实远程连接在我的git博客上有详细的教程，这里我大概说一下</p>
+<p>git init 初始化仓库
+git add. 增加所有修改的意思
+git commit -m &ldquo;备注&rdquo;  提交到远程仓库“备注随便写，你写我是傻逼都行”</p>
+<h2 id="将两个仓库链接起来">将两个仓库链接起来</h2>
+<p>这一步是最恶心我的，不知道为什么，不能用http链接，只能用ssh链接
+大概就是你需要在你的电脑生成一个ssh链接，然后将其放到GitHub的配置上</p>
+<p>这步是参考别人的</p>
+<h3 id="打开git-bash命令窗口">打开git bash命令窗口</h3>
+<h3 id="生成ssh-key">生成ssh key</h3>
+<p>ssh-keygen -t rsa -b 4096 -C &ldquo;<a class="link" href="mailto:your_email@example.com" >your_email@example.com</a>&rdquo;</p>
+<p><a class="link" href="mailto:your_email@example.com" >your_email@example.com</a>为github上你注册的email地址。</p>
+<p>然后直接三个enter不管他</p>
+<p>上面默认生成在用户主目录的.ssh目录下，可以自己输入自定义位置</p>
+<h3 id="把ssh-key添加到github">把ssh key添加到github</h3>
+<p>复制文件c/Users/Administrator/.ssh/id_rsa.pub内容，把key添加到：github &gt; settings &gt; SSH and GPG keys &gt; New SSH key &gt; 粘贴保存。</p>
+<h3 id="测试ssh连接">测试SSH连接</h3>
+<p>$ ssh -T <a class="link" href="mailto:git@github.com" >git@github.com</a></p>
+<p>如果成功的话你就可以通过SSH方式来clone及提交代码了</p>
+<p>// 创建一个分支
+git branch -M main
+//使用 git remote add 命令将远程仓库添加到仓库配置中
+git remote add origin <a class="link" href="https://github.com/your-username/your-repo.git"  target="_blank" rel="noopener"
+    >https://github.com/your-username/your-repo.git</a>
+//使用 SSH 连接后，可以使用 SSH URL 推送到 GitHub 仓库
+git remote set-url origin <a class="link" href="mailto:git@github.com" >git@github.com</a>:your-username/your-repo.git
+//推送文件
+git push -u origin main</p>
+<h2 id="后续提交">后续提交</h2>
+<p>//在站点中运行
+hugo</p>
+<p>//进入public/文件夹下
+cd public/</p>
+<p>//提交文件</p>
+<p>git add .</p>
+<p>git commit -m &ldquo;备注&rdquo;
+//推送到远程：在ssh已连接的情况下
+git push -u origin main</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 西伯利亚土豆商
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

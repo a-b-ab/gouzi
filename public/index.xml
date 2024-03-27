@@ -6,7 +6,131 @@
         <description>Recent content on 西伯利亚土豆商</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 26 Mar 2024 18:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 27 Mar 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>个人博客搭建呀</title>
+        <link>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</link>
+        <pubDate>Wed, 27 Mar 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403271606982.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+&lt;em&gt;在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id=&#34;hugo静态网站生成器&#34;&gt;hugo（静态网站生成器）&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;总之，先给官方文档
+&lt;a class=&#34;link&#34; href=&#34;https://www.gohugo.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.gohugo.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;看的懂最好，看不懂，那就看看我的或别人的&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;这一步可以参照网上很多人的文档，最推荐官方，下载链接如下：
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/gohugoio/hugo/releases&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的&lt;/p&gt;
+&lt;p&gt;下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin&lt;/p&gt;
+&lt;p&gt;解释一下，为什么要改文件夹名字？
+为了添加环境变量&lt;/p&gt;
+&lt;p&gt;为什么文件夹的名字是bin？
+“约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行&lt;/p&gt;
+&lt;p&gt;什么是环境变量？
+emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。&lt;/p&gt;
+&lt;p&gt;如何添加环境变量？
+请善用搜索引擎，有很多写得超级详细&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;以上信息是别人博主发的，我懒得写，哈哈&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;生成站点&#34;&gt;生成站点&lt;/h2&gt;
+&lt;p&gt;使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;在cmd输入哦&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;$ hugo new site /path/to/site&lt;/p&gt;
+&lt;p&gt;这样就在 /path/to/site 目录里生成了初始站点，进去目录：&lt;/p&gt;
+&lt;p&gt;$ cd /path/to/site&lt;/p&gt;
+&lt;p&gt;站点目录结构：&lt;/p&gt;
+&lt;p&gt;▸ archetypes/
+▸ content/
+▸ layouts/
+▸ static/
+config.toml&lt;/p&gt;
+&lt;p&gt;在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面&lt;/p&gt;
+&lt;h2 id=&#34;创建文章&#34;&gt;创建文章&lt;/h2&gt;
+&lt;p&gt;创建一个 about 页面&lt;/p&gt;
+&lt;p&gt;$ hugo new about.md&lt;/p&gt;
+&lt;p&gt;about.md 自动生成到了 content/about.md ，打开 about.md 看下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  +++
+  date = &amp;quot;2015-10-25T08:36:54-07:00&amp;quot;
+  draft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章
+  title = &amp;quot;about&amp;quot;
+
+  +++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;正文内容&lt;/p&gt;
+&lt;p&gt;创建第一篇文章，放到 post 目录，方便之后生成聚合页面&lt;/p&gt;
+&lt;p&gt;$ hugo new post/first.md&lt;/p&gt;
+&lt;h2 id=&#34;安装皮肤&#34;&gt;安装皮肤&lt;/h2&gt;
+&lt;p&gt;一个好看的主题是必要的，但是完全自己去写就太麻烦了，hugo中有很多精美的主题，比较方便的操作是在Hugo项目目录里面使用Git命令来克隆themes：你需要提供主题的 Git 仓库 URL。通常，主题的仓库 URL 可以在 Hugo Themes 官方网站或主题的文档中找到。&lt;/p&gt;
+&lt;p&gt;git clone &lt;a class=&#34;link&#34; href=&#34;https://github.com/author/theme-name.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/author/theme-name.git&lt;/a&gt; themes/theme-name&lt;/p&gt;
+&lt;p&gt;或者直接下载主题的压缩包，将其解压到themes/文件夹下，这样的话，就需要你对hugo.toml文件进行一点过的修改。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;git的介绍可以看看官方文档或者我的博客也有，基本都是我从官方文档中学习的&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置hugotoml&#34;&gt;配置hugo.toml&lt;/h2&gt;
+&lt;p&gt;好多教程里面直接就说会生成config.yml文件，但事实上新版的都是生成的hugo.toml，这不免让第一次配置的人感到迷惑，这两种的使用都是可以的，只是在语法结构上会有区别(类似于c++和python)，如果你想要完全自己手搓，按照你喜欢的语言就好，如果像我一样，只想点点鼠标，那就主要观察你下载的themes里面它使用的是什么，跟着用就行。&lt;/p&gt;
+&lt;p&gt;例如，我下载的主题是PaperMod，其提供的范例里面用config.yml替代了hugo.toml，所以在使用时，可以直接将范例中的文件替代掉你创建的站点下的hugo.toml文件，并在里面进行一定的修改&lt;/p&gt;
+&lt;p&gt;使用主题前最好看一下主题相应的配置教程，不同的主题是不一样，主题就是别人写好的网站的模板，而你就是去套用别人的模板。&lt;/p&gt;
+&lt;p&gt;theme = &amp;ldquo;my-theme&amp;rdquo;
+// my-theme是你下载的theme的主题名，要和你解压的文件名一致&lt;/p&gt;
+&lt;h2 id=&#34;生成网站&#34;&gt;生成网站&lt;/h2&gt;
+&lt;p&gt;需要注意的是，虽然我们做了这么多，但是在这个结构下(在 my-site这个结构下)，我们网站的页面实际上是还没有生成的，要想生成静态网站页面，必须运行如下命令&lt;/p&gt;
+&lt;p&gt;hugo&lt;/p&gt;
+&lt;p&gt;命令运行后，在上文提到my-site这个结构下会产生一个public/文件夹，里面保存生成的静态页面，后面将其在GitHub上面布置，实际上就是将public/中的内容远程推送到Github仓库中后进行展示。&lt;/p&gt;
+&lt;p&gt;hugo server&lt;/p&gt;
+&lt;p&gt;可以在本地预览你生成的网站，点击链接就可以在你本地的电脑看到自己搭建的网页的，但是这只是完成了一半，你需要将其托管到github page上，别人才能通过网址找到你的网站，github page是最简单且免费的方法，当然便宜的东西是有缺陷的，如果以后自己想深入，就需要买个域名和服务器了&lt;/p&gt;
+&lt;h2 id=&#34;推送到github&#34;&gt;推送到GitHub&lt;/h2&gt;
+&lt;p&gt;首先在GitHub上创建一个仓库，名字最好和你自己的名字一样，其实也无所谓，但是好多人都这么做，但是我不是&lt;/p&gt;
+&lt;h3 id=&#34;在pubilc文件夹中创建仓库&#34;&gt;在pubilc文件夹中创建仓库&lt;/h3&gt;
+&lt;p&gt;记得cd 进入对应的文件夹&lt;/p&gt;
+&lt;p&gt;其实远程连接在我的git博客上有详细的教程，这里我大概说一下&lt;/p&gt;
+&lt;p&gt;git init 初始化仓库
+git add. 增加所有修改的意思
+git commit -m &amp;ldquo;备注&amp;rdquo;  提交到远程仓库“备注随便写，你写我是傻逼都行”&lt;/p&gt;
+&lt;h2 id=&#34;将两个仓库链接起来&#34;&gt;将两个仓库链接起来&lt;/h2&gt;
+&lt;p&gt;这一步是最恶心我的，不知道为什么，不能用http链接，只能用ssh链接
+大概就是你需要在你的电脑生成一个ssh链接，然后将其放到GitHub的配置上&lt;/p&gt;
+&lt;p&gt;这步是参考别人的&lt;/p&gt;
+&lt;h3 id=&#34;打开git-bash命令窗口&#34;&gt;打开git bash命令窗口&lt;/h3&gt;
+&lt;h3 id=&#34;生成ssh-key&#34;&gt;生成ssh key&lt;/h3&gt;
+&lt;p&gt;ssh-keygen -t rsa -b 4096 -C &amp;ldquo;&lt;a class=&#34;link&#34; href=&#34;mailto:your_email@example.com&#34; &gt;your_email@example.com&lt;/a&gt;&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;mailto:your_email@example.com&#34; &gt;your_email@example.com&lt;/a&gt;为github上你注册的email地址。&lt;/p&gt;
+&lt;p&gt;然后直接三个enter不管他&lt;/p&gt;
+&lt;p&gt;上面默认生成在用户主目录的.ssh目录下，可以自己输入自定义位置&lt;/p&gt;
+&lt;h3 id=&#34;把ssh-key添加到github&#34;&gt;把ssh key添加到github&lt;/h3&gt;
+&lt;p&gt;复制文件c/Users/Administrator/.ssh/id_rsa.pub内容，把key添加到：github &amp;gt; settings &amp;gt; SSH and GPG keys &amp;gt; New SSH key &amp;gt; 粘贴保存。&lt;/p&gt;
+&lt;h3 id=&#34;测试ssh连接&#34;&gt;测试SSH连接&lt;/h3&gt;
+&lt;p&gt;$ ssh -T &lt;a class=&#34;link&#34; href=&#34;mailto:git@github.com&#34; &gt;git@github.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果成功的话你就可以通过SSH方式来clone及提交代码了&lt;/p&gt;
+&lt;p&gt;// 创建一个分支
+git branch -M main
+//使用 git remote add 命令将远程仓库添加到仓库配置中
+git remote add origin &lt;a class=&#34;link&#34; href=&#34;https://github.com/your-username/your-repo.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/your-username/your-repo.git&lt;/a&gt;
+//使用 SSH 连接后，可以使用 SSH URL 推送到 GitHub 仓库
+git remote set-url origin &lt;a class=&#34;link&#34; href=&#34;mailto:git@github.com&#34; &gt;git@github.com&lt;/a&gt;:your-username/your-repo.git
+//推送文件
+git push -u origin main&lt;/p&gt;
+&lt;h2 id=&#34;后续提交&#34;&gt;后续提交&lt;/h2&gt;
+&lt;p&gt;//在站点中运行
+hugo&lt;/p&gt;
+&lt;p&gt;//进入public/文件夹下
+cd public/&lt;/p&gt;
+&lt;p&gt;//提交文件&lt;/p&gt;
+&lt;p&gt;git add .&lt;/p&gt;
+&lt;p&gt;git commit -m &amp;ldquo;备注&amp;rdquo;
+//推送到远程：在ssh已连接的情况下
+git push -u origin main&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Linux重装</title>
         <link>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</link>
         <pubDate>Tue, 26 Mar 2024 18:28:01 +0800</pubDate>
