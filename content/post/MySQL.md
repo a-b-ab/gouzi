@@ -1,3 +1,9 @@
++++
+title = 'python'
+date = 2024-04-13T13:35:01+08:00
+draft = false
++++
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404131545297.jpg"/>
 ## 连接 MySQL 数据库
 `mysql -u root -p`
 
