@@ -2,52 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://example.com/post/</loc>
     <lastmod>2024-03-28T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</loc>
+    <loc>https://example.com/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</loc>
     <lastmod>2024-03-28T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://example.com/</loc>
     <lastmod>2024-03-28T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</loc>
+    <loc>https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</loc>
     <lastmod>2024-03-27T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</loc>
+    <loc>https://example.com/p/linux%E9%87%8D%E8%A3%85/</loc>
     <lastmod>2024-03-26T18:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</loc>
+    <loc>https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</loc>
     <lastmod>2024-03-26T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</loc>
+    <loc>https://example.com/p/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2024-03-21T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/git/</loc>
+    <loc>https://example.com/p/git/</loc>
     <lastmod>2024-03-19T13:35:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/python/</loc>
+    <loc>https://example.com/p/python/</loc>
     <lastmod>2024-03-17T13:35:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/my-first-post/</loc>
+    <loc>https://example.com/p/my-first-post/</loc>
     <lastmod>2024-03-17T13:28:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://example.com/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/page/</loc>
+    <loc>https://example.com/page/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://example.com/p/</loc>
   </url><url>
-    <loc>http://localhost:1313/links/</loc>
+    <loc>https://example.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://example.com/links/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://example.com/search/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/test/</loc>
+    <loc>https://example.com/tags/</loc>
   </url><url>
-    <loc>http://localhost:1313/%E5%85%B3%E4%BA%8E/</loc>
+    <loc>https://example.com/categories/test/</loc>
+  </url><url>
+    <loc>https://example.com/%E5%85%B3%E4%BA%8E/</loc>
   </url>
 </urlset>
