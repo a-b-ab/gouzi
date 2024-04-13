@@ -1,5 +1,5 @@
 +++
-title = 'python'
+title = 'mysql'
 date = 2024-04-13T13:35:01+08:00
 draft = false
 +++
