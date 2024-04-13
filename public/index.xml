@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>西伯利亚土豆商</title>
-        <link>https://example.com/</link>
+        <link>http://localhost:1313/</link>
         <description>Recent content on 西伯利亚土豆商</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 13 Apr 2024 13:35:01 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 13 Apr 2024 13:35:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>mysql</title>
-        <link>https://example.com/p/mysql/</link>
+        <link>http://localhost:1313/p/mysql/</link>
         <pubDate>Sat, 13 Apr 2024 13:35:01 +0800</pubDate>
         
-        <guid>https://example.com/p/mysql/</guid>
+        <guid>http://localhost:1313/p/mysql/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404131545297.jpg&#34;/&gt;
 ## 连接 MySQL 数据库
 `mysql -u root -p`
@@ -513,10 +513,10 @@ END;&lt;/p&gt;
         </item>
         <item>
         <title>好东西哦！</title>
-        <link>https://example.com/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</link>
+        <link>http://localhost:1313/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</link>
         <pubDate>Thu, 28 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</guid>
+        <guid>http://localhost:1313/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</guid>
         <description>&lt;h1 id=&#34;推荐&#34;&gt;推荐&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403291306357.jpg&#34;
 	
@@ -949,10 +949,10 @@ stripe
         </item>
         <item>
         <title>个人博客搭建呀</title>
-        <link>https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</link>
+        <link>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</link>
         <pubDate>Wed, 27 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</guid>
+        <guid>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403271606982.jpg&#34;
 	
 	
@@ -1073,10 +1073,10 @@ git push -u origin main&lt;/p&gt;
         </item>
         <item>
         <title>Linux重装</title>
-        <link>https://example.com/p/linux%E9%87%8D%E8%A3%85/</link>
+        <link>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</link>
         <pubDate>Tue, 26 Mar 2024 18:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/linux%E9%87%8D%E8%A3%85/</guid>
+        <guid>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403191526421.jpg&#34;
 	
 	
@@ -1155,10 +1155,10 @@ git push -u origin main&lt;/p&gt;
         </item>
         <item>
         <title>爬虫学习plus</title>
-        <link>https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</link>
+        <link>http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</link>
         <pubDate>Tue, 26 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</guid>
+        <guid>http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403262100222.jpg&#34;
 	
 	
@@ -1542,10 +1542,10 @@ redis相关操作配置：
         </item>
         <item>
         <title>爬虫</title>
-        <link>https://example.com/p/%E7%88%AC%E8%99%AB/</link>
+        <link>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</link>
         <pubDate>Thu, 21 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/%E7%88%AC%E8%99%AB/</guid>
+        <guid>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</guid>
         <description>&lt;h1 id=&#34;爬虫基础&#34;&gt;爬虫基础&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403211058784.jpg&#34;
 	
@@ -1690,10 +1690,10 @@ HTTP是无状态的&lt;/p&gt;
         </item>
         <item>
         <title>git</title>
-        <link>https://example.com/p/git/</link>
+        <link>http://localhost:1313/p/git/</link>
         <pubDate>Tue, 19 Mar 2024 13:35:01 +0800</pubDate>
         
-        <guid>https://example.com/p/git/</guid>
+        <guid>http://localhost:1313/p/git/</guid>
         <description>&lt;h1 id=&#34;git&#34;&gt;git&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;啊能镇楼&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181915672.jpeg&#34;
@@ -2265,10 +2265,10 @@ create mode 100644 runoob-test.txt&lt;/p&gt;
         </item>
         <item>
         <title>python</title>
-        <link>https://example.com/p/python/</link>
+        <link>http://localhost:1313/p/python/</link>
         <pubDate>Sun, 17 Mar 2024 13:35:01 +0800</pubDate>
         
-        <guid>https://example.com/p/python/</guid>
+        <guid>http://localhost:1313/p/python/</guid>
         <description>&lt;p&gt;&lt;em&gt;这是我在学习蛇书时的学习笔记，写这篇博客一是为了自己以后复盘，二是顺便分享一下，本人写这篇文章时才大二，写的不是很好，但是我就是不改，嘿嘿~~&lt;/em&gt;
 &lt;em&gt;白金镇楼&lt;/em&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182039941.jpg&#34;
@@ -2394,7 +2394,7 @@ numbers = list(range(1,6))&lt;/p&gt;
 squares = [value**2 for value in range(1,11)]&lt;/p&gt;
 &lt;p&gt;切片
 players[0:3]&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/2024-03-10-16-58-41.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/2024-03-10-16-58-41.png&#34;
 	
 	
 	
@@ -3535,7 +3535,7 @@ username.json 存在，就加载其中的⽤户名，并向⽤户发出个性化
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;测试类
 断言
-&lt;img src=&#34;https://example.com/2024-03-11-09-06-48.png&#34;
+&lt;img src=&#34;http://localhost:1313/2024-03-11-09-06-48.png&#34;
 	
 	
 	
@@ -3615,7 +3615,7 @@ test_store_single_response() 和test_store_three_responses() 提供了⼀个 lan
 们。这些⽂件存储在⽬录 &lt;strong&gt;pycache&lt;/strong&gt; 中。为了让 Git 忽略这个⽬录，创建
 ⼀个名为 .gitignore 的特殊⽂件（这个⽂件名以句点打头，且没有扩展
 名），并在其中添加如下⼀⾏内容
-&lt;img src=&#34;https://example.com/2024-03-11-13-34-48.png&#34;
+&lt;img src=&#34;http://localhost:1313/2024-03-11-13-34-48.png&#34;
 	
 	
 	
@@ -3801,10 +3801,10 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>My First Post</title>
-        <link>https://example.com/p/my-first-post/</link>
+        <link>http://localhost:1313/p/my-first-post/</link>
         <pubDate>Sun, 17 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>https://example.com/p/my-first-post/</guid>
+        <guid>http://localhost:1313/p/my-first-post/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182029744.jpg&#34;
 	
 	
@@ -3819,18 +3819,18 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>Archives</title>
-        <link>https://example.com/archives/</link>
+        <link>http://localhost:1313/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/archives/</guid>
+        <guid>http://localhost:1313/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>Links</title>
-        <link>https://example.com/links/</link>
+        <link>http://localhost:1313/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/links/</guid>
+        <guid>http://localhost:1313/links/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -3862,18 +3862,18 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>Search</title>
-        <link>https://example.com/search/</link>
+        <link>http://localhost:1313/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/search/</guid>
+        <guid>http://localhost:1313/search/</guid>
         <description></description>
         </item>
         <item>
         <title>关于</title>
-        <link>https://example.com/%E5%85%B3%E4%BA%8E/</link>
+        <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>http://localhost:1313/%E5%85%B3%E4%BA%8E/</guid>
         <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
