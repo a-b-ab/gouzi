@@ -6,7 +6,546 @@
         <description>Recent content on 西伯利亚土豆商</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 13 Apr 2024 13:35:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 22 Apr 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>python项目管理</title>
+        <link>http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</link>
+        <pubDate>Mon, 22 Apr 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</guid>
+        <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404221613371.jpg&#34;/&gt;
+&lt;h1 id=&#34;python项目管理&#34;&gt;Python项目管理&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一下，感觉自己作为一个学校里学生，有幸在学校间接触到这些观念，是很幸运的。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;环境管理&#34;&gt;环境管理&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;使用Anaconda和Pipenv共同管理Python项目环境&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Anaconda包含了许多常用的Python库、工具和环境，使得安装和管理这些工具变得更加容易。它包括了Python解释器本身以及许多流行的科学计算库，比如NumPy、SciPy、Pandas、Matplotlib等。此外，Anaconda还提供了一个名为Conda的包管理器，用于安装、更新和管理这些库，以及创建和管理不同的Python环境。&lt;/p&gt;
+&lt;p&gt;对于Python新手来说，Anaconda是一个很好的选择，因为它提供了一个完整的Python环境，无需手动安装和配置每个库。你只需安装Anaconda，就可以开始编写Python代码并使用各种科学计算工具了。&lt;/p&gt;
+&lt;p&gt;Pipenv 是 Python 项目的包管理器和虚拟环境管理器。它旨在提供一种简单的方式来创建和管理项目的依赖项，并确保这些依赖项在不同环境中的一致性&lt;/p&gt;
+&lt;p&gt;下面是 Pipenv 的一些主要功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟环境管理：Pipenv 可以为每个项目创建独立的虚拟环境，这意味着每个项目都有自己的 Python 解释器和依赖项，而不会干扰系统中的其他项目。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依赖项管理：Pipenv 使用 Pipfile 和 Pipfile.lock 文件来管理项目的依赖项。Pipfile 是项目的声明性文件，用于指定所需的包和版本，而 Pipfile.lock 文件则记录了确切的依赖项版本，以确保在不同环境中的一致性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自动环境激活：当你进入项目目录时，Pipenv 会自动激活该项目的虚拟环境，这意味着你可以立即开始使用项目的依赖项而无需手动激活虚拟环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令行工具：Pipenv 提供了一组简单的命令行工具，用于安装、更新和删除依赖项，以及管理虚拟环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;胎教版：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;当你开始一个新的 Python 项目时，你需要安装各种各样的库来帮助你完成任务。Pipenv 就像一个保姆，帮助你照顾这些库，确保它们安装正确且不会互相冲突。
+
+想象一下你在一个大杂货店里购物，每个库就像是你要买的商品。Pipenv 就是你的购物清单和购物车。你列出你要买的东西（依赖库），然后 Pipenv 帮你把它们一个一个加到你的购物车里（项目环境）。
+
+同时，Pipenv 还能确保你购物车里的东西都是正确的版本，就像是每个商品上都有一个标签标明它的准确型号和规格一样。这样，当你需要重建你的购物车时，你就可以确保每个东西都是一样的。
+
+最后，Pipenv 还能帮你管理购物车的整个过程。它会告诉你什么时候需要买新的东西（更新库），或者什么时候需要把一些东西扔掉（删除库）。
+
+总的来说，Pipenv 就像是你的 Python 项目的好帮手，确保你所需的库都安装正确，没有任何混乱
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;师兄画的图
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404171846878.png&#34;/&gt;&lt;/p&gt;
+&lt;h2 id=&#34;编码标准&#34;&gt;编码标准&lt;/h2&gt;
+&lt;p&gt;对于编码标准，推荐跟着社区的PEP8走&lt;/p&gt;
+&lt;p&gt;PEP8 是 Python Enhancement Proposal 8 的缩写，它是 Python 社区中的一项规范，用于指导 Python 代码的编写风格和格式。PEP8 旨在提高代码的可读性，并促进代码在不同项目和团队之间的一致性。&lt;/p&gt;
+&lt;p&gt;以下是 PEP8 涵盖的一些主要方面：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;缩进：使用 4 个空格作为缩进的标准，而不是制表符。
+
+行长度：每行代码应尽量控制在 79 个字符以内，但可以允许最多 99 个字符。
+
+命名约定：变量名应该采用小写字母，单词之间使用下划线分隔（例如，my_variable），而类名应采用驼峰命名法（例如，MyClass）。
+
+空格：在逗号、冒号、分号等符号后应添加一个空格，但在圆括号内部不需要添加空格。
+
+导入：每个导入应该独立一行，避免使用通配符导入（例如，from module import *）。
+
+注释：使用适当的注释来解释代码的作用和目的，注释应该清晰、简洁且易于理解。
+
+代码布局：遵循统一的代码布局规范，包括适当的缩进、空行和代码段分隔。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;pep8链接：  &lt;a class=&#34;link&#34; href=&#34;https://pep8.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pep8.org/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;规范化&#34;&gt;规范化&lt;/h2&gt;
+&lt;p&gt;black：代码格式化
+Black 是一个自动化代码格式化工具，它可以帮助你自动将 Python 代码按照一致的规范进行格式化，从而使得代码风格更加统一，减少手动调整格式的工作量。&lt;/p&gt;
+&lt;p&gt;pylint：代码检查
+Pylint 是 Python 中一种静态代码分析工具，它的主要作用是检查 Python 代码中的语法错误、代码风格问题以及潜在的逻辑错误，并提供相应的建议和警告，以帮助开发者编写更加规范、可靠和易于维护的代码。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;语法错误检查：Pylint 可以检测出代码中的语法错误，并指出出错的位置和可能的原因。
+
+代码风格检查：Pylint 可以根据 PEP8 等 Python 代码规范，检查代码中的格式问题，如缩进、空格、命名规范等，并提供相应的建议。
+
+代码质量检查：Pylint 可以评估代码的质量，并提供一些度量指标，如代码的复杂度、重复代码等，帮助开发者识别出代码中的潜在问题。
+
+错误和警告提示：Pylint 可以检测出代码中的潜在逻辑错误、不安全的操作、未使用的变量等，并给出相应的警告或错误提示，帮助开发者尽早发现并修复问题。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;isort：导包规划化
+isort 的作用就是帮助开发者自动将导入语句按照指定的规范进行排序和格式化，以保持代码的清晰易读，并且符合约定俗成的编码规范。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;导入语句排序：isort 可以自动将导入语句按照特定的顺序排序，例如将标准库模块、第三方库模块和本地模块分组，并按字母顺序排列。
+
+分组和对齐：isort 可以将导入语句分组，并且对齐每个组内的导入语句，使得代码结构更加清晰易读。
+
+移除重复导入：isort 可以检测并移除重复的导入语句，避免在代码中出现不必要的重复导入。
+
+自定义配置：isort 提供了丰富的配置选项，可以根据项目的需要进行定制，包括导入顺序、分组规则、对齐方式等。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;flake8(mccabe)：代码复杂度检查
+flake8是一个Python工具，用于检查你的代码是否符合PEP 8样式指南
+Flake8 是 Python 中常用的代码质量检查工具之一，而 mccabe 则是 Flake8 的一个插件，用于检测代码中的复杂度。&lt;/p&gt;
+&lt;p&gt;使用方法：
+终端激活虚拟环境 activate 环境名
+进入所需项目 cd 路径
+进行pipenv初始化
+进行对应的工具处理&lt;/p&gt;
+&lt;h2 id=&#34;文件作用&#34;&gt;文件作用&lt;/h2&gt;
+&lt;h3 id=&#34;setupcfg&#34;&gt;setup.cfg&lt;/h3&gt;
+&lt;p&gt;setup.cfg文件是一个配置文件，用于存储与项目相关的各种设置&lt;/p&gt;
+&lt;h3 id=&#34;pipfilelock&#34;&gt;Pipfile.lock&lt;/h3&gt;
+&lt;p&gt;是由Pipenv生成的一个文件，用于锁定项目的依赖包的精确版本。这个文件确保了你的项目在不同的环境和时间点上都能使用相同版本的依赖，从而避免了因为依赖版本不一致导致的问题&lt;/p&gt;
+&lt;h3 id=&#34;pipfile&#34;&gt;Pipfile&lt;/h3&gt;
+&lt;p&gt;是由Pipenv工具使用的一个文件，用于管理Python项目的依赖。它类似于requirements.txt文件，但提供了更强大的功能，例如锁定依赖的精确版本，区分开发和生产环境的依赖，以及自动管理虚拟环境。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;[[source]]：这个部分定义了包的源。在这个例子中，包的源被设置为PyPI。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[packages]：这个部分列出了项目的主要依赖。在这个例子中，项目依赖了requests，lxml，black，isort，pylint，flake8这几个包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[dev-packages]：这个部分列出了项目的开发依赖。这些依赖只在开发环境中需要，例如测试工具，代码格式化工具等。在这个例子中，项目的开发依赖包括black，pylint，isort，pytest。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[requires]这个部分定义了项目需要的Python版本。在这个例子中，项目需要Python 3.10。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[scripts]：在Pipfile中用于定义一些自定义的命令。这些命令可以是任何你想要的shell命令，它们可以帮助你自动化一些常见的任务，例如运行测试，构建项目，或者启动开发服务器&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当你运行pipenv install命令时，Pipenv会查看Pipfile，然后安装列出的所有依赖。如果你运行pipenv install &amp;ndash;dev，Pipenv还会安装[dev-packages]中列出的依赖。&lt;/p&gt;
+&lt;p&gt;*[packages]和[dev-packages]两个部分都是用来列出项目的依赖的，但它们的用途有所不同。&lt;/p&gt;
+&lt;p&gt;[packages]部分列出的是项目运行时需要的依赖。这些依赖是项目的核心部分，无论是在开发环境还是在生产环境，都需要这些依赖。例如，如果你的项目是一个Web应用，那么你可能需要像Flask或Django这样的Web框架，这些依赖应该被列在[packages]部分。&lt;/p&gt;
+&lt;p&gt;[dev-packages]部分列出的是只在开发环境中需要的依赖。这些依赖在生产环境中通常是不需要的。例如，你可能需要像pytest这样的测试框架来运行你的测试，或者需要像flake8或black这样的工具来检查你的代码格式，这些依赖应该被列在[dev-packages]部分。&lt;/p&gt;
+&lt;p&gt;当你运行pipenv install命令时，Pipenv会安装[packages]部分列出的所有依赖。如果你运行pipenv install &amp;ndash;dev命令，Pipenv会额外安装[dev-packages]部分列出的依赖。这样，你可以在开发环境中安装所有的依赖，而在生产环境中只安装必要的依赖，从而减少生产环境的复杂性和安全风险。*&lt;/p&gt;
+&lt;h3 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h3&gt;
+&lt;p&gt;这个文件是一个Dockerfile，它是一种文本文档，用于自动化Docker镜像的构建过程。Dockerfile中的每一行都代表在镜像中执行的一条命令。&lt;/p&gt;
+&lt;p&gt;Docker作用：&lt;/p&gt;
+&lt;p&gt;Docker是一个开源的应用容器引擎，它允许开发者将应用及其依赖打包到一个可移植的容器中，然后发布到任何流行的Linux或Windows机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
+&lt;p&gt;以下是Docker的一些主要用途：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;提供一致的环境：Docker可以确保在不同的环境中（开发，测试，生产等）运行相同的软件和配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简化配置：Docker使得配置应用环境变得更加简单。你只需要编写一个Dockerfile或者docker-compose.yml文件，就可以定义你的整个环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隔离应用：每个Docker容器都在其自己的环境中运行，这意味着你可以在同一台机器上运行多个不同版本的同一软件，而不会有冲突。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;微服务架构：Docker非常适合微服务架构，因为它允许你为每个服务创建一个单独的容器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;持续集成/持续部署（CI/CD）：Docker可以与CI/CD工具（如Jenkins，GitLab CI等）集成，使得自动化构建，测试和部署变得更加简单。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快速部署：Docker容器比传统的虚拟机启动得更快，这使得它非常适合需要快速扩展的应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总的来说，Docker是一种使得软件开发，测试和部署变得更加简单和一致的工具。&lt;/p&gt;
+&lt;h3 id=&#34;pylintrc&#34;&gt;.pylintrc&lt;/h3&gt;
+&lt;p&gt;这个文件是一个.pylintrc文件，它是Pylint工具的配置文件。Pylint是一个Python代码静态分析工具，它可以检查代码中的错误，查找不符合PEP 8编码规范的代码，以及查找代码中的其他问题&lt;/p&gt;
+&lt;p&gt;总的来说，这个.pylintrc文件定义了Pylint如何检查你的Python代码。你可以根据你的需要修改这个文件，以定制Pylint的行为&lt;/p&gt;
+&lt;h3 id=&#34;gitinore&#34;&gt;.gitinore&lt;/h3&gt;
+&lt;p&gt;这个文件是一个.gitignore文件，它告诉Git哪些文件或目录不应该被版本控制系统跟踪
+在这个.gitignore文件中，每一行都代表一个忽略规则，Git将忽略与这些规则匹配的文件和目录&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pycache&lt;/strong&gt;/和*.py[cod]规则告诉Git忽略Python编译的字节码文件和优化的字节码文件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;*.so规则告诉Git忽略C扩展的共享对象文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;build/，dist/，*.egg-info/等规则告诉Git忽略Python打包和分发过程中生成的文件和目录。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;.manifest和&lt;/em&gt;.spec规则告诉Git忽略PyInstaller生成的文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;htmlcov/，.tox/，.coverage等规则告诉Git忽略单元测试和覆盖率报告生成的文件和目录。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总的来说，.gitignore文件帮助你管理你的Git仓库，确保只有需要跟踪的文件被包含在版本控制中。&lt;/p&gt;
+&lt;h3 id=&#34;gitattributes&#34;&gt;.gitattributes&lt;/h3&gt;
+&lt;p&gt;这个文件是一个.gitattributes文件，它用于设置Git仓库的特定行为&lt;/p&gt;
+&lt;p&gt;在这个.gitattributes文件中，Dockerfile linguist-language=Python这行告诉GitHub的Linguist工具将Dockerfile文件识别为Python语言。Linguist是GitHub用来在仓库中进行语言检测的工具，它决定了在GitHub仓库概览中显示的语言比例，以及在&amp;quot;搜索&amp;quot;功能中如何对代码进行语法高亮&lt;/p&gt;
+&lt;p&gt;通常，Linguist会自动识别文件的语言，但有时你可能希望覆盖这个行为。在这个例子中，即使Dockerfile实际上是Docker的语言，但这行设置让Linguist将其识别为Python语言&lt;/p&gt;
+&lt;p&gt;总的来说，.gitattributes文件允许你自定义Git在你的仓库中的行为&lt;/p&gt;
+&lt;h3 id=&#34;env&#34;&gt;.env&lt;/h3&gt;
+&lt;p&gt;这个文件是一个.env文件，它用于设置环境变量。在这个文件中，PYTHONPATH=${PYTHONPATH}:${PWD}这行代码将当前工作目录（${PWD}）添加到PYTHONPATH环境变量中。&lt;/p&gt;
+&lt;p&gt;PYTHONPATH是一个环境变量，它告诉Python解释器在哪里查找模块。当你尝试导入一个模块时，Python解释器会在PYTHONPATH中列出的目录中查找这个模块。&lt;/p&gt;
+&lt;p&gt;在这个例子中，${PWD}是一个环境变量，它表示当前工作目录。所以，这行代码的效果是将当前工作目录添加到PYTHONPATH中。这意味着你可以直接导入当前工作目录中的Python模块，而不需要将它们移动到Python的安装目录或其他位置。&lt;/p&gt;
+&lt;p&gt;总的来说，.env文件允许你设置环境变量，这可以帮助你配置你的应用的运行环境。&lt;/p&gt;
+&lt;h3 id=&#34;dockerignore&#34;&gt;.dockerignore&lt;/h3&gt;
+&lt;p&gt;这个文件是一个.dockerignore文件，它的作用类似于.gitignore文件，但是它是用于Docker的。.dockerignore文件告诉Docker在构建镜像时应该忽略哪些文件和目录。&lt;/p&gt;
+&lt;p&gt;在这个.dockerignore文件中：&lt;/p&gt;
+&lt;p&gt;.idea/：这个规则告诉Docker忽略.idea/目录。这个目录通常包含由JetBrains IDE（如PyCharm）生成的项目设置和配置文件。&lt;/p&gt;
+&lt;p&gt;.git/：这个规则告诉Docker忽略.git/目录。这个目录包含Git的版本控制信息。&lt;/p&gt;
+&lt;p&gt;.vscode/：这个规则告诉Docker忽略.vscode/目录。这个目录通常包含由Visual Studio Code生成的项目设置和配置文件。&lt;/p&gt;
+&lt;p&gt;总的来说，.dockerignore文件帮助你管理你的Docker镜像，确保只有需要的文件被包含在镜像中，从而减小镜像的大小并提高构建速度。&lt;/p&gt;
+&lt;h3 id=&#34;test文件夹&#34;&gt;test文件夹&lt;/h3&gt;
+&lt;p&gt;在Python项目中，test文件夹通常用于存放所有的测试代码。这些测试代码用于验证你的应用的功能和行为，确保它们按照预期工作。&lt;/p&gt;
+&lt;p&gt;以下是test文件夹的一些主要用途：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;单元测试：这些是针对单个函数或类的测试，用于验证它们的行为。例如，你可能有一个测试用例来验证你的函数是否正确地处理边界条件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;集成测试：这些是针对多个组件或模块的测试，用于验证它们是否能够正确地一起工作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归测试：当你修改或添加新的代码时，你可以运行你的测试套件来确保你没有引入新的错误。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;性能测试：这些测试用于检查你的代码的性能，例如，检查一个函数是否在给定的时间内完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在Python中，你可以使用unittest库来编写测试用例，并使用pytest或nose等工具来运行你的测试。&lt;/p&gt;
+&lt;p&gt;总的来说，test文件夹是你的项目的重要组成部分，它帮助你保持你的代码的质量和可靠性。&lt;/p&gt;
+&lt;h3 id=&#34;src文件夹&#34;&gt;src文件夹&lt;/h3&gt;
+&lt;p&gt;在Python项目中，src文件夹通常用于存放项目的源代码。这个目录通常包含一个__init__.py文件，这个文件告诉Python这个目录应该被视为一个包&lt;/p&gt;
+&lt;p&gt;以下是src文件夹的一些主要用途：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;代码组织：src文件夹提供了一个地方，你可以在其中组织你的Python模块和包。你可以在src文件夹中创建子目录来进一步组织你的代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;导入模块：当你的Python文件在src文件夹中时，你可以使用相对导入来导入其他模块。例如，如果你有一个在src/my_package目录中的my_module.py文件，你可以在src/my_package目录中的其他Python文件中使用from . import my_module来导入它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;测试：将你的源代码放在src文件夹中可以使得测试更加容易。你可以在一个单独的tests文件夹中编写测试，然后在测试中导入src文件夹中的模块。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总的来说，src文件夹是你的项目的重要组成部分，它帮助你组织和管理你的源代码。&lt;/p&gt;
+&lt;h3 id=&#34;docs文件夹&#34;&gt;docs文件夹&lt;/h3&gt;
+&lt;p&gt;在Python项目中，docs文件夹通常用于存放项目的文档。这些文档可能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;项目说明：对项目的概述，包括它的目的，主要功能，以及如何使用它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API文档：对项目中的类，函数，方法和模块的详细描述。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发者指南：对如何为项目贡献代码的指南，包括代码风格指南，测试策略，以及代码提交流程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户手册：对如何使用项目的详细指南，包括安装指南，教程，以及常见问题解答。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些文档可以使用Markdown，reStructuredText，或其他标记语言编写，然后使用工具如Sphinx生成HTML或PDF格式的文档。&lt;/p&gt;
+&lt;p&gt;总的来说，docs文件夹是你的项目的重要组成部分，它帮助用户和开发者理解和使用你的项目。&lt;/p&gt;
+&lt;h3 id=&#34;vscode文件夹&#34;&gt;.vscode文件夹&lt;/h3&gt;
+&lt;p&gt;.vscode文件夹是Visual Studio Code（VS Code）编辑器为特定项目创建的一个配置文件夹。这个文件夹通常包含两个文件：settings.json和launch.json。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;settings.json：这个文件包含了VS Code的工作区设置。这些设置会覆盖用户级别和全局的VS Code设置。例如，你可以在这个文件中设置特定的Python解释器，或者设置代码格式化工具的参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;launch.json：这个文件定义了调试配置。例如，你可以在这个文件中设置启动和调试Python程序的参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;.vscode文件夹通常会被添加到.gitignore文件中，因为这个文件夹通常包含特定用户或特定环境的设置，这些设置可能不适用于其他用户或环境。&lt;/p&gt;
+&lt;h3 id=&#34;pytestcache文件夹&#34;&gt;.pytestcache文件夹&lt;/h3&gt;
+&lt;p&gt;.pytest_cache文件夹是由pytest测试框架自动创建的。pytest在运行测试时使用这个文件夹来存储一些中间数据和测试结果，以便在后续的测试运行中重用。&lt;/p&gt;
+&lt;p&gt;以下是.pytest_cache文件夹中可能包含的一些文件和目录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;v/cache/lastfailed：这个文件包含了上次测试失败的测试用例的信息。pytest可以使用这个信息来首先运行失败的测试用例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;v/cache/nodeids：这个文件包含了所有测试用例的节点ID。pytest使用节点ID来唯一标识每个测试用例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;d/：这个目录包含了一些由pytest插件生成的数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通常，你不需要手动修改.pytest_cache文件夹中的内容。这个文件夹通常会被添加到.gitignore文件中，因为它包含的是特定于本地环境的数据，不应该被添加到版本控制系统中&lt;/p&gt;
+&lt;h3 id=&#34;cachedirtag&#34;&gt;CACHEDIR.TAG&lt;/h3&gt;
+&lt;p&gt;这个文件名为CACHEDIR.TAG，它是一个缓存目录标签文件。这种文件通常用于标记一个目录被用作缓存，也就是说，该目录中的文件是可以被安全删除的，因为它们可以被重新生成。&lt;/p&gt;
+&lt;p&gt;在这个特定的情况下，CACHEDIR.TAG文件是由pytest测试框架创建的，用于标记.pytest_cache目录为缓存目录。&lt;/p&gt;
+&lt;p&gt;文件中的Signature: 8a477f597d28d172789f06886806bc55是一个固定的签名，用于标识这个文件是一个缓存目录标签。&lt;/p&gt;
+&lt;p&gt;总的来说，CACHEDIR.TAG文件的存在告诉其他工具和用户，.pytest_cache目录中的文件是临时的，可以被安全删除。&lt;/p&gt;
+&lt;h3 id=&#34;_pycache_文件&#34;&gt;_pycache_文件&lt;/h3&gt;
+&lt;p&gt;__pycache__是Python自动创建的一个目录，用于存储编译后的Python代码，也就是字节码文件。当你运行一个Python程序时，Python解释器会首先将源代码（.py文件）编译成字节码（.pyc文件），然后执行这个字节码。&lt;/p&gt;
+&lt;p&gt;字节码文件的主要目的是加速程序的启动。当Python解释器再次运行同一个程序时，如果源代码没有改变，解释器可以直接加载字节码文件，而不需要再次编译源代码。&lt;/p&gt;
+&lt;p&gt;__pycache__目录中的文件通常有如下的命名格式：module.version.pyc，其中module是源代码文件的名称，version是Python解释器的版本。&lt;/p&gt;
+&lt;p&gt;通常，你不需要手动管理__pycache__目录或其中的文件。Python解释器会自动创建和更新这些文件。这个目录通常会被添加到.gitignore文件中，因为字节码文件是特定于Python解释器的，不应该被添加到版本控制系统中。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Django</title>
+        <link>http://localhost:1313/p/django/</link>
+        <pubDate>Sun, 21 Apr 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/django/</guid>
+        <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404221612743.jpg&#34;/&gt;
+&lt;h1 id=&#34;django&#34;&gt;Django&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;基于蛇书的django项目&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;建立项目&#34;&gt;建立项目&lt;/h2&gt;
+&lt;h3 id=&#34;制定规范&#34;&gt;制定规范&lt;/h3&gt;
+&lt;h3 id=&#34;建立虚拟环境&#34;&gt;建立虚拟环境&lt;/h3&gt;
+&lt;p&gt;虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的
+库与其他项⽬分离是有益的，为了部署到服务器，这也是必须的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python -m venv ll_env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;激活虚拟环境&#34;&gt;激活虚拟环境&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;Linux:source ll_env/bin/activate
+Window:ll_env\Scripts\activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;安装django&#34;&gt;安装Django&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;pip install --upgrade pip
+pip install django
+安装特定版本： pip install django==4.1.*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;在django中创建项目&#34;&gt;在Django中创建项目&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;django_admin startproject ll_project . 
+ls (在 Windows 系统上为 dir)
+ls ll_project
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Django 新建了⼀个名为 ll_project 的⽬录。它还创建了⽂件 manage.py，这是⼀个简单的程序，接受命令并将其交给 Django 的相关部分。我们将使⽤这些命令来管理使⽤数据库和运⾏服务器等任务&lt;/p&gt;
+&lt;p&gt;⽬录 ll_project 包含 4 个⽂件，其中最重要的是 settings.py、urls.py和 wsgi.py。⽂件 settings.py 指定 Django 如何与系统交互以及如何管理项⽬。在开发项⽬的过程中，我们将修改其中的⼀些设置，并添加⼀些设置。⽂件 urls.py 告诉 Django，应创建哪些⽹⻚来响应浏览器请求。⽂件
+wsgi.py 帮助 Django 提供它创建的⽂件，名称是 web server gateway interface（Web 服务器⽹关接⼝）的⾸字⺟缩写&lt;/p&gt;
+&lt;h3 id=&#34;创建数据库&#34;&gt;创建数据库&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py migrate
+
+dir
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;SQLite 是⼀种使⽤单个⽂件的数据库，是编写简单应⽤程序的理想选择，因为它让你不⽤太关注数据库的管理问题&lt;/p&gt;
+&lt;h3 id=&#34;查看项目&#34;&gt;查看项目&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Django 启动⼀个服务器（development server），让你能够查看系统中的项⽬，了解它的⼯作情况。如果你在浏览器中输⼊ URL 以请求⽹⻚，那么该Django 服务器将进⾏响应：⽣成合适的⽹⻚，并将其发送给浏览器。&lt;/p&gt;
+&lt;h2 id=&#34;创建应用程序&#34;&gt;创建应用程序&lt;/h2&gt;
+&lt;p&gt;Django 项⽬（project）由⼀系列应⽤程序组成，它们协同⼯作让项⽬成为⼀个整体&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source ll_env/bin/activate
+python manage.py startapp learning_logs
+ls
+ls learning_logs/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;定义模型&#34;&gt;定义模型&lt;/h3&gt;
+&lt;p&gt;模型告诉 Django 如何处理应⽤程序中存储的数据。模型就是⼀个类，就像前⾯讨论的每个类⼀样，包含属性和⽅法。&lt;/p&gt;
+&lt;h3 id=&#34;激活模型&#34;&gt;激活模型&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py makemigrations learning_logs
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;每当需要修改“学习笔记”管理的数据时，都采取如下三个步骤：修改models.py，对 learning_logs 调⽤ makemigrations，以及让 Django迁移项⽬&lt;/p&gt;
+&lt;h3 id=&#34;django管理网站&#34;&gt;Django管理网站&lt;/h3&gt;
+&lt;p&gt;Django 提供的管理⽹站（admin site）让你能够轻松地处理模型。Django 管理⽹站仅供⽹站的管理员使⽤，普通⽤户不能使⽤。本节将建⽴管理⽹站，并通过它使⽤模型 Topic 来添加⼀些主题&lt;/p&gt;
+&lt;h4 id=&#34;创建超级用户&#34;&gt;创建超级用户&lt;/h4&gt;
+&lt;p&gt;Django 允许创建具备所有权限的⽤户，即超级⽤户（superuser）。权限决定了⽤户可执⾏的操作。最严格的权限设置只允许⽤户阅读⽹站的公开信息。注册⽤户通常可阅读⾃⼰的私有数据，还可查看⼀些只有会员才能查看的信息。为了有效地管理项⽬，⽹站所有者通常需要访问⽹站存储的所有信息。优秀的管理员会⼩⼼地对待⽤户的敏感信息，因为⽤户对其访问的应⽤程序有极⼤的信任。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py createsuperuser
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;向管理网站注册模型&#34;&gt;向管理网站注册模型&lt;/h4&gt;
+&lt;p&gt;Django ⾃动在管理⽹站中添加了⼀些模型，如 User 和 Group，如果要添加我们创建的模型，则必须⼿动注册&lt;/p&gt;
+&lt;h4 id=&#34;添加主题&#34;&gt;添加主题&lt;/h4&gt;
+&lt;h3 id=&#34;定义模型entry&#34;&gt;定义模型Entry&lt;/h3&gt;
+&lt;h3 id=&#34;迁移模型entry&#34;&gt;迁移模型Entry&lt;/h3&gt;
+&lt;h3 id=&#34;django-shell&#34;&gt;Django shell&lt;/h3&gt;
+&lt;p&gt;输⼊⼀些数据后，就可以通过交互式终端会话以编程的⽅式查看这些数据了。这种交互式环境称为 Django shell，是测试项⽬和排除故障的理想之地&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py shell
+from learning_logs.models import Topic
+Topic.objects.all()
+topics = Topic.objects.all()
+for topic in topics:
+    print(topic.id, topic)
+t = Topic.objects.get(id=1)
+t.text
+t.date_added
+t.entry_set.all()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;每次修改模型后，都需要重启 shell，以便看到修改的效果。要退出 shell 会话，可按 Ctr + D。如果你使⽤的是 Windows 系统，应先按 Ctr + Z，再按回⻋键&lt;/p&gt;
+&lt;h2 id=&#34;创建网页学习笔记主页&#34;&gt;创建网页：学习笔记主页&lt;/h2&gt;
+&lt;p&gt;使⽤ Django 创建⽹⻚的过程分为三个阶段：定义 URL，编写视图，以及编写模板。按什么顺序完成这三个阶段⽆关紧要，但在本项⽬中，总是先定义 URL 模式。URL 模式描述了 URL 的构成，让 Django 知道如何将浏览器请求与⽹站 URL 匹配，以确定返回哪个⽹⻚&lt;/p&gt;
+&lt;p&gt;每个 URL 都被映射到特定的视图。视图函数获取并处理⽹⻚所需的数据。视图函数通常使⽤模板来渲染⽹⻚，⽽模板定义⽹⻚的总体结构。为了明⽩其中的⼯作原理，我们来创建学习笔记的主⻚。这包括定义该主⻚的URL，编写其视图函数，以及创建⼀个简单的模板&lt;/p&gt;
+&lt;h3 id=&#34;映射url&#34;&gt;映射URL&lt;/h3&gt;
+&lt;p&gt;⽤户通过在浏览器中输⼊ URL 和单击链接来请求⽹⻚，因此需要确定项⽬需要哪些 URL。主⻚的 URL 最重要，它是⽤户⽤来访问项⽬的基础URL。当前，基础 URL（http://localhost:8000/）返回默认的 Django ⽹站，让我们知道正确地建⽴了项⽬&lt;/p&gt;
+&lt;h3 id=&#34;编写视图&#34;&gt;编写视图&lt;/h3&gt;
+&lt;p&gt;视图函数接受请求中的信息，准备好⽣成⽹⻚所需的数据，再将这些数据发送给浏览器。这通常是使⽤定义⽹⻚外观的模板实现的。
+&lt;em&gt;learning_logs 中的⽂件 views.py 是执⾏命令 python manage.pystartapp 时⾃动⽣成的&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;编写模板&#34;&gt;编写模板&lt;/h3&gt;
+&lt;p&gt;模板定义⽹⻚的外观，⽽每当⽹⻚被请求时，Django 都将填⼊相关的数据。模板让你能够访问视图提供的任何数据。我们的主⻚视图没有提供任何数据，因此相应的模板⾮常简单&lt;/p&gt;
+&lt;h3 id=&#34;模板继承&#34;&gt;模板继承&lt;/h3&gt;
+&lt;p&gt;在创建⽹站时，⼀些通⽤元素会出现在所有⽹⻚中。在这种情况下，可编写⼀个包含通⽤元素的⽗模板，并让每个⽹⻚都继承⽗模板，⽽不是在每个⽹⻚中重复定义这些通⽤元素。这种⽅法不仅能够让你专注于开发每个⽹⻚的独特⽅⾯，还使得修改项⽬的整体外观容易得多。&lt;/p&gt;
+&lt;h4 id=&#34;父模板&#34;&gt;父模板&lt;/h4&gt;
+&lt;h4 id=&#34;子模版&#34;&gt;子模版&lt;/h4&gt;
+&lt;h3 id=&#34;显示所有主题的页面&#34;&gt;显示所有主题的页面&lt;/h3&gt;
+&lt;h4 id=&#34;url模式&#34;&gt;URL模式&lt;/h4&gt;
+&lt;p&gt;⾸先，定义显⽰所有主题的⻚⾯的 URL。通常，使⽤⼀个简单的 URL⽚段来指出⽹⻚显⽰的信息；这⾥将使⽤单词 topics，因此 URL http://localhost:8000/topics/ 将返回显⽰所有主题的⻚⾯。&lt;/p&gt;
+&lt;h4 id=&#34;视图&#34;&gt;视图&lt;/h4&gt;
+&lt;h4 id=&#34;模板&#34;&gt;模板&lt;/h4&gt;
+&lt;h3 id=&#34;显示特定主题的页面&#34;&gt;显示特定主题的页面&lt;/h3&gt;
+&lt;h4 id=&#34;url模式-1&#34;&gt;URL模式&lt;/h4&gt;
+&lt;h4 id=&#34;视图-1&#34;&gt;视图&lt;/h4&gt;
+&lt;h4 id=&#34;模板-1&#34;&gt;模板&lt;/h4&gt;
+&lt;h4 id=&#34;将显示所有主题的页面中的每个主题都设置为链接&#34;&gt;将显示所有主题的页面中的每个主题都设置为链接&lt;/h4&gt;
+&lt;h1 id=&#34;用户账户&#34;&gt;用户账户&lt;/h1&gt;
+&lt;p&gt;Web 应⽤程序的核⼼是让任何地⽅的任何⽤户都能够注册账户并使⽤它。本章将创建⼀些表单，让⽤户能够添加主题和条⽬并编辑既有的条⽬。你将了解到，Django 能够防范对基于表单的⽹⻚发起的常⻅攻
+击，让你⽆须花⼤量时间考虑应⽤程序的安全问题。&lt;/p&gt;
+&lt;h2 id=&#34;让用户能够输入数据&#34;&gt;让用户能够输入数据&lt;/h2&gt;
+&lt;h3 id=&#34;添加新主题&#34;&gt;添加新主题&lt;/h3&gt;
+&lt;h4 id=&#34;用于添加主题的表单&#34;&gt;用于添加主题的表单&lt;/h4&gt;
+&lt;h4 id=&#34;url模式new_topic&#34;&gt;URL模式new_topic&lt;/h4&gt;
+&lt;h4 id=&#34;视图函数new_topic&#34;&gt;视图函数new_topic&lt;/h4&gt;
+&lt;h4 id=&#34;get请求和post请求&#34;&gt;GET请求和POST请求&lt;/h4&gt;
+&lt;h4 id=&#34;模板new_topic&#34;&gt;模板new_topic&lt;/h4&gt;
+&lt;h4 id=&#34;链接到页面new_topic&#34;&gt;链接到页面new_topic&lt;/h4&gt;
+&lt;h3 id=&#34;添加新条目&#34;&gt;添加新条目&lt;/h3&gt;
+&lt;h4 id=&#34;用于添加新条目的表单&#34;&gt;用于添加新条目的表单&lt;/h4&gt;
+&lt;h4 id=&#34;url模式new_entry&#34;&gt;URL模式new_entry&lt;/h4&gt;
+&lt;h4 id=&#34;视图函数new_entry&#34;&gt;视图函数new_entry()&lt;/h4&gt;
+&lt;h4 id=&#34;模板new_entry&#34;&gt;模板new_entry&lt;/h4&gt;
+&lt;h4 id=&#34;链接到页面new_entry&#34;&gt;链接到页面new_entry&lt;/h4&gt;
+&lt;h3 id=&#34;编辑条目&#34;&gt;编辑条目&lt;/h3&gt;
+&lt;h4 id=&#34;url模式edit_entry&#34;&gt;URL模式edit_entry&lt;/h4&gt;
+&lt;h4 id=&#34;视图函数edit_entry&#34;&gt;视图函数edit_entry()&lt;/h4&gt;
+&lt;h4 id=&#34;模板edit_entry&#34;&gt;模板edit_entry&lt;/h4&gt;
+&lt;h4 id=&#34;链接到页面edit_entry&#34;&gt;链接到页面edit_entry&lt;/h4&gt;
+&lt;h2 id=&#34;创建用户账户&#34;&gt;创建用户账户&lt;/h2&gt;
+&lt;p&gt;本节将建⽴⽤户注册和⾝份验证系统，让⽤户能够注册账户、登录和注销。为此，我们将新建⼀个应⽤程序，其中包含与处理⽤户账户相关的所有功能。这个应⽤程序将尽可能使⽤ Django ⾃带的⽤户⾝份验证系统来完成⼯作。&lt;/p&gt;
+&lt;h3 id=&#34;应用程序accounts&#34;&gt;应用程序accounts&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py startapp accounts
+ls
+ls accounts
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;将应用程序accounts添加到settingspy中&#34;&gt;将应用程序accounts添加到settings.py中&lt;/h3&gt;
+&lt;h3 id=&#34;包含应用程序accounts的url&#34;&gt;包含应用程序accounts的URL&lt;/h3&gt;
+&lt;h3 id=&#34;登录页面&#34;&gt;登录页面&lt;/h3&gt;
+&lt;h4 id=&#34;模板loginhtml&#34;&gt;模板login.html&lt;/h4&gt;
+&lt;h4 id=&#34;设置login_redirect_url&#34;&gt;设置LOGIN_REDIRECT_URL&lt;/h4&gt;
+&lt;h4 id=&#34;链接到登录页面&#34;&gt;链接到登录页面&lt;/h4&gt;
+&lt;h4 id=&#34;使用登录页面&#34;&gt;使用登录页面&lt;/h4&gt;
+&lt;h3 id=&#34;注销&#34;&gt;注销&lt;/h3&gt;
+&lt;h4 id=&#34;在basehtml中添加注销表单&#34;&gt;在base.html中添加注销表单&lt;/h4&gt;
+&lt;h4 id=&#34;设置logout_redirect_url&#34;&gt;设置LOGOUT_REDIRECT_URL&lt;/h4&gt;
+&lt;h3 id=&#34;注册页面&#34;&gt;注册页面&lt;/h3&gt;
+&lt;h4 id=&#34;注册页面的url模式&#34;&gt;注册页面的URL模式&lt;/h4&gt;
+&lt;h4 id=&#34;视图函数register&#34;&gt;视图函数register()&lt;/h4&gt;
+&lt;h4 id=&#34;注册模板&#34;&gt;注册模板&lt;/h4&gt;
+&lt;h4 id=&#34;链接到注册页面&#34;&gt;链接到注册页面&lt;/h4&gt;
+&lt;h2 id=&#34;让用户拥有自己的数据&#34;&gt;让用户拥有自己的数据&lt;/h2&gt;
+&lt;h3 id=&#34;使用login_required限制访问&#34;&gt;使用@login_required限制访问&lt;/h3&gt;
+&lt;p&gt;Django 提供了装饰器 @login_required，有助于轻松地限制对某些⻚⾯的访问。第 11 章介绍过，装饰器（decorator）是放在函数定义前⾯的指令，⽤于改变函数的⾏为&lt;/p&gt;
+&lt;h3 id=&#34;全面限制对项目学习笔记的访问&#34;&gt;全面限制对项目“学习笔记”的访问&lt;/h3&gt;
+&lt;h3 id=&#34;将数据关联到用户&#34;&gt;将数据关联到用户&lt;/h3&gt;
+&lt;p&gt;现在，需要将数据关联到提交它们的⽤户。只需将最⾼层的数据关联到⽤户，低层的数据也将⾃动关联到该⽤户。在项⽬“学习笔记”中，应⽤程序的最⾼层数据是主题，所有条⽬都与特定的主题相关联。只要每个主题都归属于特定的⽤户，就能确定数据库中每个条⽬的所有者。&lt;/p&gt;
+&lt;h4 id=&#34;修改模型topic&#34;&gt;修改模型Topic&lt;/h4&gt;
+&lt;h4 id=&#34;确认当前有哪些用户&#34;&gt;确认当前有哪些用户&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py shell
+from django.contrib.auth.models import User
+User.objects.all()
+for user in User.objects.all():
+    print(user.username, user.id)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;迁移数据库&#34;&gt;迁移数据库&lt;/h4&gt;
+&lt;p&gt;知道⽤户 ID 后，就可迁移数据库了。在这样做时，Python 将询问是要暂时将模型 Topic 关联到特定的⽤户，还是在⽂件 models.py 中指定默认⽤户。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python manage.py makemigrations learning_logs
+1
+1
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;只允许用户访问自己的主题&#34;&gt;只允许用户访问自己的主题&lt;/h3&gt;
+&lt;h3 id=&#34;保护用户的主题&#34;&gt;保护用户的主题&lt;/h3&gt;
+&lt;h3 id=&#34;保护页面edit_entry&#34;&gt;保护页面edit_entry&lt;/h3&gt;
+&lt;h3 id=&#34;将新主题关联到当前用户&#34;&gt;将新主题关联到当前用户&lt;/h3&gt;
+&lt;h2 id=&#34;设置应用程序的样式并部署&#34;&gt;设置应用程序的样式并部署&lt;/h2&gt;
+&lt;h2 id=&#34;设置项目学习笔记的样式&#34;&gt;设置项目&amp;quot;学习笔记&amp;quot;的样式&lt;/h2&gt;
+&lt;h3 id=&#34;应用程序django-bootstrap5&#34;&gt;应用程序django-bootstrap5&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;pip install django-bootstrap5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;使用bootstarp设置项目学习笔记的样式&#34;&gt;使用Bootstarp设置项目&amp;quot;学习笔记&amp;quot;的样式&lt;/h3&gt;
+&lt;h3 id=&#34;修改basehtml&#34;&gt;修改base.html&lt;/h3&gt;
+&lt;h4 id=&#34;定义html头部&#34;&gt;定义HTML头部&lt;/h4&gt;
+&lt;h4 id=&#34;定义导航栏&#34;&gt;定义导航栏&lt;/h4&gt;
+&lt;h4 id=&#34;添加用户账户链接&#34;&gt;添加用户账户链接&lt;/h4&gt;
+&lt;h4 id=&#34;在导航栏中添加注销表单&#34;&gt;在导航栏中添加注销表单&lt;/h4&gt;
+&lt;h4 id=&#34;定义页面的主要部分&#34;&gt;定义页面的主要部分&lt;/h4&gt;
+&lt;h4 id=&#34;使用jumbotron设置主页的样式&#34;&gt;使用jumbotron设置主页的样式&lt;/h4&gt;
+&lt;h4 id=&#34;设置登录页面的样式&#34;&gt;设置登录页面的样式&lt;/h4&gt;
+&lt;h3 id=&#34;设置页面topics的样式&#34;&gt;设置页面topics的样式&lt;/h3&gt;
+&lt;h3 id=&#34;设置页面topic中条目的样式&#34;&gt;设置页面topic中条目的样式&lt;/h3&gt;
+&lt;h2 id=&#34;部署学习笔记&#34;&gt;部署&amp;quot;学习笔记&amp;quot;&lt;/h2&gt;
+&lt;h3 id=&#34;注册platformsh账户&#34;&gt;注册Platform.sh账户&lt;/h3&gt;
+&lt;h3 id=&#34;安装platformsh-cli&#34;&gt;安装Platform.sh CLI&lt;/h3&gt;
+&lt;p&gt;要将项⽬部署到 Platform.sh 服务器上并对其进⾏管理，需要使⽤Platform.sh CLI（command lineinterface，命令⾏界⾯）中的⼯具。要安装该CLI 的最新版本&lt;/p&gt;
+&lt;h3 id=&#34;安装platformshconfig&#34;&gt;安装platformshconfig&lt;/h3&gt;
+&lt;p&gt;还需安装⼀个名为 platformshconfig 的包。这个包可帮助我们监测项⽬运⾏在本地系统还是 Platform.sh 服务器上。为了安装这个包，可在活动的虚拟环境中执⾏如下命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; pip install platformshconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;创建文件requirementstxt&#34;&gt;创建文件requirements.txt&lt;/h3&gt;
+&lt;p&gt;远程服务器需要知道项⽬“学习笔记”依赖于哪些包，因此我们将使⽤ pip ⽣成⼀个⽂件，在其中列出这些包。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;其他部署要求&#34;&gt;其他部署要求&lt;/h3&gt;
+&lt;h3 id=&#34;添加配置文件&#34;&gt;添加配置文件&lt;/h3&gt;
+&lt;h4 id=&#34;显示隐藏的文件&#34;&gt;显示隐藏的文件&lt;/h4&gt;
+&lt;h4 id=&#34;配置文件-platformappyaml&#34;&gt;配置文件 .platform.app.yaml&lt;/h4&gt;
+&lt;h4 id=&#34;配置文件routesyaml&#34;&gt;配置文件routes.yaml&lt;/h4&gt;
+&lt;p&gt;路由（route）指的是请求在被服务器处理的过程中经过的路径。Platform.sh 需要知道应将收到的请求发送到哪⾥&lt;/p&gt;
+&lt;h4 id=&#34;配置文件servicesyaml&#34;&gt;配置文件services.yaml&lt;/h4&gt;
+&lt;h3 id=&#34;为部署到platformsh而修改settingspy&#34;&gt;为部署到Platform.sh而修改settings.py&lt;/h3&gt;
+&lt;h3 id=&#34;使用git跟踪项目文件&#34;&gt;使用Git跟踪项目文件&lt;/h3&gt;
+&lt;h4 id=&#34;安装git&#34;&gt;安装Git&lt;/h4&gt;
+&lt;h4 id=&#34;配置git&#34;&gt;配置Git&lt;/h4&gt;
+&lt;h4 id=&#34;忽略文件&#34;&gt;忽略文件&lt;/h4&gt;
+&lt;h4 id=&#34;提交项目&#34;&gt;提交项目&lt;/h4&gt;
+&lt;h4 id=&#34;在platformsh上创建项目&#34;&gt;在Platform.sh上创建项目&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;platform login
+Y
+platform create
+ll_project
+us-3.platform.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;推送到platformsh&#34;&gt;推送到Platform.sh&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;platform push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;查看线上项目&#34;&gt;查看线上项目&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;platform url
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;改进platformsh部署&#34;&gt;改进Platform.sh部署&lt;/h3&gt;
+&lt;h4 id=&#34;在platformsh上创建超级用户&#34;&gt;在Platform.sh上创建超级用户&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;platform environment:ssh
+ls
+python manage.py createsuperuser
+ll_admin_live
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;确保线上项目的安全&#34;&gt;确保线上项目的安全&lt;/h4&gt;
+&lt;h4 id=&#34;提交并推送修改&#34;&gt;提交并推送修改&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;git commit -am &amp;quot;Set DEBUG False on live
+git status
+platform push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;创建定制错误页面&#34;&gt;创建定制错误页面&lt;/h3&gt;
+&lt;h4 id=&#34;创建定制模板&#34;&gt;创建定制模板&lt;/h4&gt;
+&lt;h4 id=&#34;将修改推送到platformsh&#34;&gt;将修改推送到Platform.sh&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;git add .
+git commit -am &amp;quot;Added custom 404 and 500 error pages.&amp;quot;
+platform push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;继续开发&#34;&gt;继续开发&lt;/h4&gt;
+&lt;p&gt;将项⽬“学习笔记”推送到远程服务器上之后，你可能想进⼀步开发它或开发要部署的其他项⽬。更新项⽬的过程⼏乎完全相同，如下所⽰。⾸先，对本地项⽬做必要的修改。如果在修改过程中创建了新⽂件，使⽤命令 git add .（千万别忘记末尾的句点）将它们加⼊ Git 仓库。如果有修改要求迁移数据库，也需要执⾏这个命令，因为每次迁移都将⽣成新的迁移⽂件。然后，使⽤命令 git commit -am &amp;ldquo;commit message&amp;rdquo; 将修改提交到仓库，再使⽤命令 platform push 将修改推送到 Platform.sh 上。然后，访问线上的项⽬，确认期望看到的修改已⽣效。&lt;/p&gt;
+&lt;h3 id=&#34;将项目从platformsh删除&#34;&gt;将项目从Platform.sh删除&lt;/h3&gt;
+&lt;p&gt;要删除项⽬，可使⽤ Platform.sh CLI：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;platform project:delete
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;命令 platform create 还在本地 Git 仓库中添加了⼀个引⽤，它指向位于 Platform.sh 服务器上的远程仓库。可在命令⾏中删除这个远程仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git remote
+git remote remove platform
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;还可以删除项⽬的资源。⾸先登录 Platform.sh ⽹站，并访问你的仪表盘（dashboard）。这个⻚⾯列出了你的所有活动项⽬。单击项⽬框中的三个点，再单击 Edit Plan。这将打开项⽬的计价⻚⾯（pricing page），单击该⻚⾯底部的 Delete Project 按钮，将出现⼀个确认⻚⾯，然后就可以按其中的说明完成项⽬的删除了。即便你选择使⽤ CLI 删除项⽬，也应该熟悉托管提供商提供的仪表盘。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>mysql</title>
         <link>http://localhost:1313/p/mysql/</link>
         <pubDate>Sat, 13 Apr 2024 13:35:01 +0800</pubDate>
@@ -1067,8 +1606,8 @@ cd public/&lt;/p&gt;
 &lt;p&gt;//提交文件&lt;/p&gt;
 &lt;p&gt;git add .&lt;/p&gt;
 &lt;p&gt;git commit -m &amp;ldquo;备注&amp;rdquo;
-//推送到远程：在ssh已连接的情况下
-git push -u origin main&lt;/p&gt;
+//推送到远程：在ssh已连接的情况下&lt;/p&gt;
+&lt;p&gt;git push -u origin main&lt;/p&gt;
 </description>
         </item>
         <item>
