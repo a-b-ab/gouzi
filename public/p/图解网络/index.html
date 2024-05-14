@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="图解网络 基础篇 TCP/IP模型 应用层 传输层 在传输层会有两个传输协议，分别是 TCP 和 UDP TCP 的全称叫传输层控制协议（Transmission Control Prot">
+<title>图解网络</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/'>
+
+<link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="图解网络">
+<meta property='og:description' content="图解网络 基础篇 TCP/IP模型 应用层 传输层 在传输层会有两个传输协议，分别是 TCP 和 UDP TCP 的全称叫传输层控制协议（Transmission Control Prot">
+<meta property='og:url' content='http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/'>
+<meta property='og:site_name' content='西伯利亚土豆商'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-09T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-09T13:28:01&#43;08:00'/>
+<meta name="twitter:title" content="图解网络">
+<meta name="twitter:description" content="图解网络 基础篇 TCP/IP模型 应用层 传输层 在传输层会有两个传输协议，分别是 TCP 和 UDP TCP 的全称叫传输层控制协议（Transmission Control Prot">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu30e88383a721a2a54354209b7d01645c_12673_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">西伯利亚土豆商</a></h1>
+            <h2 class="site-description">我打开圣经，上面第一句话就是&#34;Hello World!&#34;</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#图解网络">图解网络</a></li>
+    <li><a href="#基础篇">基础篇</a>
+      <ol>
+        <li><a href="#tcpip模型">TCP/IP模型</a>
+          <ol>
+            <li><a href="#应用层">应用层</a></li>
+            <li><a href="#传输层">传输层</a></li>
+            <li><a href="#网络层">网络层</a></li>
+            <li><a href="#数据链路层">数据链路层</a></li>
+            <li><a href="#物理层">物理层</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#http篇">HTTP篇</a>
+      <ol>
+        <li><a href="#http基本概念">HTTP基本概念</a>
+          <ol>
+            <li><a href="#http特性">HTTP特性</a></li>
+          </ol>
+        </li>
+        <li><a href="#http11如何优化">HTTP/1.1如何优化</a>
+          <ol>
+            <li><a href="#避免发送-http-请求的法就是通过缓存技术">避免发送 HTTP 请求的⽅法就是通过缓存技术</a></li>
+            <li><a href="#如何减少-http-请求次数">如何减少 HTTP 请求次数</a></li>
+            <li><a href="#如何减少-http-响应的数据">如何减少 HTTP 响应的数据⼤⼩？</a></li>
+          </ol>
+        </li>
+        <li><a href="#https-rsa握手解析">HTTPS RSA握手解析</a>
+          <ol>
+            <li><a href="#tls握手过程">TLS握手过程</a></li>
+            <li><a href="#rsa握手过程">RSA握手过程</a></li>
+            <li><a href="#rsa算法的缺陷">RSA算法的缺陷</a></li>
+          </ol>
+        </li>
+        <li><a href="#https-ecdhe-握解析">HTTPS ECDHE 握⼿解析</a></li>
+        <li><a href="#离散对数">离散对数</a></li>
+        <li><a href="#dh算法">DH算法</a></li>
+        <li><a href="#dhe算法">DHE算法</a></li>
+        <li><a href="#ecdhe算法">ECDHE算法</a></li>
+        <li><a href="#https如何优化">HTTPS如何优化</a>
+          <ol>
+            <li><a href="#分析性能损耗">分析性能损耗</a></li>
+            <li><a href="#crl">CRL</a></li>
+            <li><a href="#ocsp">OCSP</a></li>
+            <li><a href="#ocsp-stapling">OCSP Stapling</a></li>
+          </ol>
+        </li>
+        <li><a href="#会话复用">会话复用</a>
+          <ol>
+            <li><a href="#session-id">Session ID</a></li>
+            <li><a href="#session-ticket">Session Ticket</a></li>
+            <li><a href="#pre-shared-key">Pre-shared Key</a></li>
+          </ol>
+        </li>
+        <li><a href="#http2牛逼在哪">HTTP/2牛逼在哪</a>
+          <ol>
+            <li><a href="#兼容-http11">兼容 HTTP/1.1</a></li>
+            <li><a href="#头部压缩">头部压缩</a></li>
+            <li><a href="#二进制帧">二进制帧</a></li>
+            <li><a href="#并发传输">并发传输</a></li>
+            <li><a href="#服务器主动推送资源">服务器主动推送资源</a></li>
+          </ol>
+        </li>
+        <li><a href="#http3强势来袭">HTTP/3强势来袭</a>
+          <ol>
+            <li><a href="#美中不足的http2">美中不足的HTTP/2</a></li>
+            <li><a href="#quic协议的特点">QUIC协议的特点</a></li>
+            <li><a href="#http3协议">HTTP/3协议</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#tcp篇">TCP篇</a>
+      <ol>
+        <li><a href="#tcp-三次握与四次挥">TCP 三次握⼿与四次挥⼿</a>
+          <ol>
+            <li><a href="#tcp基本认识">TCP基本认识</a></li>
+            <li><a href="#为什么需要-tcp-协议-tcp-作在哪层">为什么需要 TCP 协议？ TCP ⼯作在哪⼀层？</a></li>
+            <li><a href="#什么是-tcp">什么是 TCP</a></li>
+            <li><a href="#什么是-tcp-连接">什么是 TCP 连接？</a></li>
+            <li><a href="#如何唯确定个-tcp-连接呢">如何唯⼀确定⼀个 TCP 连接呢？</a></li>
+            <li><a href="#有个-ip-的服务器监听了个端它的-tcp-的最连接数是多少">有⼀个 IP 的服务器监听了⼀个端⼝，它的 TCP 的最⼤连接数是多少？</a></li>
+            <li><a href="#udp-和-tcp-有什么区别呢分别的应场景是">UDP 和 TCP 有什么区别呢？分别的应⽤场景是？</a></li>
+            <li><a href="#tcp和udp">TCP和UDP</a></li>
+            <li><a href="#tcp-和-udp-应场景">TCP 和 UDP 应⽤场景</a></li>
+            <li><a href="#为什么-udp-头部没有部度字段-tcp-头部有部度字段呢">为什么 UDP 头部没有「⾸部⻓度」字段，⽽ TCP 头部有「⾸部⻓度」字段呢</a></li>
+            <li><a href="#为什么-udp-头部有包度字段-tcp-头部则没有包度字段呢">为什么 UDP 头部有「包⻓度」字段，⽽ TCP 头部则没有「包⻓度」字段呢？</a></li>
+          </ol>
+        </li>
+        <li><a href="#tcp连接建立">TCP连接建立</a>
+          <ol>
+            <li><a href="#如何在-linux-系统中查看-tcp-状态">如何在 Linux 系统中查看 TCP 状态？</a></li>
+            <li><a href="#为什么是三次握不是两次四次">为什么是三次握⼿？不是两次、四次</a></li>
+            <li><a href="#syn攻击">SYN攻击</a></li>
+            <li><a href="#tcp连接断开">TCP连接断开</a>
+              <ol>
+                <li><a href="#为什么需要-time_wait-状态">为什么需要 TIME_WAIT 状态？</a></li>
+                <li><a href="#如何优化-time_wait">如何优化 TIME_WAIT？</a></li>
+                <li><a href="#如果已经建了连接但是客户端突然出现故障了怎么办">如果已经建⽴了连接，但是客户端突然出现故障了怎么办？</a></li>
+              </ol>
+            </li>
+            <li><a href="#socket编程">Socket编程</a></li>
+          </ol>
+        </li>
+        <li><a href="#tcp重传滑动窗口流量控制拥塞控制">TCP重传，滑动窗口，流量控制，拥塞控制</a>
+          <ol>
+            <li><a href="#重传机制">重传机制</a></li>
+          </ol>
+        </li>
+        <li><a href="#滑动窗口">滑动窗口</a>
+          <ol>
+            <li><a href="#发送的滑动窗">发送⽅的滑动窗⼝</a></li>
+            <li><a href="#流量控制">流量控制</a>
+              <ol>
+                <li><a href="#tcp-是如何解决窗关闭时潜在的死锁现象呢">TCP 是如何解决窗⼝关闭时，潜在的死锁现象呢</a></li>
+                <li><a href="#糊涂窗综合症">糊涂窗⼝综合症</a></li>
+              </ol>
+            </li>
+            <li><a href="#拥塞控制">拥塞控制</a></li>
+          </ol>
+        </li>
+        <li><a href="#tcp实战抓包分析">TCP实战抓包分析</a>
+          <ol>
+            <li><a href="#tcp快速建立连接">TCP快速建立连接</a></li>
+            <li><a href="#tcp重复确认和快速重传">TCP重复确认和快速重传</a></li>
+            <li><a href="#tcp流量控制">TCP流量控制</a></li>
+            <li><a href="#tcp延迟确认与nagle算法">TCP延迟确认与Nagle算法</a>
+              <ol>
+                <li><a href="#那延迟确认是什么">那延迟确认⼜是什么？</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#tcp半连接队列和全连接队列">TCP半连接队列和全连接队列</a></li>
+        <li><a href="#tcp内核参数">TCP内核参数</a>
+          <ol>
+            <li><a href="#tcp-三次握的性能提升">TCP 三次握⼿的性能提升</a>
+              <ol>
+                <li><a href="#客户端优化">客户端优化</a></li>
+                <li><a href="#服务端优化">服务端优化</a></li>
+                <li><a href="#绕过三次握">绕过三次握⼿</a></li>
+              </ol>
+            </li>
+            <li><a href="#tcp-四次挥的性能提升">TCP 四次挥⼿的性能提升</a></li>
+            <li><a href="#tcp传输数据的性能提升">TCP传输数据的性能提升</a>
+              <ol>
+                <li><a href="#如何确定最传输速度">如何确定最⼤传输速度？</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#ip">IP</a>
+          <ol>
+            <li><a href="#ip基础知识全家桶">IP基础知识全家桶</a>
+              <ol>
+                <li><a href="#前菜--ip-基本认识">前菜 —— IP 基本认识</a></li>
+                <li><a href="#主菜--ip-地址的基础知识">主菜 —— IP 地址的基础知识</a></li>
+                <li><a href="#ip-分类的缺点">IP 分类的缺点</a>
+                  <ol>
+                    <li><a href="#分类地址-cidr">⽆分类地址 CIDR</a></li>
+                    <li><a href="#为什么要分离络号和主机号">为什么要分离⽹络号和主机号？</a></li>
+                    <li><a href="#怎么进划分">怎么进⾏⼦⽹划分？</a></li>
+                  </ol>
+                </li>
+                <li><a href="#p-地址与路由控制">P 地址与路由控制</a></li>
+                <li><a href="#ip-分与重组">IP 分⽚与重组</a></li>
+                <li><a href="#ipv6-基本认识">IPv6 基本认识</a></li>
+              </ol>
+            </li>
+            <li><a href="#点--ip-协议相关技术">点⼼ —— IP 协议相关技术</a>
+              <ol>
+                <li><a href="#dns">DNS</a></li>
+                <li><a href="#域名解析的作流程">域名解析的⼯作流程</a></li>
+              </ol>
+            </li>
+            <li><a href="#arp">ARP</a></li>
+            <li><a href="#rarp-协议你知道是什么吗">RARP 协议你知道是什么吗？</a></li>
+            <li><a href="#dhcp">DHCP</a></li>
+            <li><a href="#nat">NAT</a>
+              <ol>
+                <li><a href="#nat-那么逼难道就没缺点了吗">NAT 那么⽜逼，难道就没缺点了吗</a></li>
+              </ol>
+            </li>
+            <li><a href="#icmp">ICMP</a></li>
+            <li><a href="#igmp">IGMP</a></li>
+            <li><a href="#igmp-作机制">IGMP ⼯作机制</a></li>
+            <li><a href="#读者问题组播不太懂假设台机器加组播地址需要把ip改成组播地址吗如果离开某个组播地址需要dhcp重新请求个ip吗">读者问题：“组播不太懂。。。假设⼀台机器加⼊组播地址，需要把IP改成组播地址吗？如果离开某个组播地址，需要dhcp重新请求个IP吗？”</a></li>
+          </ol>
+        </li>
+        <li><a href="#ping的工作原理">PING的工作原理</a>
+          <ol>
+            <li><a href="#ip协议的助手--icmp协议">IP协议的助手&ndash;ICMP协议</a></li>
+            <li><a href="#差错报类型">差错报⽂类型</a>
+              <ol>
+                <li><a href="#标不可达消息destination-unreachable-message--类型为-3">⽬标不可达消息（Destination Unreachable Message） —— 类型为 3</a></li>
+                <li><a href="#原点抑制消息icmp-source-quench-message--类型-4">原点抑制消息（ICMP Source Quench Message） —— 类型 4</a></li>
+                <li><a href="#重定向消息icmp-redirect-message--类型-5">重定向消息（ICMP Redirect Message） —— 类型 5</a></li>
+                <li><a href="#超时消息icmp-time-exceeded-message--类型-11">超时消息（ICMP Time Exceeded Message） —— 类型 11</a></li>
+              </ol>
+            </li>
+            <li><a href="#ping--查询报类型的使">ping —— 查询报⽂类型的使⽤</a></li>
+            <li><a href="#traceroute--差错报类型的使">traceroute —— 差错报⽂类型的使⽤</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#网络综合篇">网络综合篇</a>
+      <ol>
+        <li><a href="#51-键址到显示期间发了什么">5.1 键⼊⽹址到⽹⻚显示，期间发⽣了什么</a>
+          <ol>
+            <li><a href="#孤单弟--http">孤单⼩弟 —— HTTP</a></li>
+            <li><a href="#真实地址查询--dns">真实地址查询 —— DNS</a></li>
+            <li><a href="#指南好帮--协议栈">指南好帮⼿ —— 协议栈</a></li>
+            <li><a href="#可靠传输--tcp">可靠传输 —— TCP</a></li>
+            <li><a href="#tcp-分割数据">TCP 分割数据</a></li>
+            <li><a href="#tcp-报成">TCP 报⽂⽣成</a></li>
+            <li><a href="#远程定位--ip">远程定位 —— IP</a></li>
+            <li><a href="#ip-报成">IP 报⽂⽣成</a></li>
+            <li><a href="#两点传输--mac">两点传输 —— MAC</a></li>
+            <li><a href="#出--卡">出⼝ —— ⽹卡</a></li>
+            <li><a href="#送别者--交换机">送别者 —— 交换机</a></li>
+            <li><a href="#出境--路由器">出境⼤⻔ —— 路由器</a>
+              <ol>
+                <li><a href="#路由器与交换机的区别">路由器与交换机的区别</a></li>
+                <li><a href="#路由器基本原理">路由器基本原理</a></li>
+                <li><a href="#路由器的包接收操作">路由器的包接收操作</a></li>
+                <li><a href="#查询路由表确定输出端">查询路由表确定输出端⼝</a></li>
+                <li><a href="#路由器的发送操作">路由器的发送操作</a></li>
+              </ol>
+            </li>
+            <li><a href="#互相扒--服务器-与-客户端">互相扒⽪ —— 服务器 与 客户端</a></li>
+          </ol>
+        </li>
+        <li><a href="#linux-系统是如何收发络包的">Linux 系统是如何收发⽹络包的？</a>
+          <ol>
+            <li><a href="#linux-络协议栈">Linux ⽹络协议栈</a></li>
+            <li><a href="#linux-接收络包的流程">Linux 接收⽹络包的流程</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/">图解网络</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 09, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 57 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142259666.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h1 id="图解网络">图解网络</h1>
+<h1 id="基础篇">基础篇</h1>
+<h2 id="tcpip模型">TCP/IP模型</h2>
+<h3 id="应用层">应用层</h3>
+<h3 id="传输层">传输层</h3>
+<p>在传输层会有两个传输协议，分别是 TCP 和 UDP
+TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅</p>
+<p>UDP 就相对很简单，简单到只负责发送数据包，不保证数据包是否能抵达对⽅，但它实时性相对更好，传输效率也⾼。当然，UDP 也可以实现可靠传输，把 TCP 的特性在应⽤层上实现就可以，不过要实现⼀个商⽤的可靠 UDP传输协议，也不是⼀件简单的事情</p>
+<p>应⽤需要传输的数据可能会⾮常⼤，如果直接传输就不好控制，因此当传输层的数据包⼤⼩超过 MSS（TCP 最⼤报⽂段⻓度） ，就要将数据包分块，这样即使中途有⼀个分块丢失或损坏了，只需要᯿新这⼀个分块，⽽不⽤᯿新发送整个数据包。在 TCP 协议中，我们把每个分块称为⼀个 TCP 段（TCP Segment）。</p>
+<p>当设备作为接收⽅时，传输层则要负责把数据包传给应⽤，但是⼀台设备上可能会有很多应⽤在接收或者传输数据，因此需要⽤⼀个编号将应⽤区分开来，这个编号就是端⼝</p>
+<p>⽐如 80 端⼝通常是 Web 服务器⽤的，22 端⼝通常是远程登录服务器⽤的。⽽对于浏览器（客户端）中的每个标签栏都是⼀个独⽴的进程，操作系统会为这些进程分配临时的端⼝号</p>
+<p>由于传输层的报⽂中会携带端⼝号，因此接收⽅可以识别出该报⽂是发送给哪个应⽤</p>
+<h3 id="网络层">网络层</h3>
+<p>我们不希望传输层协议处理太多的事情，只需要服务好应⽤即可，让其作为应⽤间数据传输的媒介，帮
+助实现应⽤到应⽤的通信，⽽实际的传输功能就交给下⼀层，也就是⽹络层（Internet Layer）</p>
+<p>⽹络层最常使⽤的是 IP 协议（Internet Protocol），IP 协议会将传输层的报⽂作为数据部分，再加上 IP 包头组装成 IP 报⽂，如果 IP 报⽂⼤⼩超过 MTU（以太⽹中⼀般为 1500 字节）就会再次进⾏分⽚，得到⼀个即将发送到⽹络的 IP 报⽂。</p>
+<p>因此，需要将 IP 地址分成两种意义</p>
+<p>⼀个是⽹络号，负责标识该 IP 地址是属于哪个⼦⽹的
+⼀个是主机号，负责标识同⼀⼦⽹下的不同主机</p>
+<p>这需要配合⼦⽹掩码才能算出 IP 地址 的⽹络号和主机号</p>
+<p><strong>IP 协议的寻址作⽤是告诉我们去往下⼀个⽬的地该朝哪个⽅向⾛，路由则是根据「下⼀个⽬的地」选择路径。寻址更像在导航，路由更像在操作⽅向盘</strong></p>
+<h3 id="数据链路层">数据链路层</h3>
+<p>它主要为⽹络层提供链路级别传输的服务
+每⼀台设备的⽹卡都会有⼀个 MAC 地址，它就是⽤来唯⼀标识设备的。路由器计算出了下⼀个⽬的地 IP 地址，再通过 ARP 协议找到该⽬的地的 MAC 地址，这样就知道这个 IP 地址是哪个设备的了</p>
+<h3 id="物理层">物理层</h3>
+<p>当数据准备要从设备发送到⽹络时，需要把数据包转换成电信号，让其可以在物理介质中传输，这⼀层就是物理层（Physical Layer），它主要是为数据链路层提供⼆进制传输的服务</p>
+<h1 id="http篇">HTTP篇</h1>
+<h2 id="http基本概念">HTTP基本概念</h2>
+<p>先说明下安全和幂等的概念：
+在 HTTP 协议⾥，所谓的「安全」是指请求⽅法不会「破坏」服务器上的资源。
+所谓的「幂等」，意思是多次执⾏相同的操作，结果都是「相同」的。</p>
+<p>那么很明显 GET ⽅法就是安全且幂等的，因为它是「只读」操作，⽆论操作多少次，服务器上的数据都是安全的，且每次的结果都是相同的</p>
+<p>POST 因为是「新增或提交数据」的操作，会修改服务器上的资源，所以是不安全的，且多次提交数据就会创建多个资源，所以不是幂等的。</p>
+<h3 id="http特性">HTTP特性</h3>
+<ul>
+<li>
+<p>简单</p>
+</li>
+<li>
+<p>灵活和易于扩展</p>
+</li>
+<li>
+<p>应用广泛和跨平台</p>
+</li>
+<li>
+<p>无状态</p>
+</li>
+<li>
+<p>明文传输</p>
+</li>
+<li>
+<p>长连接</p>
+</li>
+<li>
+<p>管道网络传输</p>
+</li>
+<li>
+<p>队头阻塞</p>
+</li>
+</ul>
+<p>SSL/TLS 协议建⽴的详细流程</p>
+<ul>
+<li>
+<p>ClientHello：⾸先，由客户端向服务器发起加密通信请求，也就是 ClientHello 请求</p>
+</li>
+<li>
+<p>SeverHello：服务器收到客户端请求后，向客户端发出响应，也就是 SeverHello</p>
+</li>
+<li>
+<p>客户端回应:客户端收到服务器的回应之后，⾸先通过浏览器或者操作系统中的 CA 公钥，确认服务器的数字证书的真实性。如果证书没有问题，客户端会从数字证书中取出服务器的公钥，然后使⽤它加密报⽂</p>
+</li>
+<li>
+<p>服务器的最后回应:服务器收到客户端的第三个随机数（ pre-master key ）之后，通过协商的加密算法，计算出本次通信的「会话秘钥」。然后，向客户端发⽣最后的信息</p>
+</li>
+</ul>
+<p>那 HTTP/2 相⽐ HTTP/1.1 性能上的改进</p>
+<ul>
+<li>
+<p>头部压缩:消除重复的部分。这就是所谓的 HPACK 算法：在客户端和服务器同时维护⼀张头信息表，所有字段都会存⼊这个表，⽣成⼀个索引号，以后就不发送同样字段了，只发送索引号，这样就提⾼速度了</p>
+</li>
+<li>
+<p>⼆进制格式:头信息和数据体都是⼆进制，并且统称为帧（frame）：头信息帧和数据帧,增加了数据传输的效率。</p>
+</li>
+<li>
+<p>数据流:HTTP/2 的数据包不是按顺序发送的，同⼀个连接⾥⾯连续的数据包，可能属于不同的回应。因此，必须要对数据包做标记，指出它属于哪个回应。每个请求或回应的所有数据包，称为⼀个数据流（ Stream ）。每个数据流都标记着⼀个独⼀⽆⼆的编号，其中规定客户端发出的数据流编号为奇数， 服务器发出的数据流编号为偶数.客户端还可以指定数据流的优先级。优先级⾼的请求，服务器就先响应该请求。</p>
+</li>
+<li>
+<p>多路复⽤
+可以在⼀个连接中并发多个请求或回应，⽽不⽤按照顺序⼀⼀对应,移除了 HTTP/1.1 中的串⾏请求，不需要排队等待，也就不会再出现「队头阻塞」问题，降低了延迟，⼤幅度提⾼了连接的利⽤率
+在⼀个 TCP 连接⾥，服务器收到了客户端 A 和 B 的两个请求，如果发现 A 处理过程⾮常耗时，于是就
+回应 A 请求已经处理好的部分，接着回应 B 请求，完成后，再回应 A 请求剩下的部分</p>
+</li>
+<li>
+<p>服务器推送:减少延时的等待</p>
+</li>
+</ul>
+<p>HTTP/2 主要的问题在于，多个 HTTP 请求在复⽤⼀个 TCP 连接，下层的 TCP 协议是不知道有多少个 HTTP 请求的。所以⼀旦发⽣了丢包现象，就会触发 TCP 的᯿传机制，这样在⼀个 TCP 连接中的所有的 HTTP 请求都必须等待这个丢了的包被重传回来</p>
+<ul>
+<li>HTTP/1.1 中的管道（ pipeline）传输中如果有⼀个请求阻塞了，那么队列后请求也统统被阻塞住了</li>
+<li>HTTP/2 多个请求复⽤⼀个TCP连接，⼀旦发⽣丢包，就会阻塞住所有的 HTTP 请求。</li>
+</ul>
+<p>这都是基于 TCP 传输层的问题，所以 HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！</p>
+<p>UDP 发⽣是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的队头阻塞 和 HTTP/2 的⼀个丢包全部重传传问题</p>
+<p>⼤家都知道 UDP 是不可靠传输的，但基于 UDP 的 QUIC 协议 可以实现类似 TCP 的可靠性传输</p>
+<p>QUIC 有⾃⼰的⼀套机制可以保证传输的可靠性的。当某个流发⽣丢包时，只会阻塞这个流，其他流不会受到影响。</p>
+<p>TLS3 升级成了最新的 1.3 版本，头部压缩算法也升级成了 QPack 。</p>
+<p>HTTPS 要建⽴⼀个连接，要花费 6 次交互，先是建⽴三次握⼿，然后是 TLS/1.3 的三次握⼿。QUIC 直接把以往的 TCP 和 TLS/1.3 的 6 次交互合并成了 3 次，减少了交互次数。</p>
+<p>所以， QUIC 是⼀个在 UDP 之上的伪 TCP + TLS + HTTP/2 的多路复⽤的协议。</p>
+<h2 id="http11如何优化">HTTP/1.1如何优化</h2>
+<p>有如下 3 种优化思路：</p>
+<ul>
+<li>尽量避免发送 HTTP 请求</li>
+<li>在需要发送 HTTP 请求时，考虑如何减少请求次数</li>
+<li>减少服务器的 HTTP 响应的数据⼤⼩</li>
+</ul>
+<h3 id="避免发送-http-请求的法就是通过缓存技术">避免发送 HTTP 请求的⽅法就是通过缓存技术</h3>
+<p>客户端会把第⼀次请求以及响应的数据保存在本地磁盘上，其中将请求的 URL 作为 key，⽽响应作为 value，两者形成映射关系。</p>
+<p>这样当后续发起相同的请求时，就可以先在本地磁盘上通过 key 查到对应的 value，也就是响应，如果找到了，就直接从本地读取该响应。毋庸置疑，读取本次磁盘的速度肯定⽐⽹络请求快得多</p>
+<h3 id="如何减少-http-请求次数">如何减少 HTTP 请求次数</h3>
+<ul>
+<li>减少重定向请求次数：如果重定向的⼯作交由代理服务器完成，就能减少 HTTP 请求次数了</li>
+<li>合并请求：如果把多个访问⼩⽂件的请求合并成⼀个⼤的请求，虽然传输的总资源还是⼀样，但是减少请求，也就意味着减少了重复发送的 HTTP 头部。减少 TCP 连接的数量，因⽽省去了 TCP 握⼿和慢启动过程耗费的时间</li>
+<li>延迟发送请求：请求⽹⻚的时候，没必要把全部资源都获取到，⽽是只获取当前⽤户所看到的⻚⾯资源，当⽤户向下滑动⻚⾯的时候，再向服务器获取接下来的资源，这样就达到了延迟发送请求的效果</li>
+</ul>
+<h3 id="如何减少-http-响应的数据">如何减少 HTTP 响应的数据⼤⼩？</h3>
+<p>我们可以考虑对响应的资源进⾏压缩，这样就可以减少响应的数据⼤⼩，从⽽提⾼⽹络传输的效率。</p>
+<ul>
+<li>无损压缩</li>
+<li>有损压缩</li>
+</ul>
+<h2 id="https-rsa握手解析">HTTPS RSA握手解析</h2>
+<h3 id="tls握手过程">TLS握手过程</h3>
+<p>所以安全上存在以下三个⻛险</p>
+<ul>
+<li>窃听⻛险</li>
+<li>篡改⻛险</li>
+<li>冒充⻛险</li>
+</ul>
+<p>HTTPS 在 HTTP 与 TCP 层之间加⼊了 TLS 协议
+TLS 协议是如何解决 HTTP 的⻛险的呢？</p>
+<ul>
+<li>信息加密</li>
+<li>校验机制</li>
+<li>身份证书</li>
+</ul>
+<p>不同的密钥交换算法，TLS 的握⼿过程可能会有⼀些区别</p>
+<h3 id="rsa握手过程">RSA握手过程</h3>
+<p>传统的 TLS 握⼿基本都是使⽤ RSA 算法来实现密钥交换的，在将 TLS 证书部署服务端时，证书⽂件中包含⼀对公私钥，其中公钥会在 TLS 握⼿阶段传递给客户端，私钥则⼀直留在服务端，⼀定要确保私钥不能被窃取</p>
+<ul>
+<li>
+<p>TLS 第⼀次握⼿：客户端⾸先会发⼀个「Client Hello」消息，字⾯意思我们也能理解到，这是跟服务器「打招呼」</p>
+</li>
+<li>
+<p>TLS 第⼆次握⼿：当服务端收到客户端的「Client Hello」消息后，会确认 TLS 版本号是否⽀持，和从密码套件列表中选择⼀个密码套件，以及⽣成随机数（Server Random）接着，返回「Server Hello」消息，消息⾥⾯有服务器确认的 TLS 版本号，也给出了随机数（Server Random），然后从客户端的密码套件列表选择了⼀个合适的密码套件。</p>
+</li>
+<li>
+<p>TLS 第三次握⼿：客户端验证完证书后，认为可信则继续往下⾛。接着，客户端就会⽣成⼀个新的随机数 (pre-master)，⽤服务器的 RSA 公钥加密该随机数，通过「Change Cipher Key Exchange」消息传给服务端。</p>
+</li>
+<li>
+<p>TLS 第四次握⼿：服务器也是同样的操作，发「Change Cipher Spec」和「Encrypted Handshake Message」消息，如果双⽅都验证加密和解密没问题，那么握⼿正式完成</p>
+</li>
+</ul>
+<h3 id="rsa算法的缺陷">RSA算法的缺陷</h3>
+<p>使⽤ RSA 密钥协商算法的最⼤问题是不⽀持前向保密</p>
+<h2 id="https-ecdhe-握解析">HTTPS ECDHE 握⼿解析</h2>
+<p>HTTPS 常⽤的密钥交换算法有两种，分别是 RSA 和 ECDHE 算法
+其中，RSA 是⽐较传统的密钥交换算法，它不具备前向安全的性质，因此现在很少服务器使⽤的。⽽ ECDHE 算法具有前向安全，所以被⼴泛使⽤</p>
+<h2 id="离散对数">离散对数</h2>
+<p>特别是当模数 p 是⼀个很⼤的质数，即使知道底数 a 和真数 b ，在现有的计算机的计算⽔平是⼏乎⽆法算出离散对数的，这就是 DH 算法的数学基础</p>
+<h2 id="dh算法">DH算法</h2>
+<h2 id="dhe算法">DHE算法</h2>
+<h2 id="ecdhe算法">ECDHE算法</h2>
+<p>RSA 和 ECDHE 握⼿过程的区别：</p>
+<ul>
+<li>
+<p>RSA 密钥协商算法「不⽀持」前向保密，ECDHE 密钥协商算法「⽀持」前向保密；</p>
+</li>
+<li>
+<p>使⽤了 RSA 密钥协商算法，TLS 完成四次握⼿后，才能进⾏应⽤数据传输，⽽对于 ECDHE 算法，客户端可以不⽤等服务端的最后⼀次 TLS 握⼿，就可以提前发出加密的 HTTP 数据，节省了⼀个消息的往返时间；</p>
+</li>
+<li>
+<p>使⽤ ECDHE， 在 TLS 第 2 次握⼿中，会出现服务器端发出的「Server Key Exchange」消息，⽽ RSA 握⼿过程没有该消息</p>
+</li>
+</ul>
+<h2 id="https如何优化">HTTPS如何优化</h2>
+<h3 id="分析性能损耗">分析性能损耗</h3>
+<ul>
+<li>
+<p>第⼀个环节， TLS 协议握⼿过程；</p>
+</li>
+<li>
+<p>第⼆个环节，握⼿后的对称加密报⽂传输。</p>
+</li>
+<li>
+<p>硬件优化</p>
+</li>
+<li>
+<p>软件优化：软件的优化⽅向可以分层两种，⼀个是软件升级，⼀个是协议优化：密钥交换算法优化</p>
+</li>
+<li>
+<p>证书优化：⼀个是证书传输，⼀个是证书验证。服务器应该选⽤ ECDSA 证书，⽽⾮ RSA 证书，因为在相同安全级别下，ECC 的密钥⻓度⽐ RSA 短很多，这样可以提⾼证书传输的效率</p>
+</li>
+</ul>
+<h3 id="crl">CRL</h3>
+<p>CRL 称为证书吊销列表（Certificate Revocation List），这个列表是由 CA 定期更新，列表内容都是被撤销信任的证书序号，如果服务器的证书在此列表，就认为证书已经失效，不在的话，则认为证书是有效的、</p>
+<p>第⼀个问题，由于 CRL 列表是由 CA 维护的，定期更新，如果⼀个证书刚被吊销后，客户端在更新 CRL 之前还是会信任这个证书，实时性较差；</p>
+<p>第⼆个问题，随着吊销证书的增多，列表会越来越⼤，下载的速度就会越慢，下载完客户端还得遍历这么⼤的列表，那么就会导致客户端在校验证书这⼀环节的延时很⼤，进⽽拖慢了 HTTPS 连接</p>
+<h3 id="ocsp">OCSP</h3>
+<p>因此，现在基本都是使⽤ OCSP ，名为在线证书状态协议（Online Certificate Status Protocol）来查询证书的有效性，它的⼯作⽅式是向 CA 发送查询请求，让 CA 返回证书的有效状态。</p>
+<p>OCSP 需要向 CA 查询，因此也是要发⽣⽹络请求，⽽且还得看 CA 服务器的“脸⾊”，如果⽹络状态不好，或者CA 服务器繁忙，也会导致客户端在校验证书这⼀环节的延时变⼤。</p>
+<h3 id="ocsp-stapling">OCSP Stapling</h3>
+<p>于是为了解决这⼀个⽹络开销，就出现了 OCSP Stapling，其原理是：服务器向 CA 周期性地查询证书状态，获得⼀个带有时间戳和签名的响应结果并缓存它</p>
+<h2 id="会话复用">会话复用</h2>
+<p>TLS 握⼿的⽬的就是为了协商出会话密钥，也就是对称加密密钥，那我们如果我们把⾸次 TLS 握⼿协商的对称加密密钥缓存起来，待下次需要建⽴ HTTPS 连接时，直接「复⽤」这个密钥，不就减少 TLS 握⼿的性能损耗了吗</p>
+<p>这种⽅式就是会话复⽤（TLS session resumption），会话复⽤分两种</p>
+<ul>
+<li>第⼀种叫 Session ID；</li>
+<li>第⼆种叫 Session Ticket；</li>
+</ul>
+<h3 id="session-id">Session ID</h3>
+<p>Session ID 的⼯作原理是，客户端和服务器⾸次 TLS 握⼿连接后，双⽅会在内存缓存会话密钥，并⽤唯⼀的Session ID 来标识，Session ID 和会话密钥相当于 key-value 的关系
+但是它有两个缺点：</p>
+<ul>
+<li>服务器必须保持每⼀个客户端的会话密钥，随着客户端的增多，服务器的内存压⼒也会越⼤。</li>
+<li>现在⽹站服务⼀般是由多台服务器通过负载均衡提供服务的，客户端再次连接不⼀定会命中上次访问过的服务器，于是还要⾛完整的 TLS 握⼿过程；</li>
+</ul>
+<h3 id="session-ticket">Session Ticket</h3>
+<p>为了解决 Session ID 的问题，就出现了 Session Ticket，服务器不再缓存每个客户端的会话密钥，⽽是把缓存的⼯作交给了客户端，类似于 HTTP 的 Cookie</p>
+<p>Session ID 和 Session Ticket 都不具备前向安全性</p>
+<p>避免重放攻击的⽅式就是需要对会话密钥设定⼀个合理的过期时间</p>
+<h3 id="pre-shared-key">Pre-shared Key</h3>
+<p>⽽ TLS1.3 更为⽜逼，对于᯿连 TLS1.3 只需要 0 RTT，原理和 Ticket 类似，只不过在᯿连时，客户端会把 Ticket和 HTTP 请求⼀同发送给服务端，这种⽅式叫 Pre-shared Key</p>
+<h2 id="http2牛逼在哪">HTTP/2牛逼在哪</h2>
+<h3 id="兼容-http11">兼容 HTTP/1.1</h3>
+<h3 id="头部压缩">头部压缩</h3>
+<h3 id="二进制帧">二进制帧</h3>
+<h3 id="并发传输">并发传输</h3>
+<h3 id="服务器主动推送资源">服务器主动推送资源</h3>
+<p>HTTP/2 是基于 TCP 协议来传输数据的，TCP 是字节流协议，TCP 层必须保证收到的字节数据是完整且连续的，这样内核才会将缓冲区⾥的数据返回给 HTTP 应⽤，那么当「前 1 个字节数据」没有到达时，后收到的字节数据只能存放在内核缓冲区⾥，只有等到这 1 个字节数据到达时，HTTP/2 应⽤层才能从内核中拿到数据，这就是HTTP/2 队头阻塞问题。</p>
+<h2 id="http3强势来袭">HTTP/3强势来袭</h2>
+<h3 id="美中不足的http2">美中不足的HTTP/2</h3>
+<ul>
+<li>
+<p>队头阻塞</p>
+</li>
+<li>
+<p>TCP与TLS的握手时延迟</p>
+</li>
+<li>
+<p>网络迁移需要重新连接：⼀个 TCP 连接是由四元组（源 IP 地址，源端⼝，⽬标 IP 地址，⽬标⼝）确定的，这意味着如果 IP 地址或者端⼝变动了，就会导致需要 TCP 与 TLS ᯿新握⼿，这不利于移动设备切换⽹络的场景，⽐如 4G ⽹络环境切换成WIFI。</p>
+</li>
+</ul>
+<h3 id="quic协议的特点">QUIC协议的特点</h3>
+<ul>
+<li>
+<p>⽆队头阻塞：由于 QUIC 使⽤的传输协议是 UDP，UDP 不关⼼数据包的顺序，如果数据包丢失，UDP 也不关⼼，当然，HTTP/3 不仅仅只是简单将传输协议替换成了 UDP，还基于 UDP 协议在「应⽤层」实现了 QUIC 协议，它具有类似 TCP 的连接管理、拥塞窗⼝、流ᰁ控制的⽹络特性，相当于将不可靠传输的 UDP 协议变成“可靠”的了，所以不⽤担⼼数据包丢失的问题</p>
+</li>
+<li>
+<p>更快的连接建⽴：是QUIC 内部包含了 TLS，它在⾃⼰的帧会携带 TLS ⾥的“记录”，再加上 QUIC 使⽤的是 TLS1.3，因此仅需 1 个 RTT 就可以「同时」完成建⽴连接与密钥协商，甚⾄在第⼆次连接的时候，应⽤数据包可以和 QUIC 握⼿信息（连接信息 + TLS 信息）⼀起发送，达到 0-RTT 的效果</p>
+</li>
+<li>
+<p>连接迁移：在前⾯我们提到，基于 TCP 传输协议的 HTTP 协议，由于是通过四元组（源 IP、源端⼝、⽬的 IP、⽬的端⼝）确定⼀条 TCP 连接，那么当移动设备的⽹络从 4G 切换到 WIFI 时，意味着 IP 地址变化了，那么就必须要断开连接，然后᯿新建⽴连接，⽽建⽴连接的过程包含 TCP 三次握⼿和 TLS 四次握⼿的时延，以及 TCP 慢启动的减速过程，给⽤户的感觉就是⽹络突然卡顿了⼀下，因此连接的迁移成本是很⾼的。⽽ QUIC 协议没有⽤四元组的⽅式来“绑定”连接，⽽是通过连接 ID来标记通信的两个端点，客户端和服务器可以各⾃选择⼀组 ID 来标记⾃⼰，因此即使移动设备的⽹络变化后，导致 IP 地址变化了，只要仍保有上下⽂信息（⽐如连接 ID、TLS 密钥等），就可以“⽆缝”地复⽤原连接，消除᯿连的成本，没有丝毫卡顿感，达到了连接迁移的功能</p>
+</li>
+</ul>
+<h3 id="http3协议">HTTP/3协议</h3>
+<p>HTTP/3 同 HTTP/2 ⼀样采⽤⼆进制帧的结构，不同的地⽅在于 HTTP/2 的⼆进制帧⾥需要定义 Stream，⽽ HTTP/3 ⾃身不需要再定义 Stream，直接使⽤ QUIC ⾥的 Stream，于是 HTTP/3 的帧的结构也变简单了。</p>
+<p>HTTP/3 在头部压缩算法这⼀⽅便也做了升级，升级成了 QPACK。与 HTTP/2 中的 HPACK 编码⽅式相似，HTTP/3 中的 QPACK 也采⽤了静态表、动态表及 Huffman 编码</p>
+<p>动态表是具有时序性的，如果⾸次出现的请求发⽣了丢包，后续的收到请求，对⽅就⽆法解码出HPACK 头部，因为对⽅还没建⽴好动态表，因此后续的请求解码会阻塞到⾸次请求中丢失的数据包重传过来</p>
+<p>HTTP/3 的 QPACK 解决了这⼀问题，那它是如何解决的呢？
+QUIC 会有两个特殊的单向流，所谓的单项流只有⼀端可以发送消息，双向则指两端都可以发送消息，传输 HTTP消息时⽤的是双向流，这两个单向流的⽤法</p>
+<p>⼀个叫 QPACK Encoder Stream， ⽤于将⼀个字典（key-value）传递给对⽅，⽐如⾯对不属于静态表的HTTP 请求头部，客户端可以通过这个 Stream 发送字典</p>
+<p>⼀个叫 QPACK Decoder Stream，⽤于响应对⽅，告诉它刚发的字典已经更新到⾃⼰的本地动态表了，后续就可以使⽤这个字典来编码了。</p>
+<p>这两个特殊的单向流是⽤来同步双⽅的动态表，编码⽅收到解码⽅更新确认的通知后，才使⽤动态表编码 HTTP 头部</p>
+<h1 id="tcp篇">TCP篇</h1>
+<h2 id="tcp-三次握与四次挥">TCP 三次握⼿与四次挥⼿</h2>
+<h3 id="tcp基本认识">TCP基本认识</h3>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405041534573.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>
+<p>序列号：在建⽴连接时由计算机⽣成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送⼀次数据，就「累加」⼀次该「数据字节数」的⼤⼩。⽤来解决⽹络包乱序问题</p>
+</li>
+<li>
+<p>确认应答号：指下⼀次「期望」收到的数据的序列号，发送端收到这个确认应答以后可以认为在这个序号以前的数据都已经被正常接收。⽤来解决不丢包的问题</p>
+</li>
+<li>
+<p>控制位：ACK：</p>
+</li>
+<li>
+<p>该位为 1 时，「确认应答」的字段变为有效，TCP 规定除了最初建⽴连接时的 SYN 包之外该位必须设置为 1 。</p>
+</li>
+<li>
+<p>RST：该位为 1 时，表示 TCP 连接中出现异常必须强制断开连接。</p>
+</li>
+<li>
+<p>SYN：该位为 1 时，表示希望建⽴连接，并在其「序列号」的字段进⾏序列号初始值的设定。</p>
+</li>
+<li>
+<p>FIN：该位为 1 时，表示今后不会再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双⽅的主机之间就可以相互交换 FIN 位为 1 的 TCP 段。</p>
+</li>
+</ul>
+<h3 id="为什么需要-tcp-协议-tcp-作在哪层">为什么需要 TCP 协议？ TCP ⼯作在哪⼀层？</h3>
+<p>IP 层是「不可靠」的，它不保证⽹络包的交付、不保证⽹络包的按序交付、也不保证⽹络包中的数据的完整性</p>
+<p>如果需要保障⽹络数据包的可靠性，那么就需要由上层（传输层）的 TCP 协议来负责</p>
+<h3 id="什么是-tcp">什么是 TCP</h3>
+<p>TCP 是⾯向连接的、可靠的、基于字节流的传输层通信协议。</p>
+<ul>
+<li>
+<p>⾯向连接：⼀定是「⼀对⼀」才能连接，不能像 UDP 协议可以⼀个主机同时向多个主机发送消息，也就是⼀对多是⽆法做到的；</p>
+</li>
+<li>
+<p>可靠的：⽆论的⽹络链路中出现了怎样的链路变化，TCP 都可以保证⼀个报⽂⼀定能够到达接收端</p>
+</li>
+<li>
+<p>字节流：消息是「没有边界」的，所以⽆论我们消息有多⼤都可以进⾏传输。并且消息是「有序的」，当「前⼀个」消息没有收到的时候，即使它先收到了后⾯的字节，那么也不能扔给应⽤层去处理，同时对「重复」的报⽂会⾃动丢弃</p>
+</li>
+</ul>
+<h3 id="什么是-tcp-连接">什么是 TCP 连接？</h3>
+<ul>
+<li>Socket：由 IP 地址和端⼝号组成</li>
+<li>序列号：⽤来解决乱序问题等</li>
+<li>窗⼝⼤⼩：⽤来做流ᰁ控制</li>
+</ul>
+<h3 id="如何唯确定个-tcp-连接呢">如何唯⼀确定⼀个 TCP 连接呢？</h3>
+<p>TCP 四元组可以唯⼀的确定⼀个连接</p>
+<p>源地址和⽬的地址的字段（32位）是在 IP 头部中，作⽤是通过 IP 协议发送报⽂给对⽅主机</p>
+<p>源端⼝和⽬的端⼝的字段（16位）是在 TCP 头部中，作⽤是告诉 TCP 协议应该把报⽂发给哪个进程。</p>
+<h3 id="有个-ip-的服务器监听了个端它的-tcp-的最连接数是多少">有⼀个 IP 的服务器监听了⼀个端⼝，它的 TCP 的最⼤连接数是多少？</h3>
+<p>服务器通常固定在某个本地端⼝上监听，等待客户端的连接请求
+因此，客户端 IP 和 端⼝是可变的，其理论值计算公式如下:</p>
+<pre><code>ip数 * 端口数
+</code></pre>
+<p>当然，服务端最⼤并发 TCP 连接数远不能达到理论上限。</p>
+<ul>
+<li>⾸先主要是⽂件描述符限制，Socket 都是⽂件，所以⾸先要通过 ulimit 配置⽂件描述符的数⽬；</li>
+<li>另⼀个是内存限制，每个 TCP 连接都要占⽤⼀定内存，操作系统的内存是有限的</li>
+</ul>
+<h3 id="udp-和-tcp-有什么区别呢分别的应场景是">UDP 和 TCP 有什么区别呢？分别的应⽤场景是？</h3>
+<p>UDP 不提供复杂的控制机制，利⽤ IP 提供⾯向「⽆连接」的通信服务。
+UDP 协议真的⾮常简单，头部只有 8 个字节（ 64 位），UDP 的头部格式如下
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405041551727.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li>⽬标和源端⼝：主要是告诉 UDP 协议应该把报⽂发给哪个进程。</li>
+<li>包⻓度：该字段保存了 UDP ⾸部的⻓度跟数据的⻓度之和</li>
+<li>校验和：校验和是为了提供可靠的 UDP ⾸部和数据⽽设计</li>
+</ul>
+<h3 id="tcp和udp">TCP和UDP</h3>
+<ul>
+<li>
+<ol>
+<li>连接
+TCP 是⾯向连接的传输层协议，传输数据前先要建⽴连接。
+UDP 是不需要连接，即刻传输数据</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>服务对象
+TCP 是⼀对⼀的两点服务，即⼀条连接只有两个端点。
+UDP ⽀持⼀对⼀、⼀对多、多对多的交互通信</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>可靠性
+TCP 是可靠交付数据的，数据可以⽆差错、不丢失、不᯿复、按需到达。
+UDP 是尽最⼤努⼒交付，不保证可靠交付数据</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>拥塞控制、流量控制
+TCP 有拥塞控制和流量控制机制，保证数据传输的安全性
+UDP 则没有，即使⽹络⾮常拥堵了，也不会影响 UDP 的发送速率。</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>⾸部开销
+TCP ⾸部⻓度较⻓，会有⼀定的开销，⾸部在没有使⽤「选项」字段时是 20 个字节，如果使⽤了「选项」字段则会变⻓的
+UDP ⾸部只有 8 个字节，并且是固定不变的，开销较⼩。</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>传输⽅式
+TCP 是流式传输，没有边界，但保证顺序和可靠。
+UDP 是⼀个包⼀个包的发送，是有边界的，但可能会丢包和乱序</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>分⽚不同
+TCP 的数据⼤⼩如果⼤于 MSS ⼤⼩，则会在传输层进⾏分⽚，⽬标主机收到后，也同样在传输层组装 TCP数据包，如果中途丢失了⼀个分⽚，只需要传输丢失的这个分⽚。
+UDP 的数据⼤⼩如果⼤于 MTU ⼤⼩，则会在 IP 层进⾏分⽚，⽬标主机收到后，在 IP 层组装完数据，接着再传给传输层，但是如果中途丢了⼀个分⽚，在实现可靠传输的 UDP 时则就需要᯿传所有的数据包，这样传输效率⾮常差，所以通常 UDP 的报⽂应该⼩于 MTU</li>
+</ol>
+</li>
+</ul>
+<h3 id="tcp-和-udp-应场景">TCP 和 UDP 应⽤场景</h3>
+<p>由于 TCP 是⾯向连接，能保证数据的可靠性交付，因此经常⽤于：
+FTP ⽂件传输
+HTTP / HTTPS</p>
+<p>由于 UDP ⾯向⽆连接，它可以随时发送数据，再加上UDP本身的处理既简单⼜⾼效，因此经常⽤于：
+包总量较少的通信，如 DNS 、 SNMP 等
+视频、⾳频等多媒体通信
+⼴播通信</p>
+<h3 id="为什么-udp-头部没有部度字段-tcp-头部有部度字段呢">为什么 UDP 头部没有「⾸部⻓度」字段，⽽ TCP 头部有「⾸部⻓度」字段呢</h3>
+<p>原因是 TCP 有可变⻓的「选项」字段，⽽ UDP 头部⻓度则是不会变化的，⽆需多⼀个字段去记录 UDP的⾸部⻓度</p>
+<h3 id="为什么-udp-头部有包度字段-tcp-头部则没有包度字段呢">为什么 UDP 头部有「包⻓度」字段，⽽ TCP 头部则没有「包⻓度」字段呢？</h3>
+<p>TCP 是如何计算负载数据⻓度
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405042146363.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>其中 IP 总⻓度 和 IP ⾸部⻓度，在 IP ⾸部格式是已知的。TCP ⾸部⻓度，则是在 TCP ⾸部格式已知的，所以就可以求得 TCP 数据的⻓度</p>
+<p>⼤家这时就奇怪了问：“ UDP 也是基于 IP 层的呀，那 UDP 的数据⻓度也可以通过这个公式计算呀？ 为何还要有「包⻓度」呢？”</p>
+<p>因为为了⽹络设备硬件设计和处理⽅便，⾸部⻓度需要是 4 字节的整数倍</p>
+<p>如果去掉 UDP 「包⻓度」字段，那 UDP ⾸部⻓度就不是 4 字节的整数倍了，所以⼩林觉得这可能是为了补全UDP ⾸部⻓度是 4 字节的整数倍，才补充了「包⻓度」字段</p>
+<h2 id="tcp连接建立">TCP连接建立</h2>
+<p>TCP 是⾯向连接的协议，所以使⽤ TCP 前必须先建⽴连接，⽽建⽴连接是通过三次握⼿来进⾏的</p>
+<p>⼀开始，客户端和服务端都处于 CLOSED 状态。先是服务端主动监听某个端⼝，处于 LISTEN 状态</p>
+<p>客户端会随机初始化序号（ client_isn ），将此序号置于 TCP ⾸部的「序号」字段中，同时把 SYN 标志位置为 1 ，表示 SYN 报⽂。接着把第⼀个 SYN 报⽂发送给服务端，表示向服务端发起连接，该报⽂不包含应⽤层数据，之后客户端处于 SYN-SENT 状态。</p>
+<p>服务端收到客户端的 SYN 报⽂后，⾸先服务端也随机初始化⾃⼰的序号（ server_isn ），将此序号填⼊TCP ⾸部的「序号」字段中，其次把 TCP ⾸部的「确认应答号」字段填⼊ client_isn + 1 , 接着把 SYN和 ACK 标志位置为 1 。最后把该报⽂发给客户端，该报⽂也不包含应⽤层数据，之后服务端处于 SYN-RCVD 状态。</p>
+<p>客户端收到服务端报⽂后，还要向服务端回应最后⼀个应答报⽂，⾸先该应答报⽂ TCP ⾸部 ACK 标志位
+置为 1 ，其次「确认应答号」字段填⼊ server_isn + 1 ，最后把报⽂发送给服务端，这次报⽂可以携带客户到服务器的数据，之后客户端处于 ESTABLISHED 状态。</p>
+<p>服务器收到客户端的应答报⽂后，也进⼊ ESTABLISHED 状态</p>
+<p>从上⾯的过程可以发现第三次握⼿是可以携带数据的，前两次握⼿是不可以携带数据的，这也是⾯试常问的题</p>
+<p>⼀旦完成三次握⼿，双⽅都处于 ESTABLISHED 状态，此时连接就已建⽴完成，客户端和服务端就可以相互发送数据了。</p>
+<h3 id="如何在-linux-系统中查看-tcp-状态">如何在 Linux 系统中查看 TCP 状态？</h3>
+<p>TCP 的连接状态查看，在 Linux 可以通过 netstat -napt 命令查看</p>
+<h3 id="为什么是三次握不是两次四次">为什么是三次握⼿？不是两次、四次</h3>
+<ul>
+<li>因为三次握⼿才能保证双⽅具有接收和发送的能⼒</li>
+<li>三次握⼿才可以阻⽌重复历史连接的初始化（主要原因）：三次握⼿的⾸要原因是为了防⽌旧的重复连接初始化造成混乱</li>
+<li>三次握⼿才可以同步双⽅的初始序列号</li>
+<li>三次握⼿才可以避免资源浪费</li>
+</ul>
+<p>如果是两次握⼿连接，就不能判断当前连接是否是历史连接，三次握⼿则可以在客户端（发送⽅）准备发送第三次报⽂时，客户端因有⾜够的上下⽂来判断当前连接是否是历史连接：
+如果是历史连接（序列号过期或超时），则第三次握⼿发送的报⽂是 RST 报⽂，以此中⽌历史连接
+如果不是历史连接，则第三次发送的报⽂是 ACK 报⽂，通信双⽅就会成功建⽴连接；</p>
+<p>TCP 协议的通信双⽅， 都必须维护⼀个「序列号」， 序列号是可靠传输的⼀个关键因素</p>
+<ul>
+<li>接收⽅可以去除重复的数据；</li>
+<li>接收⽅可以根据数据包的序列号按序接收；</li>
+<li>可以标识发送出去的数据包中， 哪些是已经被对⽅收到的；</li>
+</ul>
+<p>如果客户端的 SYN 阻塞了，重复发送多次 SYN 报⽂，那么服务器在收到请求后就会建⽴多个冗余的⽆效链接，造成不必要的资源浪费</p>
+<p>TCP 建⽴连接时，通过三次握⼿能防⽌历史连接的建⽴，能减少双⽅不必要的资源开销，能帮助双⽅同步初始化序列号。序列号能够保证数据包不᯿复、不丢弃和按序传输。
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405061904944.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>当 IP 层有⼀个超过 MTU ⼤⼩的数据（TCP 头部 + TCP 数据）要发送，那么 IP 层就要进⾏分⽚，把数据分⽚成若⼲⽚，保证每⼀个分⽚都⼩于 MTU。把⼀份 IP 数据报进⾏分⽚以后，由⽬标主机的 IP 层来进⾏重新组装后，再交给上⼀层 TCP 传输层。</p>
+<p>这看起来井然有序，但这存在隐患的，那么当如果⼀个 IP 分⽚丢失，整个 IP 报⽂的所有分⽚都得重传。</p>
+<p>所以，为了达到最佳的传输效能 TCP 协议在建⽴连接的时候通常要协商双⽅的 MSS 值，当 TCP 层发现数据超过MSS 时，则就先会进⾏分⽚，当然由它形成的 IP 包的⻓度也就不会⼤于 MTU ，⾃然也就不⽤ IP 分⽚了。</p>
+<p>经过 TCP 层分⽚后，如果⼀个 TCP 分⽚丢失后，进⾏重发时也是以 MSS 为单位，⽽不⽤᯿传所有的分⽚，⼤⼤增加了重传的效率。</p>
+<h3 id="syn攻击">SYN攻击</h3>
+<p>我们都知道 TCP 连接建⽴是需要三次握⼿，假设攻击者短时间伪造不同 IP 地址的 SYN 报⽂，服务端每接收到⼀个 SYN 报⽂，就进⼊ SYN_RCVD 状态，但服务端发送出去的 ACK + SYN 报⽂，⽆法得到未知 IP 主机的ACK 应答，久⽽久之就会占满服务端的 SYN 接收队列（未连接队列），使得服务器不能为正常⽤户服务。</p>
+<p>其中⼀种解决⽅式是通过修改 Linux 内核参数，控制队列⼤⼩和当队列满时应做什么处理</p>
+<p>我们先来看下 Linux 内核的 SYN （未完成连接建⽴）队列与 Accpet （已完成连接建⽴）队列是如何⼯作的？</p>
+<p>正常流程：</p>
+<ul>
+<li>当服务端接收到客户端的 SYN 报⽂时，会将其加⼊到内核的「 SYN 队列」；</li>
+<li>接着发送 SYN + ACK 给客户端，等待客户端回应 ACK 报⽂；</li>
+<li>服务端接收到 ACK 报⽂后，从「 SYN 队列」移除放⼊到「 Accept 队列」；</li>
+<li>应⽤通过调⽤ accpet() socket 接⼝，从「 Accept 队列」取出连接</li>
+</ul>
+<p>另一种解决思路：
+计算出⼀个 cookie 值，再以 SYN + ACK 中的「序列号」返回客户端，
+服务端接收到客户端的应答报⽂时，服务器会检查这个 ACK 包的合法性。如果合法，直接放⼊到「 Accept队列」。
+最后应⽤通过调⽤ accpet() socket 接⼝，从「 Accept 队列」取出的连接。</p>
+<h3 id="tcp连接断开">TCP连接断开</h3>
+<ul>
+<li>客户端打算关闭连接，此时会发送⼀个 TCP ⾸部 FIN 标志位被置为 1 的报⽂，也即 FIN 报⽂，之后客户端进⼊ FIN_WAIT_1 状态。</li>
+<li>服务端收到该报⽂后，就向客户端发送 ACK 应答报⽂，接着服务端进⼊ CLOSED_WAIT 状态。</li>
+<li>客户端收到服务端的 ACK 应答报⽂后，之后进⼊ FIN_WAIT_2 状态。</li>
+<li>等待服务端处理完数据后，也向客户端发送 FIN 报⽂，之后服务端进⼊ LAST_ACK 状态。</li>
+<li>客户端收到服务端的 FIN 报⽂后，回⼀个 ACK 应答报⽂，之后进⼊ TIME_WAIT 状态</li>
+<li>服务器收到了 ACK 应答报⽂后，就进⼊了 CLOSED 状态，⾄此服务端已经完成连接的关闭。</li>
+<li>客户端在经过 2MSL ⼀段时间后，⾃动进⼊ CLOSED 状态，⾄此客户端也完成连接的关闭。</li>
+</ul>
+<p>你可以看到，每个⽅向都需要⼀个 FIN 和⼀个 ACK，因此通常被称为四次挥⼿。</p>
+<p>主动关闭连接的，才有 TIME_WAIT 状态</p>
+<p>关闭连接时，客户端向服务端发送 FIN 时，仅仅表示客户端不再发送数据了但是还能接收数据。
+服务器收到客户端的 FIN 报⽂时，先回⼀个 ACK 应答报⽂，⽽服务端可能还有数据需要处理和发送，等
+服务端不再发送数据时，才发送 FIN 报⽂给客户端来表示同意现在关闭连接</p>
+<h4 id="为什么需要-time_wait-状态">为什么需要 TIME_WAIT 状态？</h4>
+<p>主动发起关闭连接的⼀⽅，才会有 TIME-WAIT 状态</p>
+<p>需要 TIME-WAIT 状态，主要是两个原因：</p>
+<ul>
+<li>防⽌具有相同「四元组」的「旧」数据包被收到；</li>
+<li>保证「被动关闭连接」的⼀⽅能被正确的关闭，即保证最后的 ACK 能让被动关闭⽅接收，从⽽帮助其正常关闭</li>
+</ul>
+<p>过多的 TIME-WAIT 状态主要的危害有两种
+第⼀是内存资源占⽤；
+第⼆是对端⼝资源的占⽤，⼀个 TCP 连接⾄少消耗⼀个本地端⼝；</p>
+<h4 id="如何优化-time_wait">如何优化 TIME_WAIT？</h4>
+<p>⽅式⼀：net.ipv4.tcp_tw_reuse 和 tcp_timestamps
+⽅式⼆：net.ipv4.tcp_max_tw_buckets
+⽅式三：程序中使⽤ SO_LINGER</p>
+<h4 id="如果已经建了连接但是客户端突然出现故障了怎么办">如果已经建⽴了连接，但是客户端突然出现故障了怎么办？</h4>
+<p>TCP 有⼀个机制是保活机制。这个机制的原理是这样的：
+定义⼀个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作⽤，每隔⼀个时间间隔，发送⼀个探测报⽂，该探测报⽂包含的数据⾮常少，如果连续⼏个探测报⽂都没有得到响应，则认为当前的TCP 连接已经死亡，系统内核将错误信息通知给上层应⽤程序。</p>
+<h3 id="socket编程">Socket编程</h3>
+<p>针对 TCP 应该如何 Socket 编程？</p>
+<ul>
+<li>服务端和客户端初始化 socket ，得到⽂件描述符；</li>
+<li>服务端调⽤ bind ，将绑定在 IP 地址和端⼝;</li>
+<li>服务端调⽤ listen ，进⾏监听；</li>
+<li>服务端调⽤ accept ，等待客户端连接；</li>
+<li>客户端调⽤ connect ，向服务器端的地址和端⼝发起连接请求；</li>
+<li>服务端 accept 返回⽤于传输的 socket 的⽂件描述符；</li>
+<li>客户端调⽤ write 写⼊数据；服务端调⽤ read 读取数据；</li>
+<li>客户端断开连接时，会调⽤ close ，那么服务端 read 读取数据的时候，就会读取到了 EOF ，待处理完数据后，服务端调⽤ close ，表示连接关闭</li>
+</ul>
+<p>这⾥需要注意的是，服务端调⽤ accept 时，连接成功了会返回⼀个已完成连接的 socket，后续⽤来传输数据。所以，监听的 socket 和真正⽤来传送数据的 socket，是「两个」 socket，⼀个叫作监听 socket，⼀个叫作已完成连接 socket</p>
+<p>Linux内核中会维护两个队列：
+未完成连接队列（SYN 队列）：接收到⼀个 SYN 建⽴连接请求，处于 SYN_RCVD 状态；
+已完成连接队列（Accpet 队列）：已完成 TCP 三次握⼿过程，处于 ESTABLISHED 状态</p>
+<p>我们先看看客户端连接服务端时，发送了什么</p>
+<ul>
+<li>客户端的协议栈向服务器端发送了 SYN 包，并告诉服务器端当前发送序列号 client_isn，客户端进⼊SYN_SENT 状态</li>
+<li>服务器端的协议栈收到这个包之后，和客户端进⾏ ACK 应答，应答的值为 client_isn+1，表示对 SYN 包client_isn 的确认，同时服务器也发送⼀个 SYN 包，告诉客户端当前我的发送序列号为 server_isn，服务器端进⼊ SYN_RCVD 状态；</li>
+<li>客户端协议栈收到 ACK 之后，使得应⽤程序从 connect 调⽤返回，表示客户端到服务器端的单向连接建⽴成功，客户端的状态为 ESTABLISHED，同时客户端协议栈也会对服务器端的 SYN 包进⾏应答，应答数据为server_isn+1</li>
+<li>应答包到达服务器端后，服务器端协议栈使得 accept 阻塞调⽤返回，这个时候服务器端到客户端的单向连接也建⽴成功，服务器端也进⼊ ESTABLISHED 状态</li>
+</ul>
+<p>从上⾯的描述过程，我们可以得知客户端 connect 成功返回是在第⼆次握⼿，服务端 accept 成功返回是在三次握⼿成功之后。</p>
+<ul>
+<li>客户端调⽤ close ，表明客户端没有数据需要发送了，则此时会向服务端发送 FIN 报⽂，进⼊ FIN_WAIT_1状态</li>
+<li>服务端接收到了 FIN 报⽂，TCP 协议栈会为 FIN 包插⼊⼀个⽂件结束符 EOF 到接收缓冲区中，应⽤程序可以通过 read 调⽤来感知这个 FIN 包。这个 EOF 会被放在已排队等候的其他已接收的数据之后，这就意味着服务端需要处理这种异常情况，因为 EOF 表示在该连接上再⽆额外数据到达。此时，服务端进⼊CLOSE_WAIT 状态</li>
+<li>接着，当处理完数据后，⾃然就会读到 EOF ，于是也调⽤ close 关闭它的套接字，这会使得客户端会发出⼀个 FIN 包，之后处于 LAST_ACK 状态</li>
+<li>客户端接收到服务端的 FIN 包，并发送 ACK 确认包给服务端，此时客户端将进⼊ TIME_WAIT 状态</li>
+<li>服务端收到 ACK 确认包后，就进⼊了最后的 CLOSE 状态</li>
+<li>客户端经过 2MSL 时间之后，也进⼊ CLOSE 状态；</li>
+</ul>
+<h2 id="tcp重传滑动窗口流量控制拥塞控制">TCP重传，滑动窗口，流量控制，拥塞控制</h2>
+<h3 id="重传机制">重传机制</h3>
+<p>TCP 实现可靠传输的⽅式之⼀，是通过序列号与确认应答</p>
+<p>所以 TCP 针对数据包丢失的情况，会⽤重传机制解决。
+接下来说说常⻅的重传机制：</p>
+<ul>
+<li>
+<p>超时重传：
+RTT 就是数据从⽹络⼀端传送到另⼀端所需的时间，也就是包的往返时间。
+超时重传时间是以 RTO （Retransmission Timeout 超时重传时间）表示
+精确的测量超时时间 RTO 的值是⾮常᯿要的，这可让我们的重传机制更⾼效</p>
+</li>
+<li>
+<p>快速重传：
+TCP 还有另外⼀种快速重传（Fast Retransmit）机制，它不以时间为驱动，⽽是以数据驱动重传</p>
+</li>
+</ul>
+<p>第⼀份 Seq1 先送到了，于是就 Ack 回 2；
+结果 Seq2 因为某些原因没收到，Seq3 到达了，于是还是 Ack 回 2；
+后⾯的 Seq4 和 Seq5 都到了，但还是 Ack 回 2，因为 Seq2 还是没有收到；
+发送端收到了三个 Ack = 2 的确认，知道了 Seq2 还没有收到，就会在定时器过期之前，重传丢失的 Seq2。
+最后，收到了 Seq2，此时因为 Seq3，Seq4，Seq5 都收到了，于是 Ack 回 6
+快速重传机制只解决了⼀个问题，就是超时时间的问题，但是它依然⾯临着另外⼀个问题。就是重传的时候，是重传之前的⼀个，还是重传所有的问题</p>
+<ul>
+<li>
+<p>SACK：
+还有⼀种实现重传机制的⽅式叫： SACK （ Selective Acknowledgment 选择性确认）。
+这种⽅式需要在 TCP 头部「选项」字段⾥加⼀个 SACK 的东⻄，它可以将缓存的地图发送给发送⽅，这样发送⽅就可以知道哪些数据收到了，哪些数据没收到，知道了这些信息，就可以只重传丢失的数据。
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062033764.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+</li>
+<li>
+<p>D-SACK：
+Duplicate SACK ⼜称 D-SACK ，其主要使⽤了 SACK 来告诉「发送⽅」有哪些数据被重复接收了
+ACK 丢包：</p>
+<p>「接收⽅」发给「发送⽅」的两个 ACK 确认应答都丢失了，所以发送⽅超时后，重传第⼀个数据包（3000 ~3499）</p>
+<p>于是「接收⽅」发现数据是重复收到的，于是回了⼀个 SACK = 3000~3500，告诉「发送⽅」 3000~3500的数据早已被接收了，因为 ACK 都到了 4000 了，已经意味着 4000 之前的所有数据都已收到，所以这个SACK 就代表着 D-SACK 。</p>
+<p>这样「发送⽅」就知道了，数据没有丢，是「接收⽅」的 ACK 确认报⽂丢了</p>
+</li>
+</ul>
+<p>⽹络延时：
+数据包（1000~1499） 被⽹络延迟了，导致「发送⽅」没有收到 Ack 1500 的确认报⽂</p>
+<pre><code>⽽后⾯报⽂到达的三个相同的 ACK 确认报⽂，就触发了快速重传机制，但是在重传后，被延迟的数据包（1000~1499）⼜到了「接收⽅」；
+
+所以「接收⽅」回了⼀个 SACK=1000~1500，因为 ACK 已经到了 3000，所以这个 SACK 是 D-SACK，表示收到了重复的包
+
+这样发送⽅就知道快速重传触发的原因不是发出去的包丢了，也不是因为回应的 ACK 包丢了，⽽是因为⽹络延迟了
+</code></pre>
+<p>可⻅， D-SACK 有这么⼏个好处：</p>
+<ol>
+<li>可以让「发送⽅」知道，是发出去的包丢了，还是接收⽅回应的 ACK 包丢了;</li>
+<li>可以知道是不是「发送⽅」的数据包被⽹络延迟了;</li>
+<li>可以知道⽹络中是不是把「发送⽅」的数据包给复制了</li>
+</ol>
+<h2 id="滑动窗口">滑动窗口</h2>
+<p>如果你说完⼀句话，我在处理其他事情，没有及时回复你，那你不是要⼲等着我做完其他事情后，我回复你，你才能说下⼀句话，很显然这不现实。</p>
+<p>那么有了窗⼝，就可以指定窗⼝⼤⼩，窗⼝⼤⼩就是指⽆需等待确认应答，⽽可以继续发送数据的最⼤值</p>
+<p>窗⼝的实现实际上是操作系统开辟的⼀个缓存空间，发送⽅主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据。如果按期收到确认应答，此时数据就可以从缓存区清除。</p>
+<p>图中的 ACK 600 确认应答报⽂丢失，也没关系，因为可以通过下⼀个确认应答进⾏确认，只要发送⽅收到了 ACK 700 确认应答，就意味着 700 之前的所有数据「接收⽅」都收到了。这个模式就叫累计确认或者累计应答</p>
+<p>TCP 头⾥有⼀个字段叫 Window ，也就是窗⼝⼤⼩。
+这个字段是接收端告诉发送端⾃⼰还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能⼒来发送数据，⽽不会导致接收端处理不过来。</p>
+<h3 id="发送的滑动窗">发送⽅的滑动窗⼝</h3>
+<p>#1 是已发送并收到 ACK确认的数据：1~31 字节
+#2 是已发送但未收到 ACK确认的数据：32~45 字节
+#3 是未发送但总⼤⼩在接收⽅处理范围内（接收⽅还有空间）：46~51字节
+#4 是未发送但总⼤⼩超过接收⽅处理范围（接收⽅没有空间）：52字节以后</p>
+<p>当发送⽅把数据「全部」都⼀下发送出去后，可⽤窗⼝的⼤⼩就为 0 了，表明可⽤窗⼝耗尽，在没收到
+ACK 确认之前是⽆法继续发送数据了。</p>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062047148.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>在下图，当收到之前发送的数据 32~36 字节的 ACK 确认应答后，如果发送窗⼝的⼤⼩没有变化，则滑动窗⼝往右边移动 5 个字节，因为有 5 个字节的数据被应答确认，接下来 52~56 字节⼜变成了可⽤窗⼝，那么后续也就可以发送 52~56 这 5 个字节的数据了</p>
+<h3 id="流量控制">流量控制</h3>
+<p>发送⽅不能⽆脑的发数据给接收⽅，要考虑接收⽅处理能⼒</p>
+<p>为了防⽌这种情况发⽣，TCP 规定是不允许同时减少缓存⼜收缩窗⼝的，⽽是采⽤先收缩窗⼝，过段时间再减少缓存，这样就可以避免了丢包情况</p>
+<h4 id="tcp-是如何解决窗关闭时潜在的死锁现象呢">TCP 是如何解决窗⼝关闭时，潜在的死锁现象呢</h4>
+<p>为了解决这个问题，TCP 为每个连接设有⼀个持续定时器，只要 TCP 连接⼀⽅收到对⽅的零窗⼝通知，就启动持续计时器。</p>
+<p>只要 TCP 连接⼀⽅收到对⽅的零窗⼝通知，就启动持续计时器。
+如果持续计时器超时，就会发送窗⼝探测 ( Window probe ) 报⽂，⽽对⽅在确认这个探测报⽂时，给出⾃⼰现在的接收窗⼝⼤⼩</p>
+<h4 id="糊涂窗综合症">糊涂窗⼝综合症</h4>
+<p>如果接收⽅太忙了，来不及取⾛接收窗⼝⾥的数据，那么就会导致发送⽅的发送窗⼝越来越⼩。
+到最后，如果接收⽅腾出⼏个字节并告诉发送⽅现在有⼏个字节的窗⼝，⽽发送⽅会义⽆反顾地发送这⼏个字节，这就是糊涂窗⼝综合症</p>
+<p>就好像⼀个可以承载 50 ⼈的⼤巴⻋，每次来了⼀两个⼈，就直接发⻋。除⾮家⾥有矿的⼤巴司机，才敢这样玩，不然迟早破产。要解决这个问题也不难，⼤巴司机等乘客数ᰁ超过了 25 个，才认定可以发⻋</p>
+<p>所以，糊涂窗⼝综合症的现象是可以发⽣在发送⽅和接收⽅：
+接收⽅可以通告⼀个⼩的窗⼝
+⽽发送⽅可以发送⼩数据</p>
+<p>于是，要解决糊涂窗⼝综合症，就解决上⾯两个问题就可以了
+让接收⽅不通告⼩窗⼝给发送⽅
+让发送⽅避免发送⼩数据</p>
+<h3 id="拥塞控制">拥塞控制</h3>
+<p>在⽹络出现拥堵时，如果继续发送⼤量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是⼀重传就会导致⽹络的负担更重，于是会导致更⼤的延迟以及更多的丢包，这个情况就会进⼊恶性循环被不断地放⼤&hellip;</p>
+<p>于是，就有了拥塞控制，控制的⽬的就是避免「发送⽅」的数据填满整个⽹络</p>
+<p>拥塞窗⼝ cwnd是发送⽅维护的⼀个的状态变ᰁ，它会根据⽹络的拥塞程度动态变化的</p>
+<p>拥塞控制有哪些控制算法</p>
+<ul>
+<li>
+<p>慢启动：TCP 在刚建⽴连接完成后，⾸先是有个慢启动的过程，这个慢启动的意思就是⼀点⼀点的提⾼发送数据包的数据，如果⼀上来就发⼤ᰁ的数据，这不是给⽹络添堵吗
+慢启动的算法记住⼀个规则就⾏：当发送⽅每收到⼀个 ACK，拥塞窗⼝ cwnd 的⼤⼩就会加 1</p>
+</li>
+<li>
+<p>拥塞避免：那么进⼊拥塞避免算法后，它的规则是：每当收到⼀个 ACK 时，cwnd 增加 1/cwnd</p>
+</li>
+<li>
+<p>拥塞发⽣：cwnd = cwnd/2 ，也就是设置为原来的⼀半，或设cwnd为1</p>
+</li>
+<li>
+<p>快速恢复：拥塞窗⼝ cwnd = ssthresh + 3 （ 3 的意思是确认有 3 个数据包被收到了）；
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062215488.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+</li>
+</ul>
+<h2 id="tcp实战抓包分析">TCP实战抓包分析</h2>
+<p><strong>tcpdump 和 Wireshark</strong>
+tcpdump 仅⽀持命令⾏格式使⽤，常⽤在 Linux 服务器中抓取和分析⽹络包。
+Wireshark 除了可以抓包外，还提供了可视化分析⽹络包的图形⻚⾯</p>
+<p>所以，这两者实际上是搭配使⽤的，先⽤ tcpdump 命令在 Linux 服务器上抓包，接着把抓包的⽂件拖出到Windows 电脑后，⽤ Wireshark 可视化分析</p>
+<h3 id="tcp快速建立连接">TCP快速建立连接</h3>
+<h3 id="tcp重复确认和快速重传">TCP重复确认和快速重传</h3>
+<p>当接收⽅收到乱序数据包时，会发送重复的 ACK，以便告知发送⽅要重发该数据包，当发送⽅收到 3 个重复 ACK时，就会触发快速重传，⽴刻重发丢失数据包。</p>
+<h3 id="tcp流量控制">TCP流量控制</h3>
+<p>接收窗⼝是由接收⽅指定的值，存储在 TCP 头部中，它可以告诉发送⽅⾃⼰的 TCP 缓冲空间区⼤⼩，这个缓冲区是给应⽤程序读取数据的空间：</p>
+<h3 id="tcp延迟确认与nagle算法">TCP延迟确认与Nagle算法</h3>
+<p>快递员开着⼤货⻋送⼀个⼩包裹⼀样浪费</p>
+<p>Nagle 算法是如何避免⼤量 TCP ⼩数据报⽂的传输？
+没有已发送未确认报⽂时，⽴刻发送数据。
+存在未确认报⽂时，直到「没有已发送未确认报⽂」或「数据⻓度达到 MSS ⼤⼩」时，再发送数据
+只要没满⾜上⾯条件中的⼀条，发送⽅⼀直在囤积数据，直到满⾜上⾯的发送条件</p>
+<h4 id="那延迟确认是什么">那延迟确认⼜是什么？</h4>
+<p>事实上当没有携带数据的 ACK，它的⽹络效率也是很低的，因为它也有 40 个字节的 IP 头 和 TCP 头，但却没有携带数据报⽂。
+为了解决 ACK 传输效率低问题，所以就衍⽣出了 TCP 延迟确认。</p>
+<p>TCP 延迟确认的策略：</p>
+<ul>
+<li>当有响应数据要发送时，ACK 会随着响应数据⼀起⽴刻发送给对⽅</li>
+<li>当没有响应数据要发送时，ACK 将会延迟⼀段时间，以等待是否有响应数据可以⼀起发送</li>
+<li>如果在延迟等待发送 ACK 期间，对⽅的第⼆个数据报⽂⼜到达了，这时就会⽴刻发送 ACK</li>
+</ul>
+<p>当 TCP 延迟确认 和 Nagle 算法混合使⽤时，会导致时耗增⻓</p>
+<h2 id="tcp半连接队列和全连接队列">TCP半连接队列和全连接队列</h2>
+<p>在 TCP 三次握⼿的时候，Linux 内核会维护两个队列，分别是：
+半连接队列，也称 SYN 队列；
+全连接队列，也称 accepet 队列；</p>
+<p>服务端收到客户端发起的 SYN 请求后，<strong>内核会把该连接存储到半连接队列</strong>，并向客户端响应 SYN+ACK，接着客户端会返回 ACK，服务端收到第三次握⼿的 ACK 后，<strong>内核会把连接从半连接队列移除，然后创建新的完全的连接，并将其添加到 accept 队列，等待进程调⽤ accept 函数时把连接取出来</strong></p>
+<h2 id="tcp内核参数">TCP内核参数</h2>
+<p>TCP 协议是由操作系统实现，所以操作系统提供了不少调节 TCP 的参数</p>
+<h3 id="tcp-三次握的性能提升">TCP 三次握⼿的性能提升</h3>
+<h4 id="客户端优化">客户端优化</h4>
+<p>三次握⼿建⽴连接的⾸要⽬的是「同步序列号」。
+只有同步了序列号才有可靠传输，TCP 许多特性都依赖于序列号实现，⽐如流ᰁ控制、丢包᯿传等，这也是三次握⼿中的报⽂称为 SYN 的原因，SYN 的全称就叫 Synchronize Sequence Numbers（同步序列号）</p>
+<p>以适当调低重试次数，尽快把错误暴露给应⽤程序</p>
+<h4 id="服务端优化">服务端优化</h4>
+<p>开启 syncookies 功能就可以在不使⽤ SYN 半连接队列的情况下成功建⽴连接。</p>
+<h4 id="绕过三次握">绕过三次握⼿</h4>
+<p>在 Linux 3.7 内核版本之后，提供了 TCP Fast Open 功能，这个功能可以减少 TCP 连接建⽴的时延</p>
+<p>在客户端⾸次建⽴连接时的过程：</p>
+<ol>
+<li>客户端发送 SYN 报⽂，该报⽂包含 Fast Open 选项，且该选项的 Cookie 为空，这表明客户端请求 Fast Open Cookie；</li>
+<li>⽀持 TCP Fast Open 的服务器⽣成 Cookie，并将其置于 SYN-ACK 数据包中的 Fast Open 选项以发回客户端；</li>
+<li>客户端收到 SYN-ACK 后，本地缓存 Fast Open 选项中的 Cookie。所以，第⼀次发起 HTTP GET 请求的时候，还是需要正常的三次握⼿流程</li>
+</ol>
+<p>之后，如果客户端再次向服务器建⽴连接时的过程：</p>
+<ol>
+<li>客户端发送 SYN 报⽂，该报⽂包含「数据」（对于⾮ TFO 的普通 TCP 握⼿过程，SYN 报⽂中不包含「数据」）以及此前记录的 Cookie；</li>
+<li>⽀持 TCP Fast Open 的服务器会对收到 Cookie 进⾏校验：如果 Cookie 有效，服务器将在 SYN-ACK 报⽂中，对 SYN 和「数据」进⾏确认，服务器随后将「数据」递送⾄相应的应⽤程序；如果 Cookie ⽆效，服务器将丢弃 SYN 报⽂中包含的「数据」，且其随后发出的 SYN-ACK 报⽂将只确认 SYN 的对应序列号；</li>
+<li>如果服务器接受了 SYN 报⽂中的「数据」，服务器可在握⼿完成之前发送「数据」，这就减少了握⼿带来的1 个 RTT 的时间消耗；</li>
+<li>客户端将发送 ACK 确认服务器发回的 SYN 以及「数据」，但如果客户端在初始的 SYN 报⽂中发送的「数据」没有被确认，则客户端将重新发送「数据」；</li>
+<li>此后的 TCP 连接的数据传输过程和⾮ TFO 的正常情况⼀致。所以，之后发起 HTTP GET 请求的时候，可以绕过三次握⼿，这就减少了握⼿带来的 1 个 RTT 的时间消耗。开启了 TFO 功能，cookie 的值是存放到 TCP option 字段⾥的</li>
+</ol>
+<h3 id="tcp-四次挥的性能提升">TCP 四次挥⼿的性能提升</h3>
+<p>客户端和服务端双⽅都可以主动断开连接，通常先关闭连接的⼀⽅称为主动⽅，后关闭连接的⼀⽅称为被动</p>
+<p>可以看到，四次挥⼿过程只涉及了两种报⽂，分别是 FIN 和 ACK
+FIN 就是结束连接的意思，谁发出 FIN 报⽂，就表示它将不会再发送任何数据，关闭这⼀⽅向上的传输通道；
+ACK 就是确认的意思，⽤来通知对⽅：你⽅的发送通道已经关闭</p>
+<ul>
+<li>FIN_WAIT1 状态的优化</li>
+<li>FIN_WAIT2 状态的优化</li>
+<li>TIME_WAIT 状态的优化</li>
+</ul>
+<p>被动⽅的优化</p>
+<ul>
+<li>主动⽅的优化</li>
+<li>被动⽅的优化</li>
+</ul>
+<h3 id="tcp传输数据的性能提升">TCP传输数据的性能提升</h3>
+<p>TCP 连接是由内核维护的，内核会为每个连接建⽴内存缓冲区</p>
+<ul>
+<li>如果连接的内存配置过⼩，就⽆法充分使⽤⽹络带宽，TCP 传输效率就会降低；</li>
+<li>如果连接的内存配置过⼤，很容易把服务器资源耗尽，这样就会导致新连接⽆法建⽴；</li>
+</ul>
+<h4 id="如何确定最传输速度">如何确定最⼤传输速度？</h4>
+<p>在前⾯我们知道了 TCP 的传输速度，受制于发送窗⼝与接收窗⼝，以及⽹络设备传输能⼒。其中，窗⼝⼤⼩由内核缓冲区⼤⼩决定。如果缓冲区与⽹络传输能⼒匹配，那么缓冲区的利⽤率就达到了最⼤化。</p>
+<p>相信⼤家都知道⽹络是有「带宽」限制的，带宽描述的是⽹络传输能⼒，它与内核缓冲区的计量单位不同:</p>
+<ul>
+<li>带宽是单位时间内的流ᰁ，表达是「速度」，⽐如常⻅的带宽 100 MB/s；</li>
+<li>缓冲区单位是字节，当⽹络速度乘以时间才能得到字节数；</li>
+</ul>
+<h2 id="ip">IP</h2>
+<h3 id="ip基础知识全家桶">IP基础知识全家桶</h3>
+<h4 id="前菜--ip-基本认识">前菜 —— IP 基本认识</h4>
+<p>IP 在 TCP/IP 参考模型中处于第三层，也就是⽹络层</p>
+<p>⽹络层的主要作⽤是：实现主机与主机之间的通信，也叫点对点（end to end）通信</p>
+<p>其实很容易区分，在上⾯我们知道 IP 的作⽤是主机之间通信⽤的，⽽ MAC 的作⽤则是实现「直连」的两个设备之间通信，⽽ IP 则负责在「没有直连」的两个⽹络之间进⾏通信传输。</p>
+<p>计算机⽹络中也需要「数据链路层」和「⽹络层」这个分层才能实现向最终⽬标地址的通信。</p>
+<p>源IP地址和⽬标IP地址在传输过程中是不会变化的，只有源 MAC 地址和⽬标MAC ⼀直在变化、</p>
+<h4 id="主菜--ip-地址的基础知识">主菜 —— IP 地址的基础知识</h4>
+<p>IP 地址（IPv4 地址）由 32 位正整数来表示，IP 地址在计算机是以⼆进制的⽅式处理的</p>
+<p>⽽⼈类为了⽅便记忆采⽤了点分⼗进制的标记⽅式，也就是将 32 位 IP 地址以每 8 位为组，共分为 4 组，每组以「 . 」隔开，再将每组转换成⼗进制。</p>
+<p>实际上，IP 地址并不是根据主机台数来配置的，⽽是以⽹卡。像服务器、路由器等设备都是有 2 个以上的⽹卡，也就是它们会有 2 个以上的 IP 地址。</p>
+<p>⽹络号和主机号</p>
+<p>因为在 IP 地址中，有两个 IP 是特殊的，分别是主机号全为 1 和 全为 0 地址。</p>
+<p>主机号全为 1 指定某个⽹络下的所有主机，⽤于⼴播</p>
+<p>主机号全为 0 指定某个⽹络</p>
+<p>⼴播地址⽤于在同⼀个链路中相互连接的主机之间发送数据包</p>
+<p>⼴播地址可以分为本地⼴播和直接⼴播两种</p>
+<ul>
+<li>
+<p>在本⽹络内⼴播的叫做本地⼴播。例如⽹络地址为 192.168.0.0/24 的情况下，⼴播地址是 192.168.0.255 。因为这个⼴播地址的 IP 包会被路由器屏蔽，所以不会到达 192.168.0.0/24 以外的其他链路上。</p>
+</li>
+<li>
+<p>在不同⽹络之间的⼴播叫做直接⼴播。例如⽹络地址为 192.168.0.0/24 的主机向 192.168.1.255/24 的⽬标地址发送 IP 包。收到这个包的路由器，将数据转发给 192.168.1.0/24，从⽽使得所有
+192.168.1.1~192.168.1.254 的主机都能收到这个包（由于直接⼴播有⼀定的安全问题，多数情况下会在路由器上设置为不转发。） 。</p>
+</li>
+</ul>
+<p>⽽ D 类和 E 类地址是没有主机号的，所以不可⽤于主机 IP，D 类常被⽤于多播，E 类是预留的分类，暂时未使⽤</p>
+<p>多播⽤于将包发送给特定组内的所有主机。</p>
+<h4 id="ip-分类的缺点">IP 分类的缺点</h4>
+<p>同⼀⽹络下没有地址层次，⽐如⼀个公司⾥⽤了 B 类地址，但是可能需要根据⽣产环境、测试环境、开发环境来划分地址层次，⽽这种 IP 分类是没有地址层次划分的功能，所以这就缺少地址的灵活性。</p>
+<p>A、B、C类有个尴尬处境，就是不能很好的与现实⽹络匹配</p>
+<p>这两个缺点，都可以在 CIDR ⽆分类地址解决。</p>
+<h5 id="分类地址-cidr">⽆分类地址 CIDR</h5>
+<p>这种⽅式不再有分类地址的概念，32 ⽐特的 IP 地址被划分为两部分，前⾯是⽹络号，后⾯是主机号。
+表示形式 a.b.c.d/x ，其中 /x 表示前 x 位属于⽹络号， x 的范围是 0 ~ 32 ，这就使得 IP 地址更加具有灵活性。</p>
+<p>⽐如 10.100.122.2/24，这种地址表示形式就是 CIDR，/24 表示前 24 位是⽹络号，剩余的 8 位是主机号</p>
+<p>还有另⼀种划分⽹络号与主机号形式，那就是⼦⽹掩码，掩码的意思就是掩盖掉主机号，剩余的就是⽹络号。将⼦⽹掩码和 IP 地址按位计算 AND，就可得到⽹络号</p>
+<h5 id="为什么要分离络号和主机号">为什么要分离⽹络号和主机号？</h5>
+<p>因为两台计算机要通讯，⾸先要判断是否处于同⼀个⼴播域内，即⽹络地址是否相同。如果⽹络地址相同，表明接受⽅在本⽹络上，那么可以把数据包直接发送到⽬标主机</p>
+<p>路由器寻址⼯作中，也就是通过这样的⽅式来找到对应的⽹络号的，进⽽把数据包转发给对应的⽹络内</p>
+<h5 id="怎么进划分">怎么进⾏⼦⽹划分？</h5>
+<p>我们知道可以通过⼦⽹掩码划分出⽹络号和主机号，那实际上⼦⽹掩码还有⼀个作⽤，那就是划分⼦⽹</p>
+<p>⼦⽹划分实际上是将主机地址分为两个部分：⼦⽹⽹络地址和⼦⽹主机地址。
+未做⼦⽹划分的 ip 地址：⽹络地址＋主机地址
+做⼦⽹划分后的 ip 地址：⽹络地址＋（⼦⽹⽹络地址＋⼦⽹主机地址）</p>
+<p>假设对 C 类地址进⾏⼦⽹划分，⽹络地址 192.168.1.0，使⽤⼦⽹掩码 255.255.255.192 对其进⾏⼦⽹划分。
+C 类地址中前 24 位是⽹络号，最后 8 位是主机号，根据⼦⽹掩码可知从 8 位主机号中借⽤ 2 位作为⼦⽹号</p>
+<p>公有 IP 地址是有个组织统⼀分配的，假设你要开⼀个博客⽹站，那么你就需要去申请购买⼀个公有 IP，这样全世界的⼈才能访问。并且公有 IP 地址基本上要在整个互联⽹范围内保持唯⼀</p>
+<p>私有 IP 地址通常是内部的 IT ⼈员管理，公有 IP 地址是由 ICANN 组织管理，中⽂叫「互联⽹名称与数字地址分配机构」</p>
+<h4 id="p-地址与路由控制">P 地址与路由控制</h4>
+<p>IP地址的⽹络地址这⼀部分是⽤于进⾏路由控制</p>
+<p>路由控制表中记录着⽹络地址与下⼀步应该发送⾄路由器的地址。在主机和路由器上都会有各⾃的路由器控制表</p>
+<p>在发送 IP 包时，⾸先要确定 IP 包⾸部中的⽬标地址，再从路由控制表中找到与该地址具有相同⽹络地址的记录，根据该记录将 IP 包转发给相应的下⼀个路由器。如果路由控制表中存在多条相同⽹络地址的记录，就选择相同位数最多的⽹络地址，也就是最⻓匹配</p>
+<h4 id="ip-分与重组">IP 分⽚与重组</h4>
+<p>每种数据链路的最⼤传输单元 MTU 都是不相同的，如 FDDI 数据链路 MTU 4352、以太⽹的 MTU 是 1500 字节等</p>
+<p>每种数据链路的 MTU 之所以不同，是因为每个不同类型的数据链路的使⽤⽬的不同。使⽤⽬的不同，可承载的MTU 也就不同</p>
+<p>那么当 IP 数据包⼤⼩⼤于 MTU 时， IP 数据包就会被分⽚。</p>
+<p>在分⽚传输中，⼀旦某个分⽚丢失，则会造成整个 IP 数据报作废，所以 TCP 引⼊了 MSS 也就是在 TCP 层进⾏分⽚不由 IP 层分⽚，那么对于 UDP 我们尽ᰁ不要发送⼀个⼤于 MTU 的数据报⽂</p>
+<h4 id="ipv6-基本认识">IPv6 基本认识</h4>
+<p>IPv6 的地址主要有以下类型地址：
+单播地址，⽤于⼀对⼀的通信
+组播地址，⽤于⼀对多的通信
+任播地址，⽤于通信最近的节点，最近的节点是由路由协议决定
+没有⼴播地址</p>
+<p>IPv6 相⽐ IPv4 的⾸部改进：</p>
+<ul>
+<li>
+<p>取消了⾸部校验和字段。 因为在数据链路层和传输层都会校验，因此 IPv6 直接取消了 IP 的校验。</p>
+</li>
+<li>
+<p>取消了分⽚/重新组装相关字段。 分⽚与᯿组是耗时的过程，IPv6 不允许在中间路由器进⾏分⽚与重组，这种操作只能在源与⽬标主机，这将⼤⼤提⾼了路由器转发的速度。</p>
+</li>
+<li>
+<p>取消选项字段。 选项字段不再是标准 IP ⾸部的⼀部分了，但它并没有消失，⽽是可能出现在 IPv6 ⾸部中的「下⼀个⾸部」指出的位置上。删除该选项字段使的 IPv6 的⾸部成为固定⻓度的 40 字节</p>
+</li>
+</ul>
+<h3 id="点--ip-协议相关技术">点⼼ —— IP 协议相关技术</h3>
+<h4 id="dns">DNS</h4>
+<p>那么实现这⼀技术的就是 DNS 域名解析，DNS 可以将域名⽹址⾃动转换为具体的 IP 地址。</p>
+<p>DNS 中的域名都是⽤句点来分隔的，⽐如 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a> ，这⾥的句点代表了不同层次之间的界限</p>
+<p>在域名中，越靠右的位置表示其层级越⾼</p>
+<p>所以域名的层级关系类似⼀个树状结构：
+根 DNS 服务器
+顶级域 DNS 服务器（com）
+权威 DNS 服务器（server.com）</p>
+<h4 id="域名解析的作流程">域名解析的⼯作流程</h4>
+<ol>
+<li>客户端⾸先会发出⼀个 DNS 请求，问 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a> 的 IP 是啥，并发给本地 DNS 服务器（也就是客户端的 TCP/IP 设置中填写的 DNS 服务器地址）。</li>
+<li>本地域名服务器收到客户端的请求后，如果缓存⾥的表格能找到 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a>，则它直接返回 IP 地址。如果没有，本地 DNS 会去问它的根域名服务器：“⽼⼤， 能告诉我 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a> 的 IP 地址吗？” 根域名服务器是最⾼层次的，它不直接⽤于域名解析，但能指明⼀条道路。</li>
+<li>根 DNS 收到来⾃本地 DNS 的请求后，发现后置是 .com，说：“www.server.com 这个域名归 .com 区域管理”，我给你 .com 顶级域名服务器地址给你，你去问问它吧。”</li>
+<li>本地 DNS 收到顶级域名服务器的地址后，发起请求问“⽼⼆， 你能告诉我 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a> 的 IP 地址吗？”</li>
+<li>顶级域名服务器说：“我给你负责 <a class="link" href="https://www.server.com"  target="_blank" rel="noopener"
+    >www.server.com</a> 区域的权威 DNS 服务器的地址，你去问它应该能问到”。</li>
+<li>本地 DNS 于是转向问权威 DNS 服务器：“⽼三，www.server.com对应的IP是啥呀？” server.com 的权威DNS 服务器，它是域名解析结果的原出处。为啥叫权威呢？就是我的域名我做主。</li>
+<li>权威 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。</li>
+<li>本地 DNS 再将 IP 地址返回客户端，客户端和⽬标建⽴连接</li>
+</ol>
+<p>DNS 域名解析的过程蛮有意思的，整个过程就和我们⽇常⽣活中找⼈问路的过程类似，只指路不带路</p>
+<h3 id="arp">ARP</h3>
+<p>由于主机的路由表中可以找到下⼀跳的 IP 地址，所以可以通过 ARP 协议，求得下⼀跳的 MAC 地址。
+简单地说，ARP 是借助 ARP 请求与 ARP 响应两种类型的包确定 MAC 地址的</p>
+<ul>
+<li>主机会通过⼴播发送 ARP 请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址。</li>
+<li>当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP 请求包⾥的内容，如果 ARP 请求包中的⽬标 IP地址与⾃⼰的 IP 地址⼀致，那么这个设备就将⾃⼰的 MAC 地址塞⼊ ARP 响应包返回给主机</li>
+</ul>
+<p>操作系统通常会把第⼀次通过 ARP 获取的 MAC 地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC地址</p>
+<h3 id="rarp-协议你知道是什么吗">RARP 协议你知道是什么吗？</h3>
+<p>ARP 协议是已知 IP 地址求 MAC 地址，那 RARP 协议正好相反，它是已知 MAC 地址求 IP 地址。例如将打印机服务器等⼩型嵌⼊式设备接⼊到⽹络时就经常会⽤得到</p>
+<p>通常这需要架设⼀台 RARP 服务器，在这个服务器上注册设备的 MAC 地址及其 IP 地址。然后再将这个设备接⼊到⽹络，接着
+该设备会发送⼀条「我的 MAC 地址是XXXX，请告诉我，我的IP地址应该是什么」的请求信息。
+RARP 服务器接到这个消息后返回「MAC地址为 XXXX 的设备，IP地址为 XXXX」的信息给这个设备</p>
+<p>最后，设备就根据从 RARP 服务器所收到的应答信息设置⾃⼰的 IP 地址</p>
+<h3 id="dhcp">DHCP</h3>
+<p>DHCP 在⽣活中我们是很常⻅的了，我们的电脑通常都是通过 DHCP 动态获取 IP 地址，⼤⼤省去了配 IP 信息繁琐的过程</p>
+<p>这 4 个步骤:</p>
+<ul>
+<li>
+<p>客户端⾸先发起 DHCP 发现报⽂（DHCP DISCOVER） 的 IP 数据报，由于客户端没有 IP 地址，也不知道DHCP 服务器的地址，所以使⽤的是 UDP ⼴播通信，其使⽤的⼴播⽬的地址是 255.255.255.255（端⼝67） 并且使⽤ 0.0.0.0（端⼝ 68） 作为源 IP 地址。DHCP 客户端将该 IP 数据报传递给链路层，链路层然后将帧⼴播到所有的⽹络中设备</p>
+</li>
+<li>
+<p>DHCP 服务器收到 DHCP 发现报⽂时，⽤ DHCP 提供报⽂（DHCP OFFER） 向客户端做出响应。该报⽂仍然使⽤ IP ⼴播地址 255.255.255.255，该报⽂信息携带服务器提供可租约的 IP 地址、⼦⽹掩码、默认⽹关、DNS 服务器以及 IP 地址租⽤期。</p>
+</li>
+<li>
+<p>客户端收到⼀个或多个服务器的 DHCP 提供报⽂后，从中选择⼀个服务器，并向选中的服务器发送 DHCP 请求报⽂（DHCP REQUEST进⾏响应，回显配置的参数。</p>
+</li>
+<li>
+<p>最后，服务端⽤ DHCP ACK 报⽂对 DHCP 请求报⽂进⾏响应，应答所要求的参数。</p>
+</li>
+</ul>
+<p>⼀旦客户端收到 DHCP ACK 后，交互便完成了，并且客户端能够在租⽤期内使⽤ DHCP 服务器分配的 IP 地址。</p>
+<p>如果租约的 DHCP IP 地址快期后，客户端会向服务器发送 DHCP 请求报⽂：</p>
+<ul>
+<li>服务器如果同意继续租⽤，则⽤ DHCP ACK 报⽂进⾏应答，客户端就会延⻓租期。</li>
+<li>服务器如果不同意继续租⽤，则⽤ DHCP NACK 报⽂，客户端就要停⽌使⽤租约的 IP 地址</li>
+</ul>
+<p>可以发现，DHCP 交互中，全程都是使⽤ UDP ⼴播通信</p>
+<p>咦，⽤的是⼴播，那如果 DHCP 服务器和客户端不是在同⼀个局域⽹内，路由器⼜不会转发⼴播包，那不是每个⽹络都要配⼀个 DHCP 服务器</p>
+<p>所以，为了解决这⼀问题，就出现了 DHCP 中继代理。有了 DHCP 中继代理以后，对不同⽹段的 IP 地址分配也可以由⼀个 DHCP 服务器统⼀进⾏管理。</p>
+<ul>
+<li>DHCP 客户端会向 DHCP 中继代理发送 DHCP 请求包，⽽ DHCP 中继代理在收到这个⼴播包以后，再以单播的形式发给 DHCP 服务器。</li>
+<li>服务器端收到该包以后再向 DHCP 中继代理返回应答，并由 DHCP 中继代理将此包⼴播给 DHCP 客户端 。</li>
+</ul>
+<p>因此，DHCP 服务器即使不在同⼀个链路上也可以实现统⼀分配和管理IP地址。</p>
+<h3 id="nat">NAT</h3>
+<p>提出了⼀种⽹络地址转换 NAT 的⽅法，再次缓解了 IPv4 地址耗尽的问题</p>
+<p>简单的来说 NAT 就是同个公司、家庭、教室内的主机对外部通信时，把私有 IP 地址转换成公有 IP 地址</p>
+<p>由于绝⼤多数的⽹络应⽤都是使⽤传输层协议 TCP 或 UDP 来传输数据的。
+因此，可以把 IP 地址 + 端⼝号⼀起进⾏转换。
+这样，就⽤⼀个全球 IP 地址就可以了，这种转换技术就叫⽹络地址与端⼝转换 NAPT
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071222402.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>图中有两个客户端 192.168.1.10 和 192.168.1.11 同时与服务器 183.232.231.172 进⾏通信，并且这两个客户端的本地端⼝都是 1025</p>
+<p>此时，两个私有 IP 地址都转换 IP 地址为公有地址 120.229.175.121，但是以不同的端⼝号作为区分</p>
+<p>于是，⽣成⼀个 NAPT 路由器的转换表，就可以正确地转换地址跟端⼝的组合，令客户端 A、B 能同时与服务器之间进⾏通信。</p>
+<p>这种转换表在 NAT 路由器上⾃动⽣成。例如，在 TCP 的情况下，建⽴ TCP 连接⾸次握⼿时的 SYN 包⼀经发出，就会⽣成这个表。⽽后⼜随着收到关闭连接时发出 FIN 包的确认应答从表中被删除。</p>
+<h4 id="nat-那么逼难道就没缺点了吗">NAT 那么⽜逼，难道就没缺点了吗</h4>
+<p>由于 NAT/NAPT 都依赖于⾃⼰的转换表，因此会有以下的问题：</p>
+<ul>
+<li>外部⽆法主动与 NAT 内部服务器建⽴连接，因为 NAPT 转换表没有转换记录。</li>
+<li>转换表的⽣成与转换操作都会产⽣性能开销。</li>
+<li>通信过程中，如果 NAT 路由器重启了，所有的 TCP 连接都将被重置</li>
+</ul>
+<p>第⼀种就是改⽤ IPv6
+IPv6 可⽤范围⾮常⼤，以⾄于每台设备都可以配置⼀个公有 IP 地址，就不搞那么多花⾥胡哨的地址转换了，但是IPv6 普及速度还需要⼀些时间。</p>
+<p>第⼆种 NAT 穿透技术
+NAT 穿越技术拥有这样的功能，它能够让⽹络应⽤程序主动发现⾃⼰位于 NAT 设备之后，并且会主动获得 NAT 设备的公有 IP，并为⾃⼰建⽴端⼝映射条⽬，注意这些都是 NAT设备后的应⽤程序⾃动完成的</p>
+<p>也就是说，在 NAT 穿透技术中，NAT设备后的应⽤程序处于主动地位，它已经明确地知道 NAT 设备要修改它外发的数据包，于是它主动配合 NAT 设备的操作，主动地建⽴好映射，这样就不像以前由 NAT 设备来建⽴映射了。</p>
+<p>说⼈话，就是客户端主动从 NAT 设备获取公有 IP 地址，然后⾃⼰建⽴端⼝映射条⽬，然后⽤这个条⽬对外通信，就不需要 NAT 设备来进⾏转换了</p>
+<h3 id="icmp">ICMP</h3>
+<p>ICMP 全称是 Internet Control Message Protocol，也就是互联⽹控制报⽂协议</p>
+<p>ICMP 主要的功能包括：确认 IP 包是否成功送达⽬标地址、报告发送过程中 IP 包被废弃的原因和改善⽹络设置等。</p>
+<p>在 IP 通信中如果某个 IP 包因为某种原因未能达到⽬标地址，那么这个具体的原因将由 ICMP 负责通知</p>
+<p>ICMP 的这种通知消息会使⽤ IP 进⾏发送</p>
+<p>ICMP ⼤致可以分为两⼤类：
+⼀类是⽤于诊断的查询消息，也就是「查询报⽂类型」
+另⼀类是通知出错原因的错误消息，也就是「差错报⽂类型」</p>
+<h3 id="igmp">IGMP</h3>
+<p>在前⾯我们知道了组播地址，也就是 D 类地址，既然是组播，那就说明是只有⼀组的主机能收到数据包，不在⼀组的主机不能收到数组包，怎么管理是否是在⼀组呢？那么，就需要 IGMP 协议了</p>
+<p>IGMP 是因特⽹组管理协议，⼯作在主机（组播成员）和最后⼀跳路由之间，如上图中的蓝⾊部分
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071511059.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>IGMP 报⽂向路由器申请加⼊和退出组播组，默认情况下路由器是不会转发组播包到连接中的主机，除⾮主机通过 IGMP 加⼊到组播组，主机申请加⼊到组播组时，路由器就会记录 IGMP 路由器表，路由器后续就会转发组播包到对应的主机了。</p>
+<p>IGMP 报⽂采⽤ IP 封装，IP 头部的协议号为 2，⽽且 TTL 字段值通常为 1，因为 IGMP 是⼯作在主机与连接的路由器之间</p>
+<h3 id="igmp-作机制">IGMP ⼯作机制</h3>
+<p>GMP 分为了三个版本分别是，IGMPv1、IGMPv2、IGMPv3。
+接下来，以 IGMPv2 作为例⼦，说说常规查询与响应和离开组播组这两个⼯作机制</p>
+<ol>
+<li>
+<p>路由器会周期性发送⽬的地址为 224.0.0.1 （表示同⼀⽹段内所有主机和路由器） IGMP 常规查询报⽂。</p>
+</li>
+<li>
+<p>主机1 和 主机 3 收到这个查询，随后会启动「报告延迟计时器」，计时器的时间是随机的，通常是 0~10秒，计时器超时后主机就会发送 IGMP 成员关系报告报⽂（源 IP 地址为⾃⼰主机的 IP 地址，⽬的 IP 地址为组播地址）。如果在定时器超时之前，收到同⼀个组内的其他主机发送的成员关系报告报⽂，则⾃⼰不再发送，这样可以减少⽹络中多余的 IGMP 报⽂数量。</p>
+</li>
+<li>
+<p>路由器收到主机的成员关系报⽂后，就会在 IGMP 路由表中加⼊该组播组，后续⽹络中⼀旦该组播地址的数据到达路由器，它会把数据包转发出去。</p>
+</li>
+</ol>
+<h3 id="读者问题组播不太懂假设台机器加组播地址需要把ip改成组播地址吗如果离开某个组播地址需要dhcp重新请求个ip吗">读者问题：“组播不太懂。。。假设⼀台机器加⼊组播地址，需要把IP改成组播地址吗？如果离开某个组播地址，需要dhcp重新请求个IP吗？”</h3>
+<p>组播地址不是⽤于机器ip地址的，因为组播地址没有⽹络号和主机号，所以跟dhcp没关系。组播地址⼀般是⽤于udp协议，机器发送UDP组播数据时，⽬标地址填的是组播地址，那么在组播组内的机器都能收到数据包。</p>
+<p>是否加⼊组播组和离开组播组，是由socket⼀个接⼝实现的，主机ip是不⽤改变的</p>
+<h2 id="ping的工作原理">PING的工作原理</h2>
+<h3 id="ip协议的助手--icmp协议">IP协议的助手&ndash;ICMP协议</h3>
+<p>ping 是基于 ICMP 协议⼯作的，所以要明⽩ ping 的⼯作，⾸先我们先来熟悉 ICMP 协议</p>
+<p>ICMP 报⽂是封装在 IP 包⾥⾯，它⼯作在⽹络层，是 IP 协议的助⼿。</p>
+<p>回送消息⽤于进⾏通信的主机或路由器之间，判断所发送的数据包是否已经成功到达对端的⼀种消息， ping 命令就是利⽤这个消息实现的</p>
+<p>可以向对端主机发送回送请求的消息（ ICMP Echo Request Message ，类型 8 ），也可以接收对端主机发回来的回送应答消息（ ICMP Echo Reply Message ，类型 0 ）</p>
+<h3 id="差错报类型">差错报⽂类型</h3>
+<p>接下来，说明⼏个常⽤的 ICMP 差错报⽂的例⼦：
+⽬标不可达消息 —— 类型 为 3
+原点抑制消息 —— 类型 4
+重定向消息 —— 类型 5
+超时消息 —— 类型 11</p>
+<h4 id="标不可达消息destination-unreachable-message--类型为-3">⽬标不可达消息（Destination Unreachable Message） —— 类型为 3</h4>
+<ul>
+<li>
+<p>⽹络不可达代码为 0</p>
+</li>
+<li>
+<p>主机不可达代码为 1</p>
+</li>
+<li>
+<p>协议不可达代码为 2
+当主机使⽤ TCP 协议访问对端主机时，能找到对端的主机了，可是对端主机的防⽕墙已经禁⽌ TCP 协议访问，那么会通过 ICMP 协议以协议不可达的原因告知主机</p>
+</li>
+<li>
+<p>端⼝不可达代码为 3</p>
+</li>
+<li>
+<p>需要进⾏分⽚但设置了不分⽚位代码为 4</p>
+</li>
+</ul>
+<h4 id="原点抑制消息icmp-source-quench-message--类型-4">原点抑制消息（ICMP Source Quench Message） —— 类型 4</h4>
+<p>ICMP 原点抑制消息的⽬的就是为了缓和这种拥堵情况</p>
+<p>当路由器向低速线路发送数据时，其发送队列的缓存变为零⽽⽆法发送出去时，可以向 IP 包的源地址发送⼀个ICMP 原点抑制消息。</p>
+<p>收到这个消息的主机借此了解在整个线路的某⼀处发⽣了拥堵的情况，从⽽增⼤ IP 包的传输间隔，减少⽹络拥堵的情况</p>
+<h4 id="重定向消息icmp-redirect-message--类型-5">重定向消息（ICMP Redirect Message） —— 类型 5</h4>
+<p>如果路由器发现发送端主机使⽤了「不是最优」的路径发送数据，那么它会返回⼀个 ICMP 重定向消息给这个主机。</p>
+<p>在这个消息中包含了最合适的路由信息和源数据。这主要发⽣在路由器持有更好的路由信息的情况下。路由器会通过这样的 ICMP 消息告知发送端，让它下次发给另外⼀个路由器</p>
+<h4 id="超时消息icmp-time-exceeded-message--类型-11">超时消息（ICMP Time Exceeded Message） —— 类型 11</h4>
+<p>IP 包中有⼀个字段叫做 TTL （ Time To Live ，⽣存周期），它的值随着每经过⼀次路由器就会减 1，直到减到0 时该 IP 包会被丢弃</p>
+<h3 id="ping--查询报类型的使">ping —— 查询报⽂类型的使⽤</h3>
+<h3 id="traceroute--差错报类型的使">traceroute —— 差错报⽂类型的使⽤</h3>
+<p>有⼀款充分利⽤ ICMP 差错报⽂类型的应⽤叫做 traceroute （在UNIX、MacOS中是这个命令，⽽在Windows中对等的命令叫做 tracert ）。</p>
+<p>traceroute 的第⼀个作⽤就是故意设置特殊的 TTL，来追踪去往⽬的地时沿途经过的路由器。</p>
+<p>traceroute 还有⼀个作⽤是故意设置不分⽚，从⽽确定路径的 MTU。</p>
+<h1 id="网络综合篇">网络综合篇</h1>
+<h2 id="51-键址到显示期间发了什么">5.1 键⼊⽹址到⽹⻚显示，期间发⽣了什么</h2>
+<h3 id="孤单弟--http">孤单⼩弟 —— HTTP</h3>
+<p>⾸先浏览器做的第⼀步⼯作就是要对 URL 进⾏解析，从⽽⽣成发送给 Web 服务器的请求信息</p>
+<p>对 URL 进⾏解析之后，浏览器确定了 Web 服务器和⽂件名，接下来就是根据这些信息来⽣成 HTTP 请求消息了</p>
+<h3 id="真实地址查询--dns">真实地址查询 —— DNS</h3>
+<p>通过浏览器解析 URL 并⽣成 HTTP 消息后，需要委托操作系统将消息发送给 Web 服务器
+但在发送之前，还有⼀项⼯作需要完成，那就是查询服务器域名对应的 IP 地址，因为委托操作系统发送消息时，必须提供通信对象的 IP 地址</p>
+<h3 id="指南好帮--协议栈">指南好帮⼿ —— 协议栈</h3>
+<p>通过 DNS 获取到 IP 后，就可以把 HTTP 的传输⼯作交给操作系统中的协议栈</p>
+<p>协议栈的内部分为⼏个部分，分别承担不同的⼯作。上下关系是有⼀定的规则的，上⾯的部分会向下⾯的部分委托⼯作，下⾯的部分收到委托的⼯作并执⾏。
+<img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071631280.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>应⽤程序（浏览器）通过调⽤ Socket 库，来委托协议栈⼯作。协议栈的上半部分有两块，分别是负责收发数据的TCP 和 UDP 协议，它们两会接受应⽤层的委托执⾏收发数据的操作。</p>
+<p>协议栈的下⾯⼀半是⽤ IP 协议控制⽹络包收发操作，在互联⽹上传数据时，数据会被切分成⼀块块的⽹络包，⽽将⽹络包发送给对⽅的操作就是由 IP 负责的。</p>
+<p>此外 IP 中还包括 ICMP 协议和 ARP 协议</p>
+<p>ICMP ⽤于告知⽹络包传送过程中产⽣的错误以及各种控制信息。
+ARP ⽤于根据 IP 地址查询相应的以太⽹ MAC 地址</p>
+<p>IP 下⾯的⽹卡驱动程序负责控制⽹卡硬件，⽽最下⾯的⽹卡则负责完成实际的收发操作，也就是对⽹线中的信号执⾏发送和接收操作</p>
+<h3 id="可靠传输--tcp">可靠传输 —— TCP</h3>
+<p>这个所谓的「连接」，只是双⽅计算机⾥维护⼀个状态机，在连接建⽴的过程中，双⽅的状态变化时序图就像这样</p>
+<p>所以三次握⼿⽬的是保证双⽅都有发送和接收的能⼒</p>
+<h3 id="tcp-分割数据">TCP 分割数据</h3>
+<p>MTU ：⼀个⽹络包的最⼤⻓度，以太⽹中⼀般为 1500 字节。
+MSS ：除去 IP 和 TCP 头部之后，⼀个⽹络包所能容纳的 TCP 数据的最⼤⻓度。</p>
+<h3 id="tcp-报成">TCP 报⽂⽣成</h3>
+<p>TCP 协议⾥⾯会有两个端⼝，⼀个是浏览器监听的端⼝（通常是随机⽣成的），⼀个是 Web 服务器监听的端⼝（HTTP 默认端⼝号是 80 ， HTTPS 默认端⼝号是 443 ）。</p>
+<p>在双⽅建⽴了连接后，TCP 报⽂中的数据部分就是存放 HTTP 头部 + 数据，组装好 TCP 报⽂之后，就需交给下⾯的⽹络层处理</p>
+<h3 id="远程定位--ip">远程定位 —— IP</h3>
+<p>TCP 模块在执⾏连接、收发、断开等各阶段操作时，都需要委托 IP 模块将数据封装成⽹络包发送给通信对象。</p>
+<h3 id="ip-报成">IP 报⽂⽣成</h3>
+<h3 id="两点传输--mac">两点传输 —— MAC</h3>
+<p>⽣成了 IP 头部之后，接下来⽹络包还需要在 IP 头部的前⾯加上 MAC 头部</p>
+<p>MAC 头部是以太⽹使⽤的头部，它包含了接收⽅和发送⽅的 MAC 地址等信息。</p>
+<p>在 MAC 包头⾥需要发送⽅ MAC 地址和接收⽅⽬标 MAC 地址，⽤于两点之间的传输</p>
+<p>⼀般在 TCP/IP 通信⾥，MAC 包头的协议类型只使⽤：
+0800 ： IP 协议
+0806 ： ARP 协议</p>
+<p>MAC 发送⽅和接收⽅如何确认?
+发送⽅的 MAC 地址获取就⽐较简单了，MAC 地址是在⽹卡⽣产时写⼊到 ROM ⾥的，只要将这个值读取出来写⼊到 MAC 头部就可以了。</p>
+<p>接收⽅的 MAC 地址就有点复杂了，只要告诉以太⽹对⽅的 MAC 的地址，以太⽹就会帮我们把包发送过去，那么很显然这⾥应该填写对⽅的 MAC 地址。
+所以先得搞清楚应该把包发给谁，这个只要查⼀下路由表就知道了。在路由表中找到相匹配的条⽬，然后把包发给Gateway 列中的 IP 地址就可以了。</p>
+<p>在后续操作系统会把本次查询结果放到⼀块叫做 ARP 缓存的内存空间留着以后⽤，不过缓存的时间就⼏分钟</p>
+<p>也就是说，在发包时：
+先查询 ARP 缓存，如果其中已经保存了对⽅的 MAC 地址，就不需要发送 ARP 查询，直接使⽤ ARP 缓存中的地址</p>
+<p>⽽当 ARP 缓存中不存在对⽅ MAC 地址时，则发送 ARP ⼴播查询</p>
+<h3 id="出--卡">出⼝ —— ⽹卡</h3>
+<p>⽹络包只是存放在内存中的⼀串⼆进制数字信息，没有办法直接发送给对⽅。因此，我们需要将数字信息转换为电信号，才能在⽹线上传输，也就是说，这才是真正的数据发送过程</p>
+<p>负责执⾏这⼀操作的是⽹卡，要控制⽹卡还需要靠⽹卡驱动程序</p>
+<p>⽹卡驱动从 IP 模块获取到包之后，会将其复制到⽹卡内的缓存区中，接着会在其开头加上报头和起始帧分界符，在末尾加上⽤于检测错误的帧校验序列。</p>
+<h3 id="送别者--交换机">送别者 —— 交换机</h3>
+<p>下⾯来看⼀下包是如何通过交换机的。交换机的设计是将⽹络包原样转发到⽬的地。交换机⼯作在 MAC 层，也称为⼆层⽹络设备。</p>
+<p>⾸先，电信号到达⽹线接⼝，交换机⾥的模块进⾏接收，接下来交换机⾥的模块将电信号转换为数字信号。</p>
+<p>然后通过包末尾的 FCS 校验错误，如果没问题则放到缓冲区。这部分操作基本和计算机的⽹卡相同，但交换机的⼯作⽅式和⽹卡不同。</p>
+<p>交换机的端⼝不具有 MAC 地址</p>
+<p>将包存⼊缓冲区后，接下来需要查询⼀下这个包的接收⽅ MAC 地址是否已经在 MAC 地址表中有记录了
+交换机的 MAC 地址表主要包含两个信息：
+⼀个是设备的 MAC 地址，
+另⼀个是该设备连接在交换机的哪个端⼝上。</p>
+<p>交换机根据 MAC 地址表查找 MAC 地址，然后将信号发送到相应的端⼝</p>
+<h3 id="出境--路由器">出境⼤⻔ —— 路由器</h3>
+<h4 id="路由器与交换机的区别">路由器与交换机的区别</h4>
+<p>⽹络包经过交换机之后，现在到达了路由器，并在此被转发到下⼀个路由器或⽬标设备</p>
+<p>这⼀步转发的⼯作原理和交换机类似，也是通过查表判断包转发的⽬标</p>
+<p>因为路由器是基于 IP 设计的，俗称三层⽹络设备，路由器的各个端⼝都具有 MAC 地址和 IP 地址；
+⽽交换机是基于以太⽹设计的，俗称⼆层⽹络设备，交换机的端⼝不具有 MAC 地址。</p>
+<h4 id="路由器基本原理">路由器基本原理</h4>
+<p>路由器的端⼝具有 MAC 地址，因此它就能够成为以太⽹的发送⽅和接收⽅；同时还具有 IP 地址，从这个意义上来说，它和计算机的⽹卡是⼀样的</p>
+<h4 id="路由器的包接收操作">路由器的包接收操作</h4>
+<p>⾸先，电信号到达⽹线接⼝部分，路由器中的模块会将电信号转成数字信号，然后通过包末尾的 FCS 进⾏错误校验。</p>
+<p>如果没问题则检查 MAC 头部中的接收⽅ MAC 地址，看看是不是发给⾃⼰的包，如果是就放到接收缓冲区中，否则就丢弃这个包。</p>
+<p>总的来说，路由器的端⼝都具有 MAC 地址，只接收与⾃身地址匹配的包，遇到不匹配的包则直接丢弃</p>
+<h4 id="查询路由表确定输出端">查询路由表确定输出端⼝</h4>
+<p>完成包接收操作之后，路由器就会去掉包开头的 MAC 头部。</p>
+<p>MAC 头部的作⽤就是将包送达路由器，其中的接收⽅ MAC 地址就是路由器端⼝的 MAC 地址。因此，当包到达路由器之后，MAC 头部的任务就完成了，于是 MAC 头部就会被丢弃。</p>
+<p>接下来，路由器会根据 MAC 头部后⽅的 IP 头部中的内容进⾏包的转发操作。</p>
+<p>转发操作分为⼏个阶段，⾸先是查询路由表判断转发⽬标</p>
+<h4 id="路由器的发送操作">路由器的发送操作</h4>
+<p>⾸先，我们需要根据路由表的⽹关列判断对⽅的地址。</p>
+<ul>
+<li>如果⽹关是⼀个 IP 地址，则这个IP 地址就是我们要转发到的⽬标地址，还未抵达终点，还需继续需要路由器转发</li>
+<li>如果⽹关为空，则 IP 头部中的接收⽅ IP 地址就是要转发到的⽬标地址，也是就终于找到 IP 包头⾥的⽬标地址了，说明已抵达终点。</li>
+</ul>
+<h3 id="互相扒--服务器-与-客户端">互相扒⽪ —— 服务器 与 客户端</h3>
+<p><img src="https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071937910.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="linux-系统是如何收发络包的">Linux 系统是如何收发⽹络包的？</h2>
+<p>⽹络模型
+该模型主要有 7 层，分别是应⽤层、表示层、会话层、传输层、⽹络层、数据链路层以及物理层
+应⽤层，负责给应⽤程序提供统⼀的接⼝；
+表示层，负责把数据转换成兼容另⼀个系统能识别的格式；
+会话层，负责建⽴、管理和终⽌表示层实体之间的通信会话；
+传输层，负责端到端的数据传输；
+⽹络层，负责数据的路由、转发、分⽚；
+数据链路层，负责数据的封帧和差错检测，以及 MAC 寻址；
+物理层，负责在物理⽹络中传输数据帧</p>
+<p>TCP/IP ⽹络模型共有 4 层，分别是应⽤层、传输层、⽹络层和⽹络接⼝层，每⼀层负责的职能如下
+应⽤层，负责向⽤户提供⼀组应⽤程序，⽐如 HTTP、DNS、FTP 等;
+传输层，负责端到端的通信，⽐如 TCP、UDP 等；
+⽹络层，负责⽹络包的封装、分⽚、路由、转发，⽐如 IP、ICMP 等；
+⽹络接⼝层，负责⽹络包在物理⽹络中的传输，⽐如⽹络包的封帧、 MAC 寻址、差错检测，以及通过⽹卡传输⽹络帧等</p>
+<h3 id="linux-络协议栈">Linux ⽹络协议栈</h3>
+<p>我们可以把⾃⼰的身体⽐作应⽤层中的数据，打底⾐服⽐作传输层中的 TCP 头，外套⽐作⽹络层中 IP 头，帽⼦和鞋⼦分别⽐作⽹络接⼝层的帧头和帧尾。</p>
+<p>这些新增和头部和尾部，都有各⾃的作⽤，也都是按照特定的协议格式填充，这每⼀层都增加了各⾃的协议头，那⾃然⽹络包的⼤⼩就增⼤了，但物理链路并不能传输任意⼤⼩的数据包，所以在以太⽹中，规定了最⼤传输单元（MTU）是 1500 字节，也就是规定了单次传输的最⼤ IP 包⼤⼩。</p>
+<p>应⽤程序需要通过系统调⽤，来跟 Socket 层进⾏数据交互；
+Socket 层的下⾯就是传输层、⽹络层和⽹络接⼝层；
+最下⾯的⼀层，则是⽹卡驱动程序和硬件⽹卡设备</p>
+<h3 id="linux-接收络包的流程">Linux 接收⽹络包的流程</h3>
+<p>最简单的⼀种⽅式就是触发中断，也就是每当⽹卡收到⼀个⽹络包，就触发⼀个中断告诉操作系统
+采⽤了更为简化的 TCP/IP 模型，Linux ⽹络协议栈就是按照了该模型来实现的。</p>
+<p>当应⽤程序通过 Socket 接⼝发送数据包，数据包会被⽹络协议栈从上到下进⾏逐层处理后，才会被送到⽹卡队列中，随后由⽹卡将⽹络包发送出去</p>
+<p>⽽在接收⽹络包时，同样也要先经过⽹络协议栈从下到上的逐层处理，最后才会被送到应⽤程序。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 西伯利亚土豆商
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

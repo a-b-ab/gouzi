@@ -6,7 +6,2897 @@
         <description>Recent content on 西伯利亚土豆商</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 22 Apr 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 11 May 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Tmux</title>
+        <link>http://localhost:1313/p/tmux/</link>
+        <pubDate>Sat, 11 May 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/tmux/</guid>
+        <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142303757.jpg&#34;/&gt;
+# Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具
+&lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
+&lt;h2 id=&#34;会话于进程&#34;&gt;会话于进程&lt;/h2&gt;
+&lt;p&gt;命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称&amp;quot;窗口&amp;quot;），在里面输入命令。用户与计算机的这种临时的交互，称为一次&amp;quot;会话&amp;quot;（session） 。&lt;/p&gt;
+&lt;p&gt;会话的一个重要特点是，窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束，会话内部的进程也会随之终止，不管有没有运行完。&lt;/p&gt;
+&lt;p&gt;一个典型的例子就是，SSH 登录远程计算机，打开一个远程窗口执行命令。这时，网络突然断线，再次登录的时候，是找不回上一次执行的命令的。因为上一次 SSH 会话已经终止了，里面的进程也随之消失了。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，会话与窗口可以&amp;quot;解绑&amp;quot;：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话&amp;quot;绑定&amp;quot;其他窗口&lt;/p&gt;
+&lt;h2 id=&#34;tmux的作用&#34;&gt;Tmux的作用&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Tmux 就是会话与窗口的&amp;quot;解绑&amp;quot;工具，将它们彻底分离。&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;它允许在单个窗口中，同时访问多个会话。这对于同时运行多个命令行程序很用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它可以让新窗口&amp;quot;接入&amp;quot;已经存在的会话。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它允许每个会话有多个连接窗口，因此可以多人实时共享会话。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它还支持窗口任意的垂直和水平拆分。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;类似的终端复用器还有 GNU Screen。Tmux 与它功能相似，但是更易用，也更强大。&lt;/p&gt;
+&lt;h1 id=&#34;基本用法&#34;&gt;基本用法&lt;/h1&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Ubuntu 或 Debian
+$ sudo apt-get install tmux
+
+# CentOS 或 Fedora
+$ sudo yum install tmux
+
+# Mac
+$ brew install tmux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;启动与退出&#34;&gt;启动与退出&lt;/h2&gt;
+&lt;p&gt;安装完成后，键入tmux命令，就进入了 Tmux 窗口&lt;/p&gt;
+&lt;p&gt;上面命令会启动 Tmux 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息&lt;/p&gt;
+&lt;p&gt;按下Ctrl+d或者显式输入exit命令，就可以退出 Tmux 窗口。&lt;/p&gt;
+&lt;h2 id=&#34;前缀键&#34;&gt;前缀键&lt;/h2&gt;
+&lt;p&gt;Tmux 窗口有大量的快捷键。所有快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b，即先按下Ctrl+b，快捷键才会生效。&lt;/p&gt;
+&lt;p&gt;举例来说，帮助命令的快捷键是Ctrl+b ?它的用法是，在 Tmux 窗口中，先按下Ctrl+b，再按下?，就会显示帮助信息。&lt;/p&gt;
+&lt;p&gt;然后，按下 ESC 键或q键，就可以退出帮助。&lt;/p&gt;
+&lt;h1 id=&#34;会话管理&#34;&gt;会话管理&lt;/h1&gt;
+&lt;h2 id=&#34;新建会话&#34;&gt;新建会话&lt;/h2&gt;
+&lt;p&gt;第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推。这些窗口对应的会话，就是 0 号会话、1 号会话。&lt;/p&gt;
+&lt;p&gt;使用编号区分会话，不太直观，更好的方法是为会话起名&lt;/p&gt;
+&lt;p&gt;$ tmux new -s &lt;session-name&gt;&lt;/p&gt;
+&lt;p&gt;上面命令新建一个指定名称的会话&lt;/p&gt;
+&lt;h2 id=&#34;分离会话&#34;&gt;分离会话&lt;/h2&gt;
+&lt;p&gt;在 Tmux 窗口中，按下Ctrl+b d或者输入tmux detach命令，就会将当前会话与窗口分离。&lt;/p&gt;
+&lt;p&gt;上面命令执行后，就会退出当前 Tmux 窗口，但是会话和里面的进程仍然在后台运行。&lt;/p&gt;
+&lt;p&gt;tmux ls命令可以查看当前所有的 Tmux 会话。&lt;/p&gt;
+&lt;h2 id=&#34;接入会话&#34;&gt;接入会话&lt;/h2&gt;
+&lt;p&gt;tmux attach命令用于重新接入某个已存在的会话。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 使用会话编号
+$ tmux attach -t 0
+
+# 使用会话名称
+$ tmux attach -t &amp;lt;session-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;杀死会话&#34;&gt;杀死会话&lt;/h2&gt;
+&lt;p&gt;tmux kill-session命令用于杀死某个会话。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 使用会话编号
+$ tmux kill-session -t 0
+
+# 使用会话名称
+$ tmux kill-session -t &amp;lt;session-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;切换会话&#34;&gt;切换会话&lt;/h2&gt;
+&lt;p&gt;tmux switch命令用于切换会话。&lt;/p&gt;
+&lt;h2 id=&#34;重命名会话&#34;&gt;重命名会话&lt;/h2&gt;
+&lt;p&gt;tmux rename-session命令用于重命名会话。&lt;/p&gt;
+&lt;p&gt;$ tmux rename-session -t 0 &lt;new-name&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;上面命令将0号会话重命名&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;会话快捷键&#34;&gt;会话快捷键&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;Ctrl+b d：分离当前会话。
+Ctrl+b s：列出所有会话。
+Ctrl+b $：重命名当前会话。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;最简操作流程&#34;&gt;最简操作流程&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;新建会话tmux new -s my_session。&lt;/li&gt;
+&lt;li&gt;在 Tmux 窗口运行所需的程序。&lt;/li&gt;
+&lt;li&gt;按下快捷键Ctrl+b d将会话分离。&lt;/li&gt;
+&lt;li&gt;下次使用时，重新连接到会话tmux attach-session -t my_session。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;窗格操作&#34;&gt;窗格操作&lt;/h1&gt;
+&lt;p&gt;Tmux 可以将窗口分成多个窗格（pane），每个窗格运行不同的命令。以下命令都是在 Tmux 窗口中执行。&lt;/p&gt;
+&lt;h2 id=&#34;划分窗格&#34;&gt;划分窗格&lt;/h2&gt;
+&lt;p&gt;tmux split-window命令用来划分窗格。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 划分上下两个窗格
+$ tmux split-window
+
+# 划分左右两个窗格
+$ tmux split-window -h
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;移动光标&#34;&gt;移动光标&lt;/h2&gt;
+&lt;p&gt;tmux select-pane命令用来移动光标位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 光标切换到上方窗格
+$ tmux select-pane -U
+
+# 光标切换到下方窗格
+$ tmux select-pane -D
+
+# 光标切换到左边窗格
+$ tmux select-pane -L
+
+# 光标切换到右边窗格
+$ tmux select-pane -R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;交换窗格位置&#34;&gt;交换窗格位置&lt;/h2&gt;
+&lt;p&gt;tmux swap-pane命令用来交换窗格位置。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 当前窗格上移
+$ tmux swap-pane -U
+
+# 当前窗格下移
+$ tmux swap-pane -D
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;窗格快捷键&#34;&gt;窗格快捷键&lt;/h2&gt;
+&lt;p&gt;下面是一些窗格操作的快捷键&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Ctrl+b %：划分左右两个窗格。
+Ctrl+b &amp;quot;：划分上下两个窗格。
+Ctrl+b &amp;lt;arrow key&amp;gt;：光标切换到其他窗格。&amp;lt;arrow key&amp;gt;是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键↓。
+Ctrl+b ;：光标切换到上一个窗格。
+Ctrl+b o：光标切换到下一个窗格。
+Ctrl+b {：当前窗格与上一个窗格交换位置。
+Ctrl+b }：当前窗格与下一个窗格交换位置。
+Ctrl+b Ctrl+o：所有窗格向前移动一个位置，第一个窗格变成最后一个窗格。
+Ctrl+b Alt+o：所有窗格向后移动一个位置，最后一个窗格变成第一个窗格。
+Ctrl+b x：关闭当前窗格。
+Ctrl+b !：将当前窗格拆分为一个独立窗口。
+Ctrl+b z：当前窗格全屏显示，再使用一次会变回原来大小。
+Ctrl+b Ctrl+&amp;lt;arrow key&amp;gt;：按箭头方向调整窗格大小。
+Ctrl+b q：显示窗格编号。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;窗口管理&#34;&gt;窗口管理&lt;/h2&gt;
+&lt;p&gt;除了将一个窗口划分成多个窗格，Tmux 也允许新建多个窗口。&lt;/p&gt;
+&lt;h2 id=&#34;新建窗口&#34;&gt;新建窗口&lt;/h2&gt;
+&lt;p&gt;tmux new-window命令用来创建新窗口。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ tmux new-window
+
+# 新建一个指定名称的窗口
+$ tmux new-window -n &amp;lt;window-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;切换窗口&#34;&gt;切换窗口&lt;/h2&gt;
+&lt;p&gt;tmux select-window命令用来切换窗口。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 切换到指定编号的窗口
+$ tmux select-window -t &amp;lt;window-number&amp;gt;
+
+# 切换到指定名称的窗口
+$ tmux select-window -t &amp;lt;window-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;重命名窗口&#34;&gt;重命名窗口&lt;/h2&gt;
+&lt;p&gt;tmux rename-window命令用于为当前窗口起名（或重命名）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ tmux rename-window &amp;lt;new-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;窗口快捷键&#34;&gt;窗口快捷键&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;Ctrl+b c：创建一个新窗口，状态栏会显示多个窗口的信息。
+Ctrl+b p：切换到上一个窗口（按照状态栏上的顺序）。
+Ctrl+b n：切换到下一个窗口。
+Ctrl+b &amp;lt;number&amp;gt;：切换到指定编号的窗口，其中的&amp;lt;number&amp;gt;是状态栏上的窗口编号。
+Ctrl+b w：从列表中选择窗口。
+Ctrl+b ,：窗口重命名。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;其他命令&#34;&gt;其他命令&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;# 列出所有快捷键，及其对应的 Tmux 命令
+$ tmux list-keys
+
+# 列出所有 Tmux 命令及其参数
+$ tmux list-commands
+
+# 列出当前所有 Tmux 会话的信息
+$ tmux info
+
+# 重新加载当前的 Tmux 配置
+$ tmux source-file ~/.tmux.conf&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>xml</title>
+        <link>http://localhost:1313/p/xml/</link>
+        <pubDate>Fri, 10 May 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/xml/</guid>
+        <description>&lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
+&lt;p&gt;XML(Extensible Markup Language) 扩展性标识语言。文件后缀名为：.xml。就像HTML的作用是显示数据，XML的作用是传输和存储数据。
+&lt;em&gt;据说，java是一门专业操作XML的语言&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id=&#34;是干啥用的&#34;&gt;是干啥用的&lt;/h1&gt;
+&lt;p&gt;为了便于不同应用，不同平台之间的数据共享和通信&lt;/p&gt;
+&lt;p&gt;具体点的作用为：
+1.可作为一种简单的数据库，存储并检索数据
+2.传输约定格式的文件
+3.做软件的配置文件
+&lt;em&gt;配置文件：保存软件设置的文件&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;XML的出生是为了完善HTML的缺陷和局限性&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;xml的闺蜜--json&#34;&gt;XML的闺蜜&amp;ndash;JSON&lt;/h1&gt;
+&lt;p&gt;JSON javascript Object Notation ,js对象表示法。作用也是存储和交换文本信息&lt;/p&gt;
+&lt;p&gt;JSON更小，跟快，更易解析
+JSON适用于简单的传值，XML适用于更广阔的范围&lt;/p&gt;
+&lt;p&gt;.xml文件中的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;email xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; xsi:noNamespaceSchemaLocation=&amp;quot;email.xsd&amp;quot;&amp;gt;
+&amp;lt;to&amp;gt;liuwei8809@163.com&amp;lt;/to&amp;gt;
+&amp;lt;form&amp;gt;hellokitty@163.com&amp;lt;/form&amp;gt;
+&amp;lt;title&amp;gt;about loving&amp;lt;/title&amp;gt;
+&amp;lt;body&amp;gt;I love you forever!&amp;lt;/body&amp;gt;
+&amp;lt;date&amp;gt;2008-11-12&amp;lt;/date&amp;gt;
+&amp;lt;/email&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>图解网络</title>
+        <link>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</link>
+        <pubDate>Thu, 09 May 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142259666.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;图解网络&#34;&gt;图解网络&lt;/h1&gt;
+&lt;h1 id=&#34;基础篇&#34;&gt;基础篇&lt;/h1&gt;
+&lt;h2 id=&#34;tcpip模型&#34;&gt;TCP/IP模型&lt;/h2&gt;
+&lt;h3 id=&#34;应用层&#34;&gt;应用层&lt;/h3&gt;
+&lt;h3 id=&#34;传输层&#34;&gt;传输层&lt;/h3&gt;
+&lt;p&gt;在传输层会有两个传输协议，分别是 TCP 和 UDP
+TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅&lt;/p&gt;
+&lt;p&gt;UDP 就相对很简单，简单到只负责发送数据包，不保证数据包是否能抵达对⽅，但它实时性相对更好，传输效率也⾼。当然，UDP 也可以实现可靠传输，把 TCP 的特性在应⽤层上实现就可以，不过要实现⼀个商⽤的可靠 UDP传输协议，也不是⼀件简单的事情&lt;/p&gt;
+&lt;p&gt;应⽤需要传输的数据可能会⾮常⼤，如果直接传输就不好控制，因此当传输层的数据包⼤⼩超过 MSS（TCP 最⼤报⽂段⻓度） ，就要将数据包分块，这样即使中途有⼀个分块丢失或损坏了，只需要᯿新这⼀个分块，⽽不⽤᯿新发送整个数据包。在 TCP 协议中，我们把每个分块称为⼀个 TCP 段（TCP Segment）。&lt;/p&gt;
+&lt;p&gt;当设备作为接收⽅时，传输层则要负责把数据包传给应⽤，但是⼀台设备上可能会有很多应⽤在接收或者传输数据，因此需要⽤⼀个编号将应⽤区分开来，这个编号就是端⼝&lt;/p&gt;
+&lt;p&gt;⽐如 80 端⼝通常是 Web 服务器⽤的，22 端⼝通常是远程登录服务器⽤的。⽽对于浏览器（客户端）中的每个标签栏都是⼀个独⽴的进程，操作系统会为这些进程分配临时的端⼝号&lt;/p&gt;
+&lt;p&gt;由于传输层的报⽂中会携带端⼝号，因此接收⽅可以识别出该报⽂是发送给哪个应⽤&lt;/p&gt;
+&lt;h3 id=&#34;网络层&#34;&gt;网络层&lt;/h3&gt;
+&lt;p&gt;我们不希望传输层协议处理太多的事情，只需要服务好应⽤即可，让其作为应⽤间数据传输的媒介，帮
+助实现应⽤到应⽤的通信，⽽实际的传输功能就交给下⼀层，也就是⽹络层（Internet Layer）&lt;/p&gt;
+&lt;p&gt;⽹络层最常使⽤的是 IP 协议（Internet Protocol），IP 协议会将传输层的报⽂作为数据部分，再加上 IP 包头组装成 IP 报⽂，如果 IP 报⽂⼤⼩超过 MTU（以太⽹中⼀般为 1500 字节）就会再次进⾏分⽚，得到⼀个即将发送到⽹络的 IP 报⽂。&lt;/p&gt;
+&lt;p&gt;因此，需要将 IP 地址分成两种意义&lt;/p&gt;
+&lt;p&gt;⼀个是⽹络号，负责标识该 IP 地址是属于哪个⼦⽹的
+⼀个是主机号，负责标识同⼀⼦⽹下的不同主机&lt;/p&gt;
+&lt;p&gt;这需要配合⼦⽹掩码才能算出 IP 地址 的⽹络号和主机号&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IP 协议的寻址作⽤是告诉我们去往下⼀个⽬的地该朝哪个⽅向⾛，路由则是根据「下⼀个⽬的地」选择路径。寻址更像在导航，路由更像在操作⽅向盘&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据链路层&#34;&gt;数据链路层&lt;/h3&gt;
+&lt;p&gt;它主要为⽹络层提供链路级别传输的服务
+每⼀台设备的⽹卡都会有⼀个 MAC 地址，它就是⽤来唯⼀标识设备的。路由器计算出了下⼀个⽬的地 IP 地址，再通过 ARP 协议找到该⽬的地的 MAC 地址，这样就知道这个 IP 地址是哪个设备的了&lt;/p&gt;
+&lt;h3 id=&#34;物理层&#34;&gt;物理层&lt;/h3&gt;
+&lt;p&gt;当数据准备要从设备发送到⽹络时，需要把数据包转换成电信号，让其可以在物理介质中传输，这⼀层就是物理层（Physical Layer），它主要是为数据链路层提供⼆进制传输的服务&lt;/p&gt;
+&lt;h1 id=&#34;http篇&#34;&gt;HTTP篇&lt;/h1&gt;
+&lt;h2 id=&#34;http基本概念&#34;&gt;HTTP基本概念&lt;/h2&gt;
+&lt;p&gt;先说明下安全和幂等的概念：
+在 HTTP 协议⾥，所谓的「安全」是指请求⽅法不会「破坏」服务器上的资源。
+所谓的「幂等」，意思是多次执⾏相同的操作，结果都是「相同」的。&lt;/p&gt;
+&lt;p&gt;那么很明显 GET ⽅法就是安全且幂等的，因为它是「只读」操作，⽆论操作多少次，服务器上的数据都是安全的，且每次的结果都是相同的&lt;/p&gt;
+&lt;p&gt;POST 因为是「新增或提交数据」的操作，会修改服务器上的资源，所以是不安全的，且多次提交数据就会创建多个资源，所以不是幂等的。&lt;/p&gt;
+&lt;h3 id=&#34;http特性&#34;&gt;HTTP特性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;简单&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;灵活和易于扩展&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;应用广泛和跨平台&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;明文传输&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;长连接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;管道网络传输&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;队头阻塞&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SSL/TLS 协议建⽴的详细流程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ClientHello：⾸先，由客户端向服务器发起加密通信请求，也就是 ClientHello 请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SeverHello：服务器收到客户端请求后，向客户端发出响应，也就是 SeverHello&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端回应:客户端收到服务器的回应之后，⾸先通过浏览器或者操作系统中的 CA 公钥，确认服务器的数字证书的真实性。如果证书没有问题，客户端会从数字证书中取出服务器的公钥，然后使⽤它加密报⽂&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器的最后回应:服务器收到客户端的第三个随机数（ pre-master key ）之后，通过协商的加密算法，计算出本次通信的「会话秘钥」。然后，向客户端发⽣最后的信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那 HTTP/2 相⽐ HTTP/1.1 性能上的改进&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;头部压缩:消除重复的部分。这就是所谓的 HPACK 算法：在客户端和服务器同时维护⼀张头信息表，所有字段都会存⼊这个表，⽣成⼀个索引号，以后就不发送同样字段了，只发送索引号，这样就提⾼速度了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;⼆进制格式:头信息和数据体都是⼆进制，并且统称为帧（frame）：头信息帧和数据帧,增加了数据传输的效率。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据流:HTTP/2 的数据包不是按顺序发送的，同⼀个连接⾥⾯连续的数据包，可能属于不同的回应。因此，必须要对数据包做标记，指出它属于哪个回应。每个请求或回应的所有数据包，称为⼀个数据流（ Stream ）。每个数据流都标记着⼀个独⼀⽆⼆的编号，其中规定客户端发出的数据流编号为奇数， 服务器发出的数据流编号为偶数.客户端还可以指定数据流的优先级。优先级⾼的请求，服务器就先响应该请求。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多路复⽤
+可以在⼀个连接中并发多个请求或回应，⽽不⽤按照顺序⼀⼀对应,移除了 HTTP/1.1 中的串⾏请求，不需要排队等待，也就不会再出现「队头阻塞」问题，降低了延迟，⼤幅度提⾼了连接的利⽤率
+在⼀个 TCP 连接⾥，服务器收到了客户端 A 和 B 的两个请求，如果发现 A 处理过程⾮常耗时，于是就
+回应 A 请求已经处理好的部分，接着回应 B 请求，完成后，再回应 A 请求剩下的部分&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器推送:减少延时的等待&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HTTP/2 主要的问题在于，多个 HTTP 请求在复⽤⼀个 TCP 连接，下层的 TCP 协议是不知道有多少个 HTTP 请求的。所以⼀旦发⽣了丢包现象，就会触发 TCP 的᯿传机制，这样在⼀个 TCP 连接中的所有的 HTTP 请求都必须等待这个丢了的包被重传回来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP/1.1 中的管道（ pipeline）传输中如果有⼀个请求阻塞了，那么队列后请求也统统被阻塞住了&lt;/li&gt;
+&lt;li&gt;HTTP/2 多个请求复⽤⼀个TCP连接，⼀旦发⽣丢包，就会阻塞住所有的 HTTP 请求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这都是基于 TCP 传输层的问题，所以 HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！&lt;/p&gt;
+&lt;p&gt;UDP 发⽣是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的队头阻塞 和 HTTP/2 的⼀个丢包全部重传传问题&lt;/p&gt;
+&lt;p&gt;⼤家都知道 UDP 是不可靠传输的，但基于 UDP 的 QUIC 协议 可以实现类似 TCP 的可靠性传输&lt;/p&gt;
+&lt;p&gt;QUIC 有⾃⼰的⼀套机制可以保证传输的可靠性的。当某个流发⽣丢包时，只会阻塞这个流，其他流不会受到影响。&lt;/p&gt;
+&lt;p&gt;TLS3 升级成了最新的 1.3 版本，头部压缩算法也升级成了 QPack 。&lt;/p&gt;
+&lt;p&gt;HTTPS 要建⽴⼀个连接，要花费 6 次交互，先是建⽴三次握⼿，然后是 TLS/1.3 的三次握⼿。QUIC 直接把以往的 TCP 和 TLS/1.3 的 6 次交互合并成了 3 次，减少了交互次数。&lt;/p&gt;
+&lt;p&gt;所以， QUIC 是⼀个在 UDP 之上的伪 TCP + TLS + HTTP/2 的多路复⽤的协议。&lt;/p&gt;
+&lt;h2 id=&#34;http11如何优化&#34;&gt;HTTP/1.1如何优化&lt;/h2&gt;
+&lt;p&gt;有如下 3 种优化思路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;尽量避免发送 HTTP 请求&lt;/li&gt;
+&lt;li&gt;在需要发送 HTTP 请求时，考虑如何减少请求次数&lt;/li&gt;
+&lt;li&gt;减少服务器的 HTTP 响应的数据⼤⼩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;避免发送-http-请求的法就是通过缓存技术&#34;&gt;避免发送 HTTP 请求的⽅法就是通过缓存技术&lt;/h3&gt;
+&lt;p&gt;客户端会把第⼀次请求以及响应的数据保存在本地磁盘上，其中将请求的 URL 作为 key，⽽响应作为 value，两者形成映射关系。&lt;/p&gt;
+&lt;p&gt;这样当后续发起相同的请求时，就可以先在本地磁盘上通过 key 查到对应的 value，也就是响应，如果找到了，就直接从本地读取该响应。毋庸置疑，读取本次磁盘的速度肯定⽐⽹络请求快得多&lt;/p&gt;
+&lt;h3 id=&#34;如何减少-http-请求次数&#34;&gt;如何减少 HTTP 请求次数&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;减少重定向请求次数：如果重定向的⼯作交由代理服务器完成，就能减少 HTTP 请求次数了&lt;/li&gt;
+&lt;li&gt;合并请求：如果把多个访问⼩⽂件的请求合并成⼀个⼤的请求，虽然传输的总资源还是⼀样，但是减少请求，也就意味着减少了重复发送的 HTTP 头部。减少 TCP 连接的数量，因⽽省去了 TCP 握⼿和慢启动过程耗费的时间&lt;/li&gt;
+&lt;li&gt;延迟发送请求：请求⽹⻚的时候，没必要把全部资源都获取到，⽽是只获取当前⽤户所看到的⻚⾯资源，当⽤户向下滑动⻚⾯的时候，再向服务器获取接下来的资源，这样就达到了延迟发送请求的效果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何减少-http-响应的数据&#34;&gt;如何减少 HTTP 响应的数据⼤⼩？&lt;/h3&gt;
+&lt;p&gt;我们可以考虑对响应的资源进⾏压缩，这样就可以减少响应的数据⼤⼩，从⽽提⾼⽹络传输的效率。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无损压缩&lt;/li&gt;
+&lt;li&gt;有损压缩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;https-rsa握手解析&#34;&gt;HTTPS RSA握手解析&lt;/h2&gt;
+&lt;h3 id=&#34;tls握手过程&#34;&gt;TLS握手过程&lt;/h3&gt;
+&lt;p&gt;所以安全上存在以下三个⻛险&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;窃听⻛险&lt;/li&gt;
+&lt;li&gt;篡改⻛险&lt;/li&gt;
+&lt;li&gt;冒充⻛险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HTTPS 在 HTTP 与 TCP 层之间加⼊了 TLS 协议
+TLS 协议是如何解决 HTTP 的⻛险的呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;信息加密&lt;/li&gt;
+&lt;li&gt;校验机制&lt;/li&gt;
+&lt;li&gt;身份证书&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不同的密钥交换算法，TLS 的握⼿过程可能会有⼀些区别&lt;/p&gt;
+&lt;h3 id=&#34;rsa握手过程&#34;&gt;RSA握手过程&lt;/h3&gt;
+&lt;p&gt;传统的 TLS 握⼿基本都是使⽤ RSA 算法来实现密钥交换的，在将 TLS 证书部署服务端时，证书⽂件中包含⼀对公私钥，其中公钥会在 TLS 握⼿阶段传递给客户端，私钥则⼀直留在服务端，⼀定要确保私钥不能被窃取&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TLS 第⼀次握⼿：客户端⾸先会发⼀个「Client Hello」消息，字⾯意思我们也能理解到，这是跟服务器「打招呼」&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TLS 第⼆次握⼿：当服务端收到客户端的「Client Hello」消息后，会确认 TLS 版本号是否⽀持，和从密码套件列表中选择⼀个密码套件，以及⽣成随机数（Server Random）接着，返回「Server Hello」消息，消息⾥⾯有服务器确认的 TLS 版本号，也给出了随机数（Server Random），然后从客户端的密码套件列表选择了⼀个合适的密码套件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TLS 第三次握⼿：客户端验证完证书后，认为可信则继续往下⾛。接着，客户端就会⽣成⼀个新的随机数 (pre-master)，⽤服务器的 RSA 公钥加密该随机数，通过「Change Cipher Key Exchange」消息传给服务端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TLS 第四次握⼿：服务器也是同样的操作，发「Change Cipher Spec」和「Encrypted Handshake Message」消息，如果双⽅都验证加密和解密没问题，那么握⼿正式完成&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rsa算法的缺陷&#34;&gt;RSA算法的缺陷&lt;/h3&gt;
+&lt;p&gt;使⽤ RSA 密钥协商算法的最⼤问题是不⽀持前向保密&lt;/p&gt;
+&lt;h2 id=&#34;https-ecdhe-握解析&#34;&gt;HTTPS ECDHE 握⼿解析&lt;/h2&gt;
+&lt;p&gt;HTTPS 常⽤的密钥交换算法有两种，分别是 RSA 和 ECDHE 算法
+其中，RSA 是⽐较传统的密钥交换算法，它不具备前向安全的性质，因此现在很少服务器使⽤的。⽽ ECDHE 算法具有前向安全，所以被⼴泛使⽤&lt;/p&gt;
+&lt;h2 id=&#34;离散对数&#34;&gt;离散对数&lt;/h2&gt;
+&lt;p&gt;特别是当模数 p 是⼀个很⼤的质数，即使知道底数 a 和真数 b ，在现有的计算机的计算⽔平是⼏乎⽆法算出离散对数的，这就是 DH 算法的数学基础&lt;/p&gt;
+&lt;h2 id=&#34;dh算法&#34;&gt;DH算法&lt;/h2&gt;
+&lt;h2 id=&#34;dhe算法&#34;&gt;DHE算法&lt;/h2&gt;
+&lt;h2 id=&#34;ecdhe算法&#34;&gt;ECDHE算法&lt;/h2&gt;
+&lt;p&gt;RSA 和 ECDHE 握⼿过程的区别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;RSA 密钥协商算法「不⽀持」前向保密，ECDHE 密钥协商算法「⽀持」前向保密；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使⽤了 RSA 密钥协商算法，TLS 完成四次握⼿后，才能进⾏应⽤数据传输，⽽对于 ECDHE 算法，客户端可以不⽤等服务端的最后⼀次 TLS 握⼿，就可以提前发出加密的 HTTP 数据，节省了⼀个消息的往返时间；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使⽤ ECDHE， 在 TLS 第 2 次握⼿中，会出现服务器端发出的「Server Key Exchange」消息，⽽ RSA 握⼿过程没有该消息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;https如何优化&#34;&gt;HTTPS如何优化&lt;/h2&gt;
+&lt;h3 id=&#34;分析性能损耗&#34;&gt;分析性能损耗&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第⼀个环节， TLS 协议握⼿过程；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第⼆个环节，握⼿后的对称加密报⽂传输。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;硬件优化&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;软件优化：软件的优化⽅向可以分层两种，⼀个是软件升级，⼀个是协议优化：密钥交换算法优化&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;证书优化：⼀个是证书传输，⼀个是证书验证。服务器应该选⽤ ECDSA 证书，⽽⾮ RSA 证书，因为在相同安全级别下，ECC 的密钥⻓度⽐ RSA 短很多，这样可以提⾼证书传输的效率&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;crl&#34;&gt;CRL&lt;/h3&gt;
+&lt;p&gt;CRL 称为证书吊销列表（Certificate Revocation List），这个列表是由 CA 定期更新，列表内容都是被撤销信任的证书序号，如果服务器的证书在此列表，就认为证书已经失效，不在的话，则认为证书是有效的、&lt;/p&gt;
+&lt;p&gt;第⼀个问题，由于 CRL 列表是由 CA 维护的，定期更新，如果⼀个证书刚被吊销后，客户端在更新 CRL 之前还是会信任这个证书，实时性较差；&lt;/p&gt;
+&lt;p&gt;第⼆个问题，随着吊销证书的增多，列表会越来越⼤，下载的速度就会越慢，下载完客户端还得遍历这么⼤的列表，那么就会导致客户端在校验证书这⼀环节的延时很⼤，进⽽拖慢了 HTTPS 连接&lt;/p&gt;
+&lt;h3 id=&#34;ocsp&#34;&gt;OCSP&lt;/h3&gt;
+&lt;p&gt;因此，现在基本都是使⽤ OCSP ，名为在线证书状态协议（Online Certificate Status Protocol）来查询证书的有效性，它的⼯作⽅式是向 CA 发送查询请求，让 CA 返回证书的有效状态。&lt;/p&gt;
+&lt;p&gt;OCSP 需要向 CA 查询，因此也是要发⽣⽹络请求，⽽且还得看 CA 服务器的“脸⾊”，如果⽹络状态不好，或者CA 服务器繁忙，也会导致客户端在校验证书这⼀环节的延时变⼤。&lt;/p&gt;
+&lt;h3 id=&#34;ocsp-stapling&#34;&gt;OCSP Stapling&lt;/h3&gt;
+&lt;p&gt;于是为了解决这⼀个⽹络开销，就出现了 OCSP Stapling，其原理是：服务器向 CA 周期性地查询证书状态，获得⼀个带有时间戳和签名的响应结果并缓存它&lt;/p&gt;
+&lt;h2 id=&#34;会话复用&#34;&gt;会话复用&lt;/h2&gt;
+&lt;p&gt;TLS 握⼿的⽬的就是为了协商出会话密钥，也就是对称加密密钥，那我们如果我们把⾸次 TLS 握⼿协商的对称加密密钥缓存起来，待下次需要建⽴ HTTPS 连接时，直接「复⽤」这个密钥，不就减少 TLS 握⼿的性能损耗了吗&lt;/p&gt;
+&lt;p&gt;这种⽅式就是会话复⽤（TLS session resumption），会话复⽤分两种&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第⼀种叫 Session ID；&lt;/li&gt;
+&lt;li&gt;第⼆种叫 Session Ticket；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;session-id&#34;&gt;Session ID&lt;/h3&gt;
+&lt;p&gt;Session ID 的⼯作原理是，客户端和服务器⾸次 TLS 握⼿连接后，双⽅会在内存缓存会话密钥，并⽤唯⼀的Session ID 来标识，Session ID 和会话密钥相当于 key-value 的关系
+但是它有两个缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器必须保持每⼀个客户端的会话密钥，随着客户端的增多，服务器的内存压⼒也会越⼤。&lt;/li&gt;
+&lt;li&gt;现在⽹站服务⼀般是由多台服务器通过负载均衡提供服务的，客户端再次连接不⼀定会命中上次访问过的服务器，于是还要⾛完整的 TLS 握⼿过程；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;session-ticket&#34;&gt;Session Ticket&lt;/h3&gt;
+&lt;p&gt;为了解决 Session ID 的问题，就出现了 Session Ticket，服务器不再缓存每个客户端的会话密钥，⽽是把缓存的⼯作交给了客户端，类似于 HTTP 的 Cookie&lt;/p&gt;
+&lt;p&gt;Session ID 和 Session Ticket 都不具备前向安全性&lt;/p&gt;
+&lt;p&gt;避免重放攻击的⽅式就是需要对会话密钥设定⼀个合理的过期时间&lt;/p&gt;
+&lt;h3 id=&#34;pre-shared-key&#34;&gt;Pre-shared Key&lt;/h3&gt;
+&lt;p&gt;⽽ TLS1.3 更为⽜逼，对于᯿连 TLS1.3 只需要 0 RTT，原理和 Ticket 类似，只不过在᯿连时，客户端会把 Ticket和 HTTP 请求⼀同发送给服务端，这种⽅式叫 Pre-shared Key&lt;/p&gt;
+&lt;h2 id=&#34;http2牛逼在哪&#34;&gt;HTTP/2牛逼在哪&lt;/h2&gt;
+&lt;h3 id=&#34;兼容-http11&#34;&gt;兼容 HTTP/1.1&lt;/h3&gt;
+&lt;h3 id=&#34;头部压缩&#34;&gt;头部压缩&lt;/h3&gt;
+&lt;h3 id=&#34;二进制帧&#34;&gt;二进制帧&lt;/h3&gt;
+&lt;h3 id=&#34;并发传输&#34;&gt;并发传输&lt;/h3&gt;
+&lt;h3 id=&#34;服务器主动推送资源&#34;&gt;服务器主动推送资源&lt;/h3&gt;
+&lt;p&gt;HTTP/2 是基于 TCP 协议来传输数据的，TCP 是字节流协议，TCP 层必须保证收到的字节数据是完整且连续的，这样内核才会将缓冲区⾥的数据返回给 HTTP 应⽤，那么当「前 1 个字节数据」没有到达时，后收到的字节数据只能存放在内核缓冲区⾥，只有等到这 1 个字节数据到达时，HTTP/2 应⽤层才能从内核中拿到数据，这就是HTTP/2 队头阻塞问题。&lt;/p&gt;
+&lt;h2 id=&#34;http3强势来袭&#34;&gt;HTTP/3强势来袭&lt;/h2&gt;
+&lt;h3 id=&#34;美中不足的http2&#34;&gt;美中不足的HTTP/2&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;队头阻塞&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP与TLS的握手时延迟&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网络迁移需要重新连接：⼀个 TCP 连接是由四元组（源 IP 地址，源端⼝，⽬标 IP 地址，⽬标⼝）确定的，这意味着如果 IP 地址或者端⼝变动了，就会导致需要 TCP 与 TLS ᯿新握⼿，这不利于移动设备切换⽹络的场景，⽐如 4G ⽹络环境切换成WIFI。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;quic协议的特点&#34;&gt;QUIC协议的特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;⽆队头阻塞：由于 QUIC 使⽤的传输协议是 UDP，UDP 不关⼼数据包的顺序，如果数据包丢失，UDP 也不关⼼，当然，HTTP/3 不仅仅只是简单将传输协议替换成了 UDP，还基于 UDP 协议在「应⽤层」实现了 QUIC 协议，它具有类似 TCP 的连接管理、拥塞窗⼝、流ᰁ控制的⽹络特性，相当于将不可靠传输的 UDP 协议变成“可靠”的了，所以不⽤担⼼数据包丢失的问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更快的连接建⽴：是QUIC 内部包含了 TLS，它在⾃⼰的帧会携带 TLS ⾥的“记录”，再加上 QUIC 使⽤的是 TLS1.3，因此仅需 1 个 RTT 就可以「同时」完成建⽴连接与密钥协商，甚⾄在第⼆次连接的时候，应⽤数据包可以和 QUIC 握⼿信息（连接信息 + TLS 信息）⼀起发送，达到 0-RTT 的效果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;连接迁移：在前⾯我们提到，基于 TCP 传输协议的 HTTP 协议，由于是通过四元组（源 IP、源端⼝、⽬的 IP、⽬的端⼝）确定⼀条 TCP 连接，那么当移动设备的⽹络从 4G 切换到 WIFI 时，意味着 IP 地址变化了，那么就必须要断开连接，然后᯿新建⽴连接，⽽建⽴连接的过程包含 TCP 三次握⼿和 TLS 四次握⼿的时延，以及 TCP 慢启动的减速过程，给⽤户的感觉就是⽹络突然卡顿了⼀下，因此连接的迁移成本是很⾼的。⽽ QUIC 协议没有⽤四元组的⽅式来“绑定”连接，⽽是通过连接 ID来标记通信的两个端点，客户端和服务器可以各⾃选择⼀组 ID 来标记⾃⼰，因此即使移动设备的⽹络变化后，导致 IP 地址变化了，只要仍保有上下⽂信息（⽐如连接 ID、TLS 密钥等），就可以“⽆缝”地复⽤原连接，消除᯿连的成本，没有丝毫卡顿感，达到了连接迁移的功能&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http3协议&#34;&gt;HTTP/3协议&lt;/h3&gt;
+&lt;p&gt;HTTP/3 同 HTTP/2 ⼀样采⽤⼆进制帧的结构，不同的地⽅在于 HTTP/2 的⼆进制帧⾥需要定义 Stream，⽽ HTTP/3 ⾃身不需要再定义 Stream，直接使⽤ QUIC ⾥的 Stream，于是 HTTP/3 的帧的结构也变简单了。&lt;/p&gt;
+&lt;p&gt;HTTP/3 在头部压缩算法这⼀⽅便也做了升级，升级成了 QPACK。与 HTTP/2 中的 HPACK 编码⽅式相似，HTTP/3 中的 QPACK 也采⽤了静态表、动态表及 Huffman 编码&lt;/p&gt;
+&lt;p&gt;动态表是具有时序性的，如果⾸次出现的请求发⽣了丢包，后续的收到请求，对⽅就⽆法解码出HPACK 头部，因为对⽅还没建⽴好动态表，因此后续的请求解码会阻塞到⾸次请求中丢失的数据包重传过来&lt;/p&gt;
+&lt;p&gt;HTTP/3 的 QPACK 解决了这⼀问题，那它是如何解决的呢？
+QUIC 会有两个特殊的单向流，所谓的单项流只有⼀端可以发送消息，双向则指两端都可以发送消息，传输 HTTP消息时⽤的是双向流，这两个单向流的⽤法&lt;/p&gt;
+&lt;p&gt;⼀个叫 QPACK Encoder Stream， ⽤于将⼀个字典（key-value）传递给对⽅，⽐如⾯对不属于静态表的HTTP 请求头部，客户端可以通过这个 Stream 发送字典&lt;/p&gt;
+&lt;p&gt;⼀个叫 QPACK Decoder Stream，⽤于响应对⽅，告诉它刚发的字典已经更新到⾃⼰的本地动态表了，后续就可以使⽤这个字典来编码了。&lt;/p&gt;
+&lt;p&gt;这两个特殊的单向流是⽤来同步双⽅的动态表，编码⽅收到解码⽅更新确认的通知后，才使⽤动态表编码 HTTP 头部&lt;/p&gt;
+&lt;h1 id=&#34;tcp篇&#34;&gt;TCP篇&lt;/h1&gt;
+&lt;h2 id=&#34;tcp-三次握与四次挥&#34;&gt;TCP 三次握⼿与四次挥⼿&lt;/h2&gt;
+&lt;h3 id=&#34;tcp基本认识&#34;&gt;TCP基本认识&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405041534573.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;序列号：在建⽴连接时由计算机⽣成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送⼀次数据，就「累加」⼀次该「数据字节数」的⼤⼩。⽤来解决⽹络包乱序问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确认应答号：指下⼀次「期望」收到的数据的序列号，发送端收到这个确认应答以后可以认为在这个序号以前的数据都已经被正常接收。⽤来解决不丢包的问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;控制位：ACK：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;该位为 1 时，「确认应答」的字段变为有效，TCP 规定除了最初建⽴连接时的 SYN 包之外该位必须设置为 1 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;RST：该位为 1 时，表示 TCP 连接中出现异常必须强制断开连接。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SYN：该位为 1 时，表示希望建⽴连接，并在其「序列号」的字段进⾏序列号初始值的设定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FIN：该位为 1 时，表示今后不会再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双⽅的主机之间就可以相互交换 FIN 位为 1 的 TCP 段。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么需要-tcp-协议-tcp-作在哪层&#34;&gt;为什么需要 TCP 协议？ TCP ⼯作在哪⼀层？&lt;/h3&gt;
+&lt;p&gt;IP 层是「不可靠」的，它不保证⽹络包的交付、不保证⽹络包的按序交付、也不保证⽹络包中的数据的完整性&lt;/p&gt;
+&lt;p&gt;如果需要保障⽹络数据包的可靠性，那么就需要由上层（传输层）的 TCP 协议来负责&lt;/p&gt;
+&lt;h3 id=&#34;什么是-tcp&#34;&gt;什么是 TCP&lt;/h3&gt;
+&lt;p&gt;TCP 是⾯向连接的、可靠的、基于字节流的传输层通信协议。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;⾯向连接：⼀定是「⼀对⼀」才能连接，不能像 UDP 协议可以⼀个主机同时向多个主机发送消息，也就是⼀对多是⽆法做到的；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可靠的：⽆论的⽹络链路中出现了怎样的链路变化，TCP 都可以保证⼀个报⽂⼀定能够到达接收端&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;字节流：消息是「没有边界」的，所以⽆论我们消息有多⼤都可以进⾏传输。并且消息是「有序的」，当「前⼀个」消息没有收到的时候，即使它先收到了后⾯的字节，那么也不能扔给应⽤层去处理，同时对「重复」的报⽂会⾃动丢弃&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;什么是-tcp-连接&#34;&gt;什么是 TCP 连接？&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Socket：由 IP 地址和端⼝号组成&lt;/li&gt;
+&lt;li&gt;序列号：⽤来解决乱序问题等&lt;/li&gt;
+&lt;li&gt;窗⼝⼤⼩：⽤来做流ᰁ控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何唯确定个-tcp-连接呢&#34;&gt;如何唯⼀确定⼀个 TCP 连接呢？&lt;/h3&gt;
+&lt;p&gt;TCP 四元组可以唯⼀的确定⼀个连接&lt;/p&gt;
+&lt;p&gt;源地址和⽬的地址的字段（32位）是在 IP 头部中，作⽤是通过 IP 协议发送报⽂给对⽅主机&lt;/p&gt;
+&lt;p&gt;源端⼝和⽬的端⼝的字段（16位）是在 TCP 头部中，作⽤是告诉 TCP 协议应该把报⽂发给哪个进程。&lt;/p&gt;
+&lt;h3 id=&#34;有个-ip-的服务器监听了个端它的-tcp-的最连接数是多少&#34;&gt;有⼀个 IP 的服务器监听了⼀个端⼝，它的 TCP 的最⼤连接数是多少？&lt;/h3&gt;
+&lt;p&gt;服务器通常固定在某个本地端⼝上监听，等待客户端的连接请求
+因此，客户端 IP 和 端⼝是可变的，其理论值计算公式如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ip数 * 端口数
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当然，服务端最⼤并发 TCP 连接数远不能达到理论上限。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;⾸先主要是⽂件描述符限制，Socket 都是⽂件，所以⾸先要通过 ulimit 配置⽂件描述符的数⽬；&lt;/li&gt;
+&lt;li&gt;另⼀个是内存限制，每个 TCP 连接都要占⽤⼀定内存，操作系统的内存是有限的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;udp-和-tcp-有什么区别呢分别的应场景是&#34;&gt;UDP 和 TCP 有什么区别呢？分别的应⽤场景是？&lt;/h3&gt;
+&lt;p&gt;UDP 不提供复杂的控制机制，利⽤ IP 提供⾯向「⽆连接」的通信服务。
+UDP 协议真的⾮常简单，头部只有 8 个字节（ 64 位），UDP 的头部格式如下
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405041551727.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;⽬标和源端⼝：主要是告诉 UDP 协议应该把报⽂发给哪个进程。&lt;/li&gt;
+&lt;li&gt;包⻓度：该字段保存了 UDP ⾸部的⻓度跟数据的⻓度之和&lt;/li&gt;
+&lt;li&gt;校验和：校验和是为了提供可靠的 UDP ⾸部和数据⽽设计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp和udp&#34;&gt;TCP和UDP&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;连接
+TCP 是⾯向连接的传输层协议，传输数据前先要建⽴连接。
+UDP 是不需要连接，即刻传输数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;服务对象
+TCP 是⼀对⼀的两点服务，即⼀条连接只有两个端点。
+UDP ⽀持⼀对⼀、⼀对多、多对多的交互通信&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;可靠性
+TCP 是可靠交付数据的，数据可以⽆差错、不丢失、不᯿复、按需到达。
+UDP 是尽最⼤努⼒交付，不保证可靠交付数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;拥塞控制、流量控制
+TCP 有拥塞控制和流量控制机制，保证数据传输的安全性
+UDP 则没有，即使⽹络⾮常拥堵了，也不会影响 UDP 的发送速率。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;⾸部开销
+TCP ⾸部⻓度较⻓，会有⼀定的开销，⾸部在没有使⽤「选项」字段时是 20 个字节，如果使⽤了「选项」字段则会变⻓的
+UDP ⾸部只有 8 个字节，并且是固定不变的，开销较⼩。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;传输⽅式
+TCP 是流式传输，没有边界，但保证顺序和可靠。
+UDP 是⼀个包⼀个包的发送，是有边界的，但可能会丢包和乱序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;分⽚不同
+TCP 的数据⼤⼩如果⼤于 MSS ⼤⼩，则会在传输层进⾏分⽚，⽬标主机收到后，也同样在传输层组装 TCP数据包，如果中途丢失了⼀个分⽚，只需要传输丢失的这个分⽚。
+UDP 的数据⼤⼩如果⼤于 MTU ⼤⼩，则会在 IP 层进⾏分⽚，⽬标主机收到后，在 IP 层组装完数据，接着再传给传输层，但是如果中途丢了⼀个分⽚，在实现可靠传输的 UDP 时则就需要᯿传所有的数据包，这样传输效率⾮常差，所以通常 UDP 的报⽂应该⼩于 MTU&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp-和-udp-应场景&#34;&gt;TCP 和 UDP 应⽤场景&lt;/h3&gt;
+&lt;p&gt;由于 TCP 是⾯向连接，能保证数据的可靠性交付，因此经常⽤于：
+FTP ⽂件传输
+HTTP / HTTPS&lt;/p&gt;
+&lt;p&gt;由于 UDP ⾯向⽆连接，它可以随时发送数据，再加上UDP本身的处理既简单⼜⾼效，因此经常⽤于：
+包总量较少的通信，如 DNS 、 SNMP 等
+视频、⾳频等多媒体通信
+⼴播通信&lt;/p&gt;
+&lt;h3 id=&#34;为什么-udp-头部没有部度字段-tcp-头部有部度字段呢&#34;&gt;为什么 UDP 头部没有「⾸部⻓度」字段，⽽ TCP 头部有「⾸部⻓度」字段呢&lt;/h3&gt;
+&lt;p&gt;原因是 TCP 有可变⻓的「选项」字段，⽽ UDP 头部⻓度则是不会变化的，⽆需多⼀个字段去记录 UDP的⾸部⻓度&lt;/p&gt;
+&lt;h3 id=&#34;为什么-udp-头部有包度字段-tcp-头部则没有包度字段呢&#34;&gt;为什么 UDP 头部有「包⻓度」字段，⽽ TCP 头部则没有「包⻓度」字段呢？&lt;/h3&gt;
+&lt;p&gt;TCP 是如何计算负载数据⻓度
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405042146363.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;其中 IP 总⻓度 和 IP ⾸部⻓度，在 IP ⾸部格式是已知的。TCP ⾸部⻓度，则是在 TCP ⾸部格式已知的，所以就可以求得 TCP 数据的⻓度&lt;/p&gt;
+&lt;p&gt;⼤家这时就奇怪了问：“ UDP 也是基于 IP 层的呀，那 UDP 的数据⻓度也可以通过这个公式计算呀？ 为何还要有「包⻓度」呢？”&lt;/p&gt;
+&lt;p&gt;因为为了⽹络设备硬件设计和处理⽅便，⾸部⻓度需要是 4 字节的整数倍&lt;/p&gt;
+&lt;p&gt;如果去掉 UDP 「包⻓度」字段，那 UDP ⾸部⻓度就不是 4 字节的整数倍了，所以⼩林觉得这可能是为了补全UDP ⾸部⻓度是 4 字节的整数倍，才补充了「包⻓度」字段&lt;/p&gt;
+&lt;h2 id=&#34;tcp连接建立&#34;&gt;TCP连接建立&lt;/h2&gt;
+&lt;p&gt;TCP 是⾯向连接的协议，所以使⽤ TCP 前必须先建⽴连接，⽽建⽴连接是通过三次握⼿来进⾏的&lt;/p&gt;
+&lt;p&gt;⼀开始，客户端和服务端都处于 CLOSED 状态。先是服务端主动监听某个端⼝，处于 LISTEN 状态&lt;/p&gt;
+&lt;p&gt;客户端会随机初始化序号（ client_isn ），将此序号置于 TCP ⾸部的「序号」字段中，同时把 SYN 标志位置为 1 ，表示 SYN 报⽂。接着把第⼀个 SYN 报⽂发送给服务端，表示向服务端发起连接，该报⽂不包含应⽤层数据，之后客户端处于 SYN-SENT 状态。&lt;/p&gt;
+&lt;p&gt;服务端收到客户端的 SYN 报⽂后，⾸先服务端也随机初始化⾃⼰的序号（ server_isn ），将此序号填⼊TCP ⾸部的「序号」字段中，其次把 TCP ⾸部的「确认应答号」字段填⼊ client_isn + 1 , 接着把 SYN和 ACK 标志位置为 1 。最后把该报⽂发给客户端，该报⽂也不包含应⽤层数据，之后服务端处于 SYN-RCVD 状态。&lt;/p&gt;
+&lt;p&gt;客户端收到服务端报⽂后，还要向服务端回应最后⼀个应答报⽂，⾸先该应答报⽂ TCP ⾸部 ACK 标志位
+置为 1 ，其次「确认应答号」字段填⼊ server_isn + 1 ，最后把报⽂发送给服务端，这次报⽂可以携带客户到服务器的数据，之后客户端处于 ESTABLISHED 状态。&lt;/p&gt;
+&lt;p&gt;服务器收到客户端的应答报⽂后，也进⼊ ESTABLISHED 状态&lt;/p&gt;
+&lt;p&gt;从上⾯的过程可以发现第三次握⼿是可以携带数据的，前两次握⼿是不可以携带数据的，这也是⾯试常问的题&lt;/p&gt;
+&lt;p&gt;⼀旦完成三次握⼿，双⽅都处于 ESTABLISHED 状态，此时连接就已建⽴完成，客户端和服务端就可以相互发送数据了。&lt;/p&gt;
+&lt;h3 id=&#34;如何在-linux-系统中查看-tcp-状态&#34;&gt;如何在 Linux 系统中查看 TCP 状态？&lt;/h3&gt;
+&lt;p&gt;TCP 的连接状态查看，在 Linux 可以通过 netstat -napt 命令查看&lt;/p&gt;
+&lt;h3 id=&#34;为什么是三次握不是两次四次&#34;&gt;为什么是三次握⼿？不是两次、四次&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;因为三次握⼿才能保证双⽅具有接收和发送的能⼒&lt;/li&gt;
+&lt;li&gt;三次握⼿才可以阻⽌重复历史连接的初始化（主要原因）：三次握⼿的⾸要原因是为了防⽌旧的重复连接初始化造成混乱&lt;/li&gt;
+&lt;li&gt;三次握⼿才可以同步双⽅的初始序列号&lt;/li&gt;
+&lt;li&gt;三次握⼿才可以避免资源浪费&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果是两次握⼿连接，就不能判断当前连接是否是历史连接，三次握⼿则可以在客户端（发送⽅）准备发送第三次报⽂时，客户端因有⾜够的上下⽂来判断当前连接是否是历史连接：
+如果是历史连接（序列号过期或超时），则第三次握⼿发送的报⽂是 RST 报⽂，以此中⽌历史连接
+如果不是历史连接，则第三次发送的报⽂是 ACK 报⽂，通信双⽅就会成功建⽴连接；&lt;/p&gt;
+&lt;p&gt;TCP 协议的通信双⽅， 都必须维护⼀个「序列号」， 序列号是可靠传输的⼀个关键因素&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;接收⽅可以去除重复的数据；&lt;/li&gt;
+&lt;li&gt;接收⽅可以根据数据包的序列号按序接收；&lt;/li&gt;
+&lt;li&gt;可以标识发送出去的数据包中， 哪些是已经被对⽅收到的；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果客户端的 SYN 阻塞了，重复发送多次 SYN 报⽂，那么服务器在收到请求后就会建⽴多个冗余的⽆效链接，造成不必要的资源浪费&lt;/p&gt;
+&lt;p&gt;TCP 建⽴连接时，通过三次握⼿能防⽌历史连接的建⽴，能减少双⽅不必要的资源开销，能帮助双⽅同步初始化序列号。序列号能够保证数据包不᯿复、不丢弃和按序传输。
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405061904944.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;当 IP 层有⼀个超过 MTU ⼤⼩的数据（TCP 头部 + TCP 数据）要发送，那么 IP 层就要进⾏分⽚，把数据分⽚成若⼲⽚，保证每⼀个分⽚都⼩于 MTU。把⼀份 IP 数据报进⾏分⽚以后，由⽬标主机的 IP 层来进⾏重新组装后，再交给上⼀层 TCP 传输层。&lt;/p&gt;
+&lt;p&gt;这看起来井然有序，但这存在隐患的，那么当如果⼀个 IP 分⽚丢失，整个 IP 报⽂的所有分⽚都得重传。&lt;/p&gt;
+&lt;p&gt;所以，为了达到最佳的传输效能 TCP 协议在建⽴连接的时候通常要协商双⽅的 MSS 值，当 TCP 层发现数据超过MSS 时，则就先会进⾏分⽚，当然由它形成的 IP 包的⻓度也就不会⼤于 MTU ，⾃然也就不⽤ IP 分⽚了。&lt;/p&gt;
+&lt;p&gt;经过 TCP 层分⽚后，如果⼀个 TCP 分⽚丢失后，进⾏重发时也是以 MSS 为单位，⽽不⽤᯿传所有的分⽚，⼤⼤增加了重传的效率。&lt;/p&gt;
+&lt;h3 id=&#34;syn攻击&#34;&gt;SYN攻击&lt;/h3&gt;
+&lt;p&gt;我们都知道 TCP 连接建⽴是需要三次握⼿，假设攻击者短时间伪造不同 IP 地址的 SYN 报⽂，服务端每接收到⼀个 SYN 报⽂，就进⼊ SYN_RCVD 状态，但服务端发送出去的 ACK + SYN 报⽂，⽆法得到未知 IP 主机的ACK 应答，久⽽久之就会占满服务端的 SYN 接收队列（未连接队列），使得服务器不能为正常⽤户服务。&lt;/p&gt;
+&lt;p&gt;其中⼀种解决⽅式是通过修改 Linux 内核参数，控制队列⼤⼩和当队列满时应做什么处理&lt;/p&gt;
+&lt;p&gt;我们先来看下 Linux 内核的 SYN （未完成连接建⽴）队列与 Accpet （已完成连接建⽴）队列是如何⼯作的？&lt;/p&gt;
+&lt;p&gt;正常流程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当服务端接收到客户端的 SYN 报⽂时，会将其加⼊到内核的「 SYN 队列」；&lt;/li&gt;
+&lt;li&gt;接着发送 SYN + ACK 给客户端，等待客户端回应 ACK 报⽂；&lt;/li&gt;
+&lt;li&gt;服务端接收到 ACK 报⽂后，从「 SYN 队列」移除放⼊到「 Accept 队列」；&lt;/li&gt;
+&lt;li&gt;应⽤通过调⽤ accpet() socket 接⼝，从「 Accept 队列」取出连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另一种解决思路：
+计算出⼀个 cookie 值，再以 SYN + ACK 中的「序列号」返回客户端，
+服务端接收到客户端的应答报⽂时，服务器会检查这个 ACK 包的合法性。如果合法，直接放⼊到「 Accept队列」。
+最后应⽤通过调⽤ accpet() socket 接⼝，从「 Accept 队列」取出的连接。&lt;/p&gt;
+&lt;h3 id=&#34;tcp连接断开&#34;&gt;TCP连接断开&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端打算关闭连接，此时会发送⼀个 TCP ⾸部 FIN 标志位被置为 1 的报⽂，也即 FIN 报⽂，之后客户端进⼊ FIN_WAIT_1 状态。&lt;/li&gt;
+&lt;li&gt;服务端收到该报⽂后，就向客户端发送 ACK 应答报⽂，接着服务端进⼊ CLOSED_WAIT 状态。&lt;/li&gt;
+&lt;li&gt;客户端收到服务端的 ACK 应答报⽂后，之后进⼊ FIN_WAIT_2 状态。&lt;/li&gt;
+&lt;li&gt;等待服务端处理完数据后，也向客户端发送 FIN 报⽂，之后服务端进⼊ LAST_ACK 状态。&lt;/li&gt;
+&lt;li&gt;客户端收到服务端的 FIN 报⽂后，回⼀个 ACK 应答报⽂，之后进⼊ TIME_WAIT 状态&lt;/li&gt;
+&lt;li&gt;服务器收到了 ACK 应答报⽂后，就进⼊了 CLOSED 状态，⾄此服务端已经完成连接的关闭。&lt;/li&gt;
+&lt;li&gt;客户端在经过 2MSL ⼀段时间后，⾃动进⼊ CLOSED 状态，⾄此客户端也完成连接的关闭。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你可以看到，每个⽅向都需要⼀个 FIN 和⼀个 ACK，因此通常被称为四次挥⼿。&lt;/p&gt;
+&lt;p&gt;主动关闭连接的，才有 TIME_WAIT 状态&lt;/p&gt;
+&lt;p&gt;关闭连接时，客户端向服务端发送 FIN 时，仅仅表示客户端不再发送数据了但是还能接收数据。
+服务器收到客户端的 FIN 报⽂时，先回⼀个 ACK 应答报⽂，⽽服务端可能还有数据需要处理和发送，等
+服务端不再发送数据时，才发送 FIN 报⽂给客户端来表示同意现在关闭连接&lt;/p&gt;
+&lt;h4 id=&#34;为什么需要-time_wait-状态&#34;&gt;为什么需要 TIME_WAIT 状态？&lt;/h4&gt;
+&lt;p&gt;主动发起关闭连接的⼀⽅，才会有 TIME-WAIT 状态&lt;/p&gt;
+&lt;p&gt;需要 TIME-WAIT 状态，主要是两个原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;防⽌具有相同「四元组」的「旧」数据包被收到；&lt;/li&gt;
+&lt;li&gt;保证「被动关闭连接」的⼀⽅能被正确的关闭，即保证最后的 ACK 能让被动关闭⽅接收，从⽽帮助其正常关闭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;过多的 TIME-WAIT 状态主要的危害有两种
+第⼀是内存资源占⽤；
+第⼆是对端⼝资源的占⽤，⼀个 TCP 连接⾄少消耗⼀个本地端⼝；&lt;/p&gt;
+&lt;h4 id=&#34;如何优化-time_wait&#34;&gt;如何优化 TIME_WAIT？&lt;/h4&gt;
+&lt;p&gt;⽅式⼀：net.ipv4.tcp_tw_reuse 和 tcp_timestamps
+⽅式⼆：net.ipv4.tcp_max_tw_buckets
+⽅式三：程序中使⽤ SO_LINGER&lt;/p&gt;
+&lt;h4 id=&#34;如果已经建了连接但是客户端突然出现故障了怎么办&#34;&gt;如果已经建⽴了连接，但是客户端突然出现故障了怎么办？&lt;/h4&gt;
+&lt;p&gt;TCP 有⼀个机制是保活机制。这个机制的原理是这样的：
+定义⼀个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作⽤，每隔⼀个时间间隔，发送⼀个探测报⽂，该探测报⽂包含的数据⾮常少，如果连续⼏个探测报⽂都没有得到响应，则认为当前的TCP 连接已经死亡，系统内核将错误信息通知给上层应⽤程序。&lt;/p&gt;
+&lt;h3 id=&#34;socket编程&#34;&gt;Socket编程&lt;/h3&gt;
+&lt;p&gt;针对 TCP 应该如何 Socket 编程？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务端和客户端初始化 socket ，得到⽂件描述符；&lt;/li&gt;
+&lt;li&gt;服务端调⽤ bind ，将绑定在 IP 地址和端⼝;&lt;/li&gt;
+&lt;li&gt;服务端调⽤ listen ，进⾏监听；&lt;/li&gt;
+&lt;li&gt;服务端调⽤ accept ，等待客户端连接；&lt;/li&gt;
+&lt;li&gt;客户端调⽤ connect ，向服务器端的地址和端⼝发起连接请求；&lt;/li&gt;
+&lt;li&gt;服务端 accept 返回⽤于传输的 socket 的⽂件描述符；&lt;/li&gt;
+&lt;li&gt;客户端调⽤ write 写⼊数据；服务端调⽤ read 读取数据；&lt;/li&gt;
+&lt;li&gt;客户端断开连接时，会调⽤ close ，那么服务端 read 读取数据的时候，就会读取到了 EOF ，待处理完数据后，服务端调⽤ close ，表示连接关闭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这⾥需要注意的是，服务端调⽤ accept 时，连接成功了会返回⼀个已完成连接的 socket，后续⽤来传输数据。所以，监听的 socket 和真正⽤来传送数据的 socket，是「两个」 socket，⼀个叫作监听 socket，⼀个叫作已完成连接 socket&lt;/p&gt;
+&lt;p&gt;Linux内核中会维护两个队列：
+未完成连接队列（SYN 队列）：接收到⼀个 SYN 建⽴连接请求，处于 SYN_RCVD 状态；
+已完成连接队列（Accpet 队列）：已完成 TCP 三次握⼿过程，处于 ESTABLISHED 状态&lt;/p&gt;
+&lt;p&gt;我们先看看客户端连接服务端时，发送了什么&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端的协议栈向服务器端发送了 SYN 包，并告诉服务器端当前发送序列号 client_isn，客户端进⼊SYN_SENT 状态&lt;/li&gt;
+&lt;li&gt;服务器端的协议栈收到这个包之后，和客户端进⾏ ACK 应答，应答的值为 client_isn+1，表示对 SYN 包client_isn 的确认，同时服务器也发送⼀个 SYN 包，告诉客户端当前我的发送序列号为 server_isn，服务器端进⼊ SYN_RCVD 状态；&lt;/li&gt;
+&lt;li&gt;客户端协议栈收到 ACK 之后，使得应⽤程序从 connect 调⽤返回，表示客户端到服务器端的单向连接建⽴成功，客户端的状态为 ESTABLISHED，同时客户端协议栈也会对服务器端的 SYN 包进⾏应答，应答数据为server_isn+1&lt;/li&gt;
+&lt;li&gt;应答包到达服务器端后，服务器端协议栈使得 accept 阻塞调⽤返回，这个时候服务器端到客户端的单向连接也建⽴成功，服务器端也进⼊ ESTABLISHED 状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;从上⾯的描述过程，我们可以得知客户端 connect 成功返回是在第⼆次握⼿，服务端 accept 成功返回是在三次握⼿成功之后。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端调⽤ close ，表明客户端没有数据需要发送了，则此时会向服务端发送 FIN 报⽂，进⼊ FIN_WAIT_1状态&lt;/li&gt;
+&lt;li&gt;服务端接收到了 FIN 报⽂，TCP 协议栈会为 FIN 包插⼊⼀个⽂件结束符 EOF 到接收缓冲区中，应⽤程序可以通过 read 调⽤来感知这个 FIN 包。这个 EOF 会被放在已排队等候的其他已接收的数据之后，这就意味着服务端需要处理这种异常情况，因为 EOF 表示在该连接上再⽆额外数据到达。此时，服务端进⼊CLOSE_WAIT 状态&lt;/li&gt;
+&lt;li&gt;接着，当处理完数据后，⾃然就会读到 EOF ，于是也调⽤ close 关闭它的套接字，这会使得客户端会发出⼀个 FIN 包，之后处于 LAST_ACK 状态&lt;/li&gt;
+&lt;li&gt;客户端接收到服务端的 FIN 包，并发送 ACK 确认包给服务端，此时客户端将进⼊ TIME_WAIT 状态&lt;/li&gt;
+&lt;li&gt;服务端收到 ACK 确认包后，就进⼊了最后的 CLOSE 状态&lt;/li&gt;
+&lt;li&gt;客户端经过 2MSL 时间之后，也进⼊ CLOSE 状态；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;tcp重传滑动窗口流量控制拥塞控制&#34;&gt;TCP重传，滑动窗口，流量控制，拥塞控制&lt;/h2&gt;
+&lt;h3 id=&#34;重传机制&#34;&gt;重传机制&lt;/h3&gt;
+&lt;p&gt;TCP 实现可靠传输的⽅式之⼀，是通过序列号与确认应答&lt;/p&gt;
+&lt;p&gt;所以 TCP 针对数据包丢失的情况，会⽤重传机制解决。
+接下来说说常⻅的重传机制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;超时重传：
+RTT 就是数据从⽹络⼀端传送到另⼀端所需的时间，也就是包的往返时间。
+超时重传时间是以 RTO （Retransmission Timeout 超时重传时间）表示
+精确的测量超时时间 RTO 的值是⾮常᯿要的，这可让我们的重传机制更⾼效&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快速重传：
+TCP 还有另外⼀种快速重传（Fast Retransmit）机制，它不以时间为驱动，⽽是以数据驱动重传&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第⼀份 Seq1 先送到了，于是就 Ack 回 2；
+结果 Seq2 因为某些原因没收到，Seq3 到达了，于是还是 Ack 回 2；
+后⾯的 Seq4 和 Seq5 都到了，但还是 Ack 回 2，因为 Seq2 还是没有收到；
+发送端收到了三个 Ack = 2 的确认，知道了 Seq2 还没有收到，就会在定时器过期之前，重传丢失的 Seq2。
+最后，收到了 Seq2，此时因为 Seq3，Seq4，Seq5 都收到了，于是 Ack 回 6
+快速重传机制只解决了⼀个问题，就是超时时间的问题，但是它依然⾯临着另外⼀个问题。就是重传的时候，是重传之前的⼀个，还是重传所有的问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SACK：
+还有⼀种实现重传机制的⽅式叫： SACK （ Selective Acknowledgment 选择性确认）。
+这种⽅式需要在 TCP 头部「选项」字段⾥加⼀个 SACK 的东⻄，它可以将缓存的地图发送给发送⽅，这样发送⽅就可以知道哪些数据收到了，哪些数据没收到，知道了这些信息，就可以只重传丢失的数据。
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062033764.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;D-SACK：
+Duplicate SACK ⼜称 D-SACK ，其主要使⽤了 SACK 来告诉「发送⽅」有哪些数据被重复接收了
+ACK 丢包：&lt;/p&gt;
+&lt;p&gt;「接收⽅」发给「发送⽅」的两个 ACK 确认应答都丢失了，所以发送⽅超时后，重传第⼀个数据包（3000 ~3499）&lt;/p&gt;
+&lt;p&gt;于是「接收⽅」发现数据是重复收到的，于是回了⼀个 SACK = 3000~3500，告诉「发送⽅」 3000~3500的数据早已被接收了，因为 ACK 都到了 4000 了，已经意味着 4000 之前的所有数据都已收到，所以这个SACK 就代表着 D-SACK 。&lt;/p&gt;
+&lt;p&gt;这样「发送⽅」就知道了，数据没有丢，是「接收⽅」的 ACK 确认报⽂丢了&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⽹络延时：
+数据包（1000~1499） 被⽹络延迟了，导致「发送⽅」没有收到 Ack 1500 的确认报⽂&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;⽽后⾯报⽂到达的三个相同的 ACK 确认报⽂，就触发了快速重传机制，但是在重传后，被延迟的数据包（1000~1499）⼜到了「接收⽅」；
+
+所以「接收⽅」回了⼀个 SACK=1000~1500，因为 ACK 已经到了 3000，所以这个 SACK 是 D-SACK，表示收到了重复的包
+
+这样发送⽅就知道快速重传触发的原因不是发出去的包丢了，也不是因为回应的 ACK 包丢了，⽽是因为⽹络延迟了
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可⻅， D-SACK 有这么⼏个好处：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以让「发送⽅」知道，是发出去的包丢了，还是接收⽅回应的 ACK 包丢了;&lt;/li&gt;
+&lt;li&gt;可以知道是不是「发送⽅」的数据包被⽹络延迟了;&lt;/li&gt;
+&lt;li&gt;可以知道⽹络中是不是把「发送⽅」的数据包给复制了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;滑动窗口&#34;&gt;滑动窗口&lt;/h2&gt;
+&lt;p&gt;如果你说完⼀句话，我在处理其他事情，没有及时回复你，那你不是要⼲等着我做完其他事情后，我回复你，你才能说下⼀句话，很显然这不现实。&lt;/p&gt;
+&lt;p&gt;那么有了窗⼝，就可以指定窗⼝⼤⼩，窗⼝⼤⼩就是指⽆需等待确认应答，⽽可以继续发送数据的最⼤值&lt;/p&gt;
+&lt;p&gt;窗⼝的实现实际上是操作系统开辟的⼀个缓存空间，发送⽅主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据。如果按期收到确认应答，此时数据就可以从缓存区清除。&lt;/p&gt;
+&lt;p&gt;图中的 ACK 600 确认应答报⽂丢失，也没关系，因为可以通过下⼀个确认应答进⾏确认，只要发送⽅收到了 ACK 700 确认应答，就意味着 700 之前的所有数据「接收⽅」都收到了。这个模式就叫累计确认或者累计应答&lt;/p&gt;
+&lt;p&gt;TCP 头⾥有⼀个字段叫 Window ，也就是窗⼝⼤⼩。
+这个字段是接收端告诉发送端⾃⼰还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能⼒来发送数据，⽽不会导致接收端处理不过来。&lt;/p&gt;
+&lt;h3 id=&#34;发送的滑动窗&#34;&gt;发送⽅的滑动窗⼝&lt;/h3&gt;
+&lt;p&gt;#1 是已发送并收到 ACK确认的数据：1~31 字节
+#2 是已发送但未收到 ACK确认的数据：32~45 字节
+#3 是未发送但总⼤⼩在接收⽅处理范围内（接收⽅还有空间）：46~51字节
+#4 是未发送但总⼤⼩超过接收⽅处理范围（接收⽅没有空间）：52字节以后&lt;/p&gt;
+&lt;p&gt;当发送⽅把数据「全部」都⼀下发送出去后，可⽤窗⼝的⼤⼩就为 0 了，表明可⽤窗⼝耗尽，在没收到
+ACK 确认之前是⽆法继续发送数据了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062047148.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在下图，当收到之前发送的数据 32~36 字节的 ACK 确认应答后，如果发送窗⼝的⼤⼩没有变化，则滑动窗⼝往右边移动 5 个字节，因为有 5 个字节的数据被应答确认，接下来 52~56 字节⼜变成了可⽤窗⼝，那么后续也就可以发送 52~56 这 5 个字节的数据了&lt;/p&gt;
+&lt;h3 id=&#34;流量控制&#34;&gt;流量控制&lt;/h3&gt;
+&lt;p&gt;发送⽅不能⽆脑的发数据给接收⽅，要考虑接收⽅处理能⼒&lt;/p&gt;
+&lt;p&gt;为了防⽌这种情况发⽣，TCP 规定是不允许同时减少缓存⼜收缩窗⼝的，⽽是采⽤先收缩窗⼝，过段时间再减少缓存，这样就可以避免了丢包情况&lt;/p&gt;
+&lt;h4 id=&#34;tcp-是如何解决窗关闭时潜在的死锁现象呢&#34;&gt;TCP 是如何解决窗⼝关闭时，潜在的死锁现象呢&lt;/h4&gt;
+&lt;p&gt;为了解决这个问题，TCP 为每个连接设有⼀个持续定时器，只要 TCP 连接⼀⽅收到对⽅的零窗⼝通知，就启动持续计时器。&lt;/p&gt;
+&lt;p&gt;只要 TCP 连接⼀⽅收到对⽅的零窗⼝通知，就启动持续计时器。
+如果持续计时器超时，就会发送窗⼝探测 ( Window probe ) 报⽂，⽽对⽅在确认这个探测报⽂时，给出⾃⼰现在的接收窗⼝⼤⼩&lt;/p&gt;
+&lt;h4 id=&#34;糊涂窗综合症&#34;&gt;糊涂窗⼝综合症&lt;/h4&gt;
+&lt;p&gt;如果接收⽅太忙了，来不及取⾛接收窗⼝⾥的数据，那么就会导致发送⽅的发送窗⼝越来越⼩。
+到最后，如果接收⽅腾出⼏个字节并告诉发送⽅现在有⼏个字节的窗⼝，⽽发送⽅会义⽆反顾地发送这⼏个字节，这就是糊涂窗⼝综合症&lt;/p&gt;
+&lt;p&gt;就好像⼀个可以承载 50 ⼈的⼤巴⻋，每次来了⼀两个⼈，就直接发⻋。除⾮家⾥有矿的⼤巴司机，才敢这样玩，不然迟早破产。要解决这个问题也不难，⼤巴司机等乘客数ᰁ超过了 25 个，才认定可以发⻋&lt;/p&gt;
+&lt;p&gt;所以，糊涂窗⼝综合症的现象是可以发⽣在发送⽅和接收⽅：
+接收⽅可以通告⼀个⼩的窗⼝
+⽽发送⽅可以发送⼩数据&lt;/p&gt;
+&lt;p&gt;于是，要解决糊涂窗⼝综合症，就解决上⾯两个问题就可以了
+让接收⽅不通告⼩窗⼝给发送⽅
+让发送⽅避免发送⼩数据&lt;/p&gt;
+&lt;h3 id=&#34;拥塞控制&#34;&gt;拥塞控制&lt;/h3&gt;
+&lt;p&gt;在⽹络出现拥堵时，如果继续发送⼤量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是⼀重传就会导致⽹络的负担更重，于是会导致更⼤的延迟以及更多的丢包，这个情况就会进⼊恶性循环被不断地放⼤&amp;hellip;&lt;/p&gt;
+&lt;p&gt;于是，就有了拥塞控制，控制的⽬的就是避免「发送⽅」的数据填满整个⽹络&lt;/p&gt;
+&lt;p&gt;拥塞窗⼝ cwnd是发送⽅维护的⼀个的状态变ᰁ，它会根据⽹络的拥塞程度动态变化的&lt;/p&gt;
+&lt;p&gt;拥塞控制有哪些控制算法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;慢启动：TCP 在刚建⽴连接完成后，⾸先是有个慢启动的过程，这个慢启动的意思就是⼀点⼀点的提⾼发送数据包的数据，如果⼀上来就发⼤ᰁ的数据，这不是给⽹络添堵吗
+慢启动的算法记住⼀个规则就⾏：当发送⽅每收到⼀个 ACK，拥塞窗⼝ cwnd 的⼤⼩就会加 1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拥塞避免：那么进⼊拥塞避免算法后，它的规则是：每当收到⼀个 ACK 时，cwnd 增加 1/cwnd&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拥塞发⽣：cwnd = cwnd/2 ，也就是设置为原来的⼀半，或设cwnd为1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快速恢复：拥塞窗⼝ cwnd = ssthresh + 3 （ 3 的意思是确认有 3 个数据包被收到了）；
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405062215488.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;tcp实战抓包分析&#34;&gt;TCP实战抓包分析&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;tcpdump 和 Wireshark&lt;/strong&gt;
+tcpdump 仅⽀持命令⾏格式使⽤，常⽤在 Linux 服务器中抓取和分析⽹络包。
+Wireshark 除了可以抓包外，还提供了可视化分析⽹络包的图形⻚⾯&lt;/p&gt;
+&lt;p&gt;所以，这两者实际上是搭配使⽤的，先⽤ tcpdump 命令在 Linux 服务器上抓包，接着把抓包的⽂件拖出到Windows 电脑后，⽤ Wireshark 可视化分析&lt;/p&gt;
+&lt;h3 id=&#34;tcp快速建立连接&#34;&gt;TCP快速建立连接&lt;/h3&gt;
+&lt;h3 id=&#34;tcp重复确认和快速重传&#34;&gt;TCP重复确认和快速重传&lt;/h3&gt;
+&lt;p&gt;当接收⽅收到乱序数据包时，会发送重复的 ACK，以便告知发送⽅要重发该数据包，当发送⽅收到 3 个重复 ACK时，就会触发快速重传，⽴刻重发丢失数据包。&lt;/p&gt;
+&lt;h3 id=&#34;tcp流量控制&#34;&gt;TCP流量控制&lt;/h3&gt;
+&lt;p&gt;接收窗⼝是由接收⽅指定的值，存储在 TCP 头部中，它可以告诉发送⽅⾃⼰的 TCP 缓冲空间区⼤⼩，这个缓冲区是给应⽤程序读取数据的空间：&lt;/p&gt;
+&lt;h3 id=&#34;tcp延迟确认与nagle算法&#34;&gt;TCP延迟确认与Nagle算法&lt;/h3&gt;
+&lt;p&gt;快递员开着⼤货⻋送⼀个⼩包裹⼀样浪费&lt;/p&gt;
+&lt;p&gt;Nagle 算法是如何避免⼤量 TCP ⼩数据报⽂的传输？
+没有已发送未确认报⽂时，⽴刻发送数据。
+存在未确认报⽂时，直到「没有已发送未确认报⽂」或「数据⻓度达到 MSS ⼤⼩」时，再发送数据
+只要没满⾜上⾯条件中的⼀条，发送⽅⼀直在囤积数据，直到满⾜上⾯的发送条件&lt;/p&gt;
+&lt;h4 id=&#34;那延迟确认是什么&#34;&gt;那延迟确认⼜是什么？&lt;/h4&gt;
+&lt;p&gt;事实上当没有携带数据的 ACK，它的⽹络效率也是很低的，因为它也有 40 个字节的 IP 头 和 TCP 头，但却没有携带数据报⽂。
+为了解决 ACK 传输效率低问题，所以就衍⽣出了 TCP 延迟确认。&lt;/p&gt;
+&lt;p&gt;TCP 延迟确认的策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当有响应数据要发送时，ACK 会随着响应数据⼀起⽴刻发送给对⽅&lt;/li&gt;
+&lt;li&gt;当没有响应数据要发送时，ACK 将会延迟⼀段时间，以等待是否有响应数据可以⼀起发送&lt;/li&gt;
+&lt;li&gt;如果在延迟等待发送 ACK 期间，对⽅的第⼆个数据报⽂⼜到达了，这时就会⽴刻发送 ACK&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当 TCP 延迟确认 和 Nagle 算法混合使⽤时，会导致时耗增⻓&lt;/p&gt;
+&lt;h2 id=&#34;tcp半连接队列和全连接队列&#34;&gt;TCP半连接队列和全连接队列&lt;/h2&gt;
+&lt;p&gt;在 TCP 三次握⼿的时候，Linux 内核会维护两个队列，分别是：
+半连接队列，也称 SYN 队列；
+全连接队列，也称 accepet 队列；&lt;/p&gt;
+&lt;p&gt;服务端收到客户端发起的 SYN 请求后，&lt;strong&gt;内核会把该连接存储到半连接队列&lt;/strong&gt;，并向客户端响应 SYN+ACK，接着客户端会返回 ACK，服务端收到第三次握⼿的 ACK 后，&lt;strong&gt;内核会把连接从半连接队列移除，然后创建新的完全的连接，并将其添加到 accept 队列，等待进程调⽤ accept 函数时把连接取出来&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tcp内核参数&#34;&gt;TCP内核参数&lt;/h2&gt;
+&lt;p&gt;TCP 协议是由操作系统实现，所以操作系统提供了不少调节 TCP 的参数&lt;/p&gt;
+&lt;h3 id=&#34;tcp-三次握的性能提升&#34;&gt;TCP 三次握⼿的性能提升&lt;/h3&gt;
+&lt;h4 id=&#34;客户端优化&#34;&gt;客户端优化&lt;/h4&gt;
+&lt;p&gt;三次握⼿建⽴连接的⾸要⽬的是「同步序列号」。
+只有同步了序列号才有可靠传输，TCP 许多特性都依赖于序列号实现，⽐如流ᰁ控制、丢包᯿传等，这也是三次握⼿中的报⽂称为 SYN 的原因，SYN 的全称就叫 Synchronize Sequence Numbers（同步序列号）&lt;/p&gt;
+&lt;p&gt;以适当调低重试次数，尽快把错误暴露给应⽤程序&lt;/p&gt;
+&lt;h4 id=&#34;服务端优化&#34;&gt;服务端优化&lt;/h4&gt;
+&lt;p&gt;开启 syncookies 功能就可以在不使⽤ SYN 半连接队列的情况下成功建⽴连接。&lt;/p&gt;
+&lt;h4 id=&#34;绕过三次握&#34;&gt;绕过三次握⼿&lt;/h4&gt;
+&lt;p&gt;在 Linux 3.7 内核版本之后，提供了 TCP Fast Open 功能，这个功能可以减少 TCP 连接建⽴的时延&lt;/p&gt;
+&lt;p&gt;在客户端⾸次建⽴连接时的过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端发送 SYN 报⽂，该报⽂包含 Fast Open 选项，且该选项的 Cookie 为空，这表明客户端请求 Fast Open Cookie；&lt;/li&gt;
+&lt;li&gt;⽀持 TCP Fast Open 的服务器⽣成 Cookie，并将其置于 SYN-ACK 数据包中的 Fast Open 选项以发回客户端；&lt;/li&gt;
+&lt;li&gt;客户端收到 SYN-ACK 后，本地缓存 Fast Open 选项中的 Cookie。所以，第⼀次发起 HTTP GET 请求的时候，还是需要正常的三次握⼿流程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;之后，如果客户端再次向服务器建⽴连接时的过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端发送 SYN 报⽂，该报⽂包含「数据」（对于⾮ TFO 的普通 TCP 握⼿过程，SYN 报⽂中不包含「数据」）以及此前记录的 Cookie；&lt;/li&gt;
+&lt;li&gt;⽀持 TCP Fast Open 的服务器会对收到 Cookie 进⾏校验：如果 Cookie 有效，服务器将在 SYN-ACK 报⽂中，对 SYN 和「数据」进⾏确认，服务器随后将「数据」递送⾄相应的应⽤程序；如果 Cookie ⽆效，服务器将丢弃 SYN 报⽂中包含的「数据」，且其随后发出的 SYN-ACK 报⽂将只确认 SYN 的对应序列号；&lt;/li&gt;
+&lt;li&gt;如果服务器接受了 SYN 报⽂中的「数据」，服务器可在握⼿完成之前发送「数据」，这就减少了握⼿带来的1 个 RTT 的时间消耗；&lt;/li&gt;
+&lt;li&gt;客户端将发送 ACK 确认服务器发回的 SYN 以及「数据」，但如果客户端在初始的 SYN 报⽂中发送的「数据」没有被确认，则客户端将重新发送「数据」；&lt;/li&gt;
+&lt;li&gt;此后的 TCP 连接的数据传输过程和⾮ TFO 的正常情况⼀致。所以，之后发起 HTTP GET 请求的时候，可以绕过三次握⼿，这就减少了握⼿带来的 1 个 RTT 的时间消耗。开启了 TFO 功能，cookie 的值是存放到 TCP option 字段⾥的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;tcp-四次挥的性能提升&#34;&gt;TCP 四次挥⼿的性能提升&lt;/h3&gt;
+&lt;p&gt;客户端和服务端双⽅都可以主动断开连接，通常先关闭连接的⼀⽅称为主动⽅，后关闭连接的⼀⽅称为被动&lt;/p&gt;
+&lt;p&gt;可以看到，四次挥⼿过程只涉及了两种报⽂，分别是 FIN 和 ACK
+FIN 就是结束连接的意思，谁发出 FIN 报⽂，就表示它将不会再发送任何数据，关闭这⼀⽅向上的传输通道；
+ACK 就是确认的意思，⽤来通知对⽅：你⽅的发送通道已经关闭&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FIN_WAIT1 状态的优化&lt;/li&gt;
+&lt;li&gt;FIN_WAIT2 状态的优化&lt;/li&gt;
+&lt;li&gt;TIME_WAIT 状态的优化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;被动⽅的优化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主动⽅的优化&lt;/li&gt;
+&lt;li&gt;被动⽅的优化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp传输数据的性能提升&#34;&gt;TCP传输数据的性能提升&lt;/h3&gt;
+&lt;p&gt;TCP 连接是由内核维护的，内核会为每个连接建⽴内存缓冲区&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果连接的内存配置过⼩，就⽆法充分使⽤⽹络带宽，TCP 传输效率就会降低；&lt;/li&gt;
+&lt;li&gt;如果连接的内存配置过⼤，很容易把服务器资源耗尽，这样就会导致新连接⽆法建⽴；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;如何确定最传输速度&#34;&gt;如何确定最⼤传输速度？&lt;/h4&gt;
+&lt;p&gt;在前⾯我们知道了 TCP 的传输速度，受制于发送窗⼝与接收窗⼝，以及⽹络设备传输能⼒。其中，窗⼝⼤⼩由内核缓冲区⼤⼩决定。如果缓冲区与⽹络传输能⼒匹配，那么缓冲区的利⽤率就达到了最⼤化。&lt;/p&gt;
+&lt;p&gt;相信⼤家都知道⽹络是有「带宽」限制的，带宽描述的是⽹络传输能⼒，它与内核缓冲区的计量单位不同:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;带宽是单位时间内的流ᰁ，表达是「速度」，⽐如常⻅的带宽 100 MB/s；&lt;/li&gt;
+&lt;li&gt;缓冲区单位是字节，当⽹络速度乘以时间才能得到字节数；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ip&#34;&gt;IP&lt;/h2&gt;
+&lt;h3 id=&#34;ip基础知识全家桶&#34;&gt;IP基础知识全家桶&lt;/h3&gt;
+&lt;h4 id=&#34;前菜--ip-基本认识&#34;&gt;前菜 —— IP 基本认识&lt;/h4&gt;
+&lt;p&gt;IP 在 TCP/IP 参考模型中处于第三层，也就是⽹络层&lt;/p&gt;
+&lt;p&gt;⽹络层的主要作⽤是：实现主机与主机之间的通信，也叫点对点（end to end）通信&lt;/p&gt;
+&lt;p&gt;其实很容易区分，在上⾯我们知道 IP 的作⽤是主机之间通信⽤的，⽽ MAC 的作⽤则是实现「直连」的两个设备之间通信，⽽ IP 则负责在「没有直连」的两个⽹络之间进⾏通信传输。&lt;/p&gt;
+&lt;p&gt;计算机⽹络中也需要「数据链路层」和「⽹络层」这个分层才能实现向最终⽬标地址的通信。&lt;/p&gt;
+&lt;p&gt;源IP地址和⽬标IP地址在传输过程中是不会变化的，只有源 MAC 地址和⽬标MAC ⼀直在变化、&lt;/p&gt;
+&lt;h4 id=&#34;主菜--ip-地址的基础知识&#34;&gt;主菜 —— IP 地址的基础知识&lt;/h4&gt;
+&lt;p&gt;IP 地址（IPv4 地址）由 32 位正整数来表示，IP 地址在计算机是以⼆进制的⽅式处理的&lt;/p&gt;
+&lt;p&gt;⽽⼈类为了⽅便记忆采⽤了点分⼗进制的标记⽅式，也就是将 32 位 IP 地址以每 8 位为组，共分为 4 组，每组以「 . 」隔开，再将每组转换成⼗进制。&lt;/p&gt;
+&lt;p&gt;实际上，IP 地址并不是根据主机台数来配置的，⽽是以⽹卡。像服务器、路由器等设备都是有 2 个以上的⽹卡，也就是它们会有 2 个以上的 IP 地址。&lt;/p&gt;
+&lt;p&gt;⽹络号和主机号&lt;/p&gt;
+&lt;p&gt;因为在 IP 地址中，有两个 IP 是特殊的，分别是主机号全为 1 和 全为 0 地址。&lt;/p&gt;
+&lt;p&gt;主机号全为 1 指定某个⽹络下的所有主机，⽤于⼴播&lt;/p&gt;
+&lt;p&gt;主机号全为 0 指定某个⽹络&lt;/p&gt;
+&lt;p&gt;⼴播地址⽤于在同⼀个链路中相互连接的主机之间发送数据包&lt;/p&gt;
+&lt;p&gt;⼴播地址可以分为本地⼴播和直接⼴播两种&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在本⽹络内⼴播的叫做本地⼴播。例如⽹络地址为 192.168.0.0/24 的情况下，⼴播地址是 192.168.0.255 。因为这个⼴播地址的 IP 包会被路由器屏蔽，所以不会到达 192.168.0.0/24 以外的其他链路上。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在不同⽹络之间的⼴播叫做直接⼴播。例如⽹络地址为 192.168.0.0/24 的主机向 192.168.1.255/24 的⽬标地址发送 IP 包。收到这个包的路由器，将数据转发给 192.168.1.0/24，从⽽使得所有
+192.168.1.1~192.168.1.254 的主机都能收到这个包（由于直接⼴播有⼀定的安全问题，多数情况下会在路由器上设置为不转发。） 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⽽ D 类和 E 类地址是没有主机号的，所以不可⽤于主机 IP，D 类常被⽤于多播，E 类是预留的分类，暂时未使⽤&lt;/p&gt;
+&lt;p&gt;多播⽤于将包发送给特定组内的所有主机。&lt;/p&gt;
+&lt;h4 id=&#34;ip-分类的缺点&#34;&gt;IP 分类的缺点&lt;/h4&gt;
+&lt;p&gt;同⼀⽹络下没有地址层次，⽐如⼀个公司⾥⽤了 B 类地址，但是可能需要根据⽣产环境、测试环境、开发环境来划分地址层次，⽽这种 IP 分类是没有地址层次划分的功能，所以这就缺少地址的灵活性。&lt;/p&gt;
+&lt;p&gt;A、B、C类有个尴尬处境，就是不能很好的与现实⽹络匹配&lt;/p&gt;
+&lt;p&gt;这两个缺点，都可以在 CIDR ⽆分类地址解决。&lt;/p&gt;
+&lt;h5 id=&#34;分类地址-cidr&#34;&gt;⽆分类地址 CIDR&lt;/h5&gt;
+&lt;p&gt;这种⽅式不再有分类地址的概念，32 ⽐特的 IP 地址被划分为两部分，前⾯是⽹络号，后⾯是主机号。
+表示形式 a.b.c.d/x ，其中 /x 表示前 x 位属于⽹络号， x 的范围是 0 ~ 32 ，这就使得 IP 地址更加具有灵活性。&lt;/p&gt;
+&lt;p&gt;⽐如 10.100.122.2/24，这种地址表示形式就是 CIDR，/24 表示前 24 位是⽹络号，剩余的 8 位是主机号&lt;/p&gt;
+&lt;p&gt;还有另⼀种划分⽹络号与主机号形式，那就是⼦⽹掩码，掩码的意思就是掩盖掉主机号，剩余的就是⽹络号。将⼦⽹掩码和 IP 地址按位计算 AND，就可得到⽹络号&lt;/p&gt;
+&lt;h5 id=&#34;为什么要分离络号和主机号&#34;&gt;为什么要分离⽹络号和主机号？&lt;/h5&gt;
+&lt;p&gt;因为两台计算机要通讯，⾸先要判断是否处于同⼀个⼴播域内，即⽹络地址是否相同。如果⽹络地址相同，表明接受⽅在本⽹络上，那么可以把数据包直接发送到⽬标主机&lt;/p&gt;
+&lt;p&gt;路由器寻址⼯作中，也就是通过这样的⽅式来找到对应的⽹络号的，进⽽把数据包转发给对应的⽹络内&lt;/p&gt;
+&lt;h5 id=&#34;怎么进划分&#34;&gt;怎么进⾏⼦⽹划分？&lt;/h5&gt;
+&lt;p&gt;我们知道可以通过⼦⽹掩码划分出⽹络号和主机号，那实际上⼦⽹掩码还有⼀个作⽤，那就是划分⼦⽹&lt;/p&gt;
+&lt;p&gt;⼦⽹划分实际上是将主机地址分为两个部分：⼦⽹⽹络地址和⼦⽹主机地址。
+未做⼦⽹划分的 ip 地址：⽹络地址＋主机地址
+做⼦⽹划分后的 ip 地址：⽹络地址＋（⼦⽹⽹络地址＋⼦⽹主机地址）&lt;/p&gt;
+&lt;p&gt;假设对 C 类地址进⾏⼦⽹划分，⽹络地址 192.168.1.0，使⽤⼦⽹掩码 255.255.255.192 对其进⾏⼦⽹划分。
+C 类地址中前 24 位是⽹络号，最后 8 位是主机号，根据⼦⽹掩码可知从 8 位主机号中借⽤ 2 位作为⼦⽹号&lt;/p&gt;
+&lt;p&gt;公有 IP 地址是有个组织统⼀分配的，假设你要开⼀个博客⽹站，那么你就需要去申请购买⼀个公有 IP，这样全世界的⼈才能访问。并且公有 IP 地址基本上要在整个互联⽹范围内保持唯⼀&lt;/p&gt;
+&lt;p&gt;私有 IP 地址通常是内部的 IT ⼈员管理，公有 IP 地址是由 ICANN 组织管理，中⽂叫「互联⽹名称与数字地址分配机构」&lt;/p&gt;
+&lt;h4 id=&#34;p-地址与路由控制&#34;&gt;P 地址与路由控制&lt;/h4&gt;
+&lt;p&gt;IP地址的⽹络地址这⼀部分是⽤于进⾏路由控制&lt;/p&gt;
+&lt;p&gt;路由控制表中记录着⽹络地址与下⼀步应该发送⾄路由器的地址。在主机和路由器上都会有各⾃的路由器控制表&lt;/p&gt;
+&lt;p&gt;在发送 IP 包时，⾸先要确定 IP 包⾸部中的⽬标地址，再从路由控制表中找到与该地址具有相同⽹络地址的记录，根据该记录将 IP 包转发给相应的下⼀个路由器。如果路由控制表中存在多条相同⽹络地址的记录，就选择相同位数最多的⽹络地址，也就是最⻓匹配&lt;/p&gt;
+&lt;h4 id=&#34;ip-分与重组&#34;&gt;IP 分⽚与重组&lt;/h4&gt;
+&lt;p&gt;每种数据链路的最⼤传输单元 MTU 都是不相同的，如 FDDI 数据链路 MTU 4352、以太⽹的 MTU 是 1500 字节等&lt;/p&gt;
+&lt;p&gt;每种数据链路的 MTU 之所以不同，是因为每个不同类型的数据链路的使⽤⽬的不同。使⽤⽬的不同，可承载的MTU 也就不同&lt;/p&gt;
+&lt;p&gt;那么当 IP 数据包⼤⼩⼤于 MTU 时， IP 数据包就会被分⽚。&lt;/p&gt;
+&lt;p&gt;在分⽚传输中，⼀旦某个分⽚丢失，则会造成整个 IP 数据报作废，所以 TCP 引⼊了 MSS 也就是在 TCP 层进⾏分⽚不由 IP 层分⽚，那么对于 UDP 我们尽ᰁ不要发送⼀个⼤于 MTU 的数据报⽂&lt;/p&gt;
+&lt;h4 id=&#34;ipv6-基本认识&#34;&gt;IPv6 基本认识&lt;/h4&gt;
+&lt;p&gt;IPv6 的地址主要有以下类型地址：
+单播地址，⽤于⼀对⼀的通信
+组播地址，⽤于⼀对多的通信
+任播地址，⽤于通信最近的节点，最近的节点是由路由协议决定
+没有⼴播地址&lt;/p&gt;
+&lt;p&gt;IPv6 相⽐ IPv4 的⾸部改进：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;取消了⾸部校验和字段。 因为在数据链路层和传输层都会校验，因此 IPv6 直接取消了 IP 的校验。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取消了分⽚/重新组装相关字段。 分⽚与᯿组是耗时的过程，IPv6 不允许在中间路由器进⾏分⽚与重组，这种操作只能在源与⽬标主机，这将⼤⼤提⾼了路由器转发的速度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取消选项字段。 选项字段不再是标准 IP ⾸部的⼀部分了，但它并没有消失，⽽是可能出现在 IPv6 ⾸部中的「下⼀个⾸部」指出的位置上。删除该选项字段使的 IPv6 的⾸部成为固定⻓度的 40 字节&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;点--ip-协议相关技术&#34;&gt;点⼼ —— IP 协议相关技术&lt;/h3&gt;
+&lt;h4 id=&#34;dns&#34;&gt;DNS&lt;/h4&gt;
+&lt;p&gt;那么实现这⼀技术的就是 DNS 域名解析，DNS 可以将域名⽹址⾃动转换为具体的 IP 地址。&lt;/p&gt;
+&lt;p&gt;DNS 中的域名都是⽤句点来分隔的，⽐如 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt; ，这⾥的句点代表了不同层次之间的界限&lt;/p&gt;
+&lt;p&gt;在域名中，越靠右的位置表示其层级越⾼&lt;/p&gt;
+&lt;p&gt;所以域名的层级关系类似⼀个树状结构：
+根 DNS 服务器
+顶级域 DNS 服务器（com）
+权威 DNS 服务器（server.com）&lt;/p&gt;
+&lt;h4 id=&#34;域名解析的作流程&#34;&gt;域名解析的⼯作流程&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端⾸先会发出⼀个 DNS 请求，问 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt; 的 IP 是啥，并发给本地 DNS 服务器（也就是客户端的 TCP/IP 设置中填写的 DNS 服务器地址）。&lt;/li&gt;
+&lt;li&gt;本地域名服务器收到客户端的请求后，如果缓存⾥的表格能找到 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt;，则它直接返回 IP 地址。如果没有，本地 DNS 会去问它的根域名服务器：“⽼⼤， 能告诉我 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt; 的 IP 地址吗？” 根域名服务器是最⾼层次的，它不直接⽤于域名解析，但能指明⼀条道路。&lt;/li&gt;
+&lt;li&gt;根 DNS 收到来⾃本地 DNS 的请求后，发现后置是 .com，说：“www.server.com 这个域名归 .com 区域管理”，我给你 .com 顶级域名服务器地址给你，你去问问它吧。”&lt;/li&gt;
+&lt;li&gt;本地 DNS 收到顶级域名服务器的地址后，发起请求问“⽼⼆， 你能告诉我 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt; 的 IP 地址吗？”&lt;/li&gt;
+&lt;li&gt;顶级域名服务器说：“我给你负责 &lt;a class=&#34;link&#34; href=&#34;https://www.server.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.server.com&lt;/a&gt; 区域的权威 DNS 服务器的地址，你去问它应该能问到”。&lt;/li&gt;
+&lt;li&gt;本地 DNS 于是转向问权威 DNS 服务器：“⽼三，www.server.com对应的IP是啥呀？” server.com 的权威DNS 服务器，它是域名解析结果的原出处。为啥叫权威呢？就是我的域名我做主。&lt;/li&gt;
+&lt;li&gt;权威 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。&lt;/li&gt;
+&lt;li&gt;本地 DNS 再将 IP 地址返回客户端，客户端和⽬标建⽴连接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;DNS 域名解析的过程蛮有意思的，整个过程就和我们⽇常⽣活中找⼈问路的过程类似，只指路不带路&lt;/p&gt;
+&lt;h3 id=&#34;arp&#34;&gt;ARP&lt;/h3&gt;
+&lt;p&gt;由于主机的路由表中可以找到下⼀跳的 IP 地址，所以可以通过 ARP 协议，求得下⼀跳的 MAC 地址。
+简单地说，ARP 是借助 ARP 请求与 ARP 响应两种类型的包确定 MAC 地址的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主机会通过⼴播发送 ARP 请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址。&lt;/li&gt;
+&lt;li&gt;当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP 请求包⾥的内容，如果 ARP 请求包中的⽬标 IP地址与⾃⼰的 IP 地址⼀致，那么这个设备就将⾃⼰的 MAC 地址塞⼊ ARP 响应包返回给主机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;操作系统通常会把第⼀次通过 ARP 获取的 MAC 地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC地址&lt;/p&gt;
+&lt;h3 id=&#34;rarp-协议你知道是什么吗&#34;&gt;RARP 协议你知道是什么吗？&lt;/h3&gt;
+&lt;p&gt;ARP 协议是已知 IP 地址求 MAC 地址，那 RARP 协议正好相反，它是已知 MAC 地址求 IP 地址。例如将打印机服务器等⼩型嵌⼊式设备接⼊到⽹络时就经常会⽤得到&lt;/p&gt;
+&lt;p&gt;通常这需要架设⼀台 RARP 服务器，在这个服务器上注册设备的 MAC 地址及其 IP 地址。然后再将这个设备接⼊到⽹络，接着
+该设备会发送⼀条「我的 MAC 地址是XXXX，请告诉我，我的IP地址应该是什么」的请求信息。
+RARP 服务器接到这个消息后返回「MAC地址为 XXXX 的设备，IP地址为 XXXX」的信息给这个设备&lt;/p&gt;
+&lt;p&gt;最后，设备就根据从 RARP 服务器所收到的应答信息设置⾃⼰的 IP 地址&lt;/p&gt;
+&lt;h3 id=&#34;dhcp&#34;&gt;DHCP&lt;/h3&gt;
+&lt;p&gt;DHCP 在⽣活中我们是很常⻅的了，我们的电脑通常都是通过 DHCP 动态获取 IP 地址，⼤⼤省去了配 IP 信息繁琐的过程&lt;/p&gt;
+&lt;p&gt;这 4 个步骤:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;客户端⾸先发起 DHCP 发现报⽂（DHCP DISCOVER） 的 IP 数据报，由于客户端没有 IP 地址，也不知道DHCP 服务器的地址，所以使⽤的是 UDP ⼴播通信，其使⽤的⼴播⽬的地址是 255.255.255.255（端⼝67） 并且使⽤ 0.0.0.0（端⼝ 68） 作为源 IP 地址。DHCP 客户端将该 IP 数据报传递给链路层，链路层然后将帧⼴播到所有的⽹络中设备&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DHCP 服务器收到 DHCP 发现报⽂时，⽤ DHCP 提供报⽂（DHCP OFFER） 向客户端做出响应。该报⽂仍然使⽤ IP ⼴播地址 255.255.255.255，该报⽂信息携带服务器提供可租约的 IP 地址、⼦⽹掩码、默认⽹关、DNS 服务器以及 IP 地址租⽤期。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端收到⼀个或多个服务器的 DHCP 提供报⽂后，从中选择⼀个服务器，并向选中的服务器发送 DHCP 请求报⽂（DHCP REQUEST进⾏响应，回显配置的参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后，服务端⽤ DHCP ACK 报⽂对 DHCP 请求报⽂进⾏响应，应答所要求的参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⼀旦客户端收到 DHCP ACK 后，交互便完成了，并且客户端能够在租⽤期内使⽤ DHCP 服务器分配的 IP 地址。&lt;/p&gt;
+&lt;p&gt;如果租约的 DHCP IP 地址快期后，客户端会向服务器发送 DHCP 请求报⽂：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器如果同意继续租⽤，则⽤ DHCP ACK 报⽂进⾏应答，客户端就会延⻓租期。&lt;/li&gt;
+&lt;li&gt;服务器如果不同意继续租⽤，则⽤ DHCP NACK 报⽂，客户端就要停⽌使⽤租约的 IP 地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以发现，DHCP 交互中，全程都是使⽤ UDP ⼴播通信&lt;/p&gt;
+&lt;p&gt;咦，⽤的是⼴播，那如果 DHCP 服务器和客户端不是在同⼀个局域⽹内，路由器⼜不会转发⼴播包，那不是每个⽹络都要配⼀个 DHCP 服务器&lt;/p&gt;
+&lt;p&gt;所以，为了解决这⼀问题，就出现了 DHCP 中继代理。有了 DHCP 中继代理以后，对不同⽹段的 IP 地址分配也可以由⼀个 DHCP 服务器统⼀进⾏管理。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DHCP 客户端会向 DHCP 中继代理发送 DHCP 请求包，⽽ DHCP 中继代理在收到这个⼴播包以后，再以单播的形式发给 DHCP 服务器。&lt;/li&gt;
+&lt;li&gt;服务器端收到该包以后再向 DHCP 中继代理返回应答，并由 DHCP 中继代理将此包⼴播给 DHCP 客户端 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此，DHCP 服务器即使不在同⼀个链路上也可以实现统⼀分配和管理IP地址。&lt;/p&gt;
+&lt;h3 id=&#34;nat&#34;&gt;NAT&lt;/h3&gt;
+&lt;p&gt;提出了⼀种⽹络地址转换 NAT 的⽅法，再次缓解了 IPv4 地址耗尽的问题&lt;/p&gt;
+&lt;p&gt;简单的来说 NAT 就是同个公司、家庭、教室内的主机对外部通信时，把私有 IP 地址转换成公有 IP 地址&lt;/p&gt;
+&lt;p&gt;由于绝⼤多数的⽹络应⽤都是使⽤传输层协议 TCP 或 UDP 来传输数据的。
+因此，可以把 IP 地址 + 端⼝号⼀起进⾏转换。
+这样，就⽤⼀个全球 IP 地址就可以了，这种转换技术就叫⽹络地址与端⼝转换 NAPT
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071222402.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图中有两个客户端 192.168.1.10 和 192.168.1.11 同时与服务器 183.232.231.172 进⾏通信，并且这两个客户端的本地端⼝都是 1025&lt;/p&gt;
+&lt;p&gt;此时，两个私有 IP 地址都转换 IP 地址为公有地址 120.229.175.121，但是以不同的端⼝号作为区分&lt;/p&gt;
+&lt;p&gt;于是，⽣成⼀个 NAPT 路由器的转换表，就可以正确地转换地址跟端⼝的组合，令客户端 A、B 能同时与服务器之间进⾏通信。&lt;/p&gt;
+&lt;p&gt;这种转换表在 NAT 路由器上⾃动⽣成。例如，在 TCP 的情况下，建⽴ TCP 连接⾸次握⼿时的 SYN 包⼀经发出，就会⽣成这个表。⽽后⼜随着收到关闭连接时发出 FIN 包的确认应答从表中被删除。&lt;/p&gt;
+&lt;h4 id=&#34;nat-那么逼难道就没缺点了吗&#34;&gt;NAT 那么⽜逼，难道就没缺点了吗&lt;/h4&gt;
+&lt;p&gt;由于 NAT/NAPT 都依赖于⾃⼰的转换表，因此会有以下的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部⽆法主动与 NAT 内部服务器建⽴连接，因为 NAPT 转换表没有转换记录。&lt;/li&gt;
+&lt;li&gt;转换表的⽣成与转换操作都会产⽣性能开销。&lt;/li&gt;
+&lt;li&gt;通信过程中，如果 NAT 路由器重启了，所有的 TCP 连接都将被重置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第⼀种就是改⽤ IPv6
+IPv6 可⽤范围⾮常⼤，以⾄于每台设备都可以配置⼀个公有 IP 地址，就不搞那么多花⾥胡哨的地址转换了，但是IPv6 普及速度还需要⼀些时间。&lt;/p&gt;
+&lt;p&gt;第⼆种 NAT 穿透技术
+NAT 穿越技术拥有这样的功能，它能够让⽹络应⽤程序主动发现⾃⼰位于 NAT 设备之后，并且会主动获得 NAT 设备的公有 IP，并为⾃⼰建⽴端⼝映射条⽬，注意这些都是 NAT设备后的应⽤程序⾃动完成的&lt;/p&gt;
+&lt;p&gt;也就是说，在 NAT 穿透技术中，NAT设备后的应⽤程序处于主动地位，它已经明确地知道 NAT 设备要修改它外发的数据包，于是它主动配合 NAT 设备的操作，主动地建⽴好映射，这样就不像以前由 NAT 设备来建⽴映射了。&lt;/p&gt;
+&lt;p&gt;说⼈话，就是客户端主动从 NAT 设备获取公有 IP 地址，然后⾃⼰建⽴端⼝映射条⽬，然后⽤这个条⽬对外通信，就不需要 NAT 设备来进⾏转换了&lt;/p&gt;
+&lt;h3 id=&#34;icmp&#34;&gt;ICMP&lt;/h3&gt;
+&lt;p&gt;ICMP 全称是 Internet Control Message Protocol，也就是互联⽹控制报⽂协议&lt;/p&gt;
+&lt;p&gt;ICMP 主要的功能包括：确认 IP 包是否成功送达⽬标地址、报告发送过程中 IP 包被废弃的原因和改善⽹络设置等。&lt;/p&gt;
+&lt;p&gt;在 IP 通信中如果某个 IP 包因为某种原因未能达到⽬标地址，那么这个具体的原因将由 ICMP 负责通知&lt;/p&gt;
+&lt;p&gt;ICMP 的这种通知消息会使⽤ IP 进⾏发送&lt;/p&gt;
+&lt;p&gt;ICMP ⼤致可以分为两⼤类：
+⼀类是⽤于诊断的查询消息，也就是「查询报⽂类型」
+另⼀类是通知出错原因的错误消息，也就是「差错报⽂类型」&lt;/p&gt;
+&lt;h3 id=&#34;igmp&#34;&gt;IGMP&lt;/h3&gt;
+&lt;p&gt;在前⾯我们知道了组播地址，也就是 D 类地址，既然是组播，那就说明是只有⼀组的主机能收到数据包，不在⼀组的主机不能收到数组包，怎么管理是否是在⼀组呢？那么，就需要 IGMP 协议了&lt;/p&gt;
+&lt;p&gt;IGMP 是因特⽹组管理协议，⼯作在主机（组播成员）和最后⼀跳路由之间，如上图中的蓝⾊部分
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071511059.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;IGMP 报⽂向路由器申请加⼊和退出组播组，默认情况下路由器是不会转发组播包到连接中的主机，除⾮主机通过 IGMP 加⼊到组播组，主机申请加⼊到组播组时，路由器就会记录 IGMP 路由器表，路由器后续就会转发组播包到对应的主机了。&lt;/p&gt;
+&lt;p&gt;IGMP 报⽂采⽤ IP 封装，IP 头部的协议号为 2，⽽且 TTL 字段值通常为 1，因为 IGMP 是⼯作在主机与连接的路由器之间&lt;/p&gt;
+&lt;h3 id=&#34;igmp-作机制&#34;&gt;IGMP ⼯作机制&lt;/h3&gt;
+&lt;p&gt;GMP 分为了三个版本分别是，IGMPv1、IGMPv2、IGMPv3。
+接下来，以 IGMPv2 作为例⼦，说说常规查询与响应和离开组播组这两个⼯作机制&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;路由器会周期性发送⽬的地址为 224.0.0.1 （表示同⼀⽹段内所有主机和路由器） IGMP 常规查询报⽂。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主机1 和 主机 3 收到这个查询，随后会启动「报告延迟计时器」，计时器的时间是随机的，通常是 0~10秒，计时器超时后主机就会发送 IGMP 成员关系报告报⽂（源 IP 地址为⾃⼰主机的 IP 地址，⽬的 IP 地址为组播地址）。如果在定时器超时之前，收到同⼀个组内的其他主机发送的成员关系报告报⽂，则⾃⼰不再发送，这样可以减少⽹络中多余的 IGMP 报⽂数量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;路由器收到主机的成员关系报⽂后，就会在 IGMP 路由表中加⼊该组播组，后续⽹络中⼀旦该组播地址的数据到达路由器，它会把数据包转发出去。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;读者问题组播不太懂假设台机器加组播地址需要把ip改成组播地址吗如果离开某个组播地址需要dhcp重新请求个ip吗&#34;&gt;读者问题：“组播不太懂。。。假设⼀台机器加⼊组播地址，需要把IP改成组播地址吗？如果离开某个组播地址，需要dhcp重新请求个IP吗？”&lt;/h3&gt;
+&lt;p&gt;组播地址不是⽤于机器ip地址的，因为组播地址没有⽹络号和主机号，所以跟dhcp没关系。组播地址⼀般是⽤于udp协议，机器发送UDP组播数据时，⽬标地址填的是组播地址，那么在组播组内的机器都能收到数据包。&lt;/p&gt;
+&lt;p&gt;是否加⼊组播组和离开组播组，是由socket⼀个接⼝实现的，主机ip是不⽤改变的&lt;/p&gt;
+&lt;h2 id=&#34;ping的工作原理&#34;&gt;PING的工作原理&lt;/h2&gt;
+&lt;h3 id=&#34;ip协议的助手--icmp协议&#34;&gt;IP协议的助手&amp;ndash;ICMP协议&lt;/h3&gt;
+&lt;p&gt;ping 是基于 ICMP 协议⼯作的，所以要明⽩ ping 的⼯作，⾸先我们先来熟悉 ICMP 协议&lt;/p&gt;
+&lt;p&gt;ICMP 报⽂是封装在 IP 包⾥⾯，它⼯作在⽹络层，是 IP 协议的助⼿。&lt;/p&gt;
+&lt;p&gt;回送消息⽤于进⾏通信的主机或路由器之间，判断所发送的数据包是否已经成功到达对端的⼀种消息， ping 命令就是利⽤这个消息实现的&lt;/p&gt;
+&lt;p&gt;可以向对端主机发送回送请求的消息（ ICMP Echo Request Message ，类型 8 ），也可以接收对端主机发回来的回送应答消息（ ICMP Echo Reply Message ，类型 0 ）&lt;/p&gt;
+&lt;h3 id=&#34;差错报类型&#34;&gt;差错报⽂类型&lt;/h3&gt;
+&lt;p&gt;接下来，说明⼏个常⽤的 ICMP 差错报⽂的例⼦：
+⽬标不可达消息 —— 类型 为 3
+原点抑制消息 —— 类型 4
+重定向消息 —— 类型 5
+超时消息 —— 类型 11&lt;/p&gt;
+&lt;h4 id=&#34;标不可达消息destination-unreachable-message--类型为-3&#34;&gt;⽬标不可达消息（Destination Unreachable Message） —— 类型为 3&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;⽹络不可达代码为 0&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主机不可达代码为 1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;协议不可达代码为 2
+当主机使⽤ TCP 协议访问对端主机时，能找到对端的主机了，可是对端主机的防⽕墙已经禁⽌ TCP 协议访问，那么会通过 ICMP 协议以协议不可达的原因告知主机&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;端⼝不可达代码为 3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;需要进⾏分⽚但设置了不分⽚位代码为 4&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;原点抑制消息icmp-source-quench-message--类型-4&#34;&gt;原点抑制消息（ICMP Source Quench Message） —— 类型 4&lt;/h4&gt;
+&lt;p&gt;ICMP 原点抑制消息的⽬的就是为了缓和这种拥堵情况&lt;/p&gt;
+&lt;p&gt;当路由器向低速线路发送数据时，其发送队列的缓存变为零⽽⽆法发送出去时，可以向 IP 包的源地址发送⼀个ICMP 原点抑制消息。&lt;/p&gt;
+&lt;p&gt;收到这个消息的主机借此了解在整个线路的某⼀处发⽣了拥堵的情况，从⽽增⼤ IP 包的传输间隔，减少⽹络拥堵的情况&lt;/p&gt;
+&lt;h4 id=&#34;重定向消息icmp-redirect-message--类型-5&#34;&gt;重定向消息（ICMP Redirect Message） —— 类型 5&lt;/h4&gt;
+&lt;p&gt;如果路由器发现发送端主机使⽤了「不是最优」的路径发送数据，那么它会返回⼀个 ICMP 重定向消息给这个主机。&lt;/p&gt;
+&lt;p&gt;在这个消息中包含了最合适的路由信息和源数据。这主要发⽣在路由器持有更好的路由信息的情况下。路由器会通过这样的 ICMP 消息告知发送端，让它下次发给另外⼀个路由器&lt;/p&gt;
+&lt;h4 id=&#34;超时消息icmp-time-exceeded-message--类型-11&#34;&gt;超时消息（ICMP Time Exceeded Message） —— 类型 11&lt;/h4&gt;
+&lt;p&gt;IP 包中有⼀个字段叫做 TTL （ Time To Live ，⽣存周期），它的值随着每经过⼀次路由器就会减 1，直到减到0 时该 IP 包会被丢弃&lt;/p&gt;
+&lt;h3 id=&#34;ping--查询报类型的使&#34;&gt;ping —— 查询报⽂类型的使⽤&lt;/h3&gt;
+&lt;h3 id=&#34;traceroute--差错报类型的使&#34;&gt;traceroute —— 差错报⽂类型的使⽤&lt;/h3&gt;
+&lt;p&gt;有⼀款充分利⽤ ICMP 差错报⽂类型的应⽤叫做 traceroute （在UNIX、MacOS中是这个命令，⽽在Windows中对等的命令叫做 tracert ）。&lt;/p&gt;
+&lt;p&gt;traceroute 的第⼀个作⽤就是故意设置特殊的 TTL，来追踪去往⽬的地时沿途经过的路由器。&lt;/p&gt;
+&lt;p&gt;traceroute 还有⼀个作⽤是故意设置不分⽚，从⽽确定路径的 MTU。&lt;/p&gt;
+&lt;h1 id=&#34;网络综合篇&#34;&gt;网络综合篇&lt;/h1&gt;
+&lt;h2 id=&#34;51-键址到显示期间发了什么&#34;&gt;5.1 键⼊⽹址到⽹⻚显示，期间发⽣了什么&lt;/h2&gt;
+&lt;h3 id=&#34;孤单弟--http&#34;&gt;孤单⼩弟 —— HTTP&lt;/h3&gt;
+&lt;p&gt;⾸先浏览器做的第⼀步⼯作就是要对 URL 进⾏解析，从⽽⽣成发送给 Web 服务器的请求信息&lt;/p&gt;
+&lt;p&gt;对 URL 进⾏解析之后，浏览器确定了 Web 服务器和⽂件名，接下来就是根据这些信息来⽣成 HTTP 请求消息了&lt;/p&gt;
+&lt;h3 id=&#34;真实地址查询--dns&#34;&gt;真实地址查询 —— DNS&lt;/h3&gt;
+&lt;p&gt;通过浏览器解析 URL 并⽣成 HTTP 消息后，需要委托操作系统将消息发送给 Web 服务器
+但在发送之前，还有⼀项⼯作需要完成，那就是查询服务器域名对应的 IP 地址，因为委托操作系统发送消息时，必须提供通信对象的 IP 地址&lt;/p&gt;
+&lt;h3 id=&#34;指南好帮--协议栈&#34;&gt;指南好帮⼿ —— 协议栈&lt;/h3&gt;
+&lt;p&gt;通过 DNS 获取到 IP 后，就可以把 HTTP 的传输⼯作交给操作系统中的协议栈&lt;/p&gt;
+&lt;p&gt;协议栈的内部分为⼏个部分，分别承担不同的⼯作。上下关系是有⼀定的规则的，上⾯的部分会向下⾯的部分委托⼯作，下⾯的部分收到委托的⼯作并执⾏。
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071631280.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;应⽤程序（浏览器）通过调⽤ Socket 库，来委托协议栈⼯作。协议栈的上半部分有两块，分别是负责收发数据的TCP 和 UDP 协议，它们两会接受应⽤层的委托执⾏收发数据的操作。&lt;/p&gt;
+&lt;p&gt;协议栈的下⾯⼀半是⽤ IP 协议控制⽹络包收发操作，在互联⽹上传数据时，数据会被切分成⼀块块的⽹络包，⽽将⽹络包发送给对⽅的操作就是由 IP 负责的。&lt;/p&gt;
+&lt;p&gt;此外 IP 中还包括 ICMP 协议和 ARP 协议&lt;/p&gt;
+&lt;p&gt;ICMP ⽤于告知⽹络包传送过程中产⽣的错误以及各种控制信息。
+ARP ⽤于根据 IP 地址查询相应的以太⽹ MAC 地址&lt;/p&gt;
+&lt;p&gt;IP 下⾯的⽹卡驱动程序负责控制⽹卡硬件，⽽最下⾯的⽹卡则负责完成实际的收发操作，也就是对⽹线中的信号执⾏发送和接收操作&lt;/p&gt;
+&lt;h3 id=&#34;可靠传输--tcp&#34;&gt;可靠传输 —— TCP&lt;/h3&gt;
+&lt;p&gt;这个所谓的「连接」，只是双⽅计算机⾥维护⼀个状态机，在连接建⽴的过程中，双⽅的状态变化时序图就像这样&lt;/p&gt;
+&lt;p&gt;所以三次握⼿⽬的是保证双⽅都有发送和接收的能⼒&lt;/p&gt;
+&lt;h3 id=&#34;tcp-分割数据&#34;&gt;TCP 分割数据&lt;/h3&gt;
+&lt;p&gt;MTU ：⼀个⽹络包的最⼤⻓度，以太⽹中⼀般为 1500 字节。
+MSS ：除去 IP 和 TCP 头部之后，⼀个⽹络包所能容纳的 TCP 数据的最⼤⻓度。&lt;/p&gt;
+&lt;h3 id=&#34;tcp-报成&#34;&gt;TCP 报⽂⽣成&lt;/h3&gt;
+&lt;p&gt;TCP 协议⾥⾯会有两个端⼝，⼀个是浏览器监听的端⼝（通常是随机⽣成的），⼀个是 Web 服务器监听的端⼝（HTTP 默认端⼝号是 80 ， HTTPS 默认端⼝号是 443 ）。&lt;/p&gt;
+&lt;p&gt;在双⽅建⽴了连接后，TCP 报⽂中的数据部分就是存放 HTTP 头部 + 数据，组装好 TCP 报⽂之后，就需交给下⾯的⽹络层处理&lt;/p&gt;
+&lt;h3 id=&#34;远程定位--ip&#34;&gt;远程定位 —— IP&lt;/h3&gt;
+&lt;p&gt;TCP 模块在执⾏连接、收发、断开等各阶段操作时，都需要委托 IP 模块将数据封装成⽹络包发送给通信对象。&lt;/p&gt;
+&lt;h3 id=&#34;ip-报成&#34;&gt;IP 报⽂⽣成&lt;/h3&gt;
+&lt;h3 id=&#34;两点传输--mac&#34;&gt;两点传输 —— MAC&lt;/h3&gt;
+&lt;p&gt;⽣成了 IP 头部之后，接下来⽹络包还需要在 IP 头部的前⾯加上 MAC 头部&lt;/p&gt;
+&lt;p&gt;MAC 头部是以太⽹使⽤的头部，它包含了接收⽅和发送⽅的 MAC 地址等信息。&lt;/p&gt;
+&lt;p&gt;在 MAC 包头⾥需要发送⽅ MAC 地址和接收⽅⽬标 MAC 地址，⽤于两点之间的传输&lt;/p&gt;
+&lt;p&gt;⼀般在 TCP/IP 通信⾥，MAC 包头的协议类型只使⽤：
+0800 ： IP 协议
+0806 ： ARP 协议&lt;/p&gt;
+&lt;p&gt;MAC 发送⽅和接收⽅如何确认?
+发送⽅的 MAC 地址获取就⽐较简单了，MAC 地址是在⽹卡⽣产时写⼊到 ROM ⾥的，只要将这个值读取出来写⼊到 MAC 头部就可以了。&lt;/p&gt;
+&lt;p&gt;接收⽅的 MAC 地址就有点复杂了，只要告诉以太⽹对⽅的 MAC 的地址，以太⽹就会帮我们把包发送过去，那么很显然这⾥应该填写对⽅的 MAC 地址。
+所以先得搞清楚应该把包发给谁，这个只要查⼀下路由表就知道了。在路由表中找到相匹配的条⽬，然后把包发给Gateway 列中的 IP 地址就可以了。&lt;/p&gt;
+&lt;p&gt;在后续操作系统会把本次查询结果放到⼀块叫做 ARP 缓存的内存空间留着以后⽤，不过缓存的时间就⼏分钟&lt;/p&gt;
+&lt;p&gt;也就是说，在发包时：
+先查询 ARP 缓存，如果其中已经保存了对⽅的 MAC 地址，就不需要发送 ARP 查询，直接使⽤ ARP 缓存中的地址&lt;/p&gt;
+&lt;p&gt;⽽当 ARP 缓存中不存在对⽅ MAC 地址时，则发送 ARP ⼴播查询&lt;/p&gt;
+&lt;h3 id=&#34;出--卡&#34;&gt;出⼝ —— ⽹卡&lt;/h3&gt;
+&lt;p&gt;⽹络包只是存放在内存中的⼀串⼆进制数字信息，没有办法直接发送给对⽅。因此，我们需要将数字信息转换为电信号，才能在⽹线上传输，也就是说，这才是真正的数据发送过程&lt;/p&gt;
+&lt;p&gt;负责执⾏这⼀操作的是⽹卡，要控制⽹卡还需要靠⽹卡驱动程序&lt;/p&gt;
+&lt;p&gt;⽹卡驱动从 IP 模块获取到包之后，会将其复制到⽹卡内的缓存区中，接着会在其开头加上报头和起始帧分界符，在末尾加上⽤于检测错误的帧校验序列。&lt;/p&gt;
+&lt;h3 id=&#34;送别者--交换机&#34;&gt;送别者 —— 交换机&lt;/h3&gt;
+&lt;p&gt;下⾯来看⼀下包是如何通过交换机的。交换机的设计是将⽹络包原样转发到⽬的地。交换机⼯作在 MAC 层，也称为⼆层⽹络设备。&lt;/p&gt;
+&lt;p&gt;⾸先，电信号到达⽹线接⼝，交换机⾥的模块进⾏接收，接下来交换机⾥的模块将电信号转换为数字信号。&lt;/p&gt;
+&lt;p&gt;然后通过包末尾的 FCS 校验错误，如果没问题则放到缓冲区。这部分操作基本和计算机的⽹卡相同，但交换机的⼯作⽅式和⽹卡不同。&lt;/p&gt;
+&lt;p&gt;交换机的端⼝不具有 MAC 地址&lt;/p&gt;
+&lt;p&gt;将包存⼊缓冲区后，接下来需要查询⼀下这个包的接收⽅ MAC 地址是否已经在 MAC 地址表中有记录了
+交换机的 MAC 地址表主要包含两个信息：
+⼀个是设备的 MAC 地址，
+另⼀个是该设备连接在交换机的哪个端⼝上。&lt;/p&gt;
+&lt;p&gt;交换机根据 MAC 地址表查找 MAC 地址，然后将信号发送到相应的端⼝&lt;/p&gt;
+&lt;h3 id=&#34;出境--路由器&#34;&gt;出境⼤⻔ —— 路由器&lt;/h3&gt;
+&lt;h4 id=&#34;路由器与交换机的区别&#34;&gt;路由器与交换机的区别&lt;/h4&gt;
+&lt;p&gt;⽹络包经过交换机之后，现在到达了路由器，并在此被转发到下⼀个路由器或⽬标设备&lt;/p&gt;
+&lt;p&gt;这⼀步转发的⼯作原理和交换机类似，也是通过查表判断包转发的⽬标&lt;/p&gt;
+&lt;p&gt;因为路由器是基于 IP 设计的，俗称三层⽹络设备，路由器的各个端⼝都具有 MAC 地址和 IP 地址；
+⽽交换机是基于以太⽹设计的，俗称⼆层⽹络设备，交换机的端⼝不具有 MAC 地址。&lt;/p&gt;
+&lt;h4 id=&#34;路由器基本原理&#34;&gt;路由器基本原理&lt;/h4&gt;
+&lt;p&gt;路由器的端⼝具有 MAC 地址，因此它就能够成为以太⽹的发送⽅和接收⽅；同时还具有 IP 地址，从这个意义上来说，它和计算机的⽹卡是⼀样的&lt;/p&gt;
+&lt;h4 id=&#34;路由器的包接收操作&#34;&gt;路由器的包接收操作&lt;/h4&gt;
+&lt;p&gt;⾸先，电信号到达⽹线接⼝部分，路由器中的模块会将电信号转成数字信号，然后通过包末尾的 FCS 进⾏错误校验。&lt;/p&gt;
+&lt;p&gt;如果没问题则检查 MAC 头部中的接收⽅ MAC 地址，看看是不是发给⾃⼰的包，如果是就放到接收缓冲区中，否则就丢弃这个包。&lt;/p&gt;
+&lt;p&gt;总的来说，路由器的端⼝都具有 MAC 地址，只接收与⾃身地址匹配的包，遇到不匹配的包则直接丢弃&lt;/p&gt;
+&lt;h4 id=&#34;查询路由表确定输出端&#34;&gt;查询路由表确定输出端⼝&lt;/h4&gt;
+&lt;p&gt;完成包接收操作之后，路由器就会去掉包开头的 MAC 头部。&lt;/p&gt;
+&lt;p&gt;MAC 头部的作⽤就是将包送达路由器，其中的接收⽅ MAC 地址就是路由器端⼝的 MAC 地址。因此，当包到达路由器之后，MAC 头部的任务就完成了，于是 MAC 头部就会被丢弃。&lt;/p&gt;
+&lt;p&gt;接下来，路由器会根据 MAC 头部后⽅的 IP 头部中的内容进⾏包的转发操作。&lt;/p&gt;
+&lt;p&gt;转发操作分为⼏个阶段，⾸先是查询路由表判断转发⽬标&lt;/p&gt;
+&lt;h4 id=&#34;路由器的发送操作&#34;&gt;路由器的发送操作&lt;/h4&gt;
+&lt;p&gt;⾸先，我们需要根据路由表的⽹关列判断对⽅的地址。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果⽹关是⼀个 IP 地址，则这个IP 地址就是我们要转发到的⽬标地址，还未抵达终点，还需继续需要路由器转发&lt;/li&gt;
+&lt;li&gt;如果⽹关为空，则 IP 头部中的接收⽅ IP 地址就是要转发到的⽬标地址，也是就终于找到 IP 包头⾥的⽬标地址了，说明已抵达终点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;互相扒--服务器-与-客户端&#34;&gt;互相扒⽪ —— 服务器 与 客户端&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405071937910.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;linux-系统是如何收发络包的&#34;&gt;Linux 系统是如何收发⽹络包的？&lt;/h2&gt;
+&lt;p&gt;⽹络模型
+该模型主要有 7 层，分别是应⽤层、表示层、会话层、传输层、⽹络层、数据链路层以及物理层
+应⽤层，负责给应⽤程序提供统⼀的接⼝；
+表示层，负责把数据转换成兼容另⼀个系统能识别的格式；
+会话层，负责建⽴、管理和终⽌表示层实体之间的通信会话；
+传输层，负责端到端的数据传输；
+⽹络层，负责数据的路由、转发、分⽚；
+数据链路层，负责数据的封帧和差错检测，以及 MAC 寻址；
+物理层，负责在物理⽹络中传输数据帧&lt;/p&gt;
+&lt;p&gt;TCP/IP ⽹络模型共有 4 层，分别是应⽤层、传输层、⽹络层和⽹络接⼝层，每⼀层负责的职能如下
+应⽤层，负责向⽤户提供⼀组应⽤程序，⽐如 HTTP、DNS、FTP 等;
+传输层，负责端到端的通信，⽐如 TCP、UDP 等；
+⽹络层，负责⽹络包的封装、分⽚、路由、转发，⽐如 IP、ICMP 等；
+⽹络接⼝层，负责⽹络包在物理⽹络中的传输，⽐如⽹络包的封帧、 MAC 寻址、差错检测，以及通过⽹卡传输⽹络帧等&lt;/p&gt;
+&lt;h3 id=&#34;linux-络协议栈&#34;&gt;Linux ⽹络协议栈&lt;/h3&gt;
+&lt;p&gt;我们可以把⾃⼰的身体⽐作应⽤层中的数据，打底⾐服⽐作传输层中的 TCP 头，外套⽐作⽹络层中 IP 头，帽⼦和鞋⼦分别⽐作⽹络接⼝层的帧头和帧尾。&lt;/p&gt;
+&lt;p&gt;这些新增和头部和尾部，都有各⾃的作⽤，也都是按照特定的协议格式填充，这每⼀层都增加了各⾃的协议头，那⾃然⽹络包的⼤⼩就增⼤了，但物理链路并不能传输任意⼤⼩的数据包，所以在以太⽹中，规定了最⼤传输单元（MTU）是 1500 字节，也就是规定了单次传输的最⼤ IP 包⼤⼩。&lt;/p&gt;
+&lt;p&gt;应⽤程序需要通过系统调⽤，来跟 Socket 层进⾏数据交互；
+Socket 层的下⾯就是传输层、⽹络层和⽹络接⼝层；
+最下⾯的⼀层，则是⽹卡驱动程序和硬件⽹卡设备&lt;/p&gt;
+&lt;h3 id=&#34;linux-接收络包的流程&#34;&gt;Linux 接收⽹络包的流程&lt;/h3&gt;
+&lt;p&gt;最简单的⼀种⽅式就是触发中断，也就是每当⽹卡收到⼀个⽹络包，就触发⼀个中断告诉操作系统
+采⽤了更为简化的 TCP/IP 模型，Linux ⽹络协议栈就是按照了该模型来实现的。&lt;/p&gt;
+&lt;p&gt;当应⽤程序通过 Socket 接⼝发送数据包，数据包会被⽹络协议栈从上到下进⾏逐层处理后，才会被送到⽹卡队列中，随后由⽹卡将⽹络包发送出去&lt;/p&gt;
+&lt;p&gt;⽽在接收⽹络包时，同样也要先经过⽹络协议栈从下到上的逐层处理，最后才会被送到应⽤程序。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>图解HTTP</title>
+        <link>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3http/</link>
+        <pubDate>Wed, 08 May 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3http/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142259587.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;图解http&#34;&gt;图解HTTP&lt;/h1&gt;
+&lt;h1 id=&#34;了解web及网络基础&#34;&gt;了解Web及网络基础&lt;/h1&gt;
+&lt;h2 id=&#34;使用http协议访问web&#34;&gt;使用HTTP协议访问Web&lt;/h2&gt;
+&lt;h2 id=&#34;http的诞生&#34;&gt;HTTP的诞生&lt;/h2&gt;
+&lt;h2 id=&#34;网络基础tcpip&#34;&gt;网络基础TCP/IP&lt;/h2&gt;
+&lt;h3 id=&#34;tcpip协议族&#34;&gt;TCP/IP协议族&lt;/h3&gt;
+&lt;p&gt;协议:计算机与网络设备要相互通信，双方就必须基于相同的方法。比如，如何探测到通信目标、由哪一边先发起通信、使用哪种语言进行通信、怎样结束通信等规则都需要事先确定。不同的硬件、操作系统之
+间的通信，所有的这一切都需要一种规则。而我们就把这种规则称为协议（protocol）。&lt;/p&gt;
+&lt;h3 id=&#34;tcpip的分层管理&#34;&gt;TCP/IP的分层管理&lt;/h3&gt;
+&lt;p&gt;TCP/IP 协议族里重要的一点就是分层。TCP/IP 协议族按层次分别分为以下 4 层：&lt;strong&gt;应用层&lt;/strong&gt;、&lt;strong&gt;传输层&lt;/strong&gt;、&lt;strong&gt;网络层&lt;/strong&gt;和&lt;strong&gt;数据链路层&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;把 TCP/IP 层次化是有好处的。比如，如果互联网只由一个协议统筹，某个地方需要改变设计时，就必须把所有部分整体替换掉。而分层之后只需把变动的层替换掉即可。把各层之间的接口部分规划好之后，每个层次内部的设计就能够自由改动了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;应用层：应用层决定了向用户提供应用服务时通信的活动，TCP/IP 协议族内预存了各类通用的应用服务。比如，FTP（FileTransfer Protocol，文件传输协议）和 DNS（Domain Name System，域名系统）服务就是其中两类。 HTTP 协议也处于该层。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;传输层：传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输，在传输层有两个性质不同的协议：TCP（Transmission ControlProtocol，传输控制协议）和 UDP（User Data Protocol，用户数据报协议）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网络层（网络互连层）：网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。与对方计算机之间通过多台计算机或网络设备进行传输时，网络层所起的作用就是在众多的选项内选择一条传输路线&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;链路层（数据链路层，网络接口层）：用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分（还包括连接器等一切传输媒介）。硬件上的范畴均在链路层的作用范围之内&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcpip通信传输流&#34;&gt;TCP/IP通信传输流&lt;/h3&gt;
+&lt;p&gt;利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。&lt;/p&gt;
+&lt;p&gt;发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;这种把数据信息包装起来的做法称为封装（encapsulate）。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;与http关系密切的协议iptcp和dns&#34;&gt;与HTTP关系密切的协议：IP,TCP和DNS&lt;/h2&gt;
+&lt;h3 id=&#34;负责传输的ip协议&#34;&gt;负责传输的IP协议&lt;/h3&gt;
+&lt;p&gt;“IP”其实是一种协议的名称&lt;/p&gt;
+&lt;p&gt;IP 协议的作用是把各种数据包传送给对方。而要保证确实传送到对方那里，则需要满足各类条件。其中两个重要的条件是 IP 地址和 MAC地址（Media Access Control Address）。&lt;/p&gt;
+&lt;p&gt;IP 地址指明了节点被分配到的地址，MAC 地址是指网卡所属的固定地址。IP 地址可以和 MAC 地址进行配对。IP 地址可变换，但 MAC地址基本上不会更改。&lt;/p&gt;
+&lt;p&gt;使用 ARP 协议凭借 MAC 地址进行通信，ARP 是一种用以解析地址的协议，根据通信方的 IP 地址就可以反查出对应的 MAC 地址。&lt;/p&gt;
+&lt;h3 id=&#34;确保可靠性的tcp协议&#34;&gt;确保可靠性的TCP协议&lt;/h3&gt;
+&lt;p&gt;TCP 位于传输层，提供可靠的字节流服务。&lt;/p&gt;
+&lt;p&gt;所谓的字节流服务（Byte Stream Service）是指，为了方便传输，将大块数据分割成以报文段（segment）为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。一言以蔽之，TCP 协议为了更容易传送大数据才把数据分割，而且 TCP 协议能够确认数据最终是否送达到对方。&lt;/p&gt;
+&lt;p&gt;为了准确无误地将数据送达目标处，TCP 协议采用了三次握手（three-way handshaking）策略&lt;/p&gt;
+&lt;p&gt;握手过程中使用了 TCP 的标志（flag） —— SYN（synchronize） 和 ACK（acknowledgement）。&lt;/p&gt;
+&lt;p&gt;发送端首先发送一个带 SYN 标志的数据包给对方。接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传一个带 ACK 标志的数据包，代表“握手”结束&lt;/p&gt;
+&lt;p&gt;若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。&lt;/p&gt;
+&lt;h3 id=&#34;负责域名解析的dns服务&#34;&gt;负责域名解析的DNS服务&lt;/h3&gt;
+&lt;p&gt;DNS（Domain Name System）服务是和 HTTP 协议一样位于应用层的协议。它提供域名到 IP 地址之间的解析服务。&lt;/p&gt;
+&lt;p&gt;计算机既可以被赋予 IP 地址，也可以被赋予主机名和域名。&lt;/p&gt;
+&lt;p&gt;用户通常使用主机名或域名来访问对方的计算机，而不是直接通过 IP地址访问。因为与 IP 地址的一组纯数字相比，用字母配合数字的表示形式来指定计算机名更符合人类的记忆习惯&lt;/p&gt;
+&lt;p&gt;但要让计算机去理解名称，相对而言就变得困难了。因为计算机更擅长处理一长串数字&lt;/p&gt;
+&lt;p&gt;为了解决上述的问题，DNS 服务应运而生。DNS 协议提供通过域名查找 IP 地址，或逆向从 IP 地址反查域名的服务
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405012253520.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;各种协议与http协议的关系&#34;&gt;各种协议与HTTP协议的关系&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405012251747.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;uri和url&#34;&gt;URI和URL&lt;/h2&gt;
+&lt;h3 id=&#34;统一资源标识符uri&#34;&gt;统一资源标识符URI&lt;/h3&gt;
+&lt;h3 id=&#34;uri格式&#34;&gt;URI格式&lt;/h3&gt;
+&lt;p&gt;表示指定的 URI，要使用涵盖全部必要信息的绝对 URI、绝对 URL以及相对 URL。相对 URL，是指从浏览器中基本 URI 处指定的 URL，形如 /image/logo.gif。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405012359410.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;让我们先来了解一下绝对 URI 的格式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用 http: 或 https: 等协议方案名获取访问资源时要指定协议类型。不区分字母大小写，最后附一个冒号（:）。
+也可使用 data: 或 javascript: 这类指定数据或脚本程序的方案名。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;登录信息（认证）
+指定用户名和密码作为从服务器端获取资源时必要的登录信息（身份认证）。此项是可选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器地址
+使用绝对 URI 必须指定待访问的服务器地址。地址可以是类似hackr.jp 这种 DNS 可解析的名称，或是 192.168.1.1 这类 IPv4 地址名，还可以是 [0:0:0:0:0:0:0:1] 这样用方括号括起来的 IPv6 地址名。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器端口号
+指定服务器连接的网络端口号。此项也是可选项，若用户省略则自动使用默认端口号。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;带层次的文件路径
+指定服务器上的文件路径来定位特指的资源。这与 UNIX 系统的文件目录结构相似&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查询字符串
+针对已指定的文件路径内的资源，可以使用查询字符串传入任意参数。此项可选。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;片段标识符
+使用片段标识符通常可标记出已获取资源中的子资源（文档内的某个位置）。但在 RFC 中并没有明确规定其使用方法。该项也为可选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;并不是所有的应用程序都符合 RFC&lt;/p&gt;
+&lt;p&gt;有一些用来制定 HTTP 协议技术标准的文档，它们被称为RFC（Request for Comments，征求修正意见书）。&lt;/p&gt;
+&lt;p&gt;通常，应用程序会遵照由 RFC 确定的标准实现。可以说，RFC 是互联网的设计文档，要是不按照 RFC 标准执行，就有可能导致无法通信的状况。比如，有一台 Web 服务器内的应用服务没有遵照RFC 的标准实现，那 Web 浏览器就很可能无法访问这台服务器了。&lt;/p&gt;
+&lt;h1 id=&#34;简单的http协议&#34;&gt;简单的HTTP协议&lt;/h1&gt;
+&lt;h2 id=&#34;http协议用于客户端和服务端之间的通信&#34;&gt;HTTP协议用于客户端和服务端之间的通信&lt;/h2&gt;
+&lt;h2 id=&#34;通过请求和响应的交换达成通信&#34;&gt;通过请求和响应的交换达成通信&lt;/h2&gt;
+&lt;p&gt;请求报文是由请求方法、请求 URI、协议版本、可选的请求首部字段和内容实体构成的。&lt;/p&gt;
+&lt;p&gt;响应报文基本上由协议版本、状态码（表示请求成功或失败的数字代码）、用以解释状态码的原因短语、可选的响应首部字段以及实体主体构成。&lt;/p&gt;
+&lt;h2 id=&#34;http是不保存状态的协议&#34;&gt;HTTP是不保存状态的协议&lt;/h2&gt;
+&lt;h2 id=&#34;请求uri定位资源&#34;&gt;请求URI定位资源&lt;/h2&gt;
+&lt;h2 id=&#34;告知服务器意图的http方法&#34;&gt;告知服务器意图的HTTP方法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;GET:获取资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;POST：传输实体主体 虽然用 GET 方法也可以传输实体的主体，但一般不用 GET 方法进行传输，而是用 POST 方法。虽说 POST 的功能与 GET 很相似，但POST 的主要目的并不是获取响应的主体内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PUT：传输文件 鉴于 HTTP/1.1 的 PUT 方法自身不带验证机制，任何人都可以上传文件 , 存在安全性问题，因此一般的 Web 网站不使用该方法。若配合 Web 应用程序的验证机制，或架构设计采用REST（REpresentational State Transfer，表征状态转移）标准的同类Web 网站，就可能会开放使用 PUT方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HEAD:获取报文首部 HEAD 方法和 GET 方法一样，只是不返回报文主体部分。用于确认URI 的有效性及资源更新的日期时间等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DELETE:删除文件 DELETE 方法用来删除文件，是与 PUT 相反的方法。DELETE 方法按请求 URI 删除指定的资源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OPTIONS:询问支持的方法 OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TRACE：追踪路径 TRACE 方法是让 Web 服务器端将之前的请求通信环回给客户端的方法。
+发送请求时，在 Max-Forwards 首部字段中填入数值，每经过一个服务器端就将该数字减 1，当数值刚好减到 0 时，就停止继续传输，最后接收到请求的服务器端则返回状态码 200 OK 的响应。
+客户端通过 TRACE 方法可以查询发送出去的请求是怎样被加工修改/ 篡改的。这是因为，请求想要连接到源目标服务器可能会通过代理中转，TRACE 方法就是用来确认连接过程中发生的一系列操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CONNECT:CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行 TCP 通信。主要使用 SSL（Secure Sockets Layer，安全套接层）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用方法下达命令&#34;&gt;使用方法下达命令&lt;/h2&gt;
+&lt;h2 id=&#34;持久连接节省通信量&#34;&gt;持久连接节省通信量&lt;/h2&gt;
+&lt;h3 id=&#34;持久连接&#34;&gt;持久连接&lt;/h3&gt;
+&lt;p&gt;持久连接的特点是，只要任意一端没有明确提出断开连接，则保持 TCP 连接状态。
+持久连接旨在建立 1 次 TCP 连接后进行多次请求和响应的交互&lt;/p&gt;
+&lt;p&gt;持久连接的好处在于减少了 TCP 连接的重复建立和断开所造成的额外开销，减轻了服务器端的负载。另外，减少开销的那部分时间，使HTTP 请求和响应能够更早地结束，这样 Web 页面的显示速度也就相应提高了。&lt;/p&gt;
+&lt;h3 id=&#34;管线化&#34;&gt;管线化&lt;/h3&gt;
+&lt;p&gt;持久连接使得多数请求以管线化（pipelining）方式发送成为可能。从前发送请求后需等待并收到响应，才能发送下一个请求。管线化技术出现后，不用等待响应亦可直接发送下一个请求。
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405020024030.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用cookie的状态管理&#34;&gt;使用Cookie的状态管理&lt;/h2&gt;
+&lt;p&gt;HTTP 是无状态协议，它不对之前发生过的请求和响应的状态进行管理。也就是说，无法根据之前的状态进行本次的请求处理。不可否认，无状态协议当然也有它的优点。由于不必保存状态，自然可减少服务器的 CPU 及内存资源的消耗。从另一侧面来说，也正是因为 HTTP 协议本身是非常简单的，所以才会被应用在各种场景里&lt;/p&gt;
+&lt;p&gt;Cookie 会根据从服务器端发送的响应报文内的一个叫做 Set-Cookie 的首部字段信息，通知客户端保存 Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入 Cookie 值后发送出去。&lt;/p&gt;
+&lt;p&gt;服务器端发现客户端发送过来的 Cookie 后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。&lt;/p&gt;
+&lt;h1 id=&#34;http报文内的http信息&#34;&gt;HTTP报文内的HTTP信息&lt;/h1&gt;
+&lt;h2 id=&#34;http报文&#34;&gt;HTTP报文&lt;/h2&gt;
+&lt;p&gt;用于 HTTP 协议交互的信息被称为 HTTP 报文。请求端（客户端）的HTTP 报文叫做请求报文，响应端（服务器端）的叫做响应报文。HTTP 报文本身是由多行（用 CR+LF 作换行符）数据构成的字符串文本。&lt;/p&gt;
+&lt;p&gt;HTTP 报文大致可分为报文首部和报文主体两块。两者由最初出现的空行（CR+LF）来划分。通常，并不一定要有报文主体。&lt;/p&gt;
+&lt;p&gt;请求报文和响应报文的首部内容由以下数据组成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;请求行
+包含用于请求的方法，请求 URI 和 HTTP 版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;状态行
+包含表明响应结果的状态码，原因短语和 HTTP 版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;首部字段
+包含表示请求和响应的各种条件和属性的各类首部：一般有 4 种首部，分别是：通用首部、请求首部、响应首部和实体首部。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;其他
+可能包含 HTTP 的 RFC 里未定义的首部（Cookie 等）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;编码提升传输速率&#34;&gt;编码提升传输速率&lt;/h2&gt;
+&lt;p&gt;HTTP 在传输数据时可以按照数据原貌直接传输，但也可以在传输过程中通过编码提升传输速率。通过在传输时编码，能有效地处理大量的访问请求。但是，编码的操作需要计算机来完成，因此会消耗更多的 CPU 等资源。&lt;/p&gt;
+&lt;h3 id=&#34;报文主体和实体主体的差异&#34;&gt;报文主体和实体主体的差异&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;报文：是 HTTP 通信中的基本单位，由 8 位组字节流（octet sequence，其中 octet 为 8 个比特）组成，通过 HTTP 通信传输。&lt;/li&gt;
+&lt;li&gt;实体：作为请求或响应的有效载荷数据（补充项）被传输，其内容由实体首部和实体主体组成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HTTP 报文的主体用于传输请求或响应的实体主体。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;通常，报文主体等于实体主体。只有当传输中进行编码操作时，实体主体的内容发生变化，才导致它和报文主体产生差异。&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;压缩传输的内容编码&#34;&gt;压缩传输的内容编码&lt;/h3&gt;
+&lt;p&gt;向待发送邮件内增加附件时，为了使邮件容量变小，我们会先用 ZIP压缩文件之后再添加附件发送。HTTP 协议中有一种被称为内容编码的功能也能进行类似的操作。&lt;/p&gt;
+&lt;p&gt;内容编码指明应用在实体内容上的编码格式，并保持实体信息原样压缩。内容编码后的实体由客户端接收并负责解码。&lt;/p&gt;
+&lt;p&gt;常用的内容编码有以下几种。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;gzip（GNU zip）&lt;/li&gt;
+&lt;li&gt;compress（UNIX系统的标准压缩）&lt;/li&gt;
+&lt;li&gt;defate（zlib）&lt;/li&gt;
+&lt;li&gt;identity（不进行编码）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分割发送的分块传输编码&#34;&gt;分割发送的分块传输编码&lt;/h3&gt;
+&lt;p&gt;在 HTTP 通信过程中，请求的编码实体资源尚未全部传输完成之前，浏览器无法显示请求页面。在传输大容量数据时，通过把数据分割成多块，能够让浏览器逐步显示页面。&lt;/p&gt;
+&lt;p&gt;这种把实体主体分块的功能称为分块传输编码&lt;/p&gt;
+&lt;p&gt;分块传输编码会将实体主体分成多个部分（块）。每一块都会用十六进制来标记块的大小，而实体主体的最后一块会使用“0(CR+LF)”来标记。&lt;/p&gt;
+&lt;h2 id=&#34;发送多种数据的多部分对象集合&#34;&gt;发送多种数据的多部分对象集合&lt;/h2&gt;
+&lt;p&gt;在 MIME 扩展中会使用一种称为多部分对象集合（Multipart）的方法，来容纳多份不同类型的数据。&lt;/p&gt;
+&lt;p&gt;相应地，HTTP 协议中也采纳了多部分对象集合，发送的一份报文主体内可含有多类型实体。通常是在图片或文本文件等上传时使用&lt;/p&gt;
+&lt;p&gt;多部分对象集合包含的对象如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;multipart/form-data
+在 Web 表单文件上传时使用&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;multipart/byteranges
+状态码 206（Partial Content，部分内容）响应报文包含了多个范
+围的内容时使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在 HTTP 报文中使用多部分对象集合时，需要在首部字段里加上Content-type。&lt;/p&gt;
+&lt;p&gt;使用 boundary 字符串来划分多部分对象集合指明的各类实体。在boundary 字符串指定的各个实体的起始行之前插入“&amp;ndash;”标记（例如：&amp;ndash;AaB03x、&amp;ndash;THIS_STRING_SEPARATES），而在多部分对象集合对应的字符串的最后插入“&amp;ndash;”标记（例如：&amp;ndash;AaB03x&amp;ndash;、&amp;ndash;THIS_STRING_SEPARATES&amp;ndash;）作为结束。&lt;/p&gt;
+&lt;h2 id=&#34;获取部分内容的范围请求&#34;&gt;获取部分内容的范围请求&lt;/h2&gt;
+&lt;p&gt;以前，用户不能使用现在这种高速的带宽访问互联网，当时，下载一个尺寸稍大的图片或文件就已经很吃力了。如果下载过程中遇到网络中断的情况，那就必须重头开始。为了解决上述问题，需要一种可恢复的机制。所谓恢复是指能从之前下载中断处恢复下载。&lt;/p&gt;
+&lt;p&gt;要实现该功能需要指定下载的实体范围。像这样，指定范围发送的请求叫做范围请求（Range Request）。&lt;/p&gt;
+&lt;p&gt;对一份 10 000 字节大小的资源，如果使用范围请求，可以只请求5001~10 000 字节内的资源&lt;/p&gt;
+&lt;h2 id=&#34;内容协商返回最合适的内容&#34;&gt;内容协商返回最合适的内容&lt;/h2&gt;
+&lt;p&gt;当浏览器的默认语言为英语或中文，访问相同 URI 的 Web 页面时，则会显示对应的英语版或中文版的 Web 页面。这样的机制称为内容协商（Content Negotiation）。&lt;/p&gt;
+&lt;p&gt;内容协商机制是指客户端和服务器端就响应的资源内容进行交涉，然后提供给客户端最为适合的资源。内容协商会以响应资源的语言、字符集、编码方式等作为判断的基准&lt;/p&gt;
+&lt;p&gt;内容协商技术有以下 3 种类型。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器驱动协商&lt;/li&gt;
+&lt;li&gt;客户端驱动协商&lt;/li&gt;
+&lt;li&gt;透明协商：是服务器驱动和客户端驱动的结合体，是由服务器端和客户端各自进行内容协商的一种方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;返回结果的http状态码&#34;&gt;返回结果的HTTP状态码&lt;/h1&gt;
+&lt;h2 id=&#34;状态码告知从服务器端返回的请求结果&#34;&gt;状态码告知从服务器端返回的请求结果&lt;/h2&gt;
+&lt;p&gt;状态码如 200 OK，以 3 位数字和原因短语组成
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405020112563.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2xx成功&#34;&gt;2xx成功&lt;/h2&gt;
+&lt;h3 id=&#34;200-ok&#34;&gt;200 ok&lt;/h3&gt;
+&lt;h3 id=&#34;204-no-content&#34;&gt;204 no content&lt;/h3&gt;
+&lt;p&gt;该状态码代表服务器接收的请求已成功处理，但在返回的响应报文中不含实体的主体部分&lt;/p&gt;
+&lt;h3 id=&#34;206-partial-content&#34;&gt;206 partial content&lt;/h3&gt;
+&lt;p&gt;该状态码表示客户端进行了范围请求，而服务器成功执行了这部分的GET 请求。响应报文中包含由 Content-Range 指定范围的实体内容。&lt;/p&gt;
+&lt;h2 id=&#34;3xx重定向&#34;&gt;3xx重定向&lt;/h2&gt;
+&lt;h3 id=&#34;301-moved-permanently&#34;&gt;301 moved permanently&lt;/h3&gt;
+&lt;p&gt;永久性重定向。该状态码表示请求的资源已被分配了新的 URI，以后应使用资源现在所指的 URI。&lt;/p&gt;
+&lt;h3 id=&#34;302-found&#34;&gt;302 found&lt;/h3&gt;
+&lt;p&gt;临时性重定向。该状态码表示请求的资源已被分配了新的 URI，希望用户（本次）能使用新的 URI 访问。&lt;/p&gt;
+&lt;h3 id=&#34;303-see-other&#34;&gt;303 see other&lt;/h3&gt;
+&lt;p&gt;该状态码表示由于请求对应的资源存在着另一个 URI，应使用 GET方法定向获取请求的资源&lt;/p&gt;
+&lt;p&gt;当 301、302、303 响应状态码返回时，几乎所有的浏览器都会把POST 改成 GET，并删除请求报文内的主体，之后请求会自动再次发送。&lt;/p&gt;
+&lt;h3 id=&#34;304-not-modified&#34;&gt;304 not modified&lt;/h3&gt;
+&lt;p&gt;该状态码表示客户端发送附带条件的请求 2 时，服务器端允许请求访问资源，但未满足条件的情况。304 状态码返回时，不包含任何响应的主体部分&lt;/p&gt;
+&lt;h3 id=&#34;307-temporary-redirect&#34;&gt;307 temporary redirect&lt;/h3&gt;
+&lt;p&gt;临时重定向。该状态码与 302 Found 有着相同的含义&lt;/p&gt;
+&lt;h2 id=&#34;4xx客户端错误&#34;&gt;4xx客户端错误&lt;/h2&gt;
+&lt;h3 id=&#34;400-bad-request&#34;&gt;400 bad request&lt;/h3&gt;
+&lt;p&gt;该状态码表示请求报文中存在语法错误。当错误发生时，需修改请求的内容后再次发送请求&lt;/p&gt;
+&lt;h3 id=&#34;401-unauthorized&#34;&gt;401 unauthorized&lt;/h3&gt;
+&lt;p&gt;该状态码表示发送的请求需要有通过 HTTP 认证（BASIC 认证、DIGEST 认证）的认证信息。&lt;/p&gt;
+&lt;h3 id=&#34;403-forbidden&#34;&gt;403 forbidden&lt;/h3&gt;
+&lt;p&gt;该状态码表明对请求资源的访问被服务器拒绝了&lt;/p&gt;
+&lt;h3 id=&#34;404-not-found&#34;&gt;404 not found&lt;/h3&gt;
+&lt;p&gt;该状态码表明服务器上无法找到请求的资源&lt;/p&gt;
+&lt;h2 id=&#34;5xx服务器错误&#34;&gt;5xx服务器错误&lt;/h2&gt;
+&lt;h3 id=&#34;500-internal-server-error&#34;&gt;500 internal server error&lt;/h3&gt;
+&lt;p&gt;该状态码表明服务器端在执行请求时发生了错误。也有可能是 Web应用存在的 bug 或某些临时的故障&lt;/p&gt;
+&lt;h3 id=&#34;503-servicre-unavailable&#34;&gt;503 servicre unavailable&lt;/h3&gt;
+&lt;p&gt;该状态码表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;状态码和状况的不一致&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不少返回的状态码响应都是错误的，但是用户可能察觉不到这点。比如 Web 应用程序内部发生错误，状态码依然返回 200 OK，这种情况也经常遇到。&lt;/p&gt;
+&lt;h2 id=&#34;与http协作的web服务器&#34;&gt;与HTTP协作的Web服务器&lt;/h2&gt;
+&lt;p&gt;一台 Web 服务器可搭建多个独立域名的 Web 网站，也可作为通信路径上的中转服务器提升传输效率。&lt;/p&gt;
+&lt;h2 id=&#34;用单台虚拟主机实现多个域名&#34;&gt;用单台虚拟主机实现多个域名&lt;/h2&gt;
+&lt;p&gt;所以，如果一台服务器内托管了 &lt;a class=&#34;link&#34; href=&#34;https://www.tricorder.jp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.tricorder.jp&lt;/a&gt; 和 &lt;a class=&#34;link&#34; href=&#34;https://www.hackr.jp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.hackr.jp&lt;/a&gt; 这两个域名，当收到请求时就需要弄清楚究竟要访问哪个域名。&lt;/p&gt;
+&lt;p&gt;在相同的 IP 地址下，由于虚拟主机可以寄存多个不同主机名和域名的 Web 网站，因此在发送 HTTP 请求时，必须在 Host 首部内完整指定主机名或域名的 URI。&lt;/p&gt;
+&lt;h2 id=&#34;通信数据转发程序代理网关隧道&#34;&gt;通信数据转发程序：代理，网关，隧道&lt;/h2&gt;
+&lt;p&gt;HTTP 通信时，除客户端和服务器以外，还有一些用于通信数据转发的应用程序，例如代理、网关和隧道。它们可以配合服务器工作。&lt;/p&gt;
+&lt;p&gt;这些应用程序和服务器可以将请求转发给通信线路上的下一站服务器，并且能接收从那台服务器发送的响应再转发给客户端。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;代理：代理是一种有转发功能的应用程序，它扮演了位于服务器和客户端“中间人”的角色，接收由客户端发送的请求并转发给服务器，同时也接收服务器返回的响应并转发给客户端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网关：网关是转发其他服务器通信数据的服务器，接收从客户端发送来的请求时，它就像自己拥有资源的源服务器一样对请求进行处理。有时客户端可能都不会察觉，自己的通信目标是一个网关。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隧道：隧道是在相隔甚远的客户端和服务器两者之间进行中转，并保持双方通信连接的应用程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;代理&#34;&gt;代理&lt;/h3&gt;
+&lt;p&gt;代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。代理不改变请求 URI，会直接发送给前方持有资源的目标服务器。&lt;/p&gt;
+&lt;p&gt;持有资源实体的服务器被称为源服务器。从源服务器返回的响应经过代理服务器后再传给客户端。&lt;/p&gt;
+&lt;p&gt;每次通过代理服务器转发请求或响应时，会追加写入 Via 首部信息&lt;/p&gt;
+&lt;p&gt;在 HTTP 通信过程中，可级联多台代理服务器。请求和响应的转发会经过数台类似锁链一样连接起来的代理服务器。转发时，需要附加Via 首部字段以标记出经过的主机信息。&lt;/p&gt;
+&lt;p&gt;使用代理服务器的理由有：利用缓存技术（稍后讲解）减少网络带宽的流量，组织内部针对特定网站的访问控制，以获取访问日志为主要目的，等等。&lt;/p&gt;
+&lt;p&gt;代理有多种使用方法，按两种基准分类。一种是是否使用缓存，另一种是是否会修改报文。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;缓存代理
+代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本（缓存）保存在代理服务器上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当代理再次接收到对相同资源的请求时，就可以不从源服务器那里获取资源，而是将之前缓存的资源作为响应返回&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;透明代理
+转发请求或响应时，不对报文做任何加工的代理类型被称为透明代理（Transparent Proxy）。反之，对报文内容进行加工的代理被称为非透明代理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;网关&#34;&gt;网关&lt;/h3&gt;
+&lt;p&gt;利用网关可以由 HTTP 请求转化为其他协议通信&lt;/p&gt;
+&lt;p&gt;利用网关能提高通信的安全性，因为可以在客户端与网关之间的通信线路上加密以确保连接的安全。比如，网关可以连接数据库，使用SQL语句查询数据。另外，在 Web 购物网站上进行信用卡结算时，
+网关可以和信用卡结算系统联动。&lt;/p&gt;
+&lt;h3 id=&#34;隧道&#34;&gt;隧道&lt;/h3&gt;
+&lt;p&gt;隧道可按要求建立起一条与其他服务器的通信线路，届时使用 SSL等加密手段进行通信。隧道的目的是确保客户端能与服务器进行安全的通信。&lt;/p&gt;
+&lt;p&gt;隧道本身不会去解析 HTTP 请求。也就是说，请求保持原样中转给之后的服务器。隧道会在通信双方断开连接时结束。&lt;/p&gt;
+&lt;h2 id=&#34;保存资源的缓存&#34;&gt;保存资源的缓存&lt;/h2&gt;
+&lt;p&gt;缓存是指代理服务器或客户端本地磁盘内保存的资源副本。利用缓存可减少对源服务器的访问，因此也就节省了通信流量和通信时间。&lt;/p&gt;
+&lt;h3 id=&#34;缓存的有效期限&#34;&gt;缓存的有效期限&lt;/h3&gt;
+&lt;h3 id=&#34;客户端的缓存&#34;&gt;客户端的缓存&lt;/h3&gt;
+&lt;p&gt;缓存不仅可以存在于缓存服务器内，还可以存在客户端浏览器中。以Internet Explorer 程序为例，把客户端缓存称为临时网络文件&lt;/p&gt;
+&lt;p&gt;浏览器缓存如果有效，就不必再向服务器请求相同的资源了，可以直接从本地磁盘内读取&lt;/p&gt;
+&lt;p&gt;另外，和缓存服务器相同的一点是，当判定缓存过期后，会向源服务器确认资源的有效性。若判断浏览器缓存失效，浏览器会再次请求新资源。&lt;/p&gt;
+&lt;h1 id=&#34;http首部&#34;&gt;HTTP首部&lt;/h1&gt;
+&lt;h2 id=&#34;http报文首部&#34;&gt;HTTP报文首部&lt;/h2&gt;
+&lt;h2 id=&#34;http首部字段&#34;&gt;HTTP首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;http首部字段传递重要信息&#34;&gt;HTTP首部字段传递重要信息&lt;/h3&gt;
+&lt;p&gt;使用首部字段是为了给浏览器和服务器提供报文主体大小、所使用的语言、认证信息等内容。&lt;/p&gt;
+&lt;h3 id=&#34;http首部字段结构&#34;&gt;HTTP首部字段结构&lt;/h3&gt;
+&lt;p&gt;HTTP 首部字段是由首部字段名和字段值构成的，中间用冒号“:” 分隔。&lt;/p&gt;
+&lt;h3 id=&#34;4种http首部字段类型&#34;&gt;4种HTTP首部字段类型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;通用首部字段
+请求报文和响应报文两方都会使用的首部&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请求首部字段
+从客户端向服务器端发送请求报文时使用的首部。补充了请求的附加内容、客户端信息、响应内容相关优先级等信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;响应首部字段
+从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实体首部字段
+针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http11首部一览&#34;&gt;HTTP/1.1首部一览&lt;/h3&gt;
+&lt;p&gt;4个表&lt;/p&gt;
+&lt;h3 id=&#34;非http11首部字段&#34;&gt;非HTTP/1.1首部字段&lt;/h3&gt;
+&lt;p&gt;还有 Cookie、Set-Cookie 和 Content-Disposition等在其他 RFC 中定义的首部字段，它们的使用频率也很高。&lt;/p&gt;
+&lt;p&gt;这些非正式的首部字段统一归纳在 RFC4229 HTTP Header Field Registrations 中&lt;/p&gt;
+&lt;h3 id=&#34;end-to-end首部和hop-by-hop首部&#34;&gt;end-to-end首部和hop-by-hop首部&lt;/h3&gt;
+&lt;p&gt;HTTP 首部字段将定义成缓存代理和非缓存代理的行为，分成 2 种类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;端到端首部
+分在此类别中的首部会转发给请求 / 响应对应的最终接收目标，且必须保存在由缓存生成的响应中，另外规定它必须被转发&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;逐跳首部
+分在此类别中的首部只对单次转发有效，会因通过缓存或代理而不再转发。HTTP/1.1 和之后版本中，如果要使用 hop-by-hop 首部，需提供 Connection 首部字段。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;http11通用首部字段&#34;&gt;HTTP/1.1通用首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;cache-control&#34;&gt;cache-control&lt;/h3&gt;
+&lt;p&gt;通过指定首部字段 Cache-Control 的指令，就能操作缓存的工作机制。&lt;/p&gt;
+&lt;p&gt;表示是否能缓存的指令&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;public：当指定使用 public 指令时，则明确表明其他用户也可利用缓存&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;private：当指定 private 指令后，响应只以特定的用户作为对象，这与 public指令的行为相反。缓存服务器会对该特定用户提供资源缓存的服务，对于其他用户发送过来的请求，代理服务器则不会返回缓存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;no-cache
+使用 no-cache 指令的目的是为了防止从缓存中返回过期的资源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;控制可执行缓存的对象的指令&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;no-store
+当使用 no-store 指令 1 时，暗示请求（和对应的响应）或响应中包含机密信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;从字面意思上很容易把 no-cache 误解成为不缓存，但事实上 no-cache 代表不缓存过期的资源，缓存会向源服务器进行有效期确认后处理资源，也许称为 do-not-serve-from-cache-without-revalidation 更合适。no-store 才是真正地不进行缓存，请读者注意区别&lt;/p&gt;
+&lt;p&gt;因此，该指令规定缓存不能在本地存储请求或响应的任一部分。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;s-maxage
+s-maxage 指令的功能和 max-age 指令的相同，它们的不同点是 s-maxage 指令只适用于供多位用户使用的公共缓存服务器。也就是说，对于向同一用户重复返回响应的服务器来说，这个指令没有任何作用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;max-age
+当客户端发送的请求中包含 max-age 指令时，如果判定缓存资源的缓存时间数值比指定时间的数值更小，那么客户端就接收缓存的资源。另外，当指定 max-age 值为 0，那么缓存服务器通常需要将请求转发给源服务器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;min-fresh
+要求缓存服务器返回至少还未过指定时间的缓存资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;max-stale
+使用 max-stale 可指示缓存资源，即使过期也照常接收&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;only-if-cached
+使用 only-if-cached 指令表示客户端仅在缓存服务器本地缓存目标资源的情况下才会要求其返回。换言之，该指令要求缓存服务器不重新加载响应，也不会再次确认资源有效性。若发生请求缓存服务器的本地缓存无响应，则返回状态码 504 Gateway Timeout。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;must-revalidate
+使用 must-revalidate 指令，代理会向源服务器再次验证即将返回的响应缓存目前是否仍然有效。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;proxy-revaliadte
+proxy-revalidate 指令要求所有的缓存服务器在接收到客户端带有该指令的请求返回响应之前，必须再次验证缓存的有效性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;no-transform
+使用 no-transform 指令规定无论是在请求还是响应中，缓存都不能改变实体主体的媒体类型&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这样做可防止缓存或代理压缩图片等类似操作。&lt;/p&gt;
+&lt;p&gt;cache-control 扩展&lt;/p&gt;
+&lt;p&gt;cache-extension token&lt;/p&gt;
+&lt;p&gt;通过 cache-extension 标记（token），可以扩展 Cache-Control 首部字段内的指令&lt;/p&gt;
+&lt;p&gt;如上例，Cache-Control 首部字段本身没有 community 这个指令。借助extension tokens 实现了该指令的添加。如果缓存服务器不能理解community 这个新指令，就会直接忽略。因此，extension tokens 仅对能理解它的缓存服务器来说是有意义的&lt;/p&gt;
+&lt;h3 id=&#34;connection&#34;&gt;Connection&lt;/h3&gt;
+&lt;p&gt;Connection 首部字段具备如下两个作用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;控制不再转发给代理的首部字段&lt;/li&gt;
+&lt;li&gt;管理持久化连接&lt;/li&gt;
+&lt;li&gt;控制不再转发给代理的首部字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Connection: 不再转发的首部字段名&lt;/p&gt;
+&lt;p&gt;HTTP/1.1 版本的默认连接都是持久连接。为此，客户端会在持久连接上连续发送请求。当服务器端想明确断开连接时，则指定Connection 首部字段的值为 Close。&lt;/p&gt;
+&lt;h3 id=&#34;date&#34;&gt;Date&lt;/h3&gt;
+&lt;p&gt;首部字段 Date 表明创建 HTTP 报文的日期和时间&lt;/p&gt;
+&lt;h3 id=&#34;pragma&#34;&gt;Pragma&lt;/h3&gt;
+&lt;p&gt;Pragma 是 HTTP/1.1 之前版本的历史遗留字段，仅作为与 HTTP/1.0的向后兼容而定义&lt;/p&gt;
+&lt;p&gt;所有的中间服务器如果都能以 HTTP/1.1 为基准，那直接采用 Cache-Control: no-cache 指定缓存的处理方式是最为理想的。但要整体掌握全部中间服务器使用的 HTTP 协议版本却是不现实的。因此，发送的请求会同时含有下面两个首部字段。&lt;/p&gt;
+&lt;p&gt;Cache-Control: no-cache
+Pragma: no-cache&lt;/p&gt;
+&lt;h3 id=&#34;trailer&#34;&gt;Trailer&lt;/h3&gt;
+&lt;p&gt;首部字段 Trailer 会事先说明在报文主体后记录了哪些首部字段。该首部字段可应用在 HTTP/1.1 版本分块传输编码时&lt;/p&gt;
+&lt;h3 id=&#34;transfer-encoding&#34;&gt;Transfer-Encoding&lt;/h3&gt;
+&lt;p&gt;首部字段 Transfer-Encoding 规定了传输报文主体时采用的编码方式。&lt;/p&gt;
+&lt;h3 id=&#34;upgrade&#34;&gt;Upgrade&lt;/h3&gt;
+&lt;p&gt;首部字段 Upgrade 用于检测 HTTP 协议及其他协议是否可使用更高的版本进行通信，其参数值可以用来指定一个完全不同的通信协议&lt;/p&gt;
+&lt;h3 id=&#34;via&#34;&gt;Via&lt;/h3&gt;
+&lt;p&gt;使用首部字段 Via 是为了追踪客户端与服务器之间的请求和响应报文的传输路径。&lt;/p&gt;
+&lt;h3 id=&#34;warning&#34;&gt;Warning&lt;/h3&gt;
+&lt;p&gt;HTTP/1.1 的 Warning 首部是从 HTTP/1.0 的响应首部（Retry-After）演变过来的。该首部通常会告知用户一些与缓存相关的问题的警告。
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405021345456.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;请求首部字段&#34;&gt;请求首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;accept&#34;&gt;Accept&lt;/h3&gt;
+&lt;p&gt;Accept 首部字段可通知服务器，用户代理能够处理的媒体类型及媒体类型的相对优先级。可使用 type/subtype 这种形式，一次指定多种媒体类型。&lt;/p&gt;
+&lt;h3 id=&#34;accept-charset&#34;&gt;Accept-Charset&lt;/h3&gt;
+&lt;p&gt;Accept-Charset 首部字段可用来通知服务器用户代理支持的字符集及字符集的相对优先顺序&lt;/p&gt;
+&lt;h3 id=&#34;accept-encoding&#34;&gt;Accept-Encoding&lt;/h3&gt;
+&lt;p&gt;Accept-Encoding 首部字段用来告知服务器用户代理支持的内容编码及内容编码的优先级顺序&lt;/p&gt;
+&lt;p&gt;压缩方式或不压缩&lt;/p&gt;
+&lt;h3 id=&#34;accept-language&#34;&gt;Accept-Language&lt;/h3&gt;
+&lt;h3 id=&#34;authorization&#34;&gt;Authorization&lt;/h3&gt;
+&lt;p&gt;首部字段 Authorization 是用来告知服务器，用户代理的认证信息（证书值）。&lt;/p&gt;
+&lt;h3 id=&#34;expect&#34;&gt;Expect&lt;/h3&gt;
+&lt;p&gt;客户端使用首部字段 Expect 来告知服务器，期望出现的某种特定行为。&lt;/p&gt;
+&lt;h3 id=&#34;from&#34;&gt;From&lt;/h3&gt;
+&lt;p&gt;首部字段 From 用来告知服务器使用用户代理的用户的电子邮件地址&lt;/p&gt;
+&lt;h3 id=&#34;host&#34;&gt;Host&lt;/h3&gt;
+&lt;p&gt;首部字段 Host 会告知服务器，请求的资源所处的互联网主机名和端口号。Host 首部字段在 HTTP/1.1 规范内是唯一一个必须被包含在请求内的首部字段。&lt;/p&gt;
+&lt;h3 id=&#34;if-match&#34;&gt;If-Match&lt;/h3&gt;
+&lt;p&gt;形如 If-xxx 这种样式的请求首部字段，都可称为条件请求，服务器接收到附带条件的请求后，只有判断指定条件为真时，才会执行请求&lt;/p&gt;
+&lt;p&gt;只有当 If-Match 的字段值跟 ETag 值匹配一致时，服务器才会接受请求&lt;/p&gt;
+&lt;p&gt;服务器会比对 If-Match 的字段值和资源的 ETag 值，仅当两者一致时，才会执行请求。反之，则返回状态码 412 Precondition Failed 的响应。&lt;/p&gt;
+&lt;p&gt;还可以使用星号（*）指定 If-Match 的字段值。针对这种情况，服务器将会忽略 ETag 的值，只要资源存在就处理请求&lt;/p&gt;
+&lt;h3 id=&#34;if-none-match&#34;&gt;If-None-Match&lt;/h3&gt;
+&lt;h3 id=&#34;if-range&#34;&gt;If-Range&lt;/h3&gt;
+&lt;p&gt;首部字段 If-Range 属于附带条件之一。它告知服务器若指定的 If-Range 字段值（ETag 值或者时间）和请求资源的 ETag 值或时间相一致时，则作为范围请求处理。反之，则返回全体资源。&lt;/p&gt;
+&lt;h3 id=&#34;if-unmodified-since&#34;&gt;If-Unmodified-Since&lt;/h3&gt;
+&lt;p&gt;首部字段 If-Unmodified-Since 和首部字段 If-Modified-Since 的作用相反。它的作用的是告知服务器，指定的请求资源只有在字段值内指定的日期时间之后，未发生更新的情况下，才能处理请求。如果在指定日期时间后发生了更新，则以状态码 412 Precondition Failed 作为响应返回。&lt;/p&gt;
+&lt;h3 id=&#34;max-forwards&#34;&gt;Max-Forwards&lt;/h3&gt;
+&lt;p&gt;通过 TRACE 方法或 OPTIONS 方法，发送包含首部字段 Max-Forwards 的请求时，该字段以十进制整数形式指定可经过的服务器最大数目。服务器在往下一个服务器转发请求之前，Max-Forwards 的值减 1 后重新赋值。当服务器接收到 Max-Forwards 值为 0 的请求时，则不再进行转发，而是直接返回响应。&lt;/p&gt;
+&lt;h3 id=&#34;proxy-authorization&#34;&gt;Proxy-Authorization&lt;/h3&gt;
+&lt;p&gt;接收到从代理服务器发来的认证质询时，客户端会发送包含首部字段Proxy-Authorization 的请求，以告知服务器认证所需要的信息。&lt;/p&gt;
+&lt;h3 id=&#34;range&#34;&gt;Range&lt;/h3&gt;
+&lt;p&gt;对于只需获取部分资源的范围请求，包含首部字段 Range 即可告知服务器资源的指定范围。上面的示例表示请求获取从第 5001 字节至第10000 字节的资源。&lt;/p&gt;
+&lt;h3 id=&#34;referer&#34;&gt;Referer&lt;/h3&gt;
+&lt;p&gt;首部字段 Referer 会告知服务器请求的原始资源的 URI。&lt;/p&gt;
+&lt;p&gt;客户端一般都会发送 Referer 首部字段给服务器。但当直接在浏览器的地址栏输入 URI，或出于安全性的考虑时，也可以不发送该首部字段。&lt;/p&gt;
+&lt;p&gt;因为原始资源的 URI 中的查询字符串可能含有 ID 和密码等保密信息，要是写进 Referer 转发给其他服务器，则有可能导致保密信息的泄露。&lt;/p&gt;
+&lt;h3 id=&#34;te&#34;&gt;TE&lt;/h3&gt;
+&lt;p&gt;首部字段 TE 会告知服务器客户端能够处理响应的传输编码方式及相对优先级。它和首部字段 Accept-Encoding 的功能很相像，但是用于传输编码&lt;/p&gt;
+&lt;h3 id=&#34;user-agent&#34;&gt;User-Agent&lt;/h3&gt;
+&lt;p&gt;User-Agent 用于传达浏览器的种类&lt;/p&gt;
+&lt;p&gt;首部字段 User-Agent 会将创建请求的浏览器和用户代理名称等信息传达给服务器。&lt;/p&gt;
+&lt;p&gt;由网络爬虫发起请求时，有可能会在字段内添加爬虫作者的电子邮件地址。此外，如果请求经过代理，那么中间也很可能被添加上代理服务器的名称。&lt;/p&gt;
+&lt;h2 id=&#34;响应首部字段&#34;&gt;响应首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;accpet-range&#34;&gt;Accpet-Range&lt;/h3&gt;
+&lt;p&gt;首部字段 Accept-Ranges 是用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。&lt;/p&gt;
+&lt;p&gt;可指定的字段值有两种，可处理范围请求时指定其为 bytes，反之则指定其为 none。&lt;/p&gt;
+&lt;h3 id=&#34;age&#34;&gt;Age&lt;/h3&gt;
+&lt;p&gt;首部字段 Age 能告知客户端，源服务器在多久前创建了响应。字段值的单位为秒。&lt;/p&gt;
+&lt;h3 id=&#34;etag&#34;&gt;ETag&lt;/h3&gt;
+&lt;p&gt;首部字段 ETag 能告知客户端实体标识。它是一种可将资源以字符串形式做唯一性标识的方式。服务器会为每份资源分配对应的 ETag值。&lt;/p&gt;
+&lt;p&gt;资源被缓存时，就会被分配唯一性标识。例如，当使用中文版的浏览器访问 &lt;a class=&#34;link&#34; href=&#34;http://www.google.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.google.com/&lt;/a&gt; 时，就会返回中文版对应的资源，而使用英文版的浏览器访问时，则会返回英文版对应的资源。两者的URI 是相同的，所以仅凭 URI 指定缓存的资源是相当困难的。若在下载过程中出现连接中断、再连接的情况，都会依照 ETag 值来指定资源。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;强ETag值：不论实体发生多么细微的变化都会改变其值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;弱Etag值：弱 ETag 值只用于提示资源是否相同。只有资源发生了根本改变，产生差异时才会改变 ETag 值。这时，会在字段值最开始处附加 W/&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;location&#34;&gt;Location&lt;/h3&gt;
+&lt;p&gt;使用首部字段 Location 可以将响应接收方引导至某个与请求 URI 位置不同的资源。&lt;/p&gt;
+&lt;p&gt;几乎所有的浏览器在接收到包含首部字段 Location 的响应后，都会强制性地尝试对已提示的重定向资源的访问。&lt;/p&gt;
+&lt;h3 id=&#34;proxy-authenticate&#34;&gt;Proxy-Authenticate&lt;/h3&gt;
+&lt;p&gt;首部字段 Proxy-Authenticate 会把由代理服务器所要求的认证信息发送给客户端&lt;/p&gt;
+&lt;h3 id=&#34;retry-after&#34;&gt;Retry-After&lt;/h3&gt;
+&lt;p&gt;首部字段 Retry-After 告知客户端应该在多久之后再次发送请求。主要配合状态码 503 Service Unavailable 响应，或 3xx Redirect 响应一起使用。&lt;/p&gt;
+&lt;h3 id=&#34;server&#34;&gt;Server&lt;/h3&gt;
+&lt;p&gt;首部字段 Server 告知客户端当前服务器上安装的 HTTP 服务器应用程序的信息。不单单会标出服务器上的软件应用名称，还有可能包括版本号和安装时启用的可选项。&lt;/p&gt;
+&lt;h3 id=&#34;vary&#34;&gt;Vary&lt;/h3&gt;
+&lt;p&gt;当代理服务器接收到带有 Vary 首部字段指定获取资源的请求时，如果使用的 Accept-Language 字段的值相同，那么就直接从缓存返回响应。反之，则需要先从源服务器端获取资源后才能作为响应返回&lt;/p&gt;
+&lt;h3 id=&#34;www-authenticate&#34;&gt;WWW-Authenticate&lt;/h3&gt;
+&lt;p&gt;首部字段 WWW-Authenticate 用于 HTTP 访问认证。它会告知客户端适用于访问请求 URI 所指定资源的认证方案（Basic 或是 Digest）和带参数提示的质询&lt;/p&gt;
+&lt;h2 id=&#34;实体首部字段&#34;&gt;实体首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;allow&#34;&gt;Allow&lt;/h3&gt;
+&lt;p&gt;首部字段 Allow 用于通知客户端能够支持 Request-URI 指定资源的所有 HTTP 方法。&lt;/p&gt;
+&lt;h3 id=&#34;content-encodeing&#34;&gt;Content-Encodeing&lt;/h3&gt;
+&lt;h3 id=&#34;content-languange&#34;&gt;Content-Languange&lt;/h3&gt;
+&lt;h3 id=&#34;content-length&#34;&gt;Content-Length&lt;/h3&gt;
+&lt;p&gt;首部字段 Content-Length 表明了实体主体部分的大小&lt;/p&gt;
+&lt;h3 id=&#34;content-location&#34;&gt;Content-Location&lt;/h3&gt;
+&lt;p&gt;首部字段 Content-Location 给出与报文主体部分相对应的 URI。和首部字段 Location 不同，Content-Location 表示的是报文主体返回资源对应的 URI。&lt;/p&gt;
+&lt;h3 id=&#34;content-md5&#34;&gt;Content-MD5&lt;/h3&gt;
+&lt;p&gt;客户端会对接收的报文主体执行相同的 MD5 算法，然后与首部字段 Content-MD5 的字段值比较&lt;/p&gt;
+&lt;p&gt;首部字段 Content-MD5 是一串由 MD5 算法生成的值，其目的在于检查报文主体在传输过程中是否保持完整，以及确认传输到达。&lt;/p&gt;
+&lt;h3 id=&#34;content-range&#34;&gt;Content-Range&lt;/h3&gt;
+&lt;p&gt;针对范围请求，返回响应时使用的首部字段 Content-Range，能告知客户端作为响应返回的实体的哪个部分符合范围请求&lt;/p&gt;
+&lt;h3 id=&#34;content-type&#34;&gt;Content-Type&lt;/h3&gt;
+&lt;p&gt;首部字段 Content-Type 说明了实体主体内对象的媒体类型&lt;/p&gt;
+&lt;h3 id=&#34;expires&#34;&gt;Expires&lt;/h3&gt;
+&lt;p&gt;首部字段 Expires 会将资源失效的日期告知客户端。缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在Expires 字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源。&lt;/p&gt;
+&lt;h3 id=&#34;last-modified&#34;&gt;Last-Modified&lt;/h3&gt;
+&lt;p&gt;首部字段 Last-Modified 指明资源最终修改的时间&lt;/p&gt;
+&lt;h2 id=&#34;为cookie服务的首部字段&#34;&gt;为Cookie服务的首部字段&lt;/h2&gt;
+&lt;p&gt;Cookie 的工作机制是用户识别及状态管理&lt;/p&gt;
+&lt;h3 id=&#34;set-cookie&#34;&gt;Set-Cookie&lt;/h3&gt;
+&lt;p&gt;当服务器准备开始管理客户端的状态时，会事先告知各种信息&lt;br&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405021422886.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;cookie&#34;&gt;Cookie&lt;/h3&gt;
+&lt;p&gt;首部字段 Cookie 会告知服务器，当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个Cookie 时，同样可以以多个 Cookie 形式发送。&lt;/p&gt;
+&lt;h2 id=&#34;其他首部字段&#34;&gt;其他首部字段&lt;/h2&gt;
+&lt;h3 id=&#34;x-frame-options&#34;&gt;X-Frame-Options&lt;/h3&gt;
+&lt;p&gt;首部字段 X-Frame-Options 属于 HTTP 响应首部，用于控制网站内容在其他 Web 网站的 Frame 标签内的显示问题。其主要目的是为了防止点击劫持（clickjacking）攻击&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DENY ：拒绝&lt;/li&gt;
+&lt;li&gt;SAMEORIGIN ：仅同源域名下的页面（Top-level-browsing-context）匹配时许可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dnt&#34;&gt;DNT&lt;/h3&gt;
+&lt;p&gt;首部字段 DNT 属于 HTTP 请求首部，其中 DNT 是 Do Not Track 的简称，意为拒绝个人信息被收集，是表示拒绝被精准广告追踪的一种方法。&lt;/p&gt;
+&lt;h3 id=&#34;x-xss-protection&#34;&gt;X-XSS-Protection&lt;/h3&gt;
+&lt;p&gt;首部字段 X-XSS-Protection 属于 HTTP 响应首部，它是针对跨站脚本攻击（XSS）的一种对策，用于控制浏览器 XSS 防护机制的开关。&lt;/p&gt;
+&lt;h3 id=&#34;p3p&#34;&gt;P3P&lt;/h3&gt;
+&lt;p&gt;首部字段 P3P 属于 HTTP 相应首部，通过利用 P3P（The Platform forPrivacy Preferences，在线隐私偏好平台）技术，可以让 Web 网站上的个人隐私变成一种仅供程序可理解的形式，以达到保护用户隐私的目的。&lt;/p&gt;
+&lt;h1 id=&#34;确保web安全的https&#34;&gt;确保Web安全的HTTPS&lt;/h1&gt;
+&lt;h2 id=&#34;http的缺点&#34;&gt;HTTP的缺点&lt;/h2&gt;
+&lt;h3 id=&#34;通信使用明文可能会被窃听&#34;&gt;通信使用明文可能会被窃听&lt;/h3&gt;
+&lt;p&gt;由于 HTTP 本身不具备加密的功能，所以也无法做到对通信整体（使用 HTTP 协议通信的请求和响应的内容）进行加密。即，HTTP 报文使用明文（指未经过加密的报文）方式发送&lt;/p&gt;
+&lt;p&gt;加密处理防止被窃听&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通信的加密&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过和 SSL（Secure Socket Layer，安全套接层）或TLS（Transport Layer Security，安全层传输协议）的组合使用，加密 HTTP 的通信内容&lt;/p&gt;
+&lt;p&gt;与 SSL组合使用的 HTTP 被称为 HTTPS（HTTPSecure，超文本传输安全协议）或 HTTP over SSL&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内容的加密&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还有一种将参与通信的内容本身加密的方式。由于 HTTP 协议中没有加密机制，那么就对 HTTP 协议传输的内容本身加密。即把HTTP 报文里所含的内容进行加密处理。&lt;/p&gt;
+&lt;h3 id=&#34;不验证通信方的身份就可能遭遇伪装&#34;&gt;不验证通信方的身份就可能遭遇伪装&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;任何人都可发起请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查明对手的证书
+虽然使用 HTTP 协议无法确定通信方，但如果使用 SSL则可以。SSL不仅提供加密处理，而且还使用了一种被称为证书的手段，可用于确定方。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;证书由值得信任的第三方机构颁发，用以证明服务器和客户端是实际存在的。&lt;/p&gt;
+&lt;h3 id=&#34;无法证明报文完整性可能已遭篡改&#34;&gt;无法证明报文完整性，可能已遭篡改&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;接收到的内容可能有误&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何防止篡改
+虽然有使用 HTTP 协议确定报文完整性的方法，但事实上并不便捷、可靠。其中常用的是 MD5 和 SHA-1 等散列值校验的方法，以及用来确认文件的数字签名方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;http加密认证完整性保护--https&#34;&gt;HTTP+加密+认证+完整性保护 = HTTPS&lt;/h2&gt;
+&lt;h3 id=&#34;https是身披ssl外壳的http&#34;&gt;HTTPS是身披SSL外壳的HTTP&lt;/h3&gt;
+&lt;p&gt;通常，HTTP 直接和 TCP 通信。当使用 SSL时，则演变成先和 SSL通信，再由 SSL和 TCP 通信了&lt;/p&gt;
+&lt;p&gt;可以说 SSL是当今世界上应用最为广泛的网络安全技术。&lt;/p&gt;
+&lt;h3 id=&#34;相互交换密钥的公开密钥加密技术&#34;&gt;相互交换密钥的公开密钥加密技术&lt;/h3&gt;
+&lt;p&gt;在对 SSL进行讲解之前，我们先来了解一下加密方法。SSL采用一种叫做公开密钥加密（Public-key cryptography）的加密处理方式。&lt;/p&gt;
+&lt;p&gt;近代的加密方法中加密算法是公开的，而密钥却是保密的。通过这种方式得以保持加密方法的安全性&lt;/p&gt;
+&lt;p&gt;加密和解密同用一个密钥的方式称为共享密钥加密（Common keycrypto system），也被叫做对称密钥加密&lt;/p&gt;
+&lt;p&gt;公开密钥加密方式很好地解决了共享密钥加密的困难。&lt;/p&gt;
+&lt;p&gt;公开密钥加密使用一对非对称的密钥。一把叫做私有密钥（private key），另一把叫做公开密钥（public key）。顾名思义，私有密钥不能让其他任何人知道，而公开密钥则可以随意发布，任何人都可以获得。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405022254317.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;HTTPS采用混合混合加密机制
+HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密机制。
+若密钥能够实现安全交换，那么有可能会考虑仅使用公开密钥加密来通信。但是公开密钥加密与共享密钥加密相比，其处理速度要慢。&lt;/p&gt;
+&lt;h3 id=&#34;证明公开密钥正确性的证书&#34;&gt;证明公开密钥正确性的证书&lt;/h3&gt;
+&lt;p&gt;遗憾的是，公开密钥加密方式还是存在一些问题的。那就是无法证明公开密钥本身就是货真价实的公开密钥。&lt;/p&gt;
+&lt;p&gt;为了解决上述问题，可以使用由数字证书认证机构（CA，CertificateAuthority）和其相关机关颁发的公开密钥证书。&lt;/p&gt;
+&lt;p&gt;数字证书认证机构处于客户端与服务器双方都可信赖的第三方机构的立场上。威瑞信（VeriSign）就是其中一家非常有名的数字证书认证机构。我们来介绍一下数字证书认证机构的业务流程。首先，服务器的运营人员向数字证书认证机构提出公开密钥的申请。数字证书认证机构在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公钥证书后绑定在一起。服务器会将这份由数字证书认证机构颁发的公钥证书发送给客户端，以进行公开密钥加密方式通信。公钥证书也可叫做数字证书或直接称为证书接到证书的客户端可使用数字证书认证机构的公开密钥，对那张证书上的数字签名进行验证，一旦验证通过，客户端便可明确两件事：一，认证服务器的公开密钥的是真实有效的数字证书认证机构。二，服务器的公开密钥是值得信赖的。&lt;/p&gt;
+&lt;h3 id=&#34;可证明组织真实性的ev-ssl证书&#34;&gt;可证明组织真实性的EV SSL证书&lt;/h3&gt;
+&lt;p&gt;证书的一个作用是用来证明作为通信一方的服务器是否规范，另外一个作用是可确认对方服务器背后运营的企业是否真实存在。拥有该特性的证书就是 EV SSL证书（Extended Validation SSLCertificate）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;用以确认客户端的客户端证书&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;认证机构信誉第一&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;由自认证机构颁发的证书称为自签名证书&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;https的安全通信机制&#34;&gt;HTTPS的安全通信机制&lt;/h3&gt;
+&lt;p&gt;HTTPS通信&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 1： 客户端通过发送 Client Hello 报文开始 SSL通信。报文中包含客户端支持的 SSL的指定版本、加密组件（Cipher Suite）列表（所使用的加密算法及密钥长度等）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 2： 服务器可进行 SSL通信时，会以 Server Hello 报文作为应答。和客户端一样，在报文中包含 SSL版本以及加密组件。服务器的加密组件内容是从接收到的客户端加密组件内筛选出来的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 3：之后服务器发送 Certificate 报文。报文中包含公开密钥证书。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 4： 最后服务器发送 Server Hello Done 报文通知客户端，最初阶段的 SSL握手协商部分结束。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 5： SSL第一次握手结束之后，客户端以 Client Key Exchange 报文作为回应。报文中包含通信加密中使用的一种被称为 Pre-mastersecret 的随机密码串。该报文已用步骤 3 中的公开密钥进行加密。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 6： 接着客户端继续发送 Change Cipher Spec 报文。该报文会提示服务器，在此报文之后的通信会采用 Pre-master secret 密钥加密。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 7： 客户端发送 Finished 报文。该报文包含连接至今全部报文的整体校验值。这次握手协商是否能够成功，要以服务器是否能够正确解密该报文作为判定标准。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 8： 服务器同样发送 Change Cipher Spec 报文。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 9： 服务器同样发送 Finished 报文。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 10： 服务器和客户端的 Finished 报文交换完毕之后，SSL连接就算建立完成。当然，通信会受到 SSL的保护。从此处开始进行应用层协议的通信，即发送 HTTP 请求。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 11： 应用层协议通信，即发送 HTTP 响应。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 12： 最后由客户端断开连接。断开连接时，发送 close_notify 报文。上图做了一些省略，这步之后再发送 TCP FIN 报文来关闭与 TCP的通信。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在以上流程中，应用层发送数据时会附加一种叫做 MAC（MessageAuthentication Code）的报文摘要。MAC 能够查知报文是否遭到篡改，从而保护报文的完整性。&lt;/p&gt;
+&lt;p&gt;HTTPS 也存在一些问题，那就是当使用 SSL时，它的处理速度会变慢。&lt;/p&gt;
+&lt;p&gt;与纯文本通信相比，加密通信会消耗更多的CPU 及内存资源。如果每次通信都加密，会消耗相当多的资源，平摊到一台计算机上时，能够处理的请求数量必定也会随之减少。&lt;/p&gt;
+&lt;p&gt;因此，如果是非敏感信息则使用 HTTP 通信，只有在包含个人信息等敏感数据时，才利用 HTTPS 加密通信。&lt;/p&gt;
+&lt;p&gt;要进行 HTTPS 通信，证书是必不可少的。而使用的证书必须向认证机构（CA）购买&lt;/p&gt;
+&lt;h1 id=&#34;确认访问用户身份的认证&#34;&gt;确认访问用户身份的认证&lt;/h1&gt;
+&lt;h2 id=&#34;何为认证&#34;&gt;何为认证&lt;/h2&gt;
+&lt;p&gt;核对的信息通常是指以下这些。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密码：只有本人才会知道的字符串信息。&lt;/li&gt;
+&lt;li&gt;动态令牌：仅限本人持有的设备内显示的一次性密码。&lt;/li&gt;
+&lt;li&gt;数字证书：仅限本人（终端）持有的信息&lt;/li&gt;
+&lt;li&gt;生物认证：指纹和虹膜等本人的生理信息。&lt;/li&gt;
+&lt;li&gt;IC 卡等：仅限本人持有的信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;basic认证&#34;&gt;BASIC认证&lt;/h2&gt;
+&lt;h2 id=&#34;digest认证&#34;&gt;DIGEST认证&lt;/h2&gt;
+&lt;p&gt;DIGEST 认证同样使用质询 / 响应的方式（challenge/response），但不会像 BASIC 认证那样直接发送明文密码。&lt;/p&gt;
+&lt;p&gt;所谓质询响应方式是指，一开始一方会先发送认证要求给另一方，接着使用从另一方那接收到的质询码计算生成响应码。最后将响应码返回给对方进行认证的方式。&lt;/p&gt;
+&lt;h2 id=&#34;ssl客户端认证&#34;&gt;SSL客户端认证&lt;/h2&gt;
+&lt;p&gt;SSL客户端认证是借由 HTTPS 的客户端证书完成认证的方式。凭借客户端证书（在 HTTPS 一章已讲解）认证，服务器可确认访问是否来自已登录的客户端&lt;/p&gt;
+&lt;h3 id=&#34;ssl客户端认证采用双因素认证&#34;&gt;SSL客户端认证采用双因素认证&lt;/h3&gt;
+&lt;p&gt;换言之，第一个认证因素的 SSL客户端证书用来认证客户端计算机，另一个认证因素的密码则用来确定这是用户本人的行为。&lt;/p&gt;
+&lt;h3 id=&#34;ssl客户端认证必要的费用&#34;&gt;SSL客户端认证必要的费用&lt;/h3&gt;
+&lt;h2 id=&#34;基于表单认证&#34;&gt;基于表单认证&lt;/h2&gt;
+&lt;h3 id=&#34;认证多半为基于表单认证&#34;&gt;认证多半为基于表单认证&lt;/h3&gt;
+&lt;p&gt;由于使用上的便利性及安全性问题，HTTP 协议标准提供的 BASIC 认证和 DIGEST 认证几乎不怎么使用。另外，SSL客户端认证虽然具有高度的安全等级，但因为导入及维持费用等问题，还尚未普及。&lt;/p&gt;
+&lt;h3 id=&#34;session管理及cookie应用&#34;&gt;Session管理及Cookie应用&lt;/h3&gt;
+&lt;p&gt;基于表单认证的标准规范尚未有定论，一般会使用 Cookie 来管理Session（会话）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 1： 客户端把用户 ID 和密码等登录信息放入报文的实体部分，通常是以 POST 方法把请求发送给服务器。而这时，会使用 HTTPS通信来进行 HTML表单画面的显示和用户输入数据的发送&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 2： 服务器会发放用以识别用户的 Session ID。通过验证从客户端发送过来的登录信息进行身份认证，然后把用户的认证状态与Session ID 绑定后记录在服务器端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤 3： 客户端接收到从服务器端发来的 Session ID 后，会将其作为Cookie 保存在本地。下次向服务器发送请求时，浏览器会自动发送Cookie，所以 Session ID 也随之发送到服务器。服务器端可通过验证接收到的 Session ID 识别用户和其认证状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通常，一种安全的保存方法是，先利用给密码加盐（salt）1 的方式增加额外信息，再使用散列（hash）函数计算出散列值后保存。但是我们也经常看到直接保存明文密码的做法，而这样的做法具有导致密码泄露的风险。&lt;/p&gt;
+&lt;h1 id=&#34;基于http的功能追加协议&#34;&gt;基于HTTP的功能追加协议&lt;/h1&gt;
+&lt;h2 id=&#34;基于http协议&#34;&gt;基于HTTP协议&lt;/h2&gt;
+&lt;h2 id=&#34;消除http瓶颈的spdy&#34;&gt;消除HTTP瓶颈的SPDY&lt;/h2&gt;
+&lt;h3 id=&#34;http的瓶颈&#34;&gt;HTTP的瓶颈&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;一条连接上只可发送一个请求。&lt;/li&gt;
+&lt;li&gt;请求只能从客户端开始。客户端不可以接收除响应以外的指令。&lt;/li&gt;
+&lt;li&gt;请求 / 响应首部未经压缩就发送。首部信息越多延迟越大&lt;/li&gt;
+&lt;li&gt;发送冗长的首部。每次互相发送相同的首部造成的浪费较多&lt;/li&gt;
+&lt;li&gt;可任意选择数据压缩格式。非强制压缩发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ajax 的解决方法：
+Ajax（Asynchronous JavaScript and XML， 异 步 JavaScript 与 XML技术）是一种有效利用 JavaScript 和 DOM（Document Object Model，文档对象模型）的操作，以达到局部 Web 页面替换加载的异步通信手段。和以前的同步通信相比，由于它只更新一部分页面，响应中传输的数据量会因此而减少，这一优点显而易见&lt;/p&gt;
+&lt;p&gt;Ajax 的核心技术是名为 XMLHttpRequest 的 API，通过 JavaScript 脚本语言的调用就能和服务器进行 HTTP 通信。借由这种手段，就能从已加载完毕的 Web 页面上发起请求，只更新局部页面。&lt;/p&gt;
+&lt;p&gt;Comet 的解决方法：
+一旦服务器端有内容更新了，Comet 不会让请求等待，而是直接给客户端返回响应。这是一种通过延迟应答，模拟实现服务器端向客户端推送（Server Push）的功能。&lt;/p&gt;
+&lt;p&gt;通常，服务器端接收到请求，在处理完毕后就会立即返回响应，但为了实现推送功能，Comet 会先将响应置于挂起状态，当服务器端有内容更新时，再返回该响应。因此，服务器端一旦有更新，就可以立即反馈给客户端。&lt;/p&gt;
+&lt;p&gt;内容上虽然可以做到实时更新，但为了保留响应，一次连接的持续时间也变长了。期间，为了维持连接会消耗更多的资源&lt;/p&gt;
+&lt;h3 id=&#34;spdy的设计与功能&#34;&gt;SPDY的设计与功能&lt;/h3&gt;
+&lt;p&gt;SPDY 没有完全改写 HTTP 协议，而是在 TCP/IP 的应用层与运输层之间通过新加会话层的形式运作。同时，考虑到安全性问题，SPDY 规定通信中使用 SSL
+SPDY 以会话层的形式加入，控制对数据的流动，但还是采用 HTTP建立通信连接。因此，可照常使用 HTTP 的 GET 和 POST 等方 法、Cookie 以及 HTTP 报文等&lt;/p&gt;
+&lt;p&gt;使用 SPDY 后，HTTP 协议额外获得以下功能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多路复用流：通过单一的 TCP 连接，可以无限制处理多个 HTTP 请求。所有请求的处理都在一条 TCP 连接上完成，因此 TCP 的处理效率得到提高&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;赋予请求优先级:这样主要是为了在发送多个请求时，解决因带宽低而导致响应变慢的问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;压缩 HTTP 首部&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;推送功能&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器提示功能: 服务器可以主动提示客户端请求所需的资源。由于在客户端发现资源之前就可以获知资源的存在，因此在资源已缓存等情况下，可以避免发送不必要的请求。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用浏览器进行全双工通信的websocket&#34;&gt;使用浏览器进行全双工通信的WebSocket&lt;/h2&gt;
+&lt;h3 id=&#34;websocket-的设计与功能&#34;&gt;WebSocket 的设计与功能&lt;/h3&gt;
+&lt;p&gt;WebSocket，即 Web 浏览器与 Web 服务器之间全双工通信标准&lt;/p&gt;
+&lt;h3 id=&#34;websocket协议&#34;&gt;WebSocket协议&lt;/h3&gt;
+&lt;p&gt;一旦确立 WebSocket 通信连接，不论服务器还是客户端，任意一方都可直接向对方发送报文。&lt;/p&gt;
+&lt;p&gt;主要特点。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;推送功能&lt;/li&gt;
+&lt;li&gt;减少通信量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为了实现 WebSocket 通信，在 HTTP 连接建立之后，需要完成一次“握手”（Handshaking）的步骤&lt;/p&gt;
+&lt;h2 id=&#34;期盼已久的http20&#34;&gt;期盼已久的HTTP/2.0&lt;/h2&gt;
+&lt;h2 id=&#34;web服务器管理文件的webdav&#34;&gt;Web服务器管理文件的WebDAV&lt;/h2&gt;
+&lt;p&gt;WebDAV（Web-based Distributed Authoring and Versioning，基于万维网的分布式创作和版本控制）是一个可对 Web 服务器上的内容直接进行文件复制、编辑等操作的分布式文件系统。&lt;/p&gt;
+&lt;h3 id=&#34;扩展http11d的webdav&#34;&gt;扩展HTTP/1.1D的WebDAV&lt;/h3&gt;
+&lt;p&gt;针对服务器上的资源，WebDAV 新增加了一些概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集合（Collection）：是一种统一管理多个资源的概念。以集合为单位可进行各种操作。也可实现类似集合的集合这样的叠加&lt;/li&gt;
+&lt;li&gt;资源（Resource）：把文件或集合称为资源。&lt;/li&gt;
+&lt;li&gt;属性（Property）：定义资源的属性。定义以“名称 = 值”的格式执行。&lt;/li&gt;
+&lt;li&gt;锁（Lock）：把文件设置成无法编辑状态。多人同时编辑时，可防止在同一时间进行内容写入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;webdav内新增的方法及状态码&#34;&gt;WebDAV内新增的方法及状态码&lt;/h3&gt;
+&lt;p&gt;WebDAV 为实现远程文件管理，向 HTTP/1.1 中追加了以下这些方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PROPFIND ：获取属性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PROPPATCH ：修改属性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MKCOL ：创建集合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;COPY ：复制资源及属性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MOVE ：移动资源&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LOCK ：资源加锁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UNLOCK ：资源解锁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;102 Processing ：可正常处理请求，但目前是处理中状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;207 Multi-Status ：存在多种状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;422 Unprocessible Entity ：格式正确，内容有误&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;423 Locked ：资源已被加锁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;424 Failed Dependency ：处理与某请求关联的请求失败，因此不再维持依赖关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;507 Insufficient Storage ：保存空间不足&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为何 HTTP 协议受众如此广泛
+其中与企业或组织的防火墙设定有着莫大的关系。防火墙的基本功能就是禁止非指定的协议和端口号的数据包通过。因此如果使用新协议或端口号则必须修改防火墙设置。&lt;/p&gt;
+&lt;h1 id=&#34;构建web内容的技术&#34;&gt;构建Web内容的技术&lt;/h1&gt;
+&lt;h2 id=&#34;html&#34;&gt;HTML&lt;/h2&gt;
+&lt;h3 id=&#34;web-页面几乎全由-html-构建&#34;&gt;Web 页面几乎全由 HTML 构建&lt;/h3&gt;
+&lt;p&gt;HTML（HyperText Markup Language，超文本标记语言）是为了发送 Web 上的超文本（Hypertext）而开发的标记语言。超文本是一种文档系统，可将文档中任意位置的信息与其他信息（文本或图片等）建立关联，即超链接文本。标记语言是指通过在文档的某部分穿插特别的字符串标签，用来修饰文档的语言。我们把出现在 HTML文档内的这种特殊字符串叫做 HTML标签（Tag）&lt;/p&gt;
+&lt;h3 id=&#34;设计应用css&#34;&gt;设计应用CSS&lt;/h3&gt;
+&lt;p&gt;CSS（Cascading Style Sheets，层叠样式表）可以指定如何展现 HTML内的各种元素，属于样式表标准之一。&lt;/p&gt;
+&lt;h2 id=&#34;动态html&#34;&gt;动态HTML&lt;/h2&gt;
+&lt;h3 id=&#34;让-web-页面动起来的动态-html&#34;&gt;让 Web 页面动起来的动态 HTML&lt;/h3&gt;
+&lt;p&gt;所谓动态 HTML（Dynamic HTML），是指使用客户端脚本语言将静态的 HTML内容变成动态的技术的总称。鼠标单击点开的新闻、Google Maps 等可滚动的地图就用到了动态 HTML。&lt;/p&gt;
+&lt;p&gt;动态 HTML技术是通过调用客户端脚本语言 JavaScript，实现对HTML的 Web 页面的动态改造。利用 DOM（Document ObjectModel，文档对象模型）可指定欲发生动态变化的 HTML元素。&lt;/p&gt;
+&lt;h3 id=&#34;更易控制html的dom&#34;&gt;更易控制HTML的DOM&lt;/h3&gt;
+&lt;p&gt;DOM 是用以操作 HTML文档和 XML文档的 API（ApplicationProgramming Interface，应用编程接口）。使用 DOM 可以将 HTML内的元素当作对象操作，如取出元素内的字符串、改变那个 CSS 的属性等，使页面的设计发生改变。&lt;/p&gt;
+&lt;h2 id=&#34;web应用&#34;&gt;Web应用&lt;/h2&gt;
+&lt;h3 id=&#34;通过web提供功能的web应用&#34;&gt;通过Web提供功能的Web应用&lt;/h3&gt;
+&lt;p&gt;Web 应用是指通过 Web 功能提供的应用程序。比如购物网站、网上银行、SNS、BBS、搜索引擎和 e-learning 等。互联网（Internet）或企业内网（Intranet）上遍布各式各样的 Web 应用。&lt;/p&gt;
+&lt;p&gt;类似这种由程序创建的内容称为动态内容，而事先准备好的内容称为静态内容。Web 应用则作用于动态内容之上。&lt;/p&gt;
+&lt;h3 id=&#34;与服务器及程序协作的cgi&#34;&gt;与服务器及程序协作的CGI&lt;/h3&gt;
+&lt;p&gt;CGI（Common Gateway Interface，通用网关接口）是指 Web 服务器在接收到客户端发送过来的请求后转发给程序的一组机制。在 CGI 的作用下，程序会对请求内容做出相应的动作，比如创建 HTML等动态内容。&lt;/p&gt;
+&lt;p&gt;使用 CGI 的程序叫做 CGI 程序，通常是用 Perl、PHP、Ruby 和 C 等编程语言编写而成。&lt;/p&gt;
+&lt;h3 id=&#34;因java而普及的servlet&#34;&gt;因Java而普及的Servlet&lt;/h3&gt;
+&lt;p&gt;Servlet是一种能在服务器上创建动态内容的程序。Servlet 是用 Java语言实现的一个接口，属于面向企业级 Java（JavaEE，JavaEnterprise Edition）的一部分。&lt;/p&gt;
+&lt;p&gt;之前提及的 CGI，由于每次接到请求，程序都要跟着启动一次。因此一旦访问量过大，Web 服务器要承担相当大的负载。而 Servlet 运行在与 Web 服务器相同的进程中，因此受到的负载较小 2。Servlet 的运行环境叫做 Web 容器或 Servlet 容器。&lt;/p&gt;
+&lt;h2 id=&#34;数据发布的格式及语言&#34;&gt;数据发布的格式及语言&lt;/h2&gt;
+&lt;h3 id=&#34;可扩展标记语言&#34;&gt;可扩展标记语言&lt;/h3&gt;
+&lt;p&gt;XML（eXtensible Markup Language，可扩展标记语言）是一种可按应用目标进行扩展的通用标记语言。旨在通过使用 XML，使互联网数据共享变得更容易。&lt;/p&gt;
+&lt;p&gt;从 XML文档中读取数据比起 HTML更为简单。由于 XML的结构基本上都是用标签分割而成的树形结构，因此通过语法分析器（Parser）的解析功能解析 XML结构并取出数据元素，可更容易地对数据进行读取。&lt;/p&gt;
+&lt;h3 id=&#34;发布更新信息的rssatom&#34;&gt;发布更新信息的RSS/Atom&lt;/h3&gt;
+&lt;p&gt;RSS（简易信息聚合，也叫聚合内容）和 Atom 都是发布新闻或博客日志等更新信息文档的格式的总称。两者都用到了 XML。&lt;/p&gt;
+&lt;h3 id=&#34;javascript衍生的轻量级易用api&#34;&gt;JavaScript衍生的轻量级易用API&lt;/h3&gt;
+&lt;p&gt;JSON（JavaScript Object Notation）是一种以JavaScript（ECMAScript）的对象表示法为基础的轻量级数据标记语言。能够处理的数据类型有 false/null/true/ 对象 / 数组 / 数字 / 字符
+串，这 7 种类型。&lt;/p&gt;
+&lt;h1 id=&#34;web的攻击技术&#34;&gt;Web的攻击技术&lt;/h1&gt;
+&lt;h2 id=&#34;针对-web-的攻击技术&#34;&gt;针对 Web 的攻击技术&lt;/h2&gt;
+&lt;p&gt;应用 HTTP 协议的服务器和客户端，以及运行在服务器上的 Web 应用等资源才是攻击目标。&lt;/p&gt;
+&lt;h3 id=&#34;http-不具备必要的安全功能&#34;&gt;HTTP 不具备必要的安全功能&lt;/h3&gt;
+&lt;h3 id=&#34;在客户端即可篡改请求&#34;&gt;在客户端即可篡改请求&lt;/h3&gt;
+&lt;h3 id=&#34;针对-web-应用的攻击模式&#34;&gt;针对 Web 应用的攻击模式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;以服务器为目标的主动攻击&lt;/li&gt;
+&lt;li&gt;以服务器为目标的被动攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;因输出值转义不完全引发的安全漏洞&#34;&gt;因输出值转义不完全引发的安全漏洞&lt;/h3&gt;
+&lt;h2 id=&#34;跨站脚本攻击&#34;&gt;跨站脚本攻击&lt;/h2&gt;
+&lt;p&gt;跨站脚本攻击（Cross-Site Scripting，XSS）是指通过存在安全漏洞的Web 网站注册用户的浏览器内运行非法的 HTML标签或 JavaScript 进行的一种攻击。&lt;/p&gt;
+&lt;h3 id=&#34;sql-注入攻击&#34;&gt;SQL 注入攻击&lt;/h3&gt;
+&lt;p&gt;SQL是用来操作关系型数据库管理系统（Relational DataBaseManagement System，RDBMS）的数据库语言，可进行操作数据或定义数据等。&lt;/p&gt;
+&lt;h3 id=&#34;os-命令注入攻击&#34;&gt;OS 命令注入攻击&lt;/h3&gt;
+&lt;p&gt;OS 命令注入攻击（OS Command Injection）是指通过 Web 应用，执行非法的操作系统命令达到攻击的目的。只要在能调用 Shell 函数的地方就有存在被攻击的风险。&lt;/p&gt;
+&lt;h3 id=&#34;http-首部注入攻击&#34;&gt;HTTP 首部注入攻击&lt;/h3&gt;
+&lt;h3 id=&#34;邮件首部注入攻击&#34;&gt;邮件首部注入攻击&lt;/h3&gt;
+&lt;h3 id=&#34;目录遍历攻击&#34;&gt;目录遍历攻击&lt;/h3&gt;
+&lt;p&gt;目录遍历（Directory Traversal）攻击是指对本无意公开的文件目录，通过非法截断其目录路径后，达成访问目的的一种攻击。这种攻击有时也称为路径遍历（Path Traversal）攻击。&lt;/p&gt;
+&lt;h3 id=&#34;远程文件包含漏洞&#34;&gt;远程文件包含漏洞&lt;/h3&gt;
+&lt;h2 id=&#34;因设置或设计上的缺陷引发的安全漏洞&#34;&gt;因设置或设计上的缺陷引发的安全漏洞&lt;/h2&gt;
+&lt;h3 id=&#34;强制浏览&#34;&gt;强制浏览&lt;/h3&gt;
+&lt;h3 id=&#34;不正确的错误消息处理&#34;&gt;不正确的错误消息处理&lt;/h3&gt;
+&lt;h3 id=&#34;开放重定向&#34;&gt;开放重定向&lt;/h3&gt;
+&lt;h2 id=&#34;因会话管理疏忽引发的安全漏洞&#34;&gt;因会话管理疏忽引发的安全漏洞&lt;/h2&gt;
+&lt;h3 id=&#34;会话劫持&#34;&gt;会话劫持&lt;/h3&gt;
+&lt;p&gt;会话劫持（Session Hijack）是指攻击者通过某种手段拿到了用户的会话 ID，并非法使用此会话 ID 伪装成用户，达到攻击的目的。&lt;/p&gt;
+&lt;h3 id=&#34;会话固定攻击&#34;&gt;会话固定攻击&lt;/h3&gt;
+&lt;h3 id=&#34;跨站点请求伪造&#34;&gt;跨站点请求伪造&lt;/h3&gt;
+&lt;h2 id=&#34;其他安全漏洞&#34;&gt;其他安全漏洞&lt;/h2&gt;
+&lt;h3 id=&#34;密码破解&#34;&gt;密码破解&lt;/h3&gt;
+&lt;h3 id=&#34;点击劫持&#34;&gt;点击劫持&lt;/h3&gt;
+&lt;p&gt;点击劫持（Clickjacking）是指利用透明的按钮或链接做成陷阱，覆盖在 Web 页面之上。然后诱使用户在不知情的情况下，点击那个链接访问内容的一种攻击手段。这种行为又称为界面伪装&lt;/p&gt;
+&lt;h3 id=&#34;dos-攻击&#34;&gt;DoS 攻击&lt;/h3&gt;
+&lt;p&gt;DoS 攻击（Denial of Service attack）是一种让运行中的服务呈停止状态的攻击。有时也叫做服务停止攻击或拒绝服务攻击。DoS 攻击的对象不仅限于 Web 网站，还包括网络设备及服务器等&lt;/p&gt;
+&lt;p&gt;其中，集中利用访问请求的 DoS 攻击，单纯来讲就是发送大量的合法请求。服务器很难分辨何为正常请求，何为攻击请求，因此很难防止 DoS 攻击。&lt;/p&gt;
+&lt;h3 id=&#34;后门程序&#34;&gt;后门程序&lt;/h3&gt;
+&lt;p&gt;后门程序（Backdoor）是指开发设置的隐藏入口，可不按正常步骤使用受限功能。利用后门程序就能够使用原本受限制的功能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开发阶段作为 Debug 调用的后门程序&lt;/li&gt;
+&lt;li&gt;开发者为了自身利益植入的后门程序&lt;/li&gt;
+&lt;li&gt;攻击者通过某种方法设置的后门程序&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>gitte</title>
+        <link>http://localhost:1313/p/gitte/</link>
+        <pubDate>Mon, 06 May 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gitte/</guid>
+        <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142303934.jpg&#34;/&gt;
+# 什么是Gitee
+Gitee 是一个版本控制和协作的代码托管平台（可以托管代码，还可以托管文档与图片资料）。 它可以让你和其他人一起在远程或本地项目上进行协作。
+&lt;p&gt;本教程将为您介绍 Gitee 的一些基础知识，如：仓库、分支、分支修改确认以及 Pull Request （代码评审）。您将创建自己的 Hello Gitee 仓库，并学习 Gitee 的 Pull Request 工作流&lt;/p&gt;
+&lt;h2 id=&#34;创建hello-gitee仓库&#34;&gt;创建Hello Gitee仓库&lt;/h2&gt;
+&lt;p&gt;第一步 创建 Hello Gitee 仓库
+仓库可用于存放自己的一个创意或项目的资料库。&lt;/p&gt;
+&lt;p&gt;仓库内可包含：文件夹和文件，图片，视频，电子文档和代码等你能想到的任何元素。&lt;/p&gt;
+&lt;p&gt;创建新仓库时建议设置一个 README.md 的文档来介绍您的项目。&lt;/p&gt;
+&lt;p&gt;（新手默认不选）另外可选开源许可证文件，让你明确声明自己资源他人可以如何使用。&lt;/p&gt;
+&lt;p&gt;提示：社区版Gitee提供5G的总仓库空间，单文件最大支持50M&lt;/p&gt;
+&lt;p&gt;详细内容可查看：https://gitee.com/help/articles/4167&lt;/p&gt;
+&lt;h3 id=&#34;步骤&#34;&gt;步骤&lt;/h3&gt;
+&lt;p&gt;创建名字为 hello-gitee 的仓库
+仓库介绍可自定义，或直接填写：入门学习
+是否开源选择：公开
+勾选使用 Readme 文件初始化这个仓库
+点击创建按钮&lt;/p&gt;
+&lt;p&gt;（其他选项使用默认设置即可）&lt;/p&gt;
+&lt;h2 id=&#34;创建一个新分支&#34;&gt;创建一个新分支&lt;/h2&gt;
+&lt;p&gt;分支是给您提供后悔药的一种方式，以自己写的一段文字记录为例，复制出一个一模一样的文档，在新复制出的文档上修改内容，然后再合并到原始文档时，对比两个文档可以看到哪些地方做了修改，如果觉得副本中一些有价值的原始记录内容被删除了，可以继续修改副本，以免一份文档修改后，原本写的有价值的文字也被删除，就得不偿失了。&lt;/p&gt;
+&lt;h3 id=&#34;步骤-1&#34;&gt;步骤&lt;/h3&gt;
+&lt;p&gt;点击下图中的“1个分支”进入分支管理
+点击右上角“新建分支”按钮，命名，提交
+点击新建好的分支，即可进入新分支界面&lt;/p&gt;
+&lt;h2 id=&#34;修改分支并提交更改&#34;&gt;修改分支并提交更改&lt;/h2&gt;
+&lt;h2 id=&#34;提交pull-request&#34;&gt;提交Pull Request&lt;/h2&gt;
+&lt;p&gt;Pull Requests 是 Gitee 上分支操作的一项很重要的功能。我们可以通过审核并通过 Pull Requests 从而进行不同分支的合并&lt;/p&gt;
+&lt;h2 id=&#34;步骤-2&#34;&gt;步骤&lt;/h2&gt;
+&lt;p&gt;点击顶部 Pull Requests 进入配置页面，点击右上角“新建 Pull Requests” 创建请求
+命名本次操作：PR，在文本框中填入备注信息：My first PR
+点击创建&lt;/p&gt;
+&lt;h2 id=&#34;合并提交的pull-request&#34;&gt;合并提交的Pull Request&lt;/h2&gt;
+&lt;p&gt;作为仓库的拥有者，在合并提交的 Pull Requests 前一定要确认新分支的修改是否符合自己的期望，如果不符合可以在线反馈自己的意见。&lt;/p&gt;
+&lt;h3 id=&#34;步骤-3&#34;&gt;步骤&lt;/h3&gt;
+&lt;p&gt;进入 Pull Requests 页面，点击可合并的请求
+可在文件选项中查看提交的分支与 master 分支有什么差别，可通过颜色对比查看
+（白色：无修改；红色：删减内容；蓝色：新增内容）
+确认无误可点击合并按钮，如有疑问可在评论中回复
+点击合并中的按钮“合并分支”并再次点击“接收 Pull Requests”
+合并完成后显示为“已合并”，但Gitee依旧提供了强力后悔药“回退”功能（手快不用愁）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Flask</title>
+        <link>http://localhost:1313/p/flask/</link>
+        <pubDate>Tue, 30 Apr 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/flask/</guid>
+        <description>&lt;h1 id=&#34;一个最小的应用&#34;&gt;一个最小的应用&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142258566.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hello_world&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Hello,World!&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;那么，这些代码是什么意思呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 &lt;strong&gt;name&lt;/strong&gt; ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘&lt;strong&gt;main&lt;/strong&gt;’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。&lt;/p&gt;
+&lt;p&gt;外部可见的服务器
+运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。&lt;/p&gt;
+&lt;p&gt;如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &amp;ndash;host=0.0.0.0 即可:&lt;/p&gt;
+&lt;p&gt;$ flask run &amp;ndash;host=0.0.0.0
+这行代码告诉你的操作系统监听所有公开的 IP 。&lt;/p&gt;
+&lt;h2 id=&#34;调试模式&#34;&gt;调试模式&lt;/h2&gt;
+&lt;p&gt;虽然 flask 命令可以方便地启动一个本地开发服务器，但是每次应用代码 修改之后都需要手动重启服务器。这样不是很方便， Flask 可以做得更好。如果你打开 调试模式，那么服务器会在修改应用代码之后自动重启，并且当应用出错时还会提供一个 有用的调试器。&lt;/p&gt;
+&lt;p&gt;如果需要打开所有开发功能（包括调试模式），那么要在运行服务器之前导出 FLASK_ENV 环境变量并把其设置为 development:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ export FLASK_ENV=development
+$ flask run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;（在 Windows 下需要使用 set 来代替 export 。）&lt;/p&gt;
+&lt;p&gt;这样可以实现以下功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;激活调试器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;激活自动重载。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开 Flask 应用的调试模式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还可以通过导出 FLASK_DEBUG=1 来单独控制调试模式的开关。&lt;/p&gt;
+&lt;p&gt;Attention
+虽然交互调试器不能在分布环境下工作（这使得它基本不可能用于生产环境），但是 它允许执行任意代码，这样会成为一个重大安全隐患。因此， 绝对不能在生产环境 中使用调试器 。&lt;/p&gt;
+&lt;h2 id=&#34;路由&#34;&gt;路由&lt;/h2&gt;
+&lt;p&gt;现代 web 应用都使用有意义的 URL ，这样有助于用户记忆，网页会更得到用户的青睐， 提高回头率。&lt;/p&gt;
+&lt;p&gt;使用 route() 装饰器来把函数绑定到 URL:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Index Page&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/hello&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Hello, World&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;变量规则&#34;&gt;变量规则&lt;/h2&gt;
+&lt;p&gt;通过把 URL 的一部分标记为 &amp;lt;variable_name&amp;gt; 就可以在 URL 中添加变量。标记的 部分会作为关键字参数传递给函数。通过使用 &lt;a class=&#34;link&#34; href=&#34;converter:variable_name&#34; &gt;converter:variable_name&lt;/a&gt; ，可以 选择性的加上一个转换器，为变量指定规则。请看下面的例子:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/user/&amp;lt;username&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;show_user_profile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# show the user profile for that user&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;User &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%s&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/post/&amp;lt;int:post_id&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;show_post&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# show the post with the given id, the id is an integer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Post &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%d&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/path/&amp;lt;path:subpath&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;show_subpath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subpath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# show the subpath after /path/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Subpath &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%s&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subpath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;唯一的-url--重定向行为&#34;&gt;唯一的 URL / 重定向行为&lt;/h2&gt;
+&lt;p&gt;projects 的 URL 是中规中矩的，尾部有一个斜杠，看起来就如同一个文件夹。 访问一个没有斜杠结尾的 URL 时 Flask 会自动进行重定向，帮你在尾部加上一个斜杠。&lt;/p&gt;
+&lt;p&gt;about 的 URL 没有尾部斜杠，因此其行为表现与一个文件类似。如果访问这个 URL 时添加了尾部斜杠就会得到一个 404 错误。这样可以保持 URL 唯一，并帮助 搜索引擎避免重复索引同一页面。&lt;/p&gt;
+&lt;h2 id=&#34;url-构建&#34;&gt;URL 构建&lt;/h2&gt;
+&lt;p&gt;url_for() 函数用于构建指定函数的 URL。它把函数名称作为第一个 参数。它可以接受任意个关键字参数，每个关键字参数对应 URL 中的变量。未知变量 将添加到 URL 中作为查询参数&lt;/p&gt;
+&lt;h2 id=&#34;http-方法&#34;&gt;HTTP 方法&lt;/h2&gt;
+&lt;p&gt;Web 应用使用不同的 HTTP 方法处理 URL 。当你使用 Flask 时，应当熟悉 HTTP 方法。 缺省情况下，一个路由只回应 GET 请求。 可以使用 route() 装饰器的 methods 参数来处理不同的 HTTP 方法&lt;/p&gt;
+&lt;h2 id=&#34;静态文件&#34;&gt;静态文件&lt;/h2&gt;
+&lt;p&gt;动态的 web 应用也需要静态文件，一般是 CSS 和 JavaScript 文件。理想情况下你的 服务器已经配置好了为你的提供静态文件的服务。但是在开发过程中， Flask 也能做好 这项工作。只要在你的包或模块旁边创建一个名为 static 的文件夹就行了。 静态文件位于应用的 /static 中。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url_for(&#39;static&#39;, filename=&#39;style.css&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这个静态文件在文件系统中的位置应该是 static/style.css 。&lt;/p&gt;
+&lt;h2 id=&#34;渲染模板&#34;&gt;渲染模板&lt;/h2&gt;
+&lt;p&gt;在 Python 内部生成 HTML 不好玩，且相当笨拙。因为你必须自己负责 HTML 转义， 以确保应用的安全。因此， Flask 自动为你配置 Jinja2 模板引擎。&lt;/p&gt;
+&lt;p&gt;使用 render_template() 方法可以渲染模板，你只要提供模板名称和需要 作为参数传递给模板的变量就行了。下面是一个简单的模板渲染例子:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/hello/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/hello/&amp;lt;name&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hello.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Flask 会在 templates 文件夹内寻找模板。因此，如果你的应用是一个模块， 那么模板文件夹应该在模块旁边；如果是一个包，那么就应该在包里面：&lt;/p&gt;
+&lt;h2 id=&#34;操作请求数据&#34;&gt;操作请求数据&lt;/h2&gt;
+&lt;p&gt;对于 web 应用来说对客户端向服务器发送的数据作出响应很重要。在 Flask 中由全局 对象 request 来提供请求信息。如果你有一些 Python 基础，那么 可能 会奇怪：既然这个对象是全局的，怎么还能保持线程安全？答案是本地环境：&lt;/p&gt;
+&lt;h2 id=&#34;请求对象&#34;&gt;请求对象&lt;/h2&gt;
+&lt;p&gt;请求对象在 API 一节中有详细说明这里不细谈（参见 Request ）。 这里简略地谈一下最常见的操作。首先，你必须从 flask 模块导入请求对象:
+from flask import request&lt;/p&gt;
+&lt;p&gt;通过使用 method 属性可以操作当前请求方法，通过使用 form 属性处理表单数据（在 POST 或者 PUT 请求 中传输的数据）。以下是使用上述两个属性的例子&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/login&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;login&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;valid_login&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;log_the_user_in&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Invalid username/password&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# the code below is executed if the request method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# was GET or the credentials were invalid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当 form 属性中不存在这个键时会发生什么？会引发一个 KeyError 。 如果你不像捕捉一个标准错误一样捕捉 KeyError ，那么会显示一个 HTTP 400 Bad Request 错误页面。因此，多数情况下你不必处理这个问题。&lt;/p&gt;
+&lt;p&gt;要操作 URL （如 ?key=value ）中提交的参数可以使用 args 属性:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;searchword = request.args.get(&#39;key&#39;, &#39;&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;文件上传&#34;&gt;文件上传&lt;/h2&gt;
+&lt;p&gt;用 Flask 处理文件上传很容易，只要确保不要忘记在你的 HTML 表单中设置 enctype=&amp;ldquo;multipart/form-data&amp;rdquo; 属性就可以了。否则浏览器将不会传送你的文件。&lt;/p&gt;
+&lt;p&gt;已上传的文件被储存在内存或文件系统的临时位置。你可以通过请求对象 files 属性来访问上传的文件。每个上传的文件都储存在这个 字典型属性中。这个属性基本和标准 Python file 对象一样，另外多出一个 用于把上传文件保存到服务器的文件系统中的 save() 方法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/upload&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;upload_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;the_file&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/var/www/uploads/uploaded_file.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;cookles&#34;&gt;Cookles&lt;/h2&gt;
+&lt;p&gt;要访问 cookies ，可以使用 cookies 属性。可以使用响应 对象 的 set_cookie 方法来设置 cookies 。请求对象的 cookies 属性是一个包含了客户端传输的所有 cookies 的字典。在 Flask 中，如果使用会话 ，那么就不要直接使用 cookies ，因为 会话 比较安全一些。&lt;/p&gt;
+&lt;p&gt;读取 cookies:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cookies&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# use cookies.get(key) instead of cookies[key] to not get a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# KeyError if the cookie is missing.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;储存 cookies:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;make_response&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;resp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;make_response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_cookie&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;the username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;resp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意， cookies 设置在响应对象上。通常只是从视图函数返回字符串， Flask 会把它们 转换为响应对象。如果你想显式地转换，那么可以使用 make_response() 函数，然后再修改它。&lt;/p&gt;
+&lt;h2 id=&#34;重定向和错误&#34;&gt;重定向和错误&lt;/h2&gt;
+&lt;p&gt;使用 redirect() 函数可以重定向。使用 abort() 可以 更早退出请求，并返回错误代码:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;abort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/login&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;login&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;abort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;401&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;this_is_never_executed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;缺省情况下每种出错代码都会对应显示一个黑白的出错页面。使用 errorhandler() 装饰器可以定制出错页面:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.errorhandler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;404&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;page_not_found&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;page_not_found.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意 render_template() 后面的 404 ，这表示页面对就的出错 代码是 404 ，即页面不存在。缺省情况下 200 表示：一切正常。&lt;/p&gt;
+&lt;h2 id=&#34;关于响应&#34;&gt;关于响应&lt;/h2&gt;
+&lt;p&gt;视图函数的返回值会自动转换为一个响应对象。如果返回值是一个字符串，那么会被 转换为一个包含作为响应体的字符串、一个 200 OK 出错代码 和一个 text/html 类型的响应对象。如果返回值是一个字典，那么会调用 jsonify() 来产生一个响应。以下是转换的规则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果视图返回的是一个响应对象，那么就直接返回它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果返回的是一个字符串，那么根据这个字符串和缺省参数生成一个用于返回的 响应对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果返回的是一个字典，那么调用 jsonify 创建一个响应对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果返回的是一个元组，那么元组中的项目可以提供额外的信息。元组中必须至少 包含一个项目，且项目应当由 (response, status) 、 (response, headers) 或者 (response, status, headers) 组成。 status 的值会重载状态代码， headers 是一个由额外头部值组成的列表 或字典。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果以上都不是，那么 Flask 会假定返回值是一个有效的 WSGI 应用并把它转换为 一个响应对象。&lt;/p&gt;
+&lt;p&gt;如果想要在视图内部掌控响应对象的结果，那么可以使用 make_response() 函数。&lt;/p&gt;
+&lt;p&gt;可以使用 make_response() 包裹返回表达式，获得响应对象，并对该对象 进行修改，然后再返回:&lt;/p&gt;
+&lt;h2 id=&#34;json格式的api&#34;&gt;JSON格式的API&lt;/h2&gt;
+&lt;p&gt;JSON 格式的响应是常见的，用 Flask 写这样的 API 是很容易上手的。如果从视图 返回一个 dict ，那么它会被转换为一个 JSON 响应。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/me&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;me_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get_current_user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;username&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;theme&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;theme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;image&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;user_image&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果 dict 还不能满足需求，还需要创建其他类型的 JSON 格式响应，可以使用 jsonify() 函数。该函数会序列化任何支持的 JSON 数据类型。 也可以研究研究 Flask 社区扩展，以支持更复杂的应用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/users&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;users_api&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;users&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get_all_users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jsonify&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_json&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;会话&#34;&gt;会话&lt;/h2&gt;
+&lt;p&gt;除了请求对象之外还有一种称为 session 的对象，允许你在不同请求 之间储存信息。这个对象相当于用密钥签名加密的 cookie ，即用户可以查看你的 cookie ，但是如果没有密钥就无法修改它&lt;/p&gt;
+&lt;p&gt;使用会话之前你必须设置一个密钥。举例说明:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flask&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Flask&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Set the secret key to some random bytes. Keep this really secret!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secret_key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;_5#y2L&amp;#34;F4Q8z&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n\xec&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;]/&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Logged in as &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%s&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;escape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;You are not logged in&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/login&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;login&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;        &amp;lt;form method=&amp;#34;post&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;            &amp;lt;p&amp;gt;&amp;lt;input type=text name=username&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;            &amp;lt;p&amp;gt;&amp;lt;input type=submit value=Login&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;        &amp;lt;/form&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/logout&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;logout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# remove the username from the session if it&amp;#39;s there&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如何生成一个好的密钥
+生成随机数的关键在于一个好的随机种子，因此一个好的密钥应当有足够的随机性。 操作系统可以有多种方式基于密码随机生成器来生成随机数据。使用下面的命令 可以快捷的为 Flask.secret_key （ 或者 SECRET_KEY ）生成值:&lt;/p&gt;
+&lt;p&gt;$ python -c &amp;lsquo;import os; print(os.urandom(16))&amp;rsquo;
+b&amp;rsquo;_5#y2L&amp;quot;F4Q8z\n\xec]/&amp;rsquo;&lt;/p&gt;
+&lt;h2 id=&#34;消息闪现&#34;&gt;消息闪现&lt;/h2&gt;
+&lt;p&gt;一个好的应用和用户接口都有良好的反馈，否则到后来用户就会讨厌这个应用。 Flask 通过闪现系统来提供了一个易用的反馈方式。闪现系统的基本工作原理是在请求结束时 记录一个消息，提供且只提供给下一个请求使用。通常通过一个布局模板来展现闪现的 消息。&lt;/p&gt;
+&lt;p&gt;flash() 用于闪现一个消息。在模板中，使用 get_flashed_messages() 来操作消息。完整的例子参见 消息闪现 。&lt;/p&gt;
+&lt;h2 id=&#34;日志&#34;&gt;日志&lt;/h2&gt;
+&lt;p&gt;有时候可能会遇到数据出错需要纠正的情况。例如因为用户篡改了数据或客户端代码出错 而导致一个客户端代码向服务器发送了明显错误的 HTTP 请求。多数时候在类似情况下 返回 400 Bad Request 就没事了，但也有不会返回的时候，而代码还得继续运行 下去。&lt;/p&gt;
+&lt;p&gt;这时候就需要使用日志来记录这些不正常的东西了。自从 Flask 0.3 后就已经为你配置好 了一个日志工具。&lt;/p&gt;
+&lt;p&gt;以下是一些日志调用示例:
+app.logger.debug(&amp;lsquo;A value for debugging&amp;rsquo;)
+app.logger.warning(&amp;lsquo;A warning occurred (%d apples)&amp;rsquo;, 42)
+app.logger.error(&amp;lsquo;An error occurred&amp;rsquo;)&lt;/p&gt;
+&lt;h2 id=&#34;集成-wsgi-中间件&#34;&gt;集成 WSGI 中间件&lt;/h2&gt;
+&lt;p&gt;如果想要在应用中添加一个 WSGI 中间件，那么可以包装内部的 WSGI 应用。假设为了 解决 lighttpd 的错误，你要使用一个来自 Werkzeug 包的中间件，那么可以这样做:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from werkzeug.contrib.fixers import LighttpdCGIRootFix
+app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;使用-flask-扩展&#34;&gt;使用 Flask 扩展&lt;/h2&gt;
+&lt;p&gt;扩展是帮助完成公共任务的包。例如 Flask-SQLAlchemy 为在 Flask 中轻松使用 SQLAlchemy 提供支持。&lt;/p&gt;
+&lt;h2 id=&#34;部署到网络服务器&#34;&gt;部署到网络服务器&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>CSV</title>
+        <link>http://localhost:1313/p/csv/</link>
+        <pubDate>Sat, 27 Apr 2024 13:28:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/csv/</guid>
+        <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142302067.jpg&#34;/&gt;
+# CSV
+&lt;h2 id=&#34;什么是csv&#34;&gt;什么是CSV&lt;/h2&gt;
+&lt;p&gt;CSV（Comma-Separated Values，逗号分隔的值）是一种简单、实用的文件格式，用于存储和表示包括文本、数值等各种类型的数据。CSV 文件通常以 .csv 作为文件扩展名。这种文件格式的一个显著特点是：文件内的数据以逗号 , 分隔，呈现一个表格形式。CSV 文件已广泛应用于存储、传输和编辑数据。&lt;/p&gt;
+&lt;h2 id=&#34;为什么使用csv&#34;&gt;为什么使用CSV&lt;/h2&gt;
+&lt;p&gt;CSV 文件因其简单易用、兼容性高、易于数据交换等特点受到了广泛的欢迎。以下是有关 CSV 使用的一些优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;简单易懂：CSV 文件基于纯文本格式，因此可以使用任何文本编辑器(如Notepad)轻松打开和编辑。&lt;/li&gt;
+&lt;li&gt;数据兼容性：CSV 文件中的数据可以很容易地跨平台进行传输和处理，任何具有 CSV 处理功能的软件(如Microsoft Excel、Google Sheets、甚至编程语言库)都能处理该类型的文件。&lt;/li&gt;
+&lt;li&gt;资源占用低：CSV 文件以纯文本形式存储数据，其体积相对较小，便于节省存储空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;文件的结构&#34;&gt;文件的结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;每行表示一条记录：CSV 文件中的每一行代表一条记录，相当于数据库中的一行数据。&lt;/li&gt;
+&lt;li&gt;逗号分隔：每行数据中，使用逗号 , 进行数据分隔，代表不同的数据。&lt;/li&gt;
+&lt;li&gt;引号包围：当数据单元格中的内容含有逗号时，为避免混淆，需要引号 (单引号 &amp;rsquo; 或双引号 &amp;ldquo;）将这个数据包围起来，防止误认为是两个不同数据。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>python项目管理</title>
         <link>http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</link>
         <pubDate>Mon, 22 Apr 2024 13:28:01 +0800</pubDate>
