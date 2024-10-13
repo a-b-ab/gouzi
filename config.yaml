@@ -3,17 +3,17 @@ baseurl: https://example.com
 languageCode: zh-cn
 theme: stack
 paginate: 5
-title: 西伯利亚土豆商
+title: 乌鸦
 # copyright: 影麟
 
 languages:
     zh-cn:
         languageName: 中文
         # 博客名
-        title: 西伯利亚土豆商
+        title: 乌鸦
         weight: 1
         params:
-            description: 西伯利亚土豆商的个人博客
+            description: 乌鸦的个人博客
 
     # en:
     #     languageName: English
@@ -56,7 +56,7 @@ params:
     favicon:  # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
-        since: 2020
+        since: 2024
         customText:
 
     # 日期格式
@@ -66,9 +66,9 @@ params:
 
     sidebar:
         # 头像处的表情
-        emoji: 🍥
+        emoji: 🍔
         # 简介
-        subtitle: 我打开圣经，上面第一句话就是"Hello World!"
+        subtitle: 往事暗沉不可追,来日之路光明灿烂
         avatar:
             enabled: true
             local: true
@@ -78,7 +78,7 @@ params:
     article:
         math: false
         toc: true
-        readingTime: true
+        readingTime: false
         license:
             enabled: true
             default: Licensed under CC BY-NC-SA 4.0

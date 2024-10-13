@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>西伯利亚土豆商</title>
-        <link>http://localhost:1313/</link>
-        <description>Recent content on 西伯利亚土豆商</description>
+        <title>乌鸦</title>
+        <link>https://example.com/</link>
+        <description>Recent content on 乌鸦</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 11 May 2024 13:28:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 11 May 2024 13:28:01 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Tmux</title>
-        <link>http://localhost:1313/p/tmux/</link>
+        <link>https://example.com/p/tmux/</link>
         <pubDate>Sat, 11 May 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/tmux/</guid>
+        <guid>https://example.com/p/tmux/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142303757.jpg&#34;/&gt;
 # Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具
 &lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
@@ -194,10 +194,10 @@ $ tmux source-file ~/.tmux.conf&lt;/code&gt;&lt;/pre&gt;
         </item>
         <item>
         <title>xml</title>
-        <link>http://localhost:1313/p/xml/</link>
+        <link>https://example.com/p/xml/</link>
         <pubDate>Fri, 10 May 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/xml/</guid>
+        <guid>https://example.com/p/xml/</guid>
         <description>&lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
 &lt;p&gt;XML(Extensible Markup Language) 扩展性标识语言。文件后缀名为：.xml。就像HTML的作用是显示数据，XML的作用是传输和存储数据。
 &lt;em&gt;据说，java是一门专业操作XML的语言&lt;/em&gt;&lt;/p&gt;
@@ -226,10 +226,10 @@ JSON适用于简单的传值，XML适用于更广阔的范围&lt;/p&gt;
         </item>
         <item>
         <title>图解网络</title>
-        <link>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</link>
+        <link>https://example.com/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</link>
         <pubDate>Thu, 09 May 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</guid>
+        <guid>https://example.com/p/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142259666.jpg&#34;
 	
 	
@@ -1397,10 +1397,10 @@ Socket 层的下⾯就是传输层、⽹络层和⽹络接⼝层；
         </item>
         <item>
         <title>图解HTTP</title>
-        <link>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3http/</link>
+        <link>https://example.com/p/%E5%9B%BE%E8%A7%A3http/</link>
         <pubDate>Wed, 08 May 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%9B%BE%E8%A7%A3http/</guid>
+        <guid>https://example.com/p/%E5%9B%BE%E8%A7%A3http/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142259587.jpg&#34;
 	
 	
@@ -2348,10 +2348,10 @@ SPDY 以会话层的形式加入，控制对数据的流动，但还是采用 HT
         </item>
         <item>
         <title>gitte</title>
-        <link>http://localhost:1313/p/gitte/</link>
+        <link>https://example.com/p/gitte/</link>
         <pubDate>Mon, 06 May 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/gitte/</guid>
+        <guid>https://example.com/p/gitte/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142303934.jpg&#34;/&gt;
 # 什么是Gitee
 Gitee 是一个版本控制和协作的代码托管平台（可以托管代码，还可以托管文档与图片资料）。 它可以让你和其他人一起在远程或本地项目上进行协作。
@@ -2397,10 +2397,10 @@ Gitee 是一个版本控制和协作的代码托管平台（可以托管代码�
         </item>
         <item>
         <title>Flask</title>
-        <link>http://localhost:1313/p/flask/</link>
+        <link>https://example.com/p/flask/</link>
         <pubDate>Tue, 30 Apr 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/flask/</guid>
+        <guid>https://example.com/p/flask/</guid>
         <description>&lt;h1 id=&#34;一个最小的应用&#34;&gt;一个最小的应用&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142258566.jpg&#34;
 	
@@ -2873,10 +2873,10 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
         </item>
         <item>
         <title>CSV</title>
-        <link>http://localhost:1313/p/csv/</link>
+        <link>https://example.com/p/csv/</link>
         <pubDate>Sat, 27 Apr 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/csv/</guid>
+        <guid>https://example.com/p/csv/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202405142302067.jpg&#34;/&gt;
 # CSV
 &lt;h2 id=&#34;什么是csv&#34;&gt;什么是CSV&lt;/h2&gt;
@@ -2898,10 +2898,10 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
         </item>
         <item>
         <title>python项目管理</title>
-        <link>http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</link>
+        <link>https://example.com/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</link>
         <pubDate>Mon, 22 Apr 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</guid>
+        <guid>https://example.com/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404221613371.jpg&#34;/&gt;
 &lt;h1 id=&#34;python项目管理&#34;&gt;Python项目管理&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一下，感觉自己作为一个学校里学生，有幸在学校间接触到这些观念，是很幸运的。&lt;/em&gt;&lt;/p&gt;
@@ -3175,10 +3175,10 @@ Flake8 是 Python 中常用的代码质量检查工具之一，而 mccabe 则是
         </item>
         <item>
         <title>Django</title>
-        <link>http://localhost:1313/p/django/</link>
+        <link>https://example.com/p/django/</link>
         <pubDate>Sun, 21 Apr 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/django/</guid>
+        <guid>https://example.com/p/django/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404221612743.jpg&#34;/&gt;
 &lt;h1 id=&#34;django&#34;&gt;Django&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;基于蛇书的django项目&lt;/em&gt;&lt;/p&gt;
@@ -3437,10 +3437,10 @@ git remote remove platform
         </item>
         <item>
         <title>mysql</title>
-        <link>http://localhost:1313/p/mysql/</link>
+        <link>https://example.com/p/mysql/</link>
         <pubDate>Sat, 13 Apr 2024 13:35:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/mysql/</guid>
+        <guid>https://example.com/p/mysql/</guid>
         <description>&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202404131545297.jpg&#34;/&gt;
 ## 连接 MySQL 数据库
 `mysql -u root -p`
@@ -3942,10 +3942,10 @@ END;&lt;/p&gt;
         </item>
         <item>
         <title>好东西哦！</title>
-        <link>http://localhost:1313/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</link>
+        <link>https://example.com/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</link>
         <pubDate>Thu, 28 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</guid>
+        <guid>https://example.com/p/%E5%A5%BD%E4%B8%9C%E8%A5%BF%E5%93%A6/</guid>
         <description>&lt;h1 id=&#34;推荐&#34;&gt;推荐&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403291306357.jpg&#34;
 	
@@ -4378,10 +4378,10 @@ stripe
         </item>
         <item>
         <title>个人博客搭建呀</title>
-        <link>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</link>
+        <link>https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</link>
         <pubDate>Wed, 27 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</guid>
+        <guid>https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403271606982.jpg&#34;
 	
 	
@@ -4502,10 +4502,10 @@ cd public/&lt;/p&gt;
         </item>
         <item>
         <title>Linux重装</title>
-        <link>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</link>
+        <link>https://example.com/p/linux%E9%87%8D%E8%A3%85/</link>
         <pubDate>Tue, 26 Mar 2024 18:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/</guid>
+        <guid>https://example.com/p/linux%E9%87%8D%E8%A3%85/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403191526421.jpg&#34;
 	
 	
@@ -4584,10 +4584,10 @@ cd public/&lt;/p&gt;
         </item>
         <item>
         <title>爬虫学习plus</title>
-        <link>http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</link>
+        <link>https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</link>
         <pubDate>Tue, 26 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</guid>
+        <guid>https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403262100222.jpg&#34;
 	
 	
@@ -4971,10 +4971,10 @@ redis相关操作配置：
         </item>
         <item>
         <title>爬虫</title>
-        <link>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</link>
+        <link>https://example.com/p/%E7%88%AC%E8%99%AB/</link>
         <pubDate>Thu, 21 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E7%88%AC%E8%99%AB/</guid>
+        <guid>https://example.com/p/%E7%88%AC%E8%99%AB/</guid>
         <description>&lt;h1 id=&#34;爬虫基础&#34;&gt;爬虫基础&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403211058784.jpg&#34;
 	
@@ -5119,10 +5119,10 @@ HTTP是无状态的&lt;/p&gt;
         </item>
         <item>
         <title>git</title>
-        <link>http://localhost:1313/p/git/</link>
+        <link>https://example.com/p/git/</link>
         <pubDate>Tue, 19 Mar 2024 13:35:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/git/</guid>
+        <guid>https://example.com/p/git/</guid>
         <description>&lt;h1 id=&#34;git&#34;&gt;git&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;啊能镇楼&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403181915672.jpeg&#34;
@@ -5694,10 +5694,10 @@ create mode 100644 runoob-test.txt&lt;/p&gt;
         </item>
         <item>
         <title>python</title>
-        <link>http://localhost:1313/p/python/</link>
+        <link>https://example.com/p/python/</link>
         <pubDate>Sun, 17 Mar 2024 13:35:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/python/</guid>
+        <guid>https://example.com/p/python/</guid>
         <description>&lt;p&gt;&lt;em&gt;这是我在学习蛇书时的学习笔记，写这篇博客一是为了自己以后复盘，二是顺便分享一下，本人写这篇文章时才大二，写的不是很好，但是我就是不改，嘿嘿~~&lt;/em&gt;
 &lt;em&gt;白金镇楼&lt;/em&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182039941.jpg&#34;
@@ -5823,7 +5823,7 @@ numbers = list(range(1,6))&lt;/p&gt;
 squares = [value**2 for value in range(1,11)]&lt;/p&gt;
 &lt;p&gt;切片
 players[0:3]&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/2024-03-10-16-58-41.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/2024-03-10-16-58-41.png&#34;
 	
 	
 	
@@ -6964,7 +6964,7 @@ username.json 存在，就加载其中的⽤户名，并向⽤户发出个性化
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;测试类
 断言
-&lt;img src=&#34;http://localhost:1313/2024-03-11-09-06-48.png&#34;
+&lt;img src=&#34;https://example.com/2024-03-11-09-06-48.png&#34;
 	
 	
 	
@@ -7044,7 +7044,7 @@ test_store_single_response() 和test_store_three_responses() 提供了⼀个 lan
 们。这些⽂件存储在⽬录 &lt;strong&gt;pycache&lt;/strong&gt; 中。为了让 Git 忽略这个⽬录，创建
 ⼀个名为 .gitignore 的特殊⽂件（这个⽂件名以句点打头，且没有扩展
 名），并在其中添加如下⼀⾏内容
-&lt;img src=&#34;http://localhost:1313/2024-03-11-13-34-48.png&#34;
+&lt;img src=&#34;https://example.com/2024-03-11-13-34-48.png&#34;
 	
 	
 	
@@ -7230,10 +7230,10 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>My First Post</title>
-        <link>http://localhost:1313/p/my-first-post/</link>
+        <link>https://example.com/p/my-first-post/</link>
         <pubDate>Sun, 17 Mar 2024 13:28:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/my-first-post/</guid>
+        <guid>https://example.com/p/my-first-post/</guid>
         <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/a-b-ab/picture/main/Picgo202403182029744.jpg&#34;
 	
 	
@@ -7248,18 +7248,18 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>Archives</title>
-        <link>http://localhost:1313/archives/</link>
+        <link>https://example.com/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/archives/</guid>
+        <guid>https://example.com/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>Links</title>
-        <link>http://localhost:1313/links/</link>
+        <link>https://example.com/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/links/</guid>
+        <guid>https://example.com/links/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -7291,18 +7291,18 @@ pygame.display.flip() 将不断更新屏幕，以显⽰新位置上的元素并�
         </item>
         <item>
         <title>Search</title>
-        <link>http://localhost:1313/search/</link>
+        <link>https://example.com/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/search/</guid>
+        <guid>https://example.com/search/</guid>
         <description></description>
         </item>
         <item>
         <title>关于</title>
-        <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
+        <link>https://example.com/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>https://example.com/%E5%85%B3%E4%BA%8E/</guid>
         <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
