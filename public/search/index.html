@@ -12,7 +12,9 @@
 <meta property='og:site_name' content='乌鸦的个人博客'>
 <meta property='og:type' content='article'><meta property='article:section' content='Page' />
 <meta name="twitter:title" content="Search">
-<meta name="twitter:description" content=""><link rel="alternate" type="application/json" href="https://example.com/search/index.json"><link rel="preload" href="/search/index.json" as="fetch" crossorigin="anonymous">
+<meta name="twitter:description" content=""><link rel="alternate" type="application/json" href="https://example.com/search/index.json">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+<link rel="preload" href="/search/index.json" as="fetch" crossorigin="anonymous">
     </head>
     <body class="template-search">
     <script>
@@ -273,8 +275,6 @@
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -303,6 +303,16 @@
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>

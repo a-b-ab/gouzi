@@ -13,6 +13,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-11T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-11T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="Tmux">
 <meta name="twitter:description" content="# Tmux 是一个终端复用器（terminal multiplexer），非常有用，属于常用的开发工具\r是什么 会话于进程 命令行的典型使用方式是，打开一个终端窗口（terminal window，以下简称&quot;窗口&quot;），在里面输入命令。用户与计算机的这种临时的交互，称为一次&quot;会话&quot;（session） 。\n会话的一个重要特点是，窗口与其中启动的进程是连在一起的。打开窗口，会话开始；关闭窗口，会话结束，会话内部的进程也会随之终止，不管有没有运行完。\n一个典型的例子就是，SSH 登录远程计算机，打开一个远程窗口执行命令。这时，网络突然断线，再次登录的时候，是找不回上一次执行的命令的。因为上一次 SSH 会话已经终止了，里面的进程也随之消失了。\n为了解决这个问题，会话与窗口可以&quot;解绑&quot;：窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话&quot;绑定&quot;其他窗口\nTmux的作用 Tmux 就是会话与窗口的&quot;解绑&quot;工具，将它们彻底分离。\n它允许在单个窗口中，同时访问多个会话。这对于同时运行多个命令行程序很用。\n它可以让新窗口&quot;接入&quot;已经存在的会话。\n它允许每个会话有多个连接窗口，因此可以多人实时共享会话。\n它还支持窗口任意的垂直和水平拆分。\n类似的终端复用器还有 GNU Screen。Tmux 与它功能相似，但是更易用，也更强大。\n基本用法 安装 # Ubuntu 或 Debian\r$ sudo apt-get install tmux\r# CentOS 或 Fedora\r$ sudo yum install tmux\r# Mac\r$ brew install tmux\r启动与退出 安装完成后，键入tmux命令，就进入了 Tmux 窗口\n上面命令会启动 Tmux 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息\n按下Ctrl+d或者显式输入exit命令，就可以退出 Tmux 窗口。\n前缀键 Tmux 窗口有大量的快捷键。所有快捷键都要通过前缀键唤起。默认的前缀键是Ctrl+b，即先按下Ctrl+b，快捷键才会生效。\n举例来说，帮助命令的快捷键是Ctrl+b ?它的用法是，在 Tmux 窗口中，先按下Ctrl+b，再按下?，就会显示帮助信息。">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+
     </head>
     <body class="
     article-page
@@ -624,8 +626,6 @@ $ tmux source-file ~/.tmux.conf</code></pre>
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -732,6 +732,16 @@ $ tmux source-file ~/.tmux.conf</code></pre>
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>

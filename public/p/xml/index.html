@@ -13,6 +13,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-10T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-10T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="xml">
 <meta name="twitter:description" content="是什么 XML(Extensible Markup Language) 扩展性标识语言。文件后缀名为：.xml。就像HTML的作用是显示数据，XML的作用是传输和存储数据。 据说，java是一门专业操作XML的语言\n是干啥用的 为了便于不同应用，不同平台之间的数据共享和通信\n具体点的作用为： 1.可作为一种简单的数据库，存储并检索数据 2.传输约定格式的文件 3.做软件的配置文件 配置文件：保存软件设置的文件\nXML的出生是为了完善HTML的缺陷和局限性\nXML的闺蜜&ndash;JSON JSON javascript Object Notation ,js对象表示法。作用也是存储和交换文本信息\nJSON更小，跟快，更易解析 JSON适用于简单的传值，XML适用于更广阔的范围\n.xml文件中的代码\n&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\r&lt;email xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;email.xsd&quot;&gt;\r&lt;to&gt;liuwei8809@163.com&lt;/to&gt;\r&lt;form&gt;hellokitty@163.com&lt;/form&gt;\r&lt;title&gt;about loving&lt;/title&gt;\r&lt;body&gt;I love you forever!&lt;/body&gt;\r&lt;date&gt;2008-11-12&lt;/date&gt;\r&lt;/email&gt; ">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+
     </head>
     <body class="
     article-page
@@ -410,8 +412,6 @@ JSON适用于简单的传值，XML适用于更广阔的范围</p>
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -518,6 +518,16 @@ JSON适用于简单的传值，XML适用于更广阔的范围</p>
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>

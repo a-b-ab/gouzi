@@ -13,6 +13,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-09T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-09T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="图解网络">
 <meta name="twitter:description" content="图解网络 基础篇 TCP/IP模型 应用层 传输层 在传输层会有两个传输协议，分别是 TCP 和 UDP TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅\nUDP 就相对很简单，简单到只负责发送数据包，不保证数据包是否能抵达对⽅，但它实时性相对更好，传输效率也⾼。当然，UDP 也可以实现可靠传输，把 TCP 的特性在应⽤层上实现就可以，不过要实现⼀个商⽤的可靠 UDP传输协议，也不是⼀件简单的事情\n应⽤需要传输的数据可能会⾮常⼤，如果直接传输就不好控制，因此当传输层的数据包⼤⼩超过 MSS（TCP 最⼤报⽂段⻓度） ，就要将数据包分块，这样即使中途有⼀个分块丢失或损坏了，只需要᯿新这⼀个分块，⽽不⽤᯿新发送整个数据包。在 TCP 协议中，我们把每个分块称为⼀个 TCP 段（TCP Segment）。\n当设备作为接收⽅时，传输层则要负责把数据包传给应⽤，但是⼀台设备上可能会有很多应⽤在接收或者传输数据，因此需要⽤⼀个编号将应⽤区分开来，这个编号就是端⼝\n⽐如 80 端⼝通常是 Web 服务器⽤的，22 端⼝通常是远程登录服务器⽤的。⽽对于浏览器（客户端）中的每个标签栏都是⼀个独⽴的进程，操作系统会为这些进程分配临时的端⼝号\n由于传输层的报⽂中会携带端⼝号，因此接收⽅可以识别出该报⽂是发送给哪个应⽤\n网络层 我们不希望传输层协议处理太多的事情，只需要服务好应⽤即可，让其作为应⽤间数据传输的媒介，帮 助实现应⽤到应⽤的通信，⽽实际的传输功能就交给下⼀层，也就是⽹络层（Internet Layer）\n⽹络层最常使⽤的是 IP 协议（Internet Protocol），IP 协议会将传输层的报⽂作为数据部分，再加上 IP 包头组装成 IP 报⽂，如果 IP 报⽂⼤⼩超过 MTU（以太⽹中⼀般为 1500 字节）就会再次进⾏分⽚，得到⼀个即将发送到⽹络的 IP 报⽂。\n因此，需要将 IP 地址分成两种意义\n⼀个是⽹络号，负责标识该 IP 地址是属于哪个⼦⽹的 ⼀个是主机号，负责标识同⼀⼦⽹下的不同主机">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+
     </head>
     <body class="
     article-page
@@ -1807,8 +1809,6 @@ Socket 层的下⾯就是传输层、⽹络层和⽹络接⼝层；
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -1915,6 +1915,16 @@ Socket 层的下⾯就是传输层、⽹络层和⽹络接⼝层；
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>

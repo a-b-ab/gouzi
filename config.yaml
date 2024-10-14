@@ -1,7 +1,7 @@
 baseurl: https://example.com
 languageCode: zh-cn
 theme: stack
-paginate: 6
+paginate: 5
 title: 乌鸦的个人博客
 copyright: 乌鸦
 
@@ -39,10 +39,10 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: /NotoV1Hamburger.png # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
-        since: 2020
+        since: 2024
         customText:
 
     dateFormat:

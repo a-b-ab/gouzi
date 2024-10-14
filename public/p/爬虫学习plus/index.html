@@ -13,6 +13,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="爬虫学习plus">
 <meta name="twitter:description" content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰\nhttp协议： 概念：就是服务器和客户端进行数据交互的一种形式\r常用请求头信息 user-agent:请求载体的身份标识\rconnection：请求完毕后，是断开连接还是保持连接\r常用响应头信息： content-type：服务器响应回客户端的数据类型\rhttps协议： 安全的超文本传输协议\r加密方式： 对称密钥加密\r非对称密钥加密\r证书密钥加密\rreques模块 python中原生的一款基于网络请求的模块，功能强大，简单便携，效率极高\r作用：模拟浏览器发请求\r如何使用： 指定URL\r发起请求\r获取响应数据\r数据解析\r持久化存储\r有些数据可能是动态请求加载出来的，不能通过url直接请求出来\n数据解析 ： 解析的局部的文本内容都会在标签之间或标签对应的属性中进行存储 1.进行指定标签的定位\r2.标签或者标签对应的属性中存储的数据值进行提取（解析）\r聚焦爬虫：爬取页面中指定的页面内容 正则 bs4 xpath\ntext(字符串) content(二进制) json()(对象)\nbs4进行数据解析 1.实例化一个BeautifulSoup对象，并将页面源码数据加载到该对象中\r2.通过调用BeautifulSoup对象中相关的属性或方法进行标签定位和数据提取\rxpath解析:最常用且便携高效的一种解析方式，通用性 -xpath解析原理：\r1.实例化一个etree的对象，且需要将被解析的页面源码数据加载到该对象中\r2.调用etree对象中的xpath方法结合着xpath表达式实现标签的定位和内容的捕获\r-环境安装\r-如何实例化一个etree对象：from lxml import etree\r1.将本地的html文档的源码数据加载到etree对象中：\retree.parse(filePath)\r2.可以将从互联网上获取的源码数据加载到该对象中：\retree.HTML('page_text')\r- xpath('xpath表达式')\r1./表示的是从根节点开始定位。表示的是一个层级\r2.//表示的是多个层级。可以表示从任意位置开始定位\r3.属性定位：//div[@class='song'] tag[@attrName=&quot;attrValue&quot;]\r4.索引定位：//div[@class='song']/p[3] 索引是从1开始的\r5.取文本：\r/text()获取的是标签中直系的文本内容\r//text()标签中非直系的文本内容\r6.取属性：\r/@attrName ==&gt;img/src\r验证码识别 反爬机制：验证码。识别验证码图片中的数据，用于模拟登录操作">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+
     </head>
     <body class="
     article-page
@@ -842,8 +844,6 @@ redis相关操作配置：
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -950,6 +950,16 @@ redis相关操作配置：
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>

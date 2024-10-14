@@ -13,6 +13,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-27T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-27T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="个人博客搭建呀">
 <meta name="twitter:description" content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接\nhugo（静态网站生成器） 其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了\n总之，先给官方文档 https://www.gohugo.org/\n看的懂最好，看不懂，那就看看我的或别人的\n这一步可以参照网上很多人的文档，最推荐官方，下载链接如下： https://github.com/gohugoio/hugo/releases\n选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的\n下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin\n解释一下，为什么要改文件夹名字？ 为了添加环境变量\n为什么文件夹的名字是bin？ “约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行\n什么是环境变量？ emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。\n如何添加环境变量？ 请善用搜索引擎，有很多写得超级详细\n以上信息是别人博主发的，我懒得写，哈哈\n生成站点 使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：\n在cmd输入哦\n$ hugo new site /path/to/site\n这样就在 /path/to/site 目录里生成了初始站点，进去目录：\n$ cd /path/to/site\n站点目录结构：\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml\n在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面\n创建文章 创建一个 about 页面\n$ hugo new about.md\nabout.md 自动生成到了 content/about.md ，打开 about.md 看下\n+++\rdate = &quot;2015-10-25T08:36:54-07:00&quot;\rdraft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章\rtitle = &quot;about&quot;\r+++\r正文内容">
+    <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
+
     </head>
     <body class="
     article-page
@@ -551,8 +553,6 @@ cd public/</p>
     <section class="copyright">
         &copy; 
         
-            2020 - 
-        
         2024 乌鸦
     </section>
     
@@ -659,6 +659,16 @@ cd public/</p>
         document.head.appendChild(customFont);
     }());
 </script>
-
+<style>
+    @font-face {
+      font-family: 'mouse';
+      src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
+    }
+  
+    :root {
+      --base-font-family: 'mouse';
+      --code-font-family: 'mouse';
+    }
+  </style>
     </body>
 </html>
