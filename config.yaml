@@ -3,7 +3,7 @@ baseurl: https://example.com
 languageCode: zh-cn
 theme: stack
 paginate: 5
-title: 乌鸦
+title: 乌鸦的博客
 # copyright: 影麟
 
 languages:
@@ -68,12 +68,12 @@ params:
         # 头像处的表情
         emoji: 🍔
         # 简介
-        subtitle: 往事暗沉不可追,来日之路光明灿烂
+        subtitle: 所行皆坦途，所愿皆如期
         avatar:
             enabled: true
             local: true
             # 位于assets/img/下的图片，头像
-            src: img/avatar.png
+            src: img/avatar.jpg
 
     article:
         math: false
