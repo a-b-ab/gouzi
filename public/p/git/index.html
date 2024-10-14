@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="git 啊能镇楼\ngit配置 $ git config --global user.name &quot;runoob&quot;\r$ git config --global user.email test@runoob.com\r查看配置信息 $ git config --list\rgit工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他人修改，你可以更新资源 在提交前查看修改 提交修改 在修改完成后，如果发现有错误，可以撤回提交并再次修改并提交 基本概念 工作区：就是你在电脑里能看到的目录 暂存区：英文叫stage或index，一般存放在 .git 目录下的index文件，所以我们把暂存区有时也叫作索引（index） 版本库：工作区有一个隐藏目录 .git，这个不算工作区，而是Git的版本库 图中左侧为工作区，右侧为版本库。在版本库中标记为“index”的区域是暂存区（stage/index）,标记为“master”的是master分支所代表的目录树 图中我们可以看出此时“HEAD”实际是指向master分支的一个“游标”。所以图示的命令中出现HEAD的地方是可以用master来替换的 图中的object标识的区域为git的对象库，实际位于“.git/objects”目录下，里面包含了创建的各种对象及内容 当对工作区修改（或新增）的文件执行git add命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中 当执行提交（git commit）时，暂存区的目录树写到版本库（对象库）中，master分支会相应的更新。即master指向的目录树就是提交时暂存区的目录树 当执行 git reset HEAD 操作时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响 当执行 git rm &ndash;cached 命令时，会直接从暂存区删除文件，工作区则不做出改变。 当执行 git checkout . 或者 git checkout &ndash; 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区中的改动。 当执行 git checkout HEAD . 或者 git checkout HEAD 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动 git 创建仓库 git init初始化一个仓库 Git 的很多命令都需要在 Git 的仓库中运行，所以 git init 是使用 Git 的第一个命令。 在执行完成 git init 命令后，Git 仓库会生成一个 .">
 <title>git</title>
 
-<link rel='canonical' href='http://localhost:1313/p/git/'>
+<link rel='canonical' href='https://example.com/p/git/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="git">
 <meta property='og:description' content="git 啊能镇楼\ngit配置 $ git config --global user.name &quot;runoob&quot;\r$ git config --global user.email test@runoob.com\r查看配置信息 $ git config --list\rgit工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他人修改，你可以更新资源 在提交前查看修改 提交修改 在修改完成后，如果发现有错误，可以撤回提交并再次修改并提交 基本概念 工作区：就是你在电脑里能看到的目录 暂存区：英文叫stage或index，一般存放在 .git 目录下的index文件，所以我们把暂存区有时也叫作索引（index） 版本库：工作区有一个隐藏目录 .git，这个不算工作区，而是Git的版本库 图中左侧为工作区，右侧为版本库。在版本库中标记为“index”的区域是暂存区（stage/index）,标记为“master”的是master分支所代表的目录树 图中我们可以看出此时“HEAD”实际是指向master分支的一个“游标”。所以图示的命令中出现HEAD的地方是可以用master来替换的 图中的object标识的区域为git的对象库，实际位于“.git/objects”目录下，里面包含了创建的各种对象及内容 当对工作区修改（或新增）的文件执行git add命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中 当执行提交（git commit）时，暂存区的目录树写到版本库（对象库）中，master分支会相应的更新。即master指向的目录树就是提交时暂存区的目录树 当执行 git reset HEAD 操作时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响 当执行 git rm &ndash;cached 命令时，会直接从暂存区删除文件，工作区则不做出改变。 当执行 git checkout . 或者 git checkout &ndash; 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区中的改动。 当执行 git checkout HEAD . 或者 git checkout HEAD 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动 git 创建仓库 git init初始化一个仓库 Git 的很多命令都需要在 Git 的仓库中运行，所以 git init 是使用 Git 的第一个命令。 在执行完成 git init 命令后，Git 仓库会生成一个 .">
-<meta property='og:url' content='http://localhost:1313/p/git/'>
-<meta property='og:site_name' content='Example Site'>
+<meta property='og:url' content='https://example.com/p/git/'>
+<meta property='og:site_name' content='乌鸦的个人博客'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-19T13:35:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-19T13:35:01&#43;08:00'/>
 <meta name="twitter:title" content="git">
 <meta name="twitter:description" content="git 啊能镇楼\ngit配置 $ git config --global user.name &quot;runoob&quot;\r$ git config --global user.email test@runoob.com\r查看配置信息 $ git config --list\rgit工作流程 克隆git资源作为工作目录 在克隆的资源上添加或修改文件 如果其他人修改，你可以更新资源 在提交前查看修改 提交修改 在修改完成后，如果发现有错误，可以撤回提交并再次修改并提交 基本概念 工作区：就是你在电脑里能看到的目录 暂存区：英文叫stage或index，一般存放在 .git 目录下的index文件，所以我们把暂存区有时也叫作索引（index） 版本库：工作区有一个隐藏目录 .git，这个不算工作区，而是Git的版本库 图中左侧为工作区，右侧为版本库。在版本库中标记为“index”的区域是暂存区（stage/index）,标记为“master”的是master分支所代表的目录树 图中我们可以看出此时“HEAD”实际是指向master分支的一个“游标”。所以图示的命令中出现HEAD的地方是可以用master来替换的 图中的object标识的区域为git的对象库，实际位于“.git/objects”目录下，里面包含了创建的各种对象及内容 当对工作区修改（或新增）的文件执行git add命令时，暂存区的目录树被更新，同时工作区修改（或新增）的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中 当执行提交（git commit）时，暂存区的目录树写到版本库（对象库）中，master分支会相应的更新。即master指向的目录树就是提交时暂存区的目录树 当执行 git reset HEAD 操作时，暂存区的目录树会被重写，被master分支指向的目录树所替换，但是工作区不受影响 当执行 git rm &ndash;cached 命令时，会直接从暂存区删除文件，工作区则不做出改变。 当执行 git checkout . 或者 git checkout &ndash; 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区中的改动。 当执行 git checkout HEAD . 或者 git checkout HEAD 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动 git 创建仓库 git init初始化一个仓库 Git 的很多命令都需要在 Git 的仓库中运行，所以 git init 是使用 Git 的第一个命令。 在执行完成 git init 命令后，Git 仓库会生成一个 .">
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,7 +69,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h1 class="site-name"><a href="/">乌鸦的个人博客</a></h1>
             <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
@@ -133,13 +133,13 @@
 
 
                 
-                <span>Home</span>
+                <span>主页</span>
             </a>
         </li>
         
         
         <li >
-            <a href='/about/' >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
                 
                 
                 
@@ -152,7 +152,7 @@
 
 
                 
-                <span>About</span>
+                <span>关于</span>
             </a>
         </li>
         
@@ -216,31 +216,6 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
-                    
-                        <li id="i18n-switch">  
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
-                                
-                                    <option value="http://localhost:1313/" selected>English</option>
-                                
-                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
-                                
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
-                                
-                            </select>
-                        </li>
-                    
-                
 
                 
                     <li id="dark-mode-toggle">
@@ -260,7 +235,7 @@
 
 
 
-                        <span>Dark Mode</span>
+                        <span>暗色模式</span>
                     </li>
                 
             </ol>
@@ -285,7 +260,7 @@
 
 
         </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
+        <h2 class="widget-title section-title">目录</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
@@ -383,7 +358,7 @@
 
 
                 <time class="article-time--reading">
-                    7 minute read
+                    阅读时长: 7 分钟
                 </time>
             </div>
         
@@ -1047,12 +1022,12 @@ create mode 100644 runoob-test.txt</p>
         
             2020 - 
         
-        2024 Example Person
+        2024 乌鸦
     </section>
     
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 

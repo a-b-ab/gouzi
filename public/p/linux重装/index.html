@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
 <title>Linux重装</title>
 
-<link rel='canonical' href='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
+<link rel='canonical' href='https://example.com/p/linux%E9%87%8D%E8%A3%85/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="Linux重装">
 <meta property='og:description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
-<meta property='og:url' content='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
-<meta property='og:site_name' content='Example Site'>
+<meta property='og:url' content='https://example.com/p/linux%E9%87%8D%E8%A3%85/'>
+<meta property='og:site_name' content='乌鸦的个人博客'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T18:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T18:28:01&#43;08:00'/>
 <meta name="twitter:title" content="Linux重装">
 <meta name="twitter:description" content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,7 +69,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h1 class="site-name"><a href="/">乌鸦的个人博客</a></h1>
             <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
@@ -133,13 +133,13 @@
 
 
                 
-                <span>Home</span>
+                <span>主页</span>
             </a>
         </li>
         
         
         <li >
-            <a href='/about/' >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
                 
                 
                 
@@ -152,7 +152,7 @@
 
 
                 
-                <span>About</span>
+                <span>关于</span>
             </a>
         </li>
         
@@ -216,31 +216,6 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
-                    
-                        <li id="i18n-switch">  
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
-                                
-                                    <option value="http://localhost:1313/" selected>English</option>
-                                
-                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
-                                
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
-                                
-                            </select>
-                        </li>
-                    
-                
 
                 
                     <li id="dark-mode-toggle">
@@ -260,7 +235,7 @@
 
 
 
-                        <span>Dark Mode</span>
+                        <span>暗色模式</span>
                     </li>
                 
             </ol>
@@ -285,7 +260,7 @@
 
 
         </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
+        <h2 class="widget-title section-title">目录</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
@@ -365,7 +340,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -536,12 +511,12 @@
         
             2020 - 
         
-        2024 Example Person
+        2024 乌鸦
     </section>
     
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
