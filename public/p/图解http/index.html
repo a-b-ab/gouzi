@@ -10,7 +10,7 @@
 <meta property='og:description' content="图解HTTP 了解Web及网络基础 使用HTTP协议访问Web HTTP的诞生 网络基础TCP/IP TCP/IP协议族 协议:计算机与网络设备要相互通信，双方就必须基于相同的方法。比如，如何探测到通信目标、由哪一边先发起通信、使用哪种语言进行通信、怎样结束通信等规则都需要事先确定。不同的硬件、操作系统之 间的通信，所有的这一切都需要一种规则。而我们就把这种规则称为协议（protocol）。\nTCP/IP的分层管理 TCP/IP 协议族里重要的一点就是分层。TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网络层和数据链路层。\n把 TCP/IP 层次化是有好处的。比如，如果互联网只由一个协议统筹，某个地方需要改变设计时，就必须把所有部分整体替换掉。而分层之后只需把变动的层替换掉即可。把各层之间的接口部分规划好之后，每个层次内部的设计就能够自由改动了\n应用层：应用层决定了向用户提供应用服务时通信的活动，TCP/IP 协议族内预存了各类通用的应用服务。比如，FTP（FileTransfer Protocol，文件传输协议）和 DNS（Domain Name System，域名系统）服务就是其中两类。 HTTP 协议也处于该层。\n传输层：传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输，在传输层有两个性质不同的协议：TCP（Transmission ControlProtocol，传输控制协议）和 UDP（User Data Protocol，用户数据报协议）。\n网络层（网络互连层）：网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。与对方计算机之间通过多台计算机或网络设备进行传输时，网络层所起的作用就是在众多的选项内选择一条传输路线\n链路层（数据链路层，网络接口层）：用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分（还包括连接器等一切传输媒介）。硬件上的范畴均在链路层的作用范围之内\nTCP/IP通信传输流 利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。\n发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。\n这种把数据信息包装起来的做法称为封装（encapsulate）。\n与HTTP关系密切的协议：IP,TCP和DNS 负责传输的IP协议 “IP”其实是一种协议的名称\nIP 协议的作用是把各种数据包传送给对方。而要保证确实传送到对方那里，则需要满足各类条件。其中两个重要的条件是 IP 地址和 MAC地址（Media Access Control Address）。\nIP 地址指明了节点被分配到的地址，MAC 地址是指网卡所属的固定地址。IP 地址可以和 MAC 地址进行配对。IP 地址可变换，但 MAC地址基本上不会更改。\n使用 ARP 协议凭借 MAC 地址进行通信，ARP 是一种用以解析地址的协议，根据通信方的 IP 地址就可以反查出对应的 MAC 地址。">
 <meta property='og:url' content='https://example.com/p/%E5%9B%BE%E8%A7%A3http/'>
 <meta property='og:site_name' content='乌鸦的个人博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-08T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-08T13:28:01&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-05-08T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-14T23:00:09&#43;08:00'/>
 <meta name="twitter:title" content="图解HTTP">
 <meta name="twitter:description" content="图解HTTP 了解Web及网络基础 使用HTTP协议访问Web HTTP的诞生 网络基础TCP/IP TCP/IP协议族 协议:计算机与网络设备要相互通信，双方就必须基于相同的方法。比如，如何探测到通信目标、由哪一边先发起通信、使用哪种语言进行通信、怎样结束通信等规则都需要事先确定。不同的硬件、操作系统之 间的通信，所有的这一切都需要一种规则。而我们就把这种规则称为协议（protocol）。\nTCP/IP的分层管理 TCP/IP 协议族里重要的一点就是分层。TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网络层和数据链路层。\n把 TCP/IP 层次化是有好处的。比如，如果互联网只由一个协议统筹，某个地方需要改变设计时，就必须把所有部分整体替换掉。而分层之后只需把变动的层替换掉即可。把各层之间的接口部分规划好之后，每个层次内部的设计就能够自由改动了\n应用层：应用层决定了向用户提供应用服务时通信的活动，TCP/IP 协议族内预存了各类通用的应用服务。比如，FTP（FileTransfer Protocol，文件传输协议）和 DNS（Domain Name System，域名系统）服务就是其中两类。 HTTP 协议也处于该层。\n传输层：传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输，在传输层有两个性质不同的协议：TCP（Transmission ControlProtocol，传输控制协议）和 UDP（User Data Protocol，用户数据报协议）。\n网络层（网络互连层）：网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。与对方计算机之间通过多台计算机或网络设备进行传输时，网络层所起的作用就是在众多的选项内选择一条传输路线\n链路层（数据链路层，网络接口层）：用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分（还包括连接器等一切传输媒介）。硬件上的范畴均在链路层的作用范围之内\nTCP/IP通信传输流 利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。\n发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。\n这种把数据信息包装起来的做法称为封装（encapsulate）。\n与HTTP关系密切的协议：IP,TCP和DNS 负责传输的IP协议 “IP”其实是一种协议的名称\nIP 协议的作用是把各种数据包传送给对方。而要保证确实传送到对方那里，则需要满足各类条件。其中两个重要的条件是 IP 地址和 MAC地址（Media Access Control Address）。\nIP 地址指明了节点被分配到的地址，MAC 地址是指网卡所属的固定地址。IP 地址可以和 MAC 地址进行配对。IP 地址可变换，但 MAC地址基本上不会更改。\n使用 ARP 协议凭借 MAC 地址进行通信，ARP 是一种用以解析地址的协议，根据通信方的 IP 地址就可以反查出对应的 MAC 地址。">
     <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
@@ -1624,7 +1624,19 @@ SPDY 以会话层的形式加入，控制对数据的流动，但还是采用 HT
 
         <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 May 14, 2024 23:00 CST
+        </span>
+    </section></footer>
 
 
     
@@ -1793,14 +1805,14 @@ SPDY 以会话层的形式加入，控制对数据的流动，但还是采用 HT
 </script>
 <style>
     @font-face {
-      font-family: 'mouse';
+      font-family: 'homework';
       src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
     }
   
     :root {
-      --base-font-family: 'mouse';
-      --code-font-family: 'mouse';
+      --base-font-family: 'homework';
+      --code-font-family: 'homework';
     }
-  </style>
+</style>
     </body>
 </html>

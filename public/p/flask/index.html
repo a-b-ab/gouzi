@@ -10,7 +10,7 @@
 <meta property='og:description' content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？\n首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。\n接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 name ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘main’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。\n然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。\n函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。\n把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。\n外部可见的服务器 运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。\n如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &ndash;host=0.0.0.0 即可:\n$ flask run &ndash;host=0.0.0.0 这行代码告诉你的操作系统监听所有公开的 IP 。">
 <meta property='og:url' content='https://example.com/p/flask/'>
 <meta property='og:site_name' content='乌鸦的个人博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-30T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-04-30T13:28:01&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-30T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-05-14T23:05:08&#43;08:00'/>
 <meta name="twitter:title" content="Flask">
 <meta name="twitter:description" content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？\n首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。\n接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 name ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘main’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。\n然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。\n函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。\n把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。\n外部可见的服务器 运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。\n如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &ndash;host=0.0.0.0 即可:\n$ flask run &ndash;host=0.0.0.0 这行代码告诉你的操作系统监听所有公开的 IP 。">
     <link rel="shortcut icon" href="/NotoV1Hamburger.png" />
@@ -846,7 +846,19 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
 
         <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 May 14, 2024 23:05 CST
+        </span>
+    </section></footer>
 
 
     
@@ -1015,14 +1027,14 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
 </script>
 <style>
     @font-face {
-      font-family: 'mouse';
+      font-family: 'homework';
       src: url(https://example.com/font/CEFFontsCJK-Regular.ttf) format('truetype');
     }
   
     :root {
-      --base-font-family: 'mouse';
-      --code-font-family: 'mouse';
+      --base-font-family: 'homework';
+      --code-font-family: 'homework';
     }
-  </style>
+</style>
     </body>
 </html>
