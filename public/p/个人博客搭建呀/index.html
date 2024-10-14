@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接\nhugo（静态网站生成器） 其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了\n总之，先给官方文档 https://www.gohugo.org/\n看的懂最好，看不懂，那就看看我的或别人的\n这一步可以参照网上很多人的文档，最推荐官方，下载链接如下： https://github.com/gohugoio/hugo/releases\n选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的\n下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin\n解释一下，为什么要改文件夹名字？ 为了添加环境变量\n为什么文件夹的名字是bin？ “约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行\n什么是环境变量？ emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。\n如何添加环境变量？ 请善用搜索引擎，有很多写得超级详细\n以上信息是别人博主发的，我懒得写，哈哈\n生成站点 使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：\n在cmd输入哦\n$ hugo new site /path/to/site\n这样就在 /path/to/site 目录里生成了初始站点，进去目录：\n$ cd /path/to/site\n站点目录结构：\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml\n在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面\n创建文章 创建一个 about 页面\n$ hugo new about.md\nabout.md 自动生成到了 content/about.md ，打开 about.md 看下\n+++\rdate = &quot;2015-10-25T08:36:54-07:00&quot;\rdraft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章\rtitle = &quot;about&quot;\r+++\r正文内容">
 <title>个人博客搭建呀</title>
 
-<link rel='canonical' href='https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
+<link rel='canonical' href='http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="个人博客搭建呀">
-<meta property='og:description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
-<meta property='og:url' content='https://example.com/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接\nhugo（静态网站生成器） 其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了\n总之，先给官方文档 https://www.gohugo.org/\n看的懂最好，看不懂，那就看看我的或别人的\n这一步可以参照网上很多人的文档，最推荐官方，下载链接如下： https://github.com/gohugoio/hugo/releases\n选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的\n下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin\n解释一下，为什么要改文件夹名字？ 为了添加环境变量\n为什么文件夹的名字是bin？ “约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行\n什么是环境变量？ emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。\n如何添加环境变量？ 请善用搜索引擎，有很多写得超级详细\n以上信息是别人博主发的，我懒得写，哈哈\n生成站点 使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：\n在cmd输入哦\n$ hugo new site /path/to/site\n这样就在 /path/to/site 目录里生成了初始站点，进去目录：\n$ cd /path/to/site\n站点目录结构：\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml\n在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面\n创建文章 创建一个 about 页面\n$ hugo new about.md\nabout.md 自动生成到了 content/about.md ，打开 about.md 看下\n+++\rdate = &quot;2015-10-25T08:36:54-07:00&quot;\rdraft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章\rtitle = &quot;about&quot;\r+++\r正文内容">
+<meta property='og:url' content='http://localhost:1313/p/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%91%80/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-27T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-27T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="个人博客搭建呀">
-<meta name="twitter:description" content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接 hugo（静态网站生成器">
+<meta name="twitter:description" content="在搭建个人博客时，遇到了各种阴间问题，为此我删了起码七个库，都是泪，归根到底就是两个问题，一是主题配置，二是远程连接\nhugo（静态网站生成器） 其实不管什么东西，我都是建议先去看官方文档的，就像我师兄说的，你看别人教程就像别人消化后la给你，就像人体蜈蚣，哈哈哈，但是说实在，我也是过来人，有些东西确实需要别人指点一二，抛砖引玉，我写的博客一是为了自己复盘，二是想成为那个砖，帮助那些像我在学习时一样的朋友引出自己的玉，说多了\n总之，先给官方文档 https://www.gohugo.org/\n看的懂最好，看不懂，那就看看我的或别人的\n这一步可以参照网上很多人的文档，最推荐官方，下载链接如下： https://github.com/gohugoio/hugo/releases\n选择对应的压缩包版本，这里注意一下有extend的区别，我看了一下，extend只是多了一些可以自己操作的东西，新手还是建议老老实实的\n下载好压缩包之后，不论你是解压到哪里，都需要配置路径才能使用，因此一般推荐安装在除C盘之外的盘，例如我放在D盘中，新建一个文件夹Hugo，将解压的内容放进去，你可以看到最主要的其实就是一个.exe的二进制文件(意味着人家已经编译好了，我们直接拿来用就可以)，并将源文件夹的名字修改为bin\n解释一下，为什么要改文件夹名字？ 为了添加环境变量\n为什么文件夹的名字是bin？ “约定俗成”，二进制的英文是 binary ，取前三个字母，其实没有什么特殊的含义，你要高兴，取你自己的名字都行，只要把.exe文件添加进环境变量就行\n什么是环境变量？ emmmn，好问题，详细的无法解释，粗略一点，只有程序被添加到环境变量中后，才能被我们的操作系统识别并调用。\n如何添加环境变量？ 请善用搜索引擎，有很多写得超级详细\n以上信息是别人博主发的，我懒得写，哈哈\n生成站点 使用Hugo快速生成站点，比如希望生成到 /path/to/site 路径：\n在cmd输入哦\n$ hugo new site /path/to/site\n这样就在 /path/to/site 目录里生成了初始站点，进去目录：\n$ cd /path/to/site\n站点目录结构：\n▸ archetypes/ ▸ content/ ▸ layouts/ ▸ static/ config.toml\n在这个目录下，最主要的是对hugo.toml，themes/的配置。创建的所有.md文件都放置在content/文件下，所有文章的图片都放在static/下面\n创建文章 创建一个 about 页面\n$ hugo new about.md\nabout.md 自动生成到了 content/about.md ，打开 about.md 看下\n+++\rdate = &quot;2015-10-25T08:36:54-07:00&quot;\rdraft = true #这个东西是草稿的意思，我建议是你每发一篇博客都改为false，以后你每一篇博客都是每一篇文章\rtitle = &quot;about&quot;\r+++\r正文内容">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,34 +285,30 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#hugo静态网站生成器">hugo（静态网站生成器）</a>
+    <li><a href="#生成站点">生成站点</a></li>
+    <li><a href="#创建文章">创建文章</a></li>
+    <li><a href="#安装皮肤">安装皮肤</a></li>
+    <li><a href="#配置hugotoml">配置hugo.toml</a></li>
+    <li><a href="#生成网站">生成网站</a></li>
+    <li><a href="#推送到github">推送到GitHub</a>
       <ol>
-        <li><a href="#生成站点">生成站点</a></li>
-        <li><a href="#创建文章">创建文章</a></li>
-        <li><a href="#安装皮肤">安装皮肤</a></li>
-        <li><a href="#配置hugotoml">配置hugo.toml</a></li>
-        <li><a href="#生成网站">生成网站</a></li>
-        <li><a href="#推送到github">推送到GitHub</a>
-          <ol>
-            <li><a href="#在pubilc文件夹中创建仓库">在pubilc文件夹中创建仓库</a></li>
-          </ol>
-        </li>
-        <li><a href="#将两个仓库链接起来">将两个仓库链接起来</a>
-          <ol>
-            <li><a href="#打开git-bash命令窗口">打开git bash命令窗口</a></li>
-            <li><a href="#生成ssh-key">生成ssh key</a></li>
-            <li><a href="#把ssh-key添加到github">把ssh key添加到github</a></li>
-            <li><a href="#测试ssh连接">测试SSH连接</a></li>
-          </ol>
-        </li>
-        <li><a href="#后续提交">后续提交</a></li>
+        <li><a href="#在pubilc文件夹中创建仓库">在pubilc文件夹中创建仓库</a></li>
       </ol>
     </li>
+    <li><a href="#将两个仓库链接起来">将两个仓库链接起来</a>
+      <ol>
+        <li><a href="#打开git-bash命令窗口">打开git bash命令窗口</a></li>
+        <li><a href="#生成ssh-key">生成ssh key</a></li>
+        <li><a href="#把ssh-key添加到github">把ssh key添加到github</a></li>
+        <li><a href="#测试ssh连接">测试SSH连接</a></li>
+      </ol>
+    </li>
+    <li><a href="#后续提交">后续提交</a></li>
   </ol>
 </nav>
         </div>
@@ -293,6 +354,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -467,7 +542,7 @@ cd public/</p>
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -501,12 +576,14 @@ cd public/</p>
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

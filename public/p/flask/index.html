@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？ 首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。 接着我们创">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？\n首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。\n接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 name ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘main’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。\n然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。\n函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。\n把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。\n外部可见的服务器 运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。\n如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &ndash;host=0.0.0.0 即可:\n$ flask run &ndash;host=0.0.0.0 这行代码告诉你的操作系统监听所有公开的 IP 。">
 <title>Flask</title>
 
-<link rel='canonical' href='https://example.com/p/flask/'>
+<link rel='canonical' href='http://localhost:1313/p/flask/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="Flask">
-<meta property='og:description' content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？ 首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。 接着我们创">
-<meta property='og:url' content='https://example.com/p/flask/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？\n首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。\n接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 name ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘main’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。\n然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。\n函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。\n把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。\n外部可见的服务器 运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。\n如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &ndash;host=0.0.0.0 即可:\n$ flask run &ndash;host=0.0.0.0 这行代码告诉你的操作系统监听所有公开的 IP 。">
+<meta property='og:url' content='http://localhost:1313/p/flask/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-30T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-04-30T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="Flask">
-<meta name="twitter:description" content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？ 首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。 接着我们创">
+<meta name="twitter:description" content="一个最小的应用 1 2 3 4 5 6 from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello_world(): return &#39;Hello,World!&#39; 那么，这些代码是什么意思呢？\n首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。\n接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 name ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘main’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。\n然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。\n函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。\n把它保存为 hello.py 或其他类似名称。请不要使用 flask.py 作为应用名称，这会与 Flask 本身发生冲突。\n外部可见的服务器 运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却 不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中 的任意 Python 代码。\n如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 &ndash;host=0.0.0.0 即可:\n$ flask run &ndash;host=0.0.0.0 这行代码告诉你的操作系统监听所有公开的 IP 。">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,36 +285,32 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#一个最小的应用">一个最小的应用</a>
-      <ol>
-        <li><a href="#调试模式">调试模式</a></li>
-        <li><a href="#路由">路由</a></li>
-        <li><a href="#变量规则">变量规则</a></li>
-        <li><a href="#唯一的-url--重定向行为">唯一的 URL / 重定向行为</a></li>
-        <li><a href="#url-构建">URL 构建</a></li>
-        <li><a href="#http-方法">HTTP 方法</a></li>
-        <li><a href="#静态文件">静态文件</a></li>
-        <li><a href="#渲染模板">渲染模板</a></li>
-        <li><a href="#操作请求数据">操作请求数据</a></li>
-        <li><a href="#请求对象">请求对象</a></li>
-        <li><a href="#文件上传">文件上传</a></li>
-        <li><a href="#cookles">Cookles</a></li>
-        <li><a href="#重定向和错误">重定向和错误</a></li>
-        <li><a href="#关于响应">关于响应</a></li>
-        <li><a href="#json格式的api">JSON格式的API</a></li>
-        <li><a href="#会话">会话</a></li>
-        <li><a href="#消息闪现">消息闪现</a></li>
-        <li><a href="#日志">日志</a></li>
-        <li><a href="#集成-wsgi-中间件">集成 WSGI 中间件</a></li>
-        <li><a href="#使用-flask-扩展">使用 Flask 扩展</a></li>
-        <li><a href="#部署到网络服务器">部署到网络服务器</a></li>
-      </ol>
-    </li>
+    <li><a href="#调试模式">调试模式</a></li>
+    <li><a href="#路由">路由</a></li>
+    <li><a href="#变量规则">变量规则</a></li>
+    <li><a href="#唯一的-url--重定向行为">唯一的 URL / 重定向行为</a></li>
+    <li><a href="#url-构建">URL 构建</a></li>
+    <li><a href="#http-方法">HTTP 方法</a></li>
+    <li><a href="#静态文件">静态文件</a></li>
+    <li><a href="#渲染模板">渲染模板</a></li>
+    <li><a href="#操作请求数据">操作请求数据</a></li>
+    <li><a href="#请求对象">请求对象</a></li>
+    <li><a href="#文件上传">文件上传</a></li>
+    <li><a href="#cookles">Cookles</a></li>
+    <li><a href="#重定向和错误">重定向和错误</a></li>
+    <li><a href="#关于响应">关于响应</a></li>
+    <li><a href="#json格式的api">JSON格式的API</a></li>
+    <li><a href="#会话">会话</a></li>
+    <li><a href="#消息闪现">消息闪现</a></li>
+    <li><a href="#日志">日志</a></li>
+    <li><a href="#集成-wsgi-中间件">集成 WSGI 中间件</a></li>
+    <li><a href="#使用-flask-扩展">使用 Flask 扩展</a></li>
+    <li><a href="#部署到网络服务器">部署到网络服务器</a></li>
   </ol>
 </nav>
         </div>
@@ -295,6 +356,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -821,7 +896,7 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -855,12 +930,14 @@ app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

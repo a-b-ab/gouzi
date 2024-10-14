@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则 EXISTS 的计算结果为 TRUE，否则计算结果为 FALSE。\nLIKE % 匹配零或多个任意字符。 _ 匹配单个任意字符。 如果需要匹配通配符，则需要使用 \\ 转义字符，如 % 和 _。 使用通配符匹配文本时，不区分字母大小写。\n按自定义顺序排序 使用 CASE 实现自定义排序 使用 FIELD() 函数实现自定义排序 在 MySQL 中的升序排序中， NULL 值出现在非 NULL 值之前 当我们使用 ORDER BY 子句降序 DESC 排序时， NULL 值排在非 NULL 值的后面\nMySQL LIMIT 在 MySQL 中，我们使用 LIMIT 子句来限定 SELECT 语句返回的行的数量\n当 DISTINCT 遇到 NULL 值时，只保留一个 NULL 值。因为 DISTINCT 认为所有的 NULL 值都是相同的，这与字段的类型无关。">
 <title>mysql</title>
 
-<link rel='canonical' href='https://example.com/p/mysql/'>
+<link rel='canonical' href='http://localhost:1313/p/mysql/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="mysql">
-<meta property='og:description' content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则">
-<meta property='og:url' content='https://example.com/p/mysql/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则 EXISTS 的计算结果为 TRUE，否则计算结果为 FALSE。\nLIKE % 匹配零或多个任意字符。 _ 匹配单个任意字符。 如果需要匹配通配符，则需要使用 \\ 转义字符，如 % 和 _。 使用通配符匹配文本时，不区分字母大小写。\n按自定义顺序排序 使用 CASE 实现自定义排序 使用 FIELD() 函数实现自定义排序 在 MySQL 中的升序排序中， NULL 值出现在非 NULL 值之前 当我们使用 ORDER BY 子句降序 DESC 排序时， NULL 值排在非 NULL 值的后面\nMySQL LIMIT 在 MySQL 中，我们使用 LIMIT 子句来限定 SELECT 语句返回的行的数量\n当 DISTINCT 遇到 NULL 值时，只保留一个 NULL 值。因为 DISTINCT 认为所有的 NULL 值都是相同的，这与字段的类型无关。">
+<meta property='og:url' content='http://localhost:1313/p/mysql/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-13T13:35:01&#43;08:00'/><meta property='article:modified_time' content='2024-04-13T13:35:01&#43;08:00'/>
 <meta name="twitter:title" content="mysql">
-<meta name="twitter:description" content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则">
+<meta name="twitter:description" content="## 连接 MySQL 数据库 `mysql -u root -p` Mysql基础 EXISTS 语法 在 MySQL 中，EXISTS 操作符用来判断一个子查询是否返回数据行。如果一个子查询返回了至少一个数据行，则 EXISTS 的计算结果为 TRUE，否则计算结果为 FALSE。\nLIKE % 匹配零或多个任意字符。 _ 匹配单个任意字符。 如果需要匹配通配符，则需要使用 \\ 转义字符，如 % 和 _。 使用通配符匹配文本时，不区分字母大小写。\n按自定义顺序排序 使用 CASE 实现自定义排序 使用 FIELD() 函数实现自定义排序 在 MySQL 中的升序排序中， NULL 值出现在非 NULL 值之前 当我们使用 ORDER BY 子句降序 DESC 排序时， NULL 值排在非 NULL 值的后面\nMySQL LIMIT 在 MySQL 中，我们使用 LIMIT 子句来限定 SELECT 语句返回的行的数量\n当 DISTINCT 遇到 NULL 值时，只保留一个 NULL 值。因为 DISTINCT 认为所有的 NULL 值都是相同的，这与字段的类型无关。">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,91 +285,87 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li><a href="#mysql基础">Mysql基础</a></li>
-        <li><a href="#exists-语法">EXISTS 语法</a></li>
-        <li><a href="#like">LIKE</a></li>
-        <li><a href="#按自定义顺序排序">按自定义顺序排序</a></li>
-        <li><a href="#使用-case-实现自定义排序">使用 CASE 实现自定义排序</a></li>
-        <li><a href="#使用-field-函数实现自定义排序">使用 FIELD() 函数实现自定义排序</a></li>
-        <li><a href="#mysql-limit">MySQL LIMIT</a></li>
-        <li><a href="#mysql-连接类型">MySQL 连接类型</a></li>
-        <li><a href="#group-by">GROUP BY</a></li>
-        <li><a href="#union">UNION</a></li>
-        <li><a href="#union-all-运算">UNION ALL 运算</a></li>
-        <li><a href="#union-排序">UNION 排序</a></li>
-        <li><a href="#union-列数">UNION 列数</a></li>
-        <li><a href="#union-列名">UNION 列名</a></li>
-        <li><a href="#别名">别名</a></li>
-        <li><a href="#子查询">子查询</a></li>
-        <li><a href="#派生表">派生表</a></li>
-        <li><a href="#insert修饰符">insert修饰符</a></li>
-        <li><a href="#delete-多表删除">DELETE 多表删除</a></li>
-        <li><a href="#delete-修饰符">DELETE 修饰符</a></li>
-        <li><a href="#update-修饰符">UPDATE 修饰符</a></li>
-        <li><a href="#mysql数据库和表">MySQL数据库和表</a></li>
-        <li><a href="#登陆时指定数据库">登陆时指定数据库</a></li>
-        <li><a href="#查看当前数据库">查看当前数据库</a></li>
-        <li><a href="#create-table--like">CREATE TABLE … LIKE</a></li>
-        <li><a href="#create-table--select">CREATE TABLE … SELECT</a></li>
-        <li><a href="#alter-table-语法">ALTER TABLE 语法</a></li>
-        <li><a href="#truncate-table-语法">TRUNCATE TABLE 语法</a></li>
-        <li><a href="#添加主键">添加主键</a></li>
-        <li><a href="#删除主键">删除主键</a></li>
-        <li><a href="#如何产生主键值">如何产生主键值</a></li>
-        <li><a href="#主键-vs-唯一索引">主键 vs 唯一索引</a></li>
-        <li><a href="#什么是外键">什么是外键</a></li>
-        <li><a href="#cascade-策略">CASCADE 策略</a></li>
-        <li><a href="#restrict-策略">RESTRICT 策略</a></li>
-        <li><a href="#set-null-策略">SET NULL 策略</a></li>
-        <li><a href="#自引用外键">自引用外键</a></li>
-        <li><a href="#启用或禁用外键约束">启用或禁用外键约束</a></li>
-        <li><a href="#确定列是否存在">确定列是否存在</a></li>
-        <li><a href="#mysql-auto_increment-自增列">MySQL AUTO_INCREMENT 自增列</a></li>
-        <li><a href="#什么是生成列">什么是生成列</a></li>
-        <li><a href="#mysql-unique-key-唯一键">MySQL UNIQUE KEY 唯一键</a></li>
-        <li><a href="#锁类型">锁类型</a></li>
-        <li><a href="#设置服务器字符集和排序规则">设置服务器字符集和排序规则</a></li>
-        <li><a href="#要查看数据库的字符集和排序规则">要查看数据库的字符集和排序规则</a></li>
-        <li><a href="#要查看指定数据库的字符集和排序规则">要查看指定数据库的字符集和排序规则</a></li>
-        <li><a href="#mysql-创建索引">MySQL 创建索引</a></li>
-        <li><a href="#mysql-删除主键索引">MySQL 删除主键索引</a></li>
-        <li><a href="#mysql-索引提示use-index">MySQL 索引提示：USE INDEX</a></li>
-        <li><a href="#mysql-聚集索引">MySQL 聚集索引</a></li>
-        <li><a href="#mysql-索引基数">MySQL 索引基数</a></li>
-        <li><a href="#mysql-隐藏索引">MySQL 隐藏索引</a></li>
-        <li><a href="#mysql-隐藏索引开关">MySQL 隐藏索引开关</a></li>
-        <li><a href="#mysql-字符串前缀索引">MySQL 字符串前缀索引</a></li>
-        <li><a href="#mysql-索引顺序">MySQL 索引顺序</a></li>
-        <li><a href="#linux-启动停止-mysql">Linux 启动/停止 MySQL</a></li>
-        <li><a href="#杀掉已删除用户的会话">杀掉已删除用户的会话</a></li>
-        <li><a href="#如何在-mysql-中锁定用户帐户">如何在 MySQL 中锁定用户帐户</a></li>
-        <li><a href="#查询用户的锁定状态">查询用户的锁定状态</a></li>
-        <li><a href="#在-mysql-中使用-grant-语句给用户授权">在 MySQL 中使用 GRANT 语句给用户授权</a></li>
-        <li><a href="#mysql-revoke-语句介绍">MySQL REVOKE 语句介绍</a></li>
-        <li><a href="#撤销代理">撤销代理</a></li>
-        <li><a href="#mysql-revoke-生效时机">MySQL REVOKE 生效时机</a></li>
-        <li><a href="#显示授予当前用户的权限">显示授予当前用户的权限</a></li>
-        <li><a href="#在-mysql-中使用角色来简化权限管理">在 MySQL 中使用角色来简化权限管理</a></li>
-        <li><a href="#mysql-角色语法">MySQL 角色语法</a></li>
-        <li><a href="#设置活跃角色">设置活跃角色</a></li>
-        <li><a href="#mysql-中的几个维护数据库表的语句">MySQL 中的几个维护数据库表的语句</a></li>
-        <li><a href="#使用-mysqldump-工具备份数据库">使用 mysqldump 工具备份数据库</a></li>
-        <li><a href="#使用-mysql-source-命令恢复数据库">使用 MySQL SOURCE 命令恢复数据库</a></li>
-        <li><a href="#使用-mysql-命令恢复">使用 mysql 命令恢复</a></li>
-        <li><a href="#在-mysql-中使用-show-processlist-语句显示连接列表">在 MySQL 中使用 SHOW PROCESSLIST 语句显示连接列表</a></li>
-        <li><a href="#mysql-创建视图">MySQL 创建视图</a></li>
-        <li><a href="#mysql-可更新视图">MySQL 可更新视图</a></li>
-        <li><a href="#mysql-触发器">MySQL 触发器</a></li>
-        <li><a href="#mysql-create-trigger-创建触发器">MySQL CREATE TRIGGER 创建触发器</a></li>
-      </ol>
-    </li>
+    <li><a href="#mysql基础">Mysql基础</a></li>
+    <li><a href="#exists-语法">EXISTS 语法</a></li>
+    <li><a href="#like">LIKE</a></li>
+    <li><a href="#按自定义顺序排序">按自定义顺序排序</a></li>
+    <li><a href="#使用-case-实现自定义排序">使用 CASE 实现自定义排序</a></li>
+    <li><a href="#使用-field-函数实现自定义排序">使用 FIELD() 函数实现自定义排序</a></li>
+    <li><a href="#mysql-limit">MySQL LIMIT</a></li>
+    <li><a href="#mysql-连接类型">MySQL 连接类型</a></li>
+    <li><a href="#group-by">GROUP BY</a></li>
+    <li><a href="#union">UNION</a></li>
+    <li><a href="#union-all-运算">UNION ALL 运算</a></li>
+    <li><a href="#union-排序">UNION 排序</a></li>
+    <li><a href="#union-列数">UNION 列数</a></li>
+    <li><a href="#union-列名">UNION 列名</a></li>
+    <li><a href="#别名">别名</a></li>
+    <li><a href="#子查询">子查询</a></li>
+    <li><a href="#派生表">派生表</a></li>
+    <li><a href="#insert修饰符">insert修饰符</a></li>
+    <li><a href="#delete-多表删除">DELETE 多表删除</a></li>
+    <li><a href="#delete-修饰符">DELETE 修饰符</a></li>
+    <li><a href="#update-修饰符">UPDATE 修饰符</a></li>
+    <li><a href="#mysql数据库和表">MySQL数据库和表</a></li>
+    <li><a href="#登陆时指定数据库">登陆时指定数据库</a></li>
+    <li><a href="#查看当前数据库">查看当前数据库</a></li>
+    <li><a href="#create-table--like">CREATE TABLE … LIKE</a></li>
+    <li><a href="#create-table--select">CREATE TABLE … SELECT</a></li>
+    <li><a href="#alter-table-语法">ALTER TABLE 语法</a></li>
+    <li><a href="#truncate-table-语法">TRUNCATE TABLE 语法</a></li>
+    <li><a href="#添加主键">添加主键</a></li>
+    <li><a href="#删除主键">删除主键</a></li>
+    <li><a href="#如何产生主键值">如何产生主键值</a></li>
+    <li><a href="#主键-vs-唯一索引">主键 vs 唯一索引</a></li>
+    <li><a href="#什么是外键">什么是外键</a></li>
+    <li><a href="#cascade-策略">CASCADE 策略</a></li>
+    <li><a href="#restrict-策略">RESTRICT 策略</a></li>
+    <li><a href="#set-null-策略">SET NULL 策略</a></li>
+    <li><a href="#自引用外键">自引用外键</a></li>
+    <li><a href="#启用或禁用外键约束">启用或禁用外键约束</a></li>
+    <li><a href="#确定列是否存在">确定列是否存在</a></li>
+    <li><a href="#mysql-auto_increment-自增列">MySQL AUTO_INCREMENT 自增列</a></li>
+    <li><a href="#什么是生成列">什么是生成列</a></li>
+    <li><a href="#mysql-unique-key-唯一键">MySQL UNIQUE KEY 唯一键</a></li>
+    <li><a href="#锁类型">锁类型</a></li>
+    <li><a href="#设置服务器字符集和排序规则">设置服务器字符集和排序规则</a></li>
+    <li><a href="#要查看数据库的字符集和排序规则">要查看数据库的字符集和排序规则</a></li>
+    <li><a href="#要查看指定数据库的字符集和排序规则">要查看指定数据库的字符集和排序规则</a></li>
+    <li><a href="#mysql-创建索引">MySQL 创建索引</a></li>
+    <li><a href="#mysql-删除主键索引">MySQL 删除主键索引</a></li>
+    <li><a href="#mysql-索引提示use-index">MySQL 索引提示：USE INDEX</a></li>
+    <li><a href="#mysql-聚集索引">MySQL 聚集索引</a></li>
+    <li><a href="#mysql-索引基数">MySQL 索引基数</a></li>
+    <li><a href="#mysql-隐藏索引">MySQL 隐藏索引</a></li>
+    <li><a href="#mysql-隐藏索引开关">MySQL 隐藏索引开关</a></li>
+    <li><a href="#mysql-字符串前缀索引">MySQL 字符串前缀索引</a></li>
+    <li><a href="#mysql-索引顺序">MySQL 索引顺序</a></li>
+    <li><a href="#linux-启动停止-mysql">Linux 启动/停止 MySQL</a></li>
+    <li><a href="#杀掉已删除用户的会话">杀掉已删除用户的会话</a></li>
+    <li><a href="#如何在-mysql-中锁定用户帐户">如何在 MySQL 中锁定用户帐户</a></li>
+    <li><a href="#查询用户的锁定状态">查询用户的锁定状态</a></li>
+    <li><a href="#在-mysql-中使用-grant-语句给用户授权">在 MySQL 中使用 GRANT 语句给用户授权</a></li>
+    <li><a href="#mysql-revoke-语句介绍">MySQL REVOKE 语句介绍</a></li>
+    <li><a href="#撤销代理">撤销代理</a></li>
+    <li><a href="#mysql-revoke-生效时机">MySQL REVOKE 生效时机</a></li>
+    <li><a href="#显示授予当前用户的权限">显示授予当前用户的权限</a></li>
+    <li><a href="#在-mysql-中使用角色来简化权限管理">在 MySQL 中使用角色来简化权限管理</a></li>
+    <li><a href="#mysql-角色语法">MySQL 角色语法</a></li>
+    <li><a href="#设置活跃角色">设置活跃角色</a></li>
+    <li><a href="#mysql-中的几个维护数据库表的语句">MySQL 中的几个维护数据库表的语句</a></li>
+    <li><a href="#使用-mysqldump-工具备份数据库">使用 mysqldump 工具备份数据库</a></li>
+    <li><a href="#使用-mysql-source-命令恢复数据库">使用 MySQL SOURCE 命令恢复数据库</a></li>
+    <li><a href="#使用-mysql-命令恢复">使用 mysql 命令恢复</a></li>
+    <li><a href="#在-mysql-中使用-show-processlist-语句显示连接列表">在 MySQL 中使用 SHOW PROCESSLIST 语句显示连接列表</a></li>
+    <li><a href="#mysql-创建视图">MySQL 创建视图</a></li>
+    <li><a href="#mysql-可更新视图">MySQL 可更新视图</a></li>
+    <li><a href="#mysql-触发器">MySQL 触发器</a></li>
+    <li><a href="#mysql-create-trigger-创建触发器">MySQL CREATE TRIGGER 创建触发器</a></li>
   </ol>
 </nav>
         </div>
@@ -350,6 +411,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -905,7 +980,7 @@ END;</p>
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -939,12 +1014,14 @@ END;</p>
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

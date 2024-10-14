@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
 <title>Linux重装</title>
 
-<link rel='canonical' href='https://example.com/p/linux%E9%87%8D%E8%A3%85/'>
+<link rel='canonical' href='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="Linux重装">
-<meta property='og:description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
-<meta property='og:url' content='https://example.com/p/linux%E9%87%8D%E8%A3%85/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
+<meta property='og:url' content='http://localhost:1313/p/linux%E9%87%8D%E8%A3%85/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T18:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T18:28:01&#43;08:00'/>
 <meta name="twitter:title" content="Linux重装">
-<meta name="twitter:description" content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装">
+<meta name="twitter:description" content="Window与Linux双系统安装与卸载Linux 如果你事先在window上安装的ubuntu,但是因为种种原因需要重装，那么你需要先卸载装在你电脑上的ubuntu系统才能安装新的Ubuntu\n重装unbuntu记得先保存好ubuntu想保存的文件\nUbuntu卸载 删除ubuntu所在卷 进入windows系统，右键此电脑-管理-磁盘管理-删除ubuntu所在的卷，使这些区域成为“可用空间”\n删除unbuntu EFI分区 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1 （我的Ubuntu EFI分区在磁盘1，根据自己的情况选择）\n输入 list partition ，输入 select partition * （*为Ubuntu EFI分区号）\n删除Ubuntu系统启动项 Win + R 输入cmd打开终端，输入 diskpart 进入磁盘工具\n输入 list disk 查看磁盘，输入 select disk 1\n输入 list partition ，输入 select partition * （*为Windows EFI分区，一般为260M）\n输入 assign letter=J（分配盘符）\n管理员模式打开记事本，记事本选择文件-打开-选中磁盘J\n打开 EFI 文件夹，删除Ubuntu文件夹\n返回 Distpart 界面，输入 remove letter=J\n磁盘分区（如果你是第一次装Ubuntu） 1.打开计算机管理 2.">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,30 +285,26 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#window与linux双系统安装与卸载linux">Window与Linux双系统安装与卸载Linux</a>
+    <li><a href="#ubuntu卸载">Ubuntu卸载</a>
       <ol>
-        <li><a href="#ubuntu卸载">Ubuntu卸载</a>
+        <li><a href="#删除ubuntu所在卷">删除ubuntu所在卷</a></li>
+        <li><a href="#删除unbuntu-efi分区">删除unbuntu EFI分区</a></li>
+        <li><a href="#删除ubuntu系统启动项">删除Ubuntu系统启动项</a></li>
+      </ol>
+    </li>
+    <li><a href="#磁盘分区如果你是第一次装ubuntu">磁盘分区（如果你是第一次装Ubuntu）</a></li>
+    <li><a href="#安装ubuntu系统">安装ubuntu系统</a>
+      <ol>
+        <li><a href="#下载linux镜像">下载Linux镜像</a></li>
+        <li><a href="#准备u盘刻盘工具">准备u盘刻盘工具</a></li>
+        <li><a href="#开机引导界面">开机引导界面</a>
           <ol>
-            <li><a href="#删除ubuntu所在卷">删除ubuntu所在卷</a></li>
-            <li><a href="#删除unbuntu-efi分区">删除unbuntu EFI分区</a></li>
-            <li><a href="#删除ubuntu系统启动项">删除Ubuntu系统启动项</a></li>
-          </ol>
-        </li>
-        <li><a href="#磁盘分区如果你是第一次装ubuntu">磁盘分区（如果你是第一次装Ubuntu）</a></li>
-        <li><a href="#安装ubuntu系统">安装ubuntu系统</a>
-          <ol>
-            <li><a href="#下载linux镜像">下载Linux镜像</a></li>
-            <li><a href="#准备u盘刻盘工具">准备u盘刻盘工具</a></li>
-            <li><a href="#开机引导界面">开机引导界面</a>
-              <ol>
-                <li><a href="#分区方案">分区方案</a></li>
-              </ol>
-            </li>
+            <li><a href="#分区方案">分区方案</a></li>
           </ol>
         </li>
       </ol>
@@ -293,6 +354,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -425,7 +500,7 @@
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -459,12 +534,14 @@
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

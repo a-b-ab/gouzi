@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Django 基于蛇书的django项目 建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Django 基于蛇书的django项目\n建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库与其他项⽬分离是有益的，为了部署到服务器，这也是必须的\npython -m venv ll_env\r激活虚拟环境 Linux:source ll_env/bin/activate\rWindow:ll_env\\Scripts\\activate\r安装Django pip install --upgrade pip\rpip install django\r安装特定版本： pip install django==4.1.*\r在Django中创建项目 django_admin startproject ll_project . ls (在 Windows 系统上为 dir)\rls ll_project\rDjango 新建了⼀个名为 ll_project 的⽬录。它还创建了⽂件 manage.py，这是⼀个简单的程序，接受命令并将其交给 Django 的相关部分。我们将使⽤这些命令来管理使⽤数据库和运⾏服务器等任务\n⽬录 ll_project 包含 4 个⽂件，其中最重要的是 settings.py、urls.py和 wsgi.py。⽂件 settings.py 指定 Django 如何与系统交互以及如何管理项⽬。在开发项⽬的过程中，我们将修改其中的⼀些设置，并添加⼀些设置。⽂件 urls.py 告诉 Django，应创建哪些⽹⻚来响应浏览器请求。⽂件 wsgi.py 帮助 Django 提供它创建的⽂件，名称是 web server gateway interface（Web 服务器⽹关接⼝）的⾸字⺟缩写">
 <title>Django</title>
 
-<link rel='canonical' href='https://example.com/p/django/'>
+<link rel='canonical' href='http://localhost:1313/p/django/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="Django">
-<meta property='og:description' content="Django 基于蛇书的django项目 建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库">
-<meta property='og:url' content='https://example.com/p/django/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="Django 基于蛇书的django项目\n建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库与其他项⽬分离是有益的，为了部署到服务器，这也是必须的\npython -m venv ll_env\r激活虚拟环境 Linux:source ll_env/bin/activate\rWindow:ll_env\\Scripts\\activate\r安装Django pip install --upgrade pip\rpip install django\r安装特定版本： pip install django==4.1.*\r在Django中创建项目 django_admin startproject ll_project . ls (在 Windows 系统上为 dir)\rls ll_project\rDjango 新建了⼀个名为 ll_project 的⽬录。它还创建了⽂件 manage.py，这是⼀个简单的程序，接受命令并将其交给 Django 的相关部分。我们将使⽤这些命令来管理使⽤数据库和运⾏服务器等任务\n⽬录 ll_project 包含 4 个⽂件，其中最重要的是 settings.py、urls.py和 wsgi.py。⽂件 settings.py 指定 Django 如何与系统交互以及如何管理项⽬。在开发项⽬的过程中，我们将修改其中的⼀些设置，并添加⼀些设置。⽂件 urls.py 告诉 Django，应创建哪些⽹⻚来响应浏览器请求。⽂件 wsgi.py 帮助 Django 提供它创建的⽂件，名称是 web server gateway interface（Web 服务器⽹关接⼝）的⾸字⺟缩写">
+<meta property='og:url' content='http://localhost:1313/p/django/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-21T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-04-21T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="Django">
-<meta name="twitter:description" content="Django 基于蛇书的django项目 建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库">
+<meta name="twitter:description" content="Django 基于蛇书的django项目\n建立项目 制定规范 建立虚拟环境 虚拟环境是系统的⼀个位置，你可在其中安装包，并将这些包与其他 Python 包隔离开来。将项⽬的 库与其他项⽬分离是有益的，为了部署到服务器，这也是必须的\npython -m venv ll_env\r激活虚拟环境 Linux:source ll_env/bin/activate\rWindow:ll_env\\Scripts\\activate\r安装Django pip install --upgrade pip\rpip install django\r安装特定版本： pip install django==4.1.*\r在Django中创建项目 django_admin startproject ll_project . ls (在 Windows 系统上为 dir)\rls ll_project\rDjango 新建了⼀个名为 ll_project 的⽬录。它还创建了⽂件 manage.py，这是⼀个简单的程序，接受命令并将其交给 Django 的相关部分。我们将使⽤这些命令来管理使⽤数据库和运⾏服务器等任务\n⽬录 ll_project 包含 4 个⽂件，其中最重要的是 settings.py、urls.py和 wsgi.py。⽂件 settings.py 指定 Django 如何与系统交互以及如何管理项⽬。在开发项⽬的过程中，我们将修改其中的⼀些设置，并添加⼀些设置。⽂件 urls.py 告诉 Django，应创建哪些⽹⻚来响应浏览器请求。⽂件 wsgi.py 帮助 Django 提供它创建的⽂件，名称是 web server gateway interface（Web 服务器⽹关接⼝）的⾸字⺟缩写">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,213 +285,208 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#django">Django</a>
+    <li><a href="#建立项目">建立项目</a>
       <ol>
-        <li><a href="#建立项目">建立项目</a>
+        <li><a href="#制定规范">制定规范</a></li>
+        <li><a href="#建立虚拟环境">建立虚拟环境</a></li>
+        <li><a href="#激活虚拟环境">激活虚拟环境</a></li>
+        <li><a href="#安装django">安装Django</a></li>
+        <li><a href="#在django中创建项目">在Django中创建项目</a></li>
+        <li><a href="#创建数据库">创建数据库</a></li>
+        <li><a href="#查看项目">查看项目</a></li>
+      </ol>
+    </li>
+    <li><a href="#创建应用程序">创建应用程序</a>
+      <ol>
+        <li><a href="#定义模型">定义模型</a></li>
+        <li><a href="#激活模型">激活模型</a></li>
+        <li><a href="#django管理网站">Django管理网站</a>
           <ol>
-            <li><a href="#制定规范">制定规范</a></li>
-            <li><a href="#建立虚拟环境">建立虚拟环境</a></li>
-            <li><a href="#激活虚拟环境">激活虚拟环境</a></li>
-            <li><a href="#安装django">安装Django</a></li>
-            <li><a href="#在django中创建项目">在Django中创建项目</a></li>
-            <li><a href="#创建数据库">创建数据库</a></li>
-            <li><a href="#查看项目">查看项目</a></li>
+            <li><a href="#创建超级用户">创建超级用户</a></li>
+            <li><a href="#向管理网站注册模型">向管理网站注册模型</a></li>
+            <li><a href="#添加主题">添加主题</a></li>
           </ol>
         </li>
-        <li><a href="#创建应用程序">创建应用程序</a>
+        <li><a href="#定义模型entry">定义模型Entry</a></li>
+        <li><a href="#迁移模型entry">迁移模型Entry</a></li>
+        <li><a href="#django-shell">Django shell</a></li>
+      </ol>
+    </li>
+    <li><a href="#创建网页学习笔记主页">创建网页：学习笔记主页</a>
+      <ol>
+        <li><a href="#映射url">映射URL</a></li>
+        <li><a href="#编写视图">编写视图</a></li>
+        <li><a href="#编写模板">编写模板</a></li>
+        <li><a href="#模板继承">模板继承</a>
           <ol>
-            <li><a href="#定义模型">定义模型</a></li>
-            <li><a href="#激活模型">激活模型</a></li>
-            <li><a href="#django管理网站">Django管理网站</a>
-              <ol>
-                <li><a href="#创建超级用户">创建超级用户</a></li>
-                <li><a href="#向管理网站注册模型">向管理网站注册模型</a></li>
-                <li><a href="#添加主题">添加主题</a></li>
-              </ol>
-            </li>
-            <li><a href="#定义模型entry">定义模型Entry</a></li>
-            <li><a href="#迁移模型entry">迁移模型Entry</a></li>
-            <li><a href="#django-shell">Django shell</a></li>
+            <li><a href="#父模板">父模板</a></li>
+            <li><a href="#子模版">子模版</a></li>
           </ol>
         </li>
-        <li><a href="#创建网页学习笔记主页">创建网页：学习笔记主页</a>
+        <li><a href="#显示所有主题的页面">显示所有主题的页面</a>
           <ol>
-            <li><a href="#映射url">映射URL</a></li>
-            <li><a href="#编写视图">编写视图</a></li>
-            <li><a href="#编写模板">编写模板</a></li>
-            <li><a href="#模板继承">模板继承</a>
-              <ol>
-                <li><a href="#父模板">父模板</a></li>
-                <li><a href="#子模版">子模版</a></li>
-              </ol>
-            </li>
-            <li><a href="#显示所有主题的页面">显示所有主题的页面</a>
-              <ol>
-                <li><a href="#url模式">URL模式</a></li>
-                <li><a href="#视图">视图</a></li>
-                <li><a href="#模板">模板</a></li>
-              </ol>
-            </li>
-            <li><a href="#显示特定主题的页面">显示特定主题的页面</a>
-              <ol>
-                <li><a href="#url模式-1">URL模式</a></li>
-                <li><a href="#视图-1">视图</a></li>
-                <li><a href="#模板-1">模板</a></li>
-                <li><a href="#将显示所有主题的页面中的每个主题都设置为链接">将显示所有主题的页面中的每个主题都设置为链接</a></li>
-              </ol>
-            </li>
+            <li><a href="#url模式">URL模式</a></li>
+            <li><a href="#视图">视图</a></li>
+            <li><a href="#模板">模板</a></li>
+          </ol>
+        </li>
+        <li><a href="#显示特定主题的页面">显示特定主题的页面</a>
+          <ol>
+            <li><a href="#url模式-1">URL模式</a></li>
+            <li><a href="#视图-1">视图</a></li>
+            <li><a href="#模板-1">模板</a></li>
+            <li><a href="#将显示所有主题的页面中的每个主题都设置为链接">将显示所有主题的页面中的每个主题都设置为链接</a></li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#用户账户">用户账户</a>
+  </ol>
+
+  <ol>
+    <li><a href="#让用户能够输入数据">让用户能够输入数据</a>
       <ol>
-        <li><a href="#让用户能够输入数据">让用户能够输入数据</a>
+        <li><a href="#添加新主题">添加新主题</a>
           <ol>
-            <li><a href="#添加新主题">添加新主题</a>
-              <ol>
-                <li><a href="#用于添加主题的表单">用于添加主题的表单</a></li>
-                <li><a href="#url模式new_topic">URL模式new_topic</a></li>
-                <li><a href="#视图函数new_topic">视图函数new_topic</a></li>
-                <li><a href="#get请求和post请求">GET请求和POST请求</a></li>
-                <li><a href="#模板new_topic">模板new_topic</a></li>
-                <li><a href="#链接到页面new_topic">链接到页面new_topic</a></li>
-              </ol>
-            </li>
-            <li><a href="#添加新条目">添加新条目</a>
-              <ol>
-                <li><a href="#用于添加新条目的表单">用于添加新条目的表单</a></li>
-                <li><a href="#url模式new_entry">URL模式new_entry</a></li>
-                <li><a href="#视图函数new_entry">视图函数new_entry()</a></li>
-                <li><a href="#模板new_entry">模板new_entry</a></li>
-                <li><a href="#链接到页面new_entry">链接到页面new_entry</a></li>
-              </ol>
-            </li>
-            <li><a href="#编辑条目">编辑条目</a>
-              <ol>
-                <li><a href="#url模式edit_entry">URL模式edit_entry</a></li>
-                <li><a href="#视图函数edit_entry">视图函数edit_entry()</a></li>
-                <li><a href="#模板edit_entry">模板edit_entry</a></li>
-                <li><a href="#链接到页面edit_entry">链接到页面edit_entry</a></li>
-              </ol>
-            </li>
+            <li><a href="#用于添加主题的表单">用于添加主题的表单</a></li>
+            <li><a href="#url模式new_topic">URL模式new_topic</a></li>
+            <li><a href="#视图函数new_topic">视图函数new_topic</a></li>
+            <li><a href="#get请求和post请求">GET请求和POST请求</a></li>
+            <li><a href="#模板new_topic">模板new_topic</a></li>
+            <li><a href="#链接到页面new_topic">链接到页面new_topic</a></li>
           </ol>
         </li>
-        <li><a href="#创建用户账户">创建用户账户</a>
+        <li><a href="#添加新条目">添加新条目</a>
           <ol>
-            <li><a href="#应用程序accounts">应用程序accounts</a></li>
-            <li><a href="#将应用程序accounts添加到settingspy中">将应用程序accounts添加到settings.py中</a></li>
-            <li><a href="#包含应用程序accounts的url">包含应用程序accounts的URL</a></li>
-            <li><a href="#登录页面">登录页面</a>
-              <ol>
-                <li><a href="#模板loginhtml">模板login.html</a></li>
-                <li><a href="#设置login_redirect_url">设置LOGIN_REDIRECT_URL</a></li>
-                <li><a href="#链接到登录页面">链接到登录页面</a></li>
-                <li><a href="#使用登录页面">使用登录页面</a></li>
-              </ol>
-            </li>
-            <li><a href="#注销">注销</a>
-              <ol>
-                <li><a href="#在basehtml中添加注销表单">在base.html中添加注销表单</a></li>
-                <li><a href="#设置logout_redirect_url">设置LOGOUT_REDIRECT_URL</a></li>
-              </ol>
-            </li>
-            <li><a href="#注册页面">注册页面</a>
-              <ol>
-                <li><a href="#注册页面的url模式">注册页面的URL模式</a></li>
-                <li><a href="#视图函数register">视图函数register()</a></li>
-                <li><a href="#注册模板">注册模板</a></li>
-                <li><a href="#链接到注册页面">链接到注册页面</a></li>
-              </ol>
-            </li>
+            <li><a href="#用于添加新条目的表单">用于添加新条目的表单</a></li>
+            <li><a href="#url模式new_entry">URL模式new_entry</a></li>
+            <li><a href="#视图函数new_entry">视图函数new_entry()</a></li>
+            <li><a href="#模板new_entry">模板new_entry</a></li>
+            <li><a href="#链接到页面new_entry">链接到页面new_entry</a></li>
           </ol>
         </li>
-        <li><a href="#让用户拥有自己的数据">让用户拥有自己的数据</a>
+        <li><a href="#编辑条目">编辑条目</a>
           <ol>
-            <li><a href="#使用login_required限制访问">使用@login_required限制访问</a></li>
-            <li><a href="#全面限制对项目学习笔记的访问">全面限制对项目“学习笔记”的访问</a></li>
-            <li><a href="#将数据关联到用户">将数据关联到用户</a>
-              <ol>
-                <li><a href="#修改模型topic">修改模型Topic</a></li>
-                <li><a href="#确认当前有哪些用户">确认当前有哪些用户</a></li>
-                <li><a href="#迁移数据库">迁移数据库</a></li>
-              </ol>
-            </li>
-            <li><a href="#只允许用户访问自己的主题">只允许用户访问自己的主题</a></li>
-            <li><a href="#保护用户的主题">保护用户的主题</a></li>
-            <li><a href="#保护页面edit_entry">保护页面edit_entry</a></li>
-            <li><a href="#将新主题关联到当前用户">将新主题关联到当前用户</a></li>
+            <li><a href="#url模式edit_entry">URL模式edit_entry</a></li>
+            <li><a href="#视图函数edit_entry">视图函数edit_entry()</a></li>
+            <li><a href="#模板edit_entry">模板edit_entry</a></li>
+            <li><a href="#链接到页面edit_entry">链接到页面edit_entry</a></li>
           </ol>
         </li>
-        <li><a href="#设置应用程序的样式并部署">设置应用程序的样式并部署</a></li>
-        <li><a href="#设置项目学习笔记的样式">设置项目&quot;学习笔记&quot;的样式</a>
+      </ol>
+    </li>
+    <li><a href="#创建用户账户">创建用户账户</a>
+      <ol>
+        <li><a href="#应用程序accounts">应用程序accounts</a></li>
+        <li><a href="#将应用程序accounts添加到settingspy中">将应用程序accounts添加到settings.py中</a></li>
+        <li><a href="#包含应用程序accounts的url">包含应用程序accounts的URL</a></li>
+        <li><a href="#登录页面">登录页面</a>
           <ol>
-            <li><a href="#应用程序django-bootstrap5">应用程序django-bootstrap5</a></li>
-            <li><a href="#使用bootstarp设置项目学习笔记的样式">使用Bootstarp设置项目&quot;学习笔记&quot;的样式</a></li>
-            <li><a href="#修改basehtml">修改base.html</a>
-              <ol>
-                <li><a href="#定义html头部">定义HTML头部</a></li>
-                <li><a href="#定义导航栏">定义导航栏</a></li>
-                <li><a href="#添加用户账户链接">添加用户账户链接</a></li>
-                <li><a href="#在导航栏中添加注销表单">在导航栏中添加注销表单</a></li>
-                <li><a href="#定义页面的主要部分">定义页面的主要部分</a></li>
-                <li><a href="#使用jumbotron设置主页的样式">使用jumbotron设置主页的样式</a></li>
-                <li><a href="#设置登录页面的样式">设置登录页面的样式</a></li>
-              </ol>
-            </li>
-            <li><a href="#设置页面topics的样式">设置页面topics的样式</a></li>
-            <li><a href="#设置页面topic中条目的样式">设置页面topic中条目的样式</a></li>
+            <li><a href="#模板loginhtml">模板login.html</a></li>
+            <li><a href="#设置login_redirect_url">设置LOGIN_REDIRECT_URL</a></li>
+            <li><a href="#链接到登录页面">链接到登录页面</a></li>
+            <li><a href="#使用登录页面">使用登录页面</a></li>
           </ol>
         </li>
-        <li><a href="#部署学习笔记">部署&quot;学习笔记&quot;</a>
+        <li><a href="#注销">注销</a>
           <ol>
-            <li><a href="#注册platformsh账户">注册Platform.sh账户</a></li>
-            <li><a href="#安装platformsh-cli">安装Platform.sh CLI</a></li>
-            <li><a href="#安装platformshconfig">安装platformshconfig</a></li>
-            <li><a href="#创建文件requirementstxt">创建文件requirements.txt</a></li>
-            <li><a href="#其他部署要求">其他部署要求</a></li>
-            <li><a href="#添加配置文件">添加配置文件</a>
-              <ol>
-                <li><a href="#显示隐藏的文件">显示隐藏的文件</a></li>
-                <li><a href="#配置文件-platformappyaml">配置文件 .platform.app.yaml</a></li>
-                <li><a href="#配置文件routesyaml">配置文件routes.yaml</a></li>
-                <li><a href="#配置文件servicesyaml">配置文件services.yaml</a></li>
-              </ol>
-            </li>
-            <li><a href="#为部署到platformsh而修改settingspy">为部署到Platform.sh而修改settings.py</a></li>
-            <li><a href="#使用git跟踪项目文件">使用Git跟踪项目文件</a>
-              <ol>
-                <li><a href="#安装git">安装Git</a></li>
-                <li><a href="#配置git">配置Git</a></li>
-                <li><a href="#忽略文件">忽略文件</a></li>
-                <li><a href="#提交项目">提交项目</a></li>
-                <li><a href="#在platformsh上创建项目">在Platform.sh上创建项目</a></li>
-                <li><a href="#推送到platformsh">推送到Platform.sh</a></li>
-              </ol>
-            </li>
-            <li><a href="#查看线上项目">查看线上项目</a></li>
-            <li><a href="#改进platformsh部署">改进Platform.sh部署</a>
-              <ol>
-                <li><a href="#在platformsh上创建超级用户">在Platform.sh上创建超级用户</a></li>
-                <li><a href="#确保线上项目的安全">确保线上项目的安全</a></li>
-                <li><a href="#提交并推送修改">提交并推送修改</a></li>
-              </ol>
-            </li>
-            <li><a href="#创建定制错误页面">创建定制错误页面</a>
-              <ol>
-                <li><a href="#创建定制模板">创建定制模板</a></li>
-                <li><a href="#将修改推送到platformsh">将修改推送到Platform.sh</a></li>
-                <li><a href="#继续开发">继续开发</a></li>
-              </ol>
-            </li>
-            <li><a href="#将项目从platformsh删除">将项目从Platform.sh删除</a></li>
+            <li><a href="#在basehtml中添加注销表单">在base.html中添加注销表单</a></li>
+            <li><a href="#设置logout_redirect_url">设置LOGOUT_REDIRECT_URL</a></li>
           </ol>
         </li>
+        <li><a href="#注册页面">注册页面</a>
+          <ol>
+            <li><a href="#注册页面的url模式">注册页面的URL模式</a></li>
+            <li><a href="#视图函数register">视图函数register()</a></li>
+            <li><a href="#注册模板">注册模板</a></li>
+            <li><a href="#链接到注册页面">链接到注册页面</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#让用户拥有自己的数据">让用户拥有自己的数据</a>
+      <ol>
+        <li><a href="#使用login_required限制访问">使用@login_required限制访问</a></li>
+        <li><a href="#全面限制对项目学习笔记的访问">全面限制对项目“学习笔记”的访问</a></li>
+        <li><a href="#将数据关联到用户">将数据关联到用户</a>
+          <ol>
+            <li><a href="#修改模型topic">修改模型Topic</a></li>
+            <li><a href="#确认当前有哪些用户">确认当前有哪些用户</a></li>
+            <li><a href="#迁移数据库">迁移数据库</a></li>
+          </ol>
+        </li>
+        <li><a href="#只允许用户访问自己的主题">只允许用户访问自己的主题</a></li>
+        <li><a href="#保护用户的主题">保护用户的主题</a></li>
+        <li><a href="#保护页面edit_entry">保护页面edit_entry</a></li>
+        <li><a href="#将新主题关联到当前用户">将新主题关联到当前用户</a></li>
+      </ol>
+    </li>
+    <li><a href="#设置应用程序的样式并部署">设置应用程序的样式并部署</a></li>
+    <li><a href="#设置项目学习笔记的样式">设置项目&quot;学习笔记&quot;的样式</a>
+      <ol>
+        <li><a href="#应用程序django-bootstrap5">应用程序django-bootstrap5</a></li>
+        <li><a href="#使用bootstarp设置项目学习笔记的样式">使用Bootstarp设置项目&quot;学习笔记&quot;的样式</a></li>
+        <li><a href="#修改basehtml">修改base.html</a>
+          <ol>
+            <li><a href="#定义html头部">定义HTML头部</a></li>
+            <li><a href="#定义导航栏">定义导航栏</a></li>
+            <li><a href="#添加用户账户链接">添加用户账户链接</a></li>
+            <li><a href="#在导航栏中添加注销表单">在导航栏中添加注销表单</a></li>
+            <li><a href="#定义页面的主要部分">定义页面的主要部分</a></li>
+            <li><a href="#使用jumbotron设置主页的样式">使用jumbotron设置主页的样式</a></li>
+            <li><a href="#设置登录页面的样式">设置登录页面的样式</a></li>
+          </ol>
+        </li>
+        <li><a href="#设置页面topics的样式">设置页面topics的样式</a></li>
+        <li><a href="#设置页面topic中条目的样式">设置页面topic中条目的样式</a></li>
+      </ol>
+    </li>
+    <li><a href="#部署学习笔记">部署&quot;学习笔记&quot;</a>
+      <ol>
+        <li><a href="#注册platformsh账户">注册Platform.sh账户</a></li>
+        <li><a href="#安装platformsh-cli">安装Platform.sh CLI</a></li>
+        <li><a href="#安装platformshconfig">安装platformshconfig</a></li>
+        <li><a href="#创建文件requirementstxt">创建文件requirements.txt</a></li>
+        <li><a href="#其他部署要求">其他部署要求</a></li>
+        <li><a href="#添加配置文件">添加配置文件</a>
+          <ol>
+            <li><a href="#显示隐藏的文件">显示隐藏的文件</a></li>
+            <li><a href="#配置文件-platformappyaml">配置文件 .platform.app.yaml</a></li>
+            <li><a href="#配置文件routesyaml">配置文件routes.yaml</a></li>
+            <li><a href="#配置文件servicesyaml">配置文件services.yaml</a></li>
+          </ol>
+        </li>
+        <li><a href="#为部署到platformsh而修改settingspy">为部署到Platform.sh而修改settings.py</a></li>
+        <li><a href="#使用git跟踪项目文件">使用Git跟踪项目文件</a>
+          <ol>
+            <li><a href="#安装git">安装Git</a></li>
+            <li><a href="#配置git">配置Git</a></li>
+            <li><a href="#忽略文件">忽略文件</a></li>
+            <li><a href="#提交项目">提交项目</a></li>
+            <li><a href="#在platformsh上创建项目">在Platform.sh上创建项目</a></li>
+            <li><a href="#推送到platformsh">推送到Platform.sh</a></li>
+          </ol>
+        </li>
+        <li><a href="#查看线上项目">查看线上项目</a></li>
+        <li><a href="#改进platformsh部署">改进Platform.sh部署</a>
+          <ol>
+            <li><a href="#在platformsh上创建超级用户">在Platform.sh上创建超级用户</a></li>
+            <li><a href="#确保线上项目的安全">确保线上项目的安全</a></li>
+            <li><a href="#提交并推送修改">提交并推送修改</a></li>
+          </ol>
+        </li>
+        <li><a href="#创建定制错误页面">创建定制错误页面</a>
+          <ol>
+            <li><a href="#创建定制模板">创建定制模板</a></li>
+            <li><a href="#将修改推送到platformsh">将修改推送到Platform.sh</a></li>
+            <li><a href="#继续开发">继续开发</a></li>
+          </ol>
+        </li>
+        <li><a href="#将项目从platformsh删除">将项目从Platform.sh删除</a></li>
       </ol>
     </li>
   </ol>
@@ -474,6 +534,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -786,7 +860,7 @@ git remote remove platform
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -820,12 +894,14 @@ git remote remove platform
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

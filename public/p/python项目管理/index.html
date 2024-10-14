@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一下，感觉自己作为一个学校里学生，有幸在学校间接触到这些观念，是很幸运的。\n环境管理 使用Anaconda和Pipenv共同管理Python项目环境\nAnaconda包含了许多常用的Python库、工具和环境，使得安装和管理这些工具变得更加容易。它包括了Python解释器本身以及许多流行的科学计算库，比如NumPy、SciPy、Pandas、Matplotlib等。此外，Anaconda还提供了一个名为Conda的包管理器，用于安装、更新和管理这些库，以及创建和管理不同的Python环境。\n对于Python新手来说，Anaconda是一个很好的选择，因为它提供了一个完整的Python环境，无需手动安装和配置每个库。你只需安装Anaconda，就可以开始编写Python代码并使用各种科学计算工具了。\nPipenv 是 Python 项目的包管理器和虚拟环境管理器。它旨在提供一种简单的方式来创建和管理项目的依赖项，并确保这些依赖项在不同环境中的一致性\n下面是 Pipenv 的一些主要功能：\n虚拟环境管理：Pipenv 可以为每个项目创建独立的虚拟环境，这意味着每个项目都有自己的 Python 解释器和依赖项，而不会干扰系统中的其他项目。\n依赖项管理：Pipenv 使用 Pipfile 和 Pipfile.lock 文件来管理项目的依赖项。Pipfile 是项目的声明性文件，用于指定所需的包和版本，而 Pipfile.lock 文件则记录了确切的依赖项版本，以确保在不同环境中的一致性。\n自动环境激活：当你进入项目目录时，Pipenv 会自动激活该项目的虚拟环境，这意味着你可以立即开始使用项目的依赖项而无需手动激活虚拟环境。\n命令行工具：Pipenv 提供了一组简单的命令行工具，用于安装、更新和删除依赖项，以及管理虚拟环境。\n胎教版：\n当你开始一个新的 Python 项目时，你需要安装各种各样的库来帮助你完成任务。Pipenv 就像一个保姆，帮助你照顾这些库，确保它们安装正确且不会互相冲突。\r想象一下你在一个大杂货店里购物，每个库就像是你要买的商品。Pipenv 就是你的购物清单和购物车。你列出你要买的东西（依赖库），然后 Pipenv 帮你把它们一个一个加到你的购物车里（项目环境）。\r同时，Pipenv 还能确保你购物车里的东西都是正确的版本，就像是每个商品上都有一个标签标明它的准确型号和规格一样。这样，当你需要重建你的购物车时，你就可以确保每个东西都是一样的。\r最后，Pipenv 还能帮你管理购物车的整个过程。它会告诉你什么时候需要买新的东西（更新库），或者什么时候需要把一些东西扔掉（删除库）。\r总的来说，Pipenv 就像是你的 Python 项目的好帮手，确保你所需的库都安装正确，没有任何混乱\r师兄画的图 编码标准 对于编码标准，推荐跟着社区的PEP8走\nPEP8 是 Python Enhancement Proposal 8 的缩写，它是 Python 社区中的一项规范，用于指导 Python 代码的编写风格和格式。PEP8 旨在提高代码的可读性，并促进代码在不同项目和团队之间的一致性。\n以下是 PEP8 涵盖的一些主要方面：\n缩进：使用 4 个空格作为缩进的标准，而不是制表符。\r行长度：每行代码应尽量控制在 79 个字符以内，但可以允许最多 99 个字符。\r命名约定：变量名应该采用小写字母，单词之间使用下划线分隔（例如，my_variable），而类名应采用驼峰命名法（例如，MyClass）。\r空格：在逗号、冒号、分号等符号后应添加一个空格，但在圆括号内部不需要添加空格。\r导入：每个导入应该独立一行，避免使用通配符导入（例如，from module import *）。\r注释：使用适当的注释来解释代码的作用和目的，注释应该清晰、简洁且易于理解。\r代码布局：遵循统一的代码布局规范，包括适当的缩进、空行和代码段分隔。\rpep8链接： https://pep8.">
 <title>python项目管理</title>
 
-<link rel='canonical' href='https://example.com/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/'>
+<link rel='canonical' href='http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="python项目管理">
-<meta property='og:description' content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一">
-<meta property='og:url' content='https://example.com/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一下，感觉自己作为一个学校里学生，有幸在学校间接触到这些观念，是很幸运的。\n环境管理 使用Anaconda和Pipenv共同管理Python项目环境\nAnaconda包含了许多常用的Python库、工具和环境，使得安装和管理这些工具变得更加容易。它包括了Python解释器本身以及许多流行的科学计算库，比如NumPy、SciPy、Pandas、Matplotlib等。此外，Anaconda还提供了一个名为Conda的包管理器，用于安装、更新和管理这些库，以及创建和管理不同的Python环境。\n对于Python新手来说，Anaconda是一个很好的选择，因为它提供了一个完整的Python环境，无需手动安装和配置每个库。你只需安装Anaconda，就可以开始编写Python代码并使用各种科学计算工具了。\nPipenv 是 Python 项目的包管理器和虚拟环境管理器。它旨在提供一种简单的方式来创建和管理项目的依赖项，并确保这些依赖项在不同环境中的一致性\n下面是 Pipenv 的一些主要功能：\n虚拟环境管理：Pipenv 可以为每个项目创建独立的虚拟环境，这意味着每个项目都有自己的 Python 解释器和依赖项，而不会干扰系统中的其他项目。\n依赖项管理：Pipenv 使用 Pipfile 和 Pipfile.lock 文件来管理项目的依赖项。Pipfile 是项目的声明性文件，用于指定所需的包和版本，而 Pipfile.lock 文件则记录了确切的依赖项版本，以确保在不同环境中的一致性。\n自动环境激活：当你进入项目目录时，Pipenv 会自动激活该项目的虚拟环境，这意味着你可以立即开始使用项目的依赖项而无需手动激活虚拟环境。\n命令行工具：Pipenv 提供了一组简单的命令行工具，用于安装、更新和删除依赖项，以及管理虚拟环境。\n胎教版：\n当你开始一个新的 Python 项目时，你需要安装各种各样的库来帮助你完成任务。Pipenv 就像一个保姆，帮助你照顾这些库，确保它们安装正确且不会互相冲突。\r想象一下你在一个大杂货店里购物，每个库就像是你要买的商品。Pipenv 就是你的购物清单和购物车。你列出你要买的东西（依赖库），然后 Pipenv 帮你把它们一个一个加到你的购物车里（项目环境）。\r同时，Pipenv 还能确保你购物车里的东西都是正确的版本，就像是每个商品上都有一个标签标明它的准确型号和规格一样。这样，当你需要重建你的购物车时，你就可以确保每个东西都是一样的。\r最后，Pipenv 还能帮你管理购物车的整个过程。它会告诉你什么时候需要买新的东西（更新库），或者什么时候需要把一些东西扔掉（删除库）。\r总的来说，Pipenv 就像是你的 Python 项目的好帮手，确保你所需的库都安装正确，没有任何混乱\r师兄画的图 编码标准 对于编码标准，推荐跟着社区的PEP8走\nPEP8 是 Python Enhancement Proposal 8 的缩写，它是 Python 社区中的一项规范，用于指导 Python 代码的编写风格和格式。PEP8 旨在提高代码的可读性，并促进代码在不同项目和团队之间的一致性。\n以下是 PEP8 涵盖的一些主要方面：\n缩进：使用 4 个空格作为缩进的标准，而不是制表符。\r行长度：每行代码应尽量控制在 79 个字符以内，但可以允许最多 99 个字符。\r命名约定：变量名应该采用小写字母，单词之间使用下划线分隔（例如，my_variable），而类名应采用驼峰命名法（例如，MyClass）。\r空格：在逗号、冒号、分号等符号后应添加一个空格，但在圆括号内部不需要添加空格。\r导入：每个导入应该独立一行，避免使用通配符导入（例如，from module import *）。\r注释：使用适当的注释来解释代码的作用和目的，注释应该清晰、简洁且易于理解。\r代码布局：遵循统一的代码布局规范，包括适当的缩进、空行和代码段分隔。\rpep8链接： https://pep8.">
+<meta property='og:url' content='http://localhost:1313/p/python%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-04-22T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-04-22T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="python项目管理">
-<meta name="twitter:description" content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一">
+<meta name="twitter:description" content="Python项目管理 事情起因是这样，我开开心心把代码提交到码云后，结果师兄跟我说去看他发的项目管理，按他的流程改好代码格式，属实把我小吓了一下，感觉自己作为一个学校里学生，有幸在学校间接触到这些观念，是很幸运的。\n环境管理 使用Anaconda和Pipenv共同管理Python项目环境\nAnaconda包含了许多常用的Python库、工具和环境，使得安装和管理这些工具变得更加容易。它包括了Python解释器本身以及许多流行的科学计算库，比如NumPy、SciPy、Pandas、Matplotlib等。此外，Anaconda还提供了一个名为Conda的包管理器，用于安装、更新和管理这些库，以及创建和管理不同的Python环境。\n对于Python新手来说，Anaconda是一个很好的选择，因为它提供了一个完整的Python环境，无需手动安装和配置每个库。你只需安装Anaconda，就可以开始编写Python代码并使用各种科学计算工具了。\nPipenv 是 Python 项目的包管理器和虚拟环境管理器。它旨在提供一种简单的方式来创建和管理项目的依赖项，并确保这些依赖项在不同环境中的一致性\n下面是 Pipenv 的一些主要功能：\n虚拟环境管理：Pipenv 可以为每个项目创建独立的虚拟环境，这意味着每个项目都有自己的 Python 解释器和依赖项，而不会干扰系统中的其他项目。\n依赖项管理：Pipenv 使用 Pipfile 和 Pipfile.lock 文件来管理项目的依赖项。Pipfile 是项目的声明性文件，用于指定所需的包和版本，而 Pipfile.lock 文件则记录了确切的依赖项版本，以确保在不同环境中的一致性。\n自动环境激活：当你进入项目目录时，Pipenv 会自动激活该项目的虚拟环境，这意味着你可以立即开始使用项目的依赖项而无需手动激活虚拟环境。\n命令行工具：Pipenv 提供了一组简单的命令行工具，用于安装、更新和删除依赖项，以及管理虚拟环境。\n胎教版：\n当你开始一个新的 Python 项目时，你需要安装各种各样的库来帮助你完成任务。Pipenv 就像一个保姆，帮助你照顾这些库，确保它们安装正确且不会互相冲突。\r想象一下你在一个大杂货店里购物，每个库就像是你要买的商品。Pipenv 就是你的购物清单和购物车。你列出你要买的东西（依赖库），然后 Pipenv 帮你把它们一个一个加到你的购物车里（项目环境）。\r同时，Pipenv 还能确保你购物车里的东西都是正确的版本，就像是每个商品上都有一个标签标明它的准确型号和规格一样。这样，当你需要重建你的购物车时，你就可以确保每个东西都是一样的。\r最后，Pipenv 还能帮你管理购物车的整个过程。它会告诉你什么时候需要买新的东西（更新库），或者什么时候需要把一些东西扔掉（删除库）。\r总的来说，Pipenv 就像是你的 Python 项目的好帮手，确保你所需的库都安装正确，没有任何混乱\r师兄画的图 编码标准 对于编码标准，推荐跟着社区的PEP8走\nPEP8 是 Python Enhancement Proposal 8 的缩写，它是 Python 社区中的一项规范，用于指导 Python 代码的编写风格和格式。PEP8 旨在提高代码的可读性，并促进代码在不同项目和团队之间的一致性。\n以下是 PEP8 涵盖的一些主要方面：\n缩进：使用 4 个空格作为缩进的标准，而不是制表符。\r行长度：每行代码应尽量控制在 79 个字符以内，但可以允许最多 99 个字符。\r命名约定：变量名应该采用小写字母，单词之间使用下划线分隔（例如，my_variable），而类名应采用驼峰命名法（例如，MyClass）。\r空格：在逗号、冒号、分号等符号后应添加一个空格，但在圆括号内部不需要添加空格。\r导入：每个导入应该独立一行，避免使用通配符导入（例如，from module import *）。\r注释：使用适当的注释来解释代码的作用和目的，注释应该清晰、简洁且易于理解。\r代码布局：遵循统一的代码布局规范，包括适当的缩进、空行和代码段分隔。\rpep8链接： https://pep8.">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,36 +285,32 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#python项目管理">Python项目管理</a>
+    <li><a href="#环境管理">环境管理</a></li>
+    <li><a href="#编码标准">编码标准</a></li>
+    <li><a href="#规范化">规范化</a></li>
+    <li><a href="#文件作用">文件作用</a>
       <ol>
-        <li><a href="#环境管理">环境管理</a></li>
-        <li><a href="#编码标准">编码标准</a></li>
-        <li><a href="#规范化">规范化</a></li>
-        <li><a href="#文件作用">文件作用</a>
-          <ol>
-            <li><a href="#setupcfg">setup.cfg</a></li>
-            <li><a href="#pipfilelock">Pipfile.lock</a></li>
-            <li><a href="#pipfile">Pipfile</a></li>
-            <li><a href="#dockerfile">Dockerfile</a></li>
-            <li><a href="#pylintrc">.pylintrc</a></li>
-            <li><a href="#gitinore">.gitinore</a></li>
-            <li><a href="#gitattributes">.gitattributes</a></li>
-            <li><a href="#env">.env</a></li>
-            <li><a href="#dockerignore">.dockerignore</a></li>
-            <li><a href="#test文件夹">test文件夹</a></li>
-            <li><a href="#src文件夹">src文件夹</a></li>
-            <li><a href="#docs文件夹">docs文件夹</a></li>
-            <li><a href="#vscode文件夹">.vscode文件夹</a></li>
-            <li><a href="#pytestcache文件夹">.pytestcache文件夹</a></li>
-            <li><a href="#cachedirtag">CACHEDIR.TAG</a></li>
-            <li><a href="#_pycache_文件">_pycache_文件</a></li>
-          </ol>
-        </li>
+        <li><a href="#setupcfg">setup.cfg</a></li>
+        <li><a href="#pipfilelock">Pipfile.lock</a></li>
+        <li><a href="#pipfile">Pipfile</a></li>
+        <li><a href="#dockerfile">Dockerfile</a></li>
+        <li><a href="#pylintrc">.pylintrc</a></li>
+        <li><a href="#gitinore">.gitinore</a></li>
+        <li><a href="#gitattributes">.gitattributes</a></li>
+        <li><a href="#env">.env</a></li>
+        <li><a href="#dockerignore">.dockerignore</a></li>
+        <li><a href="#test文件夹">test文件夹</a></li>
+        <li><a href="#src文件夹">src文件夹</a></li>
+        <li><a href="#docs文件夹">docs文件夹</a></li>
+        <li><a href="#vscode文件夹">.vscode文件夹</a></li>
+        <li><a href="#pytestcache文件夹">.pytestcache文件夹</a></li>
+        <li><a href="#cachedirtag">CACHEDIR.TAG</a></li>
+        <li><a href="#_pycache_文件">_pycache_文件</a></li>
       </ol>
     </li>
   </ol>
@@ -297,6 +358,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -624,7 +699,7 @@ Flake8 是 Python 中常用的代码质量检查工具之一，而 mccabe 则是
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -658,12 +733,14 @@ Flake8 是 Python 中常用的代码质量检查工具之一，而 mccabe 则是
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

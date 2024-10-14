@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰\nhttp协议： 概念：就是服务器和客户端进行数据交互的一种形式\r常用请求头信息 user-agent:请求载体的身份标识\rconnection：请求完毕后，是断开连接还是保持连接\r常用响应头信息： content-type：服务器响应回客户端的数据类型\rhttps协议： 安全的超文本传输协议\r加密方式： 对称密钥加密\r非对称密钥加密\r证书密钥加密\rreques模块 python中原生的一款基于网络请求的模块，功能强大，简单便携，效率极高\r作用：模拟浏览器发请求\r如何使用： 指定URL\r发起请求\r获取响应数据\r数据解析\r持久化存储\r有些数据可能是动态请求加载出来的，不能通过url直接请求出来\n数据解析 ： 解析的局部的文本内容都会在标签之间或标签对应的属性中进行存储 1.进行指定标签的定位\r2.标签或者标签对应的属性中存储的数据值进行提取（解析）\r聚焦爬虫：爬取页面中指定的页面内容 正则 bs4 xpath\ntext(字符串) content(二进制) json()(对象)\nbs4进行数据解析 1.实例化一个BeautifulSoup对象，并将页面源码数据加载到该对象中\r2.通过调用BeautifulSoup对象中相关的属性或方法进行标签定位和数据提取\rxpath解析:最常用且便携高效的一种解析方式，通用性 -xpath解析原理：\r1.实例化一个etree的对象，且需要将被解析的页面源码数据加载到该对象中\r2.调用etree对象中的xpath方法结合着xpath表达式实现标签的定位和内容的捕获\r-环境安装\r-如何实例化一个etree对象：from lxml import etree\r1.将本地的html文档的源码数据加载到etree对象中：\retree.parse(filePath)\r2.可以将从互联网上获取的源码数据加载到该对象中：\retree.HTML('page_text')\r- xpath('xpath表达式')\r1./表示的是从根节点开始定位。表示的是一个层级\r2.//表示的是多个层级。可以表示从任意位置开始定位\r3.属性定位：//div[@class='song'] tag[@attrName=&quot;attrValue&quot;]\r4.索引定位：//div[@class='song']/p[3] 索引是从1开始的\r5.取文本：\r/text()获取的是标签中直系的文本内容\r//text()标签中非直系的文本内容\r6.取属性：\r/@attrName ==&gt;img/src\r验证码识别 反爬机制：验证码。识别验证码图片中的数据，用于模拟登录操作">
 <title>爬虫学习plus</title>
 
-<link rel='canonical' href='https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
+<link rel='canonical' href='http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
 
 <link rel="stylesheet" href="/scss/style.min.a98711dd77f882bba6c64662ae7c3515ce1792919805694d18301cf79deae512.css"><meta property='og:title' content="爬虫学习plus">
-<meta property='og:description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
-<meta property='og:url' content='https://example.com/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
-<meta property='og:site_name' content='乌鸦'>
+<meta property='og:description' content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰\nhttp协议： 概念：就是服务器和客户端进行数据交互的一种形式\r常用请求头信息 user-agent:请求载体的身份标识\rconnection：请求完毕后，是断开连接还是保持连接\r常用响应头信息： content-type：服务器响应回客户端的数据类型\rhttps协议： 安全的超文本传输协议\r加密方式： 对称密钥加密\r非对称密钥加密\r证书密钥加密\rreques模块 python中原生的一款基于网络请求的模块，功能强大，简单便携，效率极高\r作用：模拟浏览器发请求\r如何使用： 指定URL\r发起请求\r获取响应数据\r数据解析\r持久化存储\r有些数据可能是动态请求加载出来的，不能通过url直接请求出来\n数据解析 ： 解析的局部的文本内容都会在标签之间或标签对应的属性中进行存储 1.进行指定标签的定位\r2.标签或者标签对应的属性中存储的数据值进行提取（解析）\r聚焦爬虫：爬取页面中指定的页面内容 正则 bs4 xpath\ntext(字符串) content(二进制) json()(对象)\nbs4进行数据解析 1.实例化一个BeautifulSoup对象，并将页面源码数据加载到该对象中\r2.通过调用BeautifulSoup对象中相关的属性或方法进行标签定位和数据提取\rxpath解析:最常用且便携高效的一种解析方式，通用性 -xpath解析原理：\r1.实例化一个etree的对象，且需要将被解析的页面源码数据加载到该对象中\r2.调用etree对象中的xpath方法结合着xpath表达式实现标签的定位和内容的捕获\r-环境安装\r-如何实例化一个etree对象：from lxml import etree\r1.将本地的html文档的源码数据加载到etree对象中：\retree.parse(filePath)\r2.可以将从互联网上获取的源码数据加载到该对象中：\retree.HTML('page_text')\r- xpath('xpath表达式')\r1./表示的是从根节点开始定位。表示的是一个层级\r2.//表示的是多个层级。可以表示从任意位置开始定位\r3.属性定位：//div[@class='song'] tag[@attrName=&quot;attrValue&quot;]\r4.索引定位：//div[@class='song']/p[3] 索引是从1开始的\r5.取文本：\r/text()获取的是标签中直系的文本内容\r//text()标签中非直系的文本内容\r6.取属性：\r/@attrName ==&gt;img/src\r验证码识别 反爬机制：验证码。识别验证码图片中的数据，用于模拟登录操作">
+<meta property='og:url' content='http://localhost:1313/p/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0plus/'>
+<meta property='og:site_name' content='Example Site'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-26T13:28:01&#43;08:00'/><meta property='article:modified_time' content='2024-03-26T13:28:01&#43;08:00'/>
 <meta name="twitter:title" content="爬虫学习plus">
-<meta name="twitter:description" content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰 http协议： 概念：就是服务器和客户端进行数据交互的一种形">
+<meta name="twitter:description" content="roots.txt协议： 君子协议：规定了网站中的哪些数据可以被爬虫爬取，哪些不能碰\nhttp协议： 概念：就是服务器和客户端进行数据交互的一种形式\r常用请求头信息 user-agent:请求载体的身份标识\rconnection：请求完毕后，是断开连接还是保持连接\r常用响应头信息： content-type：服务器响应回客户端的数据类型\rhttps协议： 安全的超文本传输协议\r加密方式： 对称密钥加密\r非对称密钥加密\r证书密钥加密\rreques模块 python中原生的一款基于网络请求的模块，功能强大，简单便携，效率极高\r作用：模拟浏览器发请求\r如何使用： 指定URL\r发起请求\r获取响应数据\r数据解析\r持久化存储\r有些数据可能是动态请求加载出来的，不能通过url直接请求出来\n数据解析 ： 解析的局部的文本内容都会在标签之间或标签对应的属性中进行存储 1.进行指定标签的定位\r2.标签或者标签对应的属性中存储的数据值进行提取（解析）\r聚焦爬虫：爬取页面中指定的页面内容 正则 bs4 xpath\ntext(字符串) content(二进制) json()(对象)\nbs4进行数据解析 1.实例化一个BeautifulSoup对象，并将页面源码数据加载到该对象中\r2.通过调用BeautifulSoup对象中相关的属性或方法进行标签定位和数据提取\rxpath解析:最常用且便携高效的一种解析方式，通用性 -xpath解析原理：\r1.实例化一个etree的对象，且需要将被解析的页面源码数据加载到该对象中\r2.调用etree对象中的xpath方法结合着xpath表达式实现标签的定位和内容的捕获\r-环境安装\r-如何实例化一个etree对象：from lxml import etree\r1.将本地的html文档的源码数据加载到etree对象中：\retree.parse(filePath)\r2.可以将从互联网上获取的源码数据加载到该对象中：\retree.HTML('page_text')\r- xpath('xpath表达式')\r1./表示的是从根节点开始定位。表示的是一个层级\r2.//表示的是多个层级。可以表示从任意位置开始定位\r3.属性定位：//div[@class='song'] tag[@attrName=&quot;attrValue&quot;]\r4.索引定位：//div[@class='song']/p[3] 索引是从1开始的\r5.取文本：\r/text()获取的是标签中直系的文本内容\r//text()标签中非直系的文本内容\r6.取属性：\r/@attrName ==&gt;img/src\r验证码识别 反爬机制：验证码。识别验证码图片中的数据，用于模拟登录操作">
     </head>
     <body class="
     article-page
@@ -40,7 +40,7 @@
     })();
 </script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -69,14 +69,14 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">乌鸦</a></h1>
-            <h2 class="site-description">所行皆坦途，所愿皆如期</h2>
+            <h1 class="site-name"><a href="/">Example Site</a></h1>
+            <h2 class="site-description">所行皆坦途,所愿皆如期</h2>
         </div>
     </header><ol class="social-menu">
             
                 <li>
                     <a 
-                        href='https://github.com/Shadow-Kylin/Shadow-Kylin.github.io'
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -94,12 +94,52 @@
                     </a>
                 </li>
             
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
         </ol><ol class="menu" id="main-menu">
         
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
                 
                 
                 
@@ -112,7 +152,7 @@
 
 
                 
-                <span>关于</span>
+                <span>About</span>
             </a>
         </li>
         
@@ -176,6 +216,31 @@
         
         <li class="menu-bottom-section">
             <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
 
                 
                     <li id="dark-mode-toggle">
@@ -195,7 +260,7 @@
 
 
 
-                        <span>暗色模式</span>
+                        <span>Dark Mode</span>
                     </li>
                 
             </ol>
@@ -220,68 +285,58 @@
 
 
         </div>
-        <h2 class="widget-title section-title">目录</h2>
+        <h2 class="widget-title section-title">Table of contents</h2>
         
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#rootstxt协议">roots.txt协议：</a></li>
-    <li><a href="#http协议">http协议：</a>
+    <li><a href="#常用请求头信息">常用请求头信息</a></li>
+    <li><a href="#常用响应头信息">常用响应头信息：</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#加密方式">加密方式：</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#如何使用">如何使用：</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#聚焦爬虫爬取页面中指定的页面内容">聚焦爬虫：爬取页面中指定的页面内容</a>
       <ol>
-        <li><a href="#常用请求头信息">常用请求头信息</a></li>
-        <li><a href="#常用响应头信息">常用响应头信息：</a></li>
+        <li><a href="#bs4进行数据解析">bs4进行数据解析</a></li>
+        <li><a href="#xpath解析最常用且便携高效的一种解析方式通用性">xpath解析:最常用且便携高效的一种解析方式，通用性</a></li>
+        <li><a href="#验证码识别">验证码识别</a></li>
+        <li><a href="#cookie用来让服务器端记录客户端的相关状态">cookie:用来让服务器端记录客户端的相关状态</a></li>
+        <li><a href="#代理破解封ip这种反爬机制">代理：破解封ip这种反爬机制</a></li>
       </ol>
     </li>
-    <li><a href="#https协议">https协议：</a>
+    <li><a href="#高性能异步爬虫">高性能异步爬虫</a>
       <ol>
-        <li><a href="#加密方式">加密方式：</a></li>
+        <li><a href="#目的在爬虫中使用异步实现高性能的数据爬取操作">目的：在爬虫中使用异步实现高性能的数据爬取操作</a></li>
+        <li><a href="#异步爬虫的方式">异步爬虫的方式：</a></li>
       </ol>
     </li>
-    <li><a href="#reques模块">reques模块</a>
+    <li><a href="#selenium模块的基本使用">selenium模块的基本使用</a></li>
+    <li><a href="#无头浏览器">无头浏览器</a></li>
+    <li><a href="#12306模拟登录">12306模拟登录</a></li>
+    <li><a href="#scrapy框架">scrapy框架</a>
       <ol>
-        <li><a href="#如何使用">如何使用：</a></li>
+        <li><a href="#基本使用">基本使用</a></li>
+        <li><a href="#scrapy数据解析">scrapy数据解析</a></li>
+        <li><a href="#process_item方法">process_item方法</a></li>
+        <li><a href="#parse方法">parse方法</a></li>
+        <li><a href="#基于spider的全站数据爬取">基于Spider的全站数据爬取</a></li>
+        <li><a href="#五大核心组件">五大核心组件</a></li>
+        <li><a href="#请求传参">请求传参</a></li>
+        <li><a href="#图片数据爬取之imagespipeline">图片数据爬取之ImagesPipeline</a></li>
+        <li><a href="#中间件">中间件</a></li>
+        <li><a href="#process_response">process_response</a></li>
+        <li><a href="#链接提取器根据制定规则allow正则进行指定链接的提取">链接提取器：根据制定规则（allow=&ldquo;正则&rdquo;）进行指定链接的提取</a></li>
+        <li><a href="#规则解析器将链接提取器提取到的链接进行指定规则callback的解析的操作">规则解析器：将链接提取器提取到的链接进行指定规则（callback）的解析的操作</a></li>
       </ol>
     </li>
-    <li><a href="#数据解析-">数据解析 ：</a>
-      <ol>
-        <li><a href="#聚焦爬虫爬取页面中指定的页面内容">聚焦爬虫：爬取页面中指定的页面内容</a>
-          <ol>
-            <li><a href="#bs4进行数据解析">bs4进行数据解析</a></li>
-            <li><a href="#xpath解析最常用且便携高效的一种解析方式通用性">xpath解析:最常用且便携高效的一种解析方式，通用性</a></li>
-            <li><a href="#验证码识别">验证码识别</a></li>
-            <li><a href="#cookie用来让服务器端记录客户端的相关状态">cookie:用来让服务器端记录客户端的相关状态</a></li>
-            <li><a href="#代理破解封ip这种反爬机制">代理：破解封ip这种反爬机制</a></li>
-          </ol>
-        </li>
-        <li><a href="#高性能异步爬虫">高性能异步爬虫</a>
-          <ol>
-            <li><a href="#目的在爬虫中使用异步实现高性能的数据爬取操作">目的：在爬虫中使用异步实现高性能的数据爬取操作</a></li>
-            <li><a href="#异步爬虫的方式">异步爬虫的方式：</a></li>
-          </ol>
-        </li>
-        <li><a href="#selenium模块的基本使用">selenium模块的基本使用</a></li>
-        <li><a href="#无头浏览器">无头浏览器</a></li>
-        <li><a href="#12306模拟登录">12306模拟登录</a></li>
-        <li><a href="#scrapy框架">scrapy框架</a>
-          <ol>
-            <li><a href="#基本使用">基本使用</a></li>
-            <li><a href="#scrapy数据解析">scrapy数据解析</a></li>
-            <li><a href="#process_item方法">process_item方法</a></li>
-            <li><a href="#parse方法">parse方法</a></li>
-            <li><a href="#基于spider的全站数据爬取">基于Spider的全站数据爬取</a></li>
-            <li><a href="#五大核心组件">五大核心组件</a></li>
-            <li><a href="#请求传参">请求传参</a></li>
-            <li><a href="#图片数据爬取之imagespipeline">图片数据爬取之ImagesPipeline</a></li>
-            <li><a href="#中间件">中间件</a></li>
-            <li><a href="#process_response">process_response</a></li>
-            <li><a href="#链接提取器根据制定规则allow正则进行指定链接的提取">链接提取器：根据制定规则（allow=&ldquo;正则&rdquo;）进行指定链接的提取</a></li>
-            <li><a href="#规则解析器将链接提取器提取到的链接进行指定规则callback的解析的操作">规则解析器：将链接提取器提取到的链接进行指定规则（callback）的解析的操作</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#分布式爬虫">分布式爬虫</a></li>
-    <li><a href="#增量式爬虫">增量式爬虫</a></li>
   </ol>
 </nav>
         </div>
@@ -327,6 +382,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
         
     </footer>
     
@@ -764,7 +833,7 @@ redis相关操作配置：
             return;
         }
         var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "stack" + '.disqus.com/embed.js';
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
@@ -798,12 +867,14 @@ redis相关操作配置：
     <section class="copyright">
         &copy; 
         
-        2024 乌鸦
+            2020 - 
+        
+        2024 Example Person
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.24.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
